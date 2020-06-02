@@ -1,0 +1,8 @@
+<div [ngSwitch]="menuSelected">
+    <div *ngSwitchCase="'inventory'">
+        <app-inventory></app-inventory>
+    </div>
+    <div *ngSwitchCase="'eprescription'">
+        <app-eprescription></app-eprescription>
+    </div>
+</div>
