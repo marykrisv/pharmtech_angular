@@ -11,9 +11,7 @@ export class SampleComponent implements OnInit {
 
   test ($event) {
     $event.stopPropagation();
-    var element = document.getElementById("wrapper");
-    element.classList.toggle("active");
-    
-    document.getElementById("sidebar-wrapper").classList.remove("inactive");
+    var element_wrapper = document.getElementById("wrapper");
+    element_wrapper.classList.toggle("active");
   }
 }

@@ -13,15 +13,11 @@ document.body.onclick = function(e) {
   var element_wrapper = document.getElementById("wrapper");
   var screenWidth = window.innerWidth;
   if (screenWidth <= 767) {
-    console.log("inside");
     if(e.target != element_sidewrapper) {
       //outside      
-      if (!element_sidewrapper.classList.contains("inactive")) {
-        console.log("super inside");
-        element_sidewrapper.classList.toggle("inactive");
-        element_wrapper.classList.remove("active");        
-      } 
-      
+      if (!element_wrapper.classList.contains("active")) {
+        element_wrapper.classList.toggle("active");        
+      }       
     } else {
       //inside
         alert('You clicked inside');
