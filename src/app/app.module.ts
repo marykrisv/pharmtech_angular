@@ -8,7 +8,6 @@ import { MenuviewComponent } from './menuview/menuview.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { EprescriptionComponent } from './eprescription/eprescription.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
-import { SampleComponent } from './sample/sample.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,6 @@ import { SampleComponent } from './sample/sample.component';
     InventoryComponent,
     EprescriptionComponent,
     SideMenuComponent,
-    SampleComponent
   ],
   imports: [
     BrowserModule,

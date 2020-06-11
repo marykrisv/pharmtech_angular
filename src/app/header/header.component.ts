@@ -13,8 +13,15 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onClick (_menuSelected) {
-    this.menuSelected = _menuSelected;
-    console.log(_menuSelected);
+  showDropDown ($event) {
+    $event.stopPropagation();
+    var element = document.getElementById("dropdownMenu");
+    element.classList.toggle("collapse");
+  }
+
+  openSideMenu ($event) {
+    $event.stopPropagation();
+    var element_wrapper = document.getElementById("wrapper");
+    element_wrapper.classList.toggle("active");
   }
 }

@@ -4,3 +4,14 @@ body {
     margin: 0px;
     padding: 0px;
 }
+
+#wrapper.active #sidebar-wrapper {
+    left: 0;
+}
+
+#wrapper.active #sidebar-wrapper {
+    // left: 0px;
+    left: -250px;
+    width: 250px;
+    transition: all 0.4s ease 0s;
+}

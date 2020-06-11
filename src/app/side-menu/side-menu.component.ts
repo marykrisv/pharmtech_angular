@@ -5,11 +5,16 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss']
 })
-export class SideMenuComponent implements OnInit {
-
+export class SideMenuComponent implements OnInit {  
+  screenWidth = window.innerWidth;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  openSubmenu ($event) {
+    $event.stopPropagation();
+    var element = document.getElementById("others");
+    element.classList.toggle("collapse");
+  }
 }

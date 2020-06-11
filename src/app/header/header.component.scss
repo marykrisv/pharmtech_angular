@@ -1,35 +1,59 @@
-.header {
-    width: 100%;
+.content-header {
     height: 50px;
-    background-color: black;
-    position: fixed;
+    // line-height: 50px;    
+    background: #29f1c3;
+    padding: 2px;
 }
 
-.body {
-    height: calc(100vh - 50px);
-    width: 100%;
-    position: relative;
-    top: 50px;
-}
-
-.navigation-bar {
-    float: left;
-    width: 20%;
-    height: 100%;
-    background-color: red;
-    // display: inline-block;
-
-    ul {
-        list-style: none;
-        float: left;
-        width: 100%;
-        padding: 0px;
-    }
-}
-
-.viewDiv{
-    width: 80%;
-    height: 100%;
-    background-color: blue;
+.content-header h1 {
+    margin: 0;
+    margin-left: 20px;
+    // line-height: 50px;
     display: inline-block;
+}
+
+#menu-toggle {
+    text-decoration: none;
+    color: black;
+    position: relative;
+    left: -10px;
+    font-size: 30px;
+    top: 5px;
+}
+
+#appName {
+    font-size: 25px;
+    color: black;
+    margin: auto;
+}
+
+.navbar-right {
+    margin-right: -15px;
+    left: -30px;
+    position: relative;
+    top: -5px;
+}
+
+.dropdown-menu {
+    display: inline-block;
+    z-index: 1;
+}
+
+#dropdownMenu.collapse {
+    display: none;
+}
+
+@media (max-width:767px) {
+    #menu-toggle {
+        display: inline-block;
+    }
+
+    .navbar-right {
+        float: right;
+        left: -20px;
+    }
+
+    .navbar-nav > li > .dropdown-menu {
+        left: -70px;
+    }
 }
