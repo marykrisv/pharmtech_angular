@@ -1,8 +1,13 @@
-<div [ngSwitch]="menuSelected">
-    <div *ngSwitchCase="'inventory'">
-        <app-inventory></app-inventory>
-    </div>
-    <div *ngSwitchCase="'eprescription'">
-        <app-eprescription></app-eprescription>
+<div class="container" (change)=menuSelectedOnChange();>
+    <div [ngSwitch]="menuSelected">
+        <div *ngSwitchCase="'users'">
+            <app-user></app-user>
+        </div>
+        <div *ngSwitchCase="'inventory'">
+            <app-inventory></app-inventory>
+        </div>
+        <div *ngSwitchCase="'eprescription'">
+            <app-eprescription></app-eprescription>
+        </div>
     </div>
 </div>

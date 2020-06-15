@@ -3,3 +3,6 @@ https://bootsnipp.com/snippets/v8kmE
 
 sidemenu
 https://bootsnipp.com/snippets/r1Pjd
+
+Component styles
+https://angular.io/guide/component-styles

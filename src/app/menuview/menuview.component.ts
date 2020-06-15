@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-menuview',
@@ -6,16 +7,26 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./menuview.component.scss']
 })
 export class MenuviewComponent implements OnInit {
-  @Input() menuSelected: string;
+  @Input()
+  private _menuSelected: string;
+  // @Output()
+  // change = new EventEmitter();
 
-  constructor() { }
+  public get menuSelected(): string {
+    return this._menuSelected;
+  }
+  public set menuSelected(value: string) {
+    this._menuSelected = value;
+  }
+
+  constructor() {
+    this._menuSelected = 'users';
+  }
 
   ngOnInit(): void {
   }
 
-}
-
-enum MenuList {
-  Inventory,
-  Eprescription
+  menuSelectedOnChange () {
+    console.log(this._menuSelected);
+  }
 }

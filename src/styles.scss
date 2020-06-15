@@ -15,3 +15,22 @@ body {
     width: 250px;
     transition: all 0.4s ease 0s;
 }
+
+@media (max-width: 767px) {
+    // .active {
+    //     background-color: black;
+    //   #modal-screen {
+    //     display: block;
+    //   }
+    // }
+
+    #modal-screen {
+        display: block;
+    }
+
+    :not(.active) {
+      #modal-screen {
+        display: block;
+      }
+    }
+  }

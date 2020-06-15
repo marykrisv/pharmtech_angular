@@ -1,55 +1,4 @@
-<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
-
-<!-- Sidebar -->
 <div id="sidebar-wrapper">
-    <!-- <div id="closeButton">
-        <div class="glyphicon glyphicon-remove"></div>
-    </div> -->
-    <!-- <nav id="spy">
-        <ul class="sidebar-nav nav">
-            <li class="sidebar-brand">
-                <a href="#home"><span class="fa fa-home solo">Home</span></a>
-            </li>
-            <li>
-                <a href="#anch1" data-scroll>
-                    <span class="fa fa-anchor solo">Anchor 1</span>
-                </a>
-            </li>
-            <li>
-                <a href="#anch2" data-scroll>
-                    <span class="fa fa-anchor solo">Anchor 2</span>
-                </a>
-            </li>
-            <li>
-                <a href="#anch3" data-scroll>
-                    <span class="fa fa-anchor solo">Anchor 3</span>
-                </a>
-            </li>
-            <li>
-                <a href="#anch4" data-scroll>
-                    <span class="fa fa-anchor solo">Anchor 4</span>
-                </a>
-            </li>
-            <li data-toggle="collapse" data-target="#service" class="collapsed">
-                <a href="#"><i class="fa fa-globe fa-lg"></i> Services <span class="arrow"></span></a>
-            </li>  
-            <ul class="sub-menu collapse" id="service">
-                <li>New Service 1</li>
-                <li>New Service 2</li>
-                <li>New Service 3</li>
-            </ul>
-            <li>
-                <a href="#anch4" data-scroll>
-                    <span class="fa fa-anchor solo">Anchor 4</span>
-                </a>
-            </li>
-        </ul>
-    </nav>     -->
-    <!-- <app-sample></app-sample> -->
-    <!------ Include the above in your HEAD tag ---------->
-
     <div class="nav-side-menu">
         <div class="brand">Pharmtech</div>
         <!-- <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i> -->
@@ -57,12 +6,12 @@
             <div class="menu-list">
     
                 <ul id="menu-content" class="menu-content out">
-                    <li>
-                        <a href="#">
+                    <li (click)="selectMenu('users')">
+                        <a>
                             <i class="fa fa-dashboard fa-lg"></i> Users
                         </a>
                     </li>
-                    <li>
+                    <li (click)="selectMenu('inventory')">
                         <a href="#">
                             <i class="fa fa-user fa-lg"></i> Inventory
                         </a>
@@ -102,9 +51,7 @@
                         <a href="#">
                             <i class="fa fa-user fa-lg"></i> POS
                         </a>
-                    </li>
-
-                    
+                    </li>                    
                 </ul>
         </div>
     </div>

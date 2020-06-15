@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +7,28 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pharmtech';
+  @Input()
+  private _menuSelected: string;
+  // @Output()
+  // change = new EventEmitter();
+
+  public get menuSelected(): string {
+    return this._menuSelected;
+  }
+  public set menuSelected(value: string) {
+    this._menuSelected = value;
+  }
+
+  constructor() {
+    this._menuSelected = 'users';
+  }
+
+  ngOnInit(): void {
+  }
+
+  menuSelectedOnChange () {
+    console.log(this._menuSelected);
+  }
 }
 
 document.body.onclick = function(e) {

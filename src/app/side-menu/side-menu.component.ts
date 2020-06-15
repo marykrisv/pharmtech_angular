@@ -1,3 +1,4 @@
+import { MenuviewComponent } from './../menuview/menuview.component';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,11 +6,16 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss']
 })
-export class SideMenuComponent implements OnInit {  
+export class SideMenuComponent implements OnInit {
   screenWidth = window.innerWidth;
+  mc = new MenuviewComponent();
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  selectMenu (selected) {
+    // this.mc.menuSelected = selected;
   }
 
   openSubmenu ($event) {
