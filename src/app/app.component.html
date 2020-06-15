@@ -1,16 +1,23 @@
-<div id="wrapper">
-    <div id="modal-screen"></div>
-    <!-- Sidebar -->
-    <app-side-menu></app-side-menu>
-    <!-- Page content -->
-    <div id="page-content-wrapper">
-        <app-header></app-header>
-        <app-menuview></app-menuview>
+<!-- if not logged in -->
+<div *ngIf="!loggedIn; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+    <div id="login-wrapper">
+        <app-login></app-login>
     </div>
-</div>
-<!-- <div style="width: 300px; height: 100vh; float:left">
-    <app-sample></app-sample>
-</div>
+</ng-template>
 
-<app-sample-header></app-sample-header> -->
-<!-- <app-header></app-header> -->
+<!-- if logged in -->
+<ng-template #elseBlock>
+    <div id="wrapper">
+        <div id="modal-screen"></div>
+        <!-- Sidebar -->
+        <app-side-menu></app-side-menu>
+        <!-- Page content -->
+        <div id="page-content-wrapper">
+            <app-header></app-header>
+            <app-menuview></app-menuview>
+        </div>
+    </div>
+</ng-template>
+
+

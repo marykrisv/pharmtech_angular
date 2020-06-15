@@ -7,27 +7,13 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 })
 export class AppComponent {
   title = 'pharmtech';
-  @Input()
-  private _menuSelected: string;
-  // @Output()
-  // change = new EventEmitter();
-
-  public get menuSelected(): string {
-    return this._menuSelected;
-  }
-  public set menuSelected(value: string) {
-    this._menuSelected = value;
-  }
+  loggedIn: boolean;
 
   constructor() {
-    this._menuSelected = 'users';
+    this.loggedIn = true;
   }
 
   ngOnInit(): void {
-  }
-
-  menuSelectedOnChange () {
-    console.log(this._menuSelected);
   }
 }
 
