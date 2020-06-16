@@ -1,19 +1,19 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'> -->
 
 <div class="container">
-    <div class="row">
-    
-    <p></p>
-    <h1>User(s)</h1> 
-        <!-- <br><br> -->
-        <div class="col-md-12">
+  <div [ngSwitch]="userMenu">
+
+    <!-- view all -->
+    <div *ngSwitchCase="'viewAll'">
+      <div class="row">
+        <p></p>
+        <h1>User(s)</h1>       
+          <!-- <br><br> -->
+          <div class="col-md-12">
             <div class="panel panel-default panel-table">
               <div class="panel-heading">
                 <div class="row">
-                  <!-- <div class="col col-md-6 col-xs-12">
-                    <h3 class="panel-title">Users</h3>
-                  </div> -->
-                  <div class="col-md-5 col-md-offset-6 col-xs-12">
+                  <div class="col-md-6 col-xs-12 col-sm-12 text-right">
                     <div class="input-group">
                       <div class="input-group-btn search-panel">
                           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -34,12 +34,9 @@
                           <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
                       </span>
                     </div>
-                  </div>
-
-
-                  
-                  <div class="col col-md-1 col-xs-12 text-right">
-                    <button type="button" class="btn btn-sm btn-primary btn-create">Create New</button>
+                  </div>            
+                  <div class="col col-md-6 col-xs-12 text-right">
+                    <button type="button" class="btn btn-sm btn-primary btn-create" (click)="goToAddView();">Create New</button>
                   </div>
                 </div>
               </div>
@@ -55,7 +52,8 @@
                   </thead>
                   <tbody>
                           <tr>
-                            <td align="center">
+                            <td class="text-center">
+                              <a class="btn btn-primary"><em class="fa fa-eye"></em></a>
                               <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
                               <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
                             </td>
@@ -69,9 +67,9 @@
               </div>
               <div class="panel-footer">
                 <div class="row">
-                  <div class="col col-xs-4">Page 1 of 5
+                  <div class="col col-xs-6">Page 1 of 5
                   </div>
-                  <div class="col col-xs-8">
+                  <div class="col col-xs-6">
                     <ul class="pagination hidden-xs pull-right">
                       <li><a href="#">1</a></li>
                       <li><a href="#">2</a></li>
@@ -87,5 +85,20 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-</div></div></div>
+
+    <!-- view each -->
+    <div *ngSwitchCase="'viewIndividual'">
+      view individual
+    </div>
+
+    <!-- add new -->
+    <div *ngSwitchCase="'add'">
+      Add
+      <button (click)="goToViewAll();">Back</button>
+    </div>
+  </div>
+</div>

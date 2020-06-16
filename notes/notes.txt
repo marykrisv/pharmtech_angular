@@ -6,3 +6,11 @@ https://bootsnipp.com/snippets/r1Pjd
 
 Component styles
 https://angular.io/guide/component-styles
+
+tables
+https://bootsnipp.com/snippets/8A2P3
+
+https://datatables.net/
+
+search box
+https://bootsnipp.com/snippets/9Avx

@@ -7,7 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  userMenu: string;
+
+  constructor() { 
+    this.userMenu = 'viewAll';
+
+    console.log(this.userMenu);
+  }
+
+  goToAddView() {
+    this.userMenu = 'add';
+  }
+
+  goToViewAll() {
+    this.userMenu = 'viewAll';
+  }
 
   ngOnInit(): void {
   }
