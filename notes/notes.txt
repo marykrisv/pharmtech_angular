@@ -14,3 +14,9 @@ https://datatables.net/
 
 search box
 https://bootsnipp.com/snippets/9Avx
+
+font awesome
+https://fontawesome.com/v4.7.0/icons/
+
+restapi
+https://www.youtube.com/watch?v=OEWXbpUMODk

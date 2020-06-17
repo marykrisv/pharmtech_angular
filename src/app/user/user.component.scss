@@ -60,9 +60,25 @@ used to vertically center elements, may need modification if you're not using de
     height: 34px;
 }
 
+td {
+    a.btn {
+        margin: 2px;
+    }
+}
+
 @media (max-width:780px) {
     .btn-create {
         margin-top: 10px;
     }
+
+    td > span {
+        font-size: 12px;
+    }
+
+    // td {
+    //     overflow: hidden;
+    //     height: 5px;
+    //     white-space: nowrap;
+    // }
 }
   

@@ -9,6 +9,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { EprescriptionComponent } from './eprescription/eprescription.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { UserComponent } from './user/user.component';
+import { HttpClientModule }    from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UserComponent } from './user/user.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
