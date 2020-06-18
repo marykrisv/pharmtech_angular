@@ -20,12 +20,12 @@
                             <span id="search_concept">Filter by</span> <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="#contains">Contains</a></li>
-                            <li><a href="#its_equal">It's equal</a></li>
-                            <li><a href="#greather_than">Greather than ></a></li>
-                            <li><a href="#less_than">Less than < </a></li>
+                            <li><a>Contains</a></li>
+                            <li><a>It's equal</a></li>
+                            <li><a>Greather than ></a></li>
+                            <li><a>Less than < </a></li>
                             <li class="divider"></li>
-                            <li><a href="#all">Anything</a></li>
+                            <li><a>Anything</a></li>
                           </ul>
                       </div>
                       <input type="hidden" name="search_param" value="all" id="search_param">         
@@ -48,25 +48,35 @@
                         <input type="checkbox">
                       </th>
                       <th width="15%" class="hidden-xs"><em class="fa fa-cog"></em></th>
+                      <th class="hidden">ID</th>
                       <th width="20%">Username</th>
                       <th width="50%">Full Name</th>
                       <th width="30%">Role</th>
                     </tr> 
                   </thead>
                   <tbody>
-                    <tr *ngFor="let user of users">
-                      <td class="visible-xs">
-                        <input type="checkbox">
-                      </td>
-                      <td class="text-center hidden-xs">
-                        <a class="btn btn-primary"><em class="fa fa-eye"></em></a>
-                        <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
-                        <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
-                      </td>
-                      <td><span>{{ user.username }}</span></td>
-                      <td><span>{{ user.userLname + ', '+ user.userFname  }}</span></td>
-                      <td><span>{{ user.userRole }}</span></td>
-                    </tr>
+                    <div *ngIf="users == null; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock>
+                      <tr>
+                        <td>No data</td>
+                      </tr>                      
+                    </ng-template>
+                    <ng-template #elseBlock>
+                      <tr *ngFor="let user of users">
+                        <td class="visible-xs">
+                          <input type="checkbox">
+                        </td>
+                        <td class="text-center hidden-xs">
+                          <a class="btn btn-primary"><em class="fa fa-eye"></em></a>
+                          <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
+                          <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                        </td>
+                        <td><span>{{ user.userName }}</span></td>
+                        <td><span>{{ user.userLname + ', '+ user.userFname  }}</span></td>
+                        <td><span>{{ user.userRole }}</span></td>
+                      </tr>
+                    </ng-template>
+                    
                   </tbody>
                 </table>
             

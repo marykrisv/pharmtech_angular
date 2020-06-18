@@ -20,11 +20,20 @@ export class UserService {
   // }
 
   getAllUsers() {
-    this.http.get('http://localhost/pharmtech/userViewAll.php').
-      subscribe(response => {
-        // console.log(response);
+    // this.http.get('http://localhost/pharmtech/userViewAll.php').
+    //   subscribe(response => {
+    //     // console.log(response);
+    //     this.users.next(response);
+    //   });
+    this.http.get('http://localhost/pharmtech/api/sample/read.php').
+    subscribe(response => {
+      if (response['message'] != undefined) {
+        this.users.next(null);
+      } else {
         this.users.next(response);
-      });
+      }
+      
+    });
   }  
 }
 

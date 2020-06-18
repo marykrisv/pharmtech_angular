@@ -6,12 +6,17 @@
             <div class="menu-list">
     
                 <ul id="menu-content" class="menu-content out">
-                    <li (click)="selectMenu('users')">
+                    <li>
+                        <a>
+                            <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                        </a>
+                    </li>
+                    <li (click)="selectMenu('users', 1)">
                         <a>
                             <i class="fa fa-users fa-lg"></i> Users
                         </a>
                     </li>
-                    <li (click)="selectMenu('inventory')">
+                    <li (click)="selectMenu('inventory', 2)">
                         <a>
                             <i class="fa fa-database fa-lg"></i> Inventory
                         </a>

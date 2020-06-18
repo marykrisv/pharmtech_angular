@@ -13,8 +13,7 @@ export class UserComponent implements OnInit {
   users: any;
 
   constructor(private us: UserService) { 
-    this.goToViewAll();
-    this.userMenu = 'viewAll';
+    
   }
 
   selectUserMenu(selected) {
@@ -26,8 +25,8 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.us.changeMenuSelected(selected);
-    // this.us.currentUsers.subscribe(users => this.users = users)
+    this.goToViewAll();
+    this.userMenu = 'viewAll';
   }
 
 }
