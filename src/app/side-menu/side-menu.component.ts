@@ -1,5 +1,6 @@
 import { MenuviewComponent } from './../menuview/menuview.component';
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -8,14 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideMenuComponent implements OnInit {
   screenWidth = window.innerWidth;
-  mc = new MenuviewComponent();
-  constructor() { }
+  menuSelected: string;
+
+  constructor(private data: DataService) { }
 
   ngOnInit(): void {
+    this.data.currentMenuSelected.subscribe(menuSelected => this.menuSelected = menuSelected)
   }
 
   selectMenu (selected) {
-    // this.mc.menuSelected = selected;
+    this.data.changeMenuSelected(selected);
   }
 
   openSubmenu ($event) {

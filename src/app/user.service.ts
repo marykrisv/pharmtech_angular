@@ -1,32 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  // users: User[] = new Array();
-  users: any;
-
-  getAllUsers(): any {
-    this.http.get('http://localhost/pharmtech/userViewAll.php').
-      subscribe(response => {
-        // console.log(response);
-        this.users = response;
-        // console.log(this.users);
-      });
-  }
+  private users = new BehaviorSubject<any>(null);
+  currentUsers = this.users.asObservable();
 
   constructor(private http: HttpClient) {
     // this.populateUsers();
+    this.getAllUsers();
   }
-  
 
-  // getAll(): Observable<User[]> {
-    
+  // changeMenuSelected (selected: string) {
+  //   this.users.next(selected);
   // }
+
+  getAllUsers() {
+    this.http.get('http://localhost/pharmtech/userViewAll.php').
+      subscribe(response => {
+        // console.log(response);
+        this.users.next(response);
+      });
+  }  
 }
 
 interface User {

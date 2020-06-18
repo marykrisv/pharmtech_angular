@@ -1,3 +1,4 @@
+import { DataService } from './../data.service';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { EventEmitter } from 'protractor';
 
@@ -7,26 +8,13 @@ import { EventEmitter } from 'protractor';
   styleUrls: ['./menuview.component.scss']
 })
 export class MenuviewComponent implements OnInit {
-  @Input()
-  private _menuSelected: string;
-  // @Output()
-  // change = new EventEmitter();
+  menuSelected: string;
 
-  public get menuSelected(): string {
-    return this._menuSelected;
-  }
-  public set menuSelected(value: string) {
-    this._menuSelected = value;
-  }
-
-  constructor() {
-    this._menuSelected = 'users';
+  constructor(private data: DataService) {
+    
   }
 
   ngOnInit(): void {
-  }
-
-  menuSelectedOnChange () {
-    console.log(this._menuSelected);
+    this.data.currentMenuSelected.subscribe(menuSelected => this.menuSelected = menuSelected)
   }
 }

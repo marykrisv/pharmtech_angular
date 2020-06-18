@@ -12,38 +12,22 @@ export class UserComponent implements OnInit {
   userMenu: string;
   users: any;
 
-  constructor(private http: HttpClient) { 
+  constructor(private us: UserService) { 
     this.goToViewAll();
-  }
-
-  getUsers(): any {
-    // console.log(this.users);
-    // this.http.get('http://jsonplaceholder.typicode.com/posts').
-    //   subscribe(response => {
-    //     console.log(response);
-    //   });
-
-      return this.http.get('http://localhost/pharmtech/userViewAll.php').
-      subscribe(response => {
-        this.users = response;
-      });
-  }
-
-  goToAddView() {
-    this.userMenu = 'add';
-  }
-
-  goToViewAll() {
-    // let userService = new UserService();
-
-    // this.users = userService.getAllUsers();
-
-    this.getUsers();
-
     this.userMenu = 'viewAll';
   }
 
+  selectUserMenu(selected) {
+    this.userMenu = selected;
+  }
+
+  goToViewAll() {
+    this.us.currentUsers.subscribe(users => this.users = users);   
+  }
+
   ngOnInit(): void {
+    // this.us.changeMenuSelected(selected);
+    // this.us.currentUsers.subscribe(users => this.users = users)
   }
 
 }
