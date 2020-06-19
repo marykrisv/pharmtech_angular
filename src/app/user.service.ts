@@ -25,12 +25,12 @@ export class UserService {
     //     // console.log(response);
     //     this.users.next(response);
     //   });
-    this.http.get('http://localhost/pharmtech/api/sample/read.php').
+    this.http.get('http://localhost/pharmtech/api/sample/read.php?').
     subscribe(response => {
-      if (response['message'] != undefined) {
-        this.users.next(null);
+      if (response['data'] != undefined) {
+        this.users.next(response['data']);
       } else {
-        this.users.next(response);
+        this.users.next(null);
       }
       
     });

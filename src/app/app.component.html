@@ -1,8 +1,8 @@
 <!-- if not logged in -->
-<div *ngIf="!loggedIn; then thenBlock else elseBlock"></div>
+<div *ngIf="user_session == null; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock>
     <div id="login-wrapper">
-        <!-- <app-login></app-login> -->
+        <app-login></app-login>
     </div>
 </ng-template>
 

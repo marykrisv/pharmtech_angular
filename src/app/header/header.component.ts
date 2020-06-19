@@ -1,3 +1,5 @@
+import { DataService } from './../data.service';
+import { Session } from './../interface/session';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,10 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   menuSelected: string;
+  user_session: Session;
 
-  constructor() { }
+  constructor(private data: DataService) { }
 
   ngOnInit(): void {
+    this.data.currentSession.subscribe(
+      usersession => this.user_session = usersession
+    );
+  }
+
+  logout() {
+    this.data.changeSession(null);
   }
 
   showDropDown ($event) {

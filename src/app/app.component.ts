@@ -1,3 +1,5 @@
+import { DataService } from './data.service';
+import { Session } from './interface/session';
 import { Component, OnInit, Input, Output } from '@angular/core';
 
 @Component({
@@ -7,17 +9,20 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 })
 export class AppComponent {
   title = 'pharmtech';
-  loggedIn: boolean;
+  user_session: Session;
 
-  constructor() {
-    this.loggedIn = true;
+  constructor(private data: DataService) {
   }
 
   ngOnInit(): void {
+    this.data.currentSession.subscribe(
+      usersession => this.user_session = usersession
+    );
   }
 }
 
 document.body.onclick = function(e) {
+  
   var element_sidewrapper = document.getElementById("sidebar-wrapper");
   var element_wrapper = document.getElementById("wrapper");
   var element_dropdown = document.getElementById("dropdownMenu");

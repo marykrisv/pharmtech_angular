@@ -17,7 +17,7 @@ export class SideMenuComponent implements OnInit {
   ngOnInit(): void {
     // this.data.currentMenuSelected.subscribe(menuSelected => this.menuSelected = menuSelected);
     this.curActivePos = 0;
-    this.selectMenu("users", 0);
+    this.selectMenu("dashboard", 0);
   }
 
   selectMenu (selected, pos) {  

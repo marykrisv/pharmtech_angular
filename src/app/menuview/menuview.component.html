@@ -1,5 +1,8 @@
 <div class="container">
     <div [ngSwitch]="menuSelected">
+        <div *ngSwitchCase="'dashboard'">
+            <app-dashboard></app-dashboard>
+        </div>
         <div *ngSwitchCase="'users'">
             <app-user></app-user>
         </div>

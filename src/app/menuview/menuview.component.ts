@@ -1,6 +1,5 @@
 import { DataService } from './../data.service';
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-menuview',
@@ -10,8 +9,7 @@ import { EventEmitter } from 'protractor';
 export class MenuviewComponent implements OnInit {
   menuSelected: string;
 
-  constructor(private data: DataService) {
-    
+  constructor(private data: DataService) {    
   }
 
   ngOnInit(): void {

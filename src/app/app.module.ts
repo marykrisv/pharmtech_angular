@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -10,6 +11,7 @@ import { EprescriptionComponent } from './eprescription/eprescription.component'
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { UserComponent } from './user/user.component';
 import { HttpClientModule }    from '@angular/common/http';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { HttpClientModule }    from '@angular/common/http';
     EprescriptionComponent,
     SideMenuComponent,
     UserComponent,
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

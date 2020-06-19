@@ -58,7 +58,7 @@
                     <div *ngIf="users == null; then thenBlock else elseBlock"></div>
                     <ng-template #thenBlock>
                       <tr>
-                        <td>No data</td>
+                        <td colspan="5" class="text-center">No data</td>
                       </tr>                      
                     </ng-template>
                     <ng-template #elseBlock>
