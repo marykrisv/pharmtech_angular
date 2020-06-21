@@ -3,15 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { UsersRoutingModule } from './user-routing.module';
 import { ViewuserComponent } from './viewuser/viewuser.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { AdduserComponent } from './adduser/adduser.component';
+import { UserdetailComponent } from './userdetail/userdetail.component';
 
 
 @NgModule({
-  declarations: [ViewuserComponent],
+  declarations: [ViewuserComponent, AdduserComponent, UserdetailComponent],
   imports: [
     CommonModule,
-    UsersRoutingModule,
-    BrowserModule
+    UsersRoutingModule
   ]
 })
 export class UsersModule { }

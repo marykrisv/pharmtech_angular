@@ -22,7 +22,7 @@ const routes: Routes = [
       },
       {
         path: 'users',
-        component: ViewuserComponent
+        loadChildren: () => import('./user/user.module').then(m => m.UsersModule)
       },
       {
         path: 'inventory',

@@ -16,7 +16,7 @@ export class ViewuserComponent implements OnInit {
   }
 
   selectUserMenu(selected) {
-    this.userMenu = selected;
+    // this.userMenu = selected;
   }
 
   goToViewAll() {

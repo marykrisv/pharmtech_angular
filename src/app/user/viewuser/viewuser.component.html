@@ -1,10 +1,7 @@
 <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'> -->
 
-<div class="container">
-    <div [ngSwitch]="userMenu">
-  
+<div class="container">  
       <!-- view all -->
-      <div *ngSwitchCase="'viewAll'">
         <div class="row">
           <p></p>
           <h1>User(s)</h1>       
@@ -36,7 +33,9 @@
                       </div>
                     </div>            
                     <div class="col col-md-6 col-xs-12 text-right">
-                      <button type="button" class="btn btn-sm btn-primary btn-create" (click)="selectUserMenu('add');">Create New</button>
+                      <button type="button" class="btn btn-sm btn-primary btn-create" 
+                      routerLink="/menu/users/adduser"
+                      (click)="selectUserMenu('add');">Create New</button>
                     </div>
                   </div>
                 </div>
@@ -67,7 +66,7 @@
                             <input type="checkbox">
                           </td>
                           <td class="text-center hidden-xs">
-                            <a class="btn btn-primary"><em class="fa fa-eye"></em></a>
+                            <a routerLink="/menu/users/userdetail" class="btn btn-primary"><em class="fa fa-eye"></em></a>
                             <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
                             <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
                           </td>
@@ -104,18 +103,4 @@
             </div>
           </div>
         </div>
-  
-  
-      <!-- view each -->
-      <div *ngSwitchCase="'viewIndividual'">
-        view individual
-      </div>
-  
-      <!-- add new -->
-      <div *ngSwitchCase="'add'">
-        <h1>UNDER CONSTRUCTION</h1>
-        <button (click)="selectUserMenu('viewAll');">Back</button>
-      </div>
-    </div>
-  </div>
   
