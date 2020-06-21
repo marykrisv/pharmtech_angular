@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div [ngSwitch]="menuSelected">
         <div *ngSwitchCase="'dashboard'">
             <app-dashboard></app-dashboard>
@@ -11,6 +11,18 @@
         </div>
         <div *ngSwitchCase="'eprescription'">
             <app-eprescription></app-eprescription>
+        </div>
+    </div>
+</div> -->
+<div id="wrapper">
+    <div id="modal-screen"></div>
+    <!-- Sidebar -->
+    <app-side-menu></app-side-menu>
+    <!-- Page content -->
+    <div id="page-content-wrapper">
+        <app-header></app-header>
+        <div class="container">
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>

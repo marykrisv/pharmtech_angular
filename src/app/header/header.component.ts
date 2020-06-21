@@ -1,6 +1,7 @@
 import { DataService } from './../data.service';
 import { Session } from './../interface/session';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ export class HeaderComponent implements OnInit {
   menuSelected: string;
   user_session: Session;
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, private router: Router) { }
 
   ngOnInit(): void {
     this.data.currentSession.subscribe(
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.data.changeSession(null);
+    this.router.navigate(['/login']);
   }
 
   showDropDown ($event) {

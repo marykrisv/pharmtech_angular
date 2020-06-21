@@ -1,23 +1,24 @@
 <!-- if not logged in -->
-<div *ngIf="user_session == null; then thenBlock else elseBlock"></div>
+<!-- <div *ngIf="user_session == null; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock>
     <div id="login-wrapper">
         <app-login></app-login>
     </div>
-</ng-template>
+</ng-template> -->
 
 <!-- if logged in -->
-<ng-template #elseBlock>
+<!-- <ng-template #elseBlock>
     <div id="wrapper">
-        <div id="modal-screen"></div>
+        <div id="modal-screen"></div> -->
         <!-- Sidebar -->
-        <app-side-menu></app-side-menu>
+        <!-- <app-side-menu></app-side-menu> -->
         <!-- Page content -->
-        <div id="page-content-wrapper">
+        <!-- <div id="page-content-wrapper">
             <app-header></app-header>
             <app-menuview selected="users"></app-menuview>
         </div>
     </div>
-</ng-template>
+</ng-template> -->
+<router-outlet></router-outlet>
 
 

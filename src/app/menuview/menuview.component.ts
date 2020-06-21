@@ -7,12 +7,11 @@ import { Component, OnInit, Input, Output } from '@angular/core';
   styleUrls: ['./menuview.component.scss']
 })
 export class MenuviewComponent implements OnInit {
-  menuSelected: string;
 
   constructor(private data: DataService) {    
   }
 
   ngOnInit(): void {
-    this.data.currentMenuSelected.subscribe(menuSelected => this.menuSelected = menuSelected)
+    
   }
 }
