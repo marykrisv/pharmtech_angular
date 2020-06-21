@@ -25,7 +25,7 @@ export class UserService {
     //     // console.log(response);
     //     this.users.next(response);
     //   });
-    this.http.get('http://localhost/pharmtech/api/sample/read.php?').
+    this.http.get('http://localhost/pharmtech/api/user/view-all-from-this-location.php?locid=1').
     subscribe(response => {
       if (response['data'] != undefined) {
         this.users.next(response['data']);

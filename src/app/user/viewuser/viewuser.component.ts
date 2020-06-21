@@ -1,13 +1,12 @@
-import { UserService } from './../user.service';
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  selector: 'app-viewuser',
+  templateUrl: './viewuser.component.html',
+  styleUrls: ['./viewuser.component.scss']
 })
-export class UserComponent implements OnInit {
+export class ViewuserComponent implements OnInit {
 
   userMenu: string;
   users: any;

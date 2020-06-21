@@ -1,10 +1,10 @@
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { ViewinventoryComponent } from './inventory/viewinventory/viewinventory.component';
 import { MenuviewComponent } from './menuview/menuview.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UserComponent } from './user/user.component';
-import { InventoryComponent } from './inventory/inventory.component';
+import { ReportComponent } from './dashboard/report/report.component';
+import { ViewuserComponent } from './user/viewuser/viewuser.component';
 
 
 const routes: Routes = [
@@ -18,15 +18,15 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        component: DashboardComponent
+        component: ReportComponent
       },
       {
         path: 'users',
-        component: UserComponent
+        component: ViewuserComponent
       },
       {
         path: 'inventory',
-        component: InventoryComponent
+        component: ViewinventoryComponent
       }
     ]
   },

@@ -1,5 +1,6 @@
 import { DataService } from './../data.service';
 import { Component, OnInit, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menuview',
@@ -8,10 +9,10 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 })
 export class MenuviewComponent implements OnInit {
 
-  constructor(private data: DataService) {    
+  constructor(private data: DataService, private router: Router) {    
   }
 
   ngOnInit(): void {
-    
+    this.router.navigate(["menu/dashboard"]);
   }
 }

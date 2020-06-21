@@ -7,7 +7,9 @@
     </h1>
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a (click)=showDropDown($event); class="dropdown-toggle" data-toggle="dropdown">{{ user_session.userName }} <span class="caret"></span></a>
+          <a (click)=showDropDown($event); class="dropdown-toggle" data-toggle="dropdown">
+            <!-- {{ user_session.userName }}  -->
+          <span class="caret"></span></a>
           <ul id="dropdownMenu" class="dropdown-menu collapse" role="menu">
             <li><a>My Profile</a></li>
             <li class="divider"></li>
