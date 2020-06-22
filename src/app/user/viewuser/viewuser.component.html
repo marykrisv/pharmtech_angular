@@ -66,7 +66,7 @@
                             <input type="checkbox">
                           </td>
                           <td class="text-center hidden-xs">
-                            <a routerLink="/menu/users/userdetail" class="btn btn-primary"><em class="fa fa-eye"></em></a>
+                            <a [routerLink]="['/menu/users/userdetail',user.userId]" class="btn btn-primary"><em class="fa fa-eye"></em></a>
                             <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
                             <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
                           </td>
