@@ -6,35 +6,55 @@
                     ">
             <div class="loginPanel">
                 <div class="login">
-                    <form>
-                        <div class="row">
-                            <div class="col-sm-10 col-sm-offset-1">
-                                <input class="inputStyle form-control" type="text" name="username" placeholder="Username">
+                    <form [formGroup]="form">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-1">
+                                    <div 
+                                        id="loginWarning"
+                                        *ngIf="warning != null" 
+                                        class="alert alert-danger">{{ warning }}
+                                    </div>
+                                    <input 
+                                        formControlName="username"
+                                        class="inputStyle form-control" 
+                                        type="text" 
+                                        name="username" 
+                                        placeholder="Username"
+                                        (click)="resetWarningMessage();"
+                                        (keyup.enter)="login()"
+                                    >                                    
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-10 col-sm-offset-1">
-                                <input class="inputStyle form-control" type="password" name="password" placeholder="password">
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-1">
+                                    <input class="inputStyle form-control" 
+                                        formControlName="password"
+                                        type="password" 
+                                        name="password" 
+                                        placeholder="password"
+                                        (click)="resetWarningMessage();"
+                                        (keyup.enter)="login()"
+                                    >
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-10 col-sm-offset-1">
-                                <input 
-                                    class="btn btn-info btn-md loginButton" 
-                                    type="button" 
-                                    name="loginbutton" 
-                                    value="LOGIN"
-                                    (click)="login()"
-                                >
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-1">
+                                    <input 
+                                        class="btn btn-info btn-md loginButton" 
+                                        type="button" 
+                                        name="loginbutton" 
+                                        value="LOGIN"
+                                        (click)="login()"
+                                    >
+                                </div>
                             </div>
-                        </div>
+                        </div>                        
                     </form>
                     <div class="row">
                         <br>
                         <div class="col-sm-10 col-sm-offset-1">
                             <span class="forgotPassword">Forgot Password? </span>
-                            <span> | </span>
-                            <span class="register">Register</span>
                         </div>
                     </div>
                 </div>

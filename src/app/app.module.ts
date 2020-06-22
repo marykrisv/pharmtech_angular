@@ -14,6 +14,7 @@ import { EprescriptionComponent } from './eprescription/eprescription.component'
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { LoginModule } from './login/login.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LoginModule } from './login/login.module';
     DashboardModule,
     UsersModule,
     InventoryModule,
-    LoginModule
+    LoginModule,
+    ReactiveFormsModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
