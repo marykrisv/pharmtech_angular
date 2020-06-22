@@ -1,6 +1,6 @@
-import { DataService } from './../data.service';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-menuview',
@@ -9,10 +9,13 @@ import { Router } from '@angular/router';
 })
 export class MenuviewComponent implements OnInit {
 
-  constructor(private data: DataService, private router: Router) {    
+  currentSession;
+
+  constructor(private data: AuthService, private router: Router) {    
   }
 
   ngOnInit(): void {
+    this.data.currentSession.subscribe(currentSession => this.currentSession = currentSession);
     this.router.navigate(["menu/dashboard"]);
   }
 }

@@ -1,7 +1,8 @@
 import { Session } from './../interface/session';
 import { Component, OnInit } from '@angular/core';
-import { DataService } from './../data.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
+import { BoundElementPropertyAst } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +13,30 @@ export class LoginComponent implements OnInit {
 
   user_session: Session;
 
-  constructor(private data: DataService, private router: Router) { }
+  constructor(private data: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.data.currentSession.subscribe(
       usersession => this.user_session = usersession
     );
-    this.router.navigate(['login']);
+    // this.router.navigate(['login']);
+    //check if in session
+    if (localStorage.getItem('session') == null) {
+      // do nothing
+    } else {
+      //get localStorage sesson and set as currentSession
+      let jsonObj: any = JSON.parse(localStorage.getItem('session')); // string to generic object first
+      let session: Session = <Session>jsonObj;
+      this.data.changeSession(session);
+      this.router.navigate(["menu/dashboard"]);
+    }   
   }
 
-  sampleLogin () {
-    this.data.changeSession({userId: 1, userName: 'Mary'});
-    this.router.navigate(['/menu/dashboard']);
+  login () {
+    const user = {
+      'userName': 'admincebu',
+      'userPassword': 'admin'
+    }
+    this.data.login(user);
   }
 }

@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth/auth.guard';
 import { ViewinventoryComponent } from './inventory/viewinventory/viewinventory.component';
 import { MenuviewComponent } from './menuview/menuview.component';
 import { LoginComponent } from './login/login.component';
@@ -26,7 +27,8 @@ const routes: Routes = [
       },
       {
         path: 'inventory',
-        component: ViewinventoryComponent
+        component: ViewinventoryComponent,
+        canActivate: [AuthGuard],
       }
     ]
   },

@@ -1,6 +1,7 @@
-import { DataService } from './data.service';
+import { element } from 'protractor';
 import { Session } from './interface/session';
 import { Component, OnInit, Input, Output } from '@angular/core';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
   title = 'pharmtech';
   user_session: Session;
 
-  constructor(private data: DataService) {
+  constructor(private data: AuthService) {
   }
 
   ngOnInit(): void {
@@ -38,11 +39,13 @@ document.body.onclick = function(e) {
         // alert('You clicked inside');
     }
   }
-  if (e.target != element_dropdown) {
-    //outside      
-    if (!element_dropdown.classList.contains("collapse")) {
-      element_dropdown.classList.toggle("collapse");        
-    } 
-  }
+  if (element_dropdown != null) {
+    if (e.target != element_dropdown) {
+      //outside      
+      if (!element_dropdown.classList.contains("collapse")) {
+        element_dropdown.classList.toggle("collapse");        
+      } 
+    }
+  } 
   
 }

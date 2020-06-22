@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth/auth.guard';
 import { InventoryModule } from './inventory/inventory.module';
 import { UsersModule } from './user/user.module';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -32,7 +33,7 @@ import { HttpClientModule }    from '@angular/common/http';
     UsersModule,
     InventoryModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

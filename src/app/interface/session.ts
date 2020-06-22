@@ -1,4 +1,9 @@
 export interface Session {
     userId: number,
-    userName: string
+    userName: string,
+    userFname: string,
+    userMname: string,
+    userLname: string,
+    userLocId: number,
+    userLocName: string
   }
