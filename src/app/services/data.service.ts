@@ -1,4 +1,4 @@
-import { Session } from './interface/session';
+import { Session } from '../interface/session';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 

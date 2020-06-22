@@ -22,7 +22,7 @@ export class AuthService {
   login (user: any) {
     return this.http.post('http://localhost/pharmtech/api/user/login', JSON.stringify(user)).
     subscribe(response => {
-      if (response != null) {
+      if (response['data'] != null) {
         const usersession = {
           userId: response['data'][0]['userId'],
           userName: response['data'][0]['userName'],

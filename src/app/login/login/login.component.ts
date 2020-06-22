@@ -1,8 +1,7 @@
-import { Session } from './../interface/session';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
-import { BoundElementPropertyAst } from '@angular/compiler';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Session } from 'src/app/interface/session';
 
 @Component({
   selector: 'app-login',

@@ -1,11 +1,10 @@
 import { AuthGuard } from './auth/auth.guard';
 import { ViewinventoryComponent } from './inventory/viewinventory/viewinventory.component';
 import { MenuviewComponent } from './menuview/menuview.component';
-import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ReportComponent } from './dashboard/report/report.component';
-import { ViewuserComponent } from './user/viewuser/viewuser.component';
+import { LoginComponent } from './login/login/login.component';
 
 
 const routes: Routes = [
@@ -34,7 +33,8 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: LoginComponent
+    redirectTo: '\login',
+    pathMatch: 'full'
   }
   // {
   //   path: '**',
