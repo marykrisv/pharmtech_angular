@@ -1,3 +1,4 @@
+import { ToolConfig } from './../../common/toolconfig';
 import { PasswordValidator } from './../../validators/password.validator';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -78,7 +79,7 @@ export class LoginComponent implements OnInit {
       'userPassword': this.passwordInput.value
     }
 
-    this.http.post('http://localhost/pharmtech/api/user/login', JSON.stringify(user)).
+    this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/login', JSON.stringify(user)).
     subscribe(response => {
       if (response['data'] != null) {
         if (response['data'][0]['userIsLocked'] == '0') {
@@ -95,7 +96,8 @@ export class LoginComponent implements OnInit {
           this.data.changeSession(usersession);
 
           //update password required for new user
-          if (response['data'][0]['userIsNew'] == '1') {            
+          if (response['data'][0]['userIsNew'] == '1') {     
+            alert("Welcome new user. Please update your password first.");       
             this.userId = response['data'][0]['userId'];
 
             //clear everything
@@ -144,7 +146,7 @@ export class LoginComponent implements OnInit {
           'userId': this.userId,
           'userPassword': this.newpasswordInput.value
         }
-        this.http.post('http://localhost/pharmtech/api/user/confirm-new-password', JSON.stringify(newpass))
+        this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/confirm-new-password', JSON.stringify(newpass))
           .subscribe(response => {
             if (response['message']=='User Updated') {
               alert('User password successfully updated!');

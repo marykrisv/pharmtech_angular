@@ -1,3 +1,4 @@
+import { ToolConfig } from './../common/toolconfig';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
@@ -15,7 +16,7 @@ export class UserService {
   }
 
   getAllUsers() {
-    this.http.get('http://localhost/pharmtech/api/user/view-all-from-this-location.php?locid=1').
+    this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-all-from-this-location.php?locid=1').
     subscribe(response => {
       if (response['data'] != undefined) {
         this.users.next(response['data']);

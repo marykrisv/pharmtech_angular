@@ -7,27 +7,27 @@ export class PasswordValidator {
         if (password.length < 8) {
             return { 
                 isPasswordInvalid: true, 
-                errorMessage: 'Passowrd should be atleast 8 characters.'
+                errorMessage: 'Password should be atleast 8 characters.'
             }
         } else if (password.search(/[a-z]/) == -1) {
             return { 
                 isPasswordInvalid: true, 
-                errorMessage: 'Passowrd should have atleast 1 letter.'
+                errorMessage: 'Password should have atleast 1 letter.'
             }
         } else if (password.search(/[A-Z]/) == -1) {
             return { 
                 isPasswordInvalid: true, 
-                errorMessage: 'Passowrd should have atleast 1 capital letter.'
+                errorMessage: 'Password should have atleast 1 capital letter.'
             }
         } else if (password.search(/[0-9]/) == -1) {
             return { 
                 isPasswordInvalid: true, 
-                errorMessage: 'Passowrd should have atleast 1 number.'
+                errorMessage: 'Password should have atleast 1 number.'
             }
         } else {
             return { 
                 isPasswordInvalid: false, 
-                errorMessage: 'Passowrd should have atleast 1 number.'
+                errorMessage: 'Password should have atleast 1 number.'
             }
         }
 
