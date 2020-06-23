@@ -6,57 +6,114 @@
                     ">
             <div class="loginPanel">
                 <div class="login">
-                    <form [formGroup]="form">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-10 col-sm-offset-1">
-                                    <div 
-                                        id="loginWarning"
-                                        *ngIf="warning != null" 
-                                        class="alert alert-danger">{{ warning }}
+                    <div id="title">{{ title }}</div>
+                    <div *ngIf="view=='login'; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock>
+                        <form [formGroup]="form">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">                                        
+                                        <div 
+                                            [ngClass]="warning != null?'alert-danger':''" 
+                                            class="alert warningMessage">{{ warning }}
+                                        </div>
+                                        <input 
+                                            formControlName="username"
+                                            class="inputStyle form-control" 
+                                            type="text" 
+                                            name="username" 
+                                            placeholder="Username"
+                                            (click)="resetWarningMessage();"
+                                            (keyup.enter)="login()"
+                                        >                                    
                                     </div>
-                                    <input 
-                                        formControlName="username"
-                                        class="inputStyle form-control" 
-                                        type="text" 
-                                        name="username" 
-                                        placeholder="Username"
-                                        (click)="resetWarningMessage();"
-                                        (keyup.enter)="login()"
-                                    >                                    
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-10 col-sm-offset-1">
-                                    <input class="inputStyle form-control" 
-                                        formControlName="password"
-                                        type="password" 
-                                        name="password" 
-                                        placeholder="password"
-                                        (click)="resetWarningMessage();"
-                                        (keyup.enter)="login()"
-                                    >
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <input class="inputStyle form-control" 
+                                            formControlName="password"
+                                            type="password" 
+                                            name="password" 
+                                            placeholder="password"
+                                            (click)="resetWarningMessage();"
+                                            (keyup.enter)="login()"
+                                        >
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-10 col-sm-offset-1">
-                                    <input 
-                                        class="btn btn-info btn-md loginButton" 
-                                        type="button" 
-                                        name="loginbutton" 
-                                        value="LOGIN"
-                                        (click)="login()"
-                                    >
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <input 
+                                            class="btn btn-info btn-md loginButton" 
+                                            type="button" 
+                                            name="loginbutton" 
+                                            value="LOGIN"
+                                            (click)="login()"
+                                        >
+                                    </div>
                                 </div>
+                            </div>                        
+                        </form>
+                        <div class="row">
+                            <br>
+                            <div class="col-sm-10 col-sm-offset-1">
+                                <span class="forgotPassword">Forgot Password? </span>
                             </div>
-                        </div>                        
-                    </form>
-                    <div class="row">
-                        <br>
-                        <div class="col-sm-10 col-sm-offset-1">
-                            <span class="forgotPassword">Forgot Password? </span>
                         </div>
-                    </div>
+                    </ng-template>
+                    <ng-template #elseBlock>
+                        <form [formGroup]="resetPassword">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <div 
+                                            [ngClass]="resetPasswordWarning != null?'alert-danger':''" 
+                                            class="alert warningMessage">
+                                            {{ resetPasswordWarning }}
+                                        </div>
+                                        <!-- <div 
+                                            *ngIf="resetPasswordWarning != null" 
+                                            class="alert alert-danger warningMessage">
+                                            {{ resetPasswordWarning }}
+                                        </div>                                         -->
+                                        <input class="inputStyle form-control" 
+                                            formControlName="newpassword"
+                                            type="password" 
+                                            name="newpassword" 
+                                            placeholder="new password"
+                                            (click)="resetWarningMessageInReset();"
+                                            (keyup.enter)="confirmNewPassword()"
+                                            autocomplete="false off new-password"
+                                        >                                  
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <input class="inputStyle form-control" 
+                                            formControlName="confirmpassword"
+                                            type="password" 
+                                            name="confirmpassword" 
+                                            placeholder="confirm password"
+                                            (click)="resetWarningMessageInReset();"
+                                            (keyup.enter)="confirmNewPassword()"
+                                            autocomplete="off"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <input 
+                                            class="btn btn-info btn-md loginButton" 
+                                            type="button" 
+                                            name="loginbutton" 
+                                            value="CONFIRM NEW PASSWORD"
+                                            (click)="confirmNewPassword()"
+                                        >
+                                    </div>
+                                </div>
+                            </div>                        
+                        </form>
+                    </ng-template>
+                                        
                 </div>
             </div>
         </div>

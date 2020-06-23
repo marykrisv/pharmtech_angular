@@ -26,8 +26,8 @@ const routes: Routes = [
       },
       {
         path: 'inventory',
-        component: ViewinventoryComponent,
-        canActivate: [AuthGuard],
+        component: ViewinventoryComponent
+        // canActivate: [AuthGuard],
       }
     ]
   },
