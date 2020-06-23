@@ -12,18 +12,15 @@ export class UserService {
   currentUsers = this.users.asObservable();
 
   constructor(private http: HttpClient) {
-    this.getAllUsers();
   }
 
-  getAllUsers() {
-    this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-all-from-this-location.php?locid=1').
-    subscribe(response => {
-      if (response['data'] != undefined) {
-        this.users.next(response['data']);
-      } else {
-        this.users.next(null);
-      }      
-    });
+  changeUsers (users: any) {
+    this.users.next(users);
+  }
+
+  async getAllUsers(locId: number) {
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-all-from-this-location.php?locid='+locId)
+    .toPromise();
   }
   
   async login(user: any) {

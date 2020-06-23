@@ -15,15 +15,18 @@ export class ViewuserComponent implements OnInit {
     
   }
 
-  selectUserMenu(selected) {
-    // this.userMenu = selected;
-  }
-
   goToViewAll() {
-    this.us.currentUsers.subscribe(users => this.users = users);   
+    this.us.getAllUsers(1).then(response => {
+      if (response['data'] != undefined) {
+        this.us.changeUsers(response['data']);
+      } else {
+        this.us.changeUsers(null);
+      } 
+    });
   }
 
   ngOnInit(): void {
+    this.us.currentUsers.subscribe(users => this.users = users);
     this.goToViewAll();
     this.userMenu = 'viewAll';
   }
