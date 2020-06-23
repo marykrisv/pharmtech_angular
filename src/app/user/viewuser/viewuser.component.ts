@@ -1,5 +1,7 @@
+import { AuthService } from 'src/app/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { Session } from 'src/app/interface/session.interface';
 
 @Component({
   selector: 'app-viewuser',
@@ -11,12 +13,13 @@ export class ViewuserComponent implements OnInit {
   userMenu: string;
   users: any;
 
-  constructor(private us: UserService) { 
-    
+  user_session: Session;
+
+  constructor(private us: UserService, private auth: AuthService) { 
   }
 
   goToViewAll() {
-    this.us.getAllUsers(1).then(response => {
+    this.us.getAllUsers(this.user_session.userLocId).then(response => {
       if (response['data'] != undefined) {
         this.us.changeUsers(response['data']);
       } else {
@@ -27,32 +30,13 @@ export class ViewuserComponent implements OnInit {
 
   ngOnInit(): void {
     this.us.currentUsers.subscribe(users => this.users = users);
+    this.auth.currentSession.subscribe(currentSession => {
+      this.user_session = currentSession;
+    });
     this.goToViewAll();
     this.userMenu = 'viewAll';
   }
 
 }
 
-interface User {
-  userId: number,
-  userName: string,
-  userPassword: string,
-  userFname: string,
-  userMname: string,
-  userLname: string,
-  userGender: string,
-  userBirthdate: Date,
-  userAddress: string,
-  userCitizenship: string,
-  userContactNo: string,
-  userRole: string,
-  userLicenseNo: string,
-  userStatus: number,
-  userIsLocked: boolean,
-  userIsNew: boolean,
-  userLocId: number
-  userCreatedOn: Date,
-  userCreatedBy: number,
-  userModifiedOn: Date,
-  userModifiedBy: number
-}
+
