@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ReportComponent } from './dashboard/report/report.component';
 import { LoginComponent } from './login/login/login.component';
+import { UserGuard } from './guard/user.guard';
 
 
 const routes: Routes = [
@@ -20,11 +21,12 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: ReportComponent,
-        // canActivate: [DashboardGuard]
+        canActivate: [DashboardGuard]
       },
       {
         path: 'users',
-        loadChildren: () => import('./user/user.module').then(m => m.UsersModule)
+        loadChildren: () => import('./user/user.module').then(m => m.UsersModule),
+        canActivate: [UserGuard]
       },
       {
         path: 'inventory',

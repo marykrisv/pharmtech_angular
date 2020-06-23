@@ -10,6 +10,13 @@
                         routerLink="dashboard" 
                         routerLinkActive="active">
                         <a>
+                            <i class="fa fa-dashboard fa-lg"></i> Dashboard                            
+                        </a>
+                    </li>
+                    <li [ngClass]="userPrivilege.priDashboard==false?'hidden':''" 
+                        routerLink="dashboard" 
+                        routerLinkActive="active">
+                        <a>
                             <i class="fa fa-dashboard fa-lg"></i> Dashboard
                         </a>
                     </li>

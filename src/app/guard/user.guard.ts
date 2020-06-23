@@ -1,13 +1,12 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { DataService } from '../services/data.service';
 import { Privilege } from '../interface/privilege.interface';
+import { DataService } from '../services/data.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DashboardGuard implements CanActivate {
+export class UserGuard implements CanActivate {
   currentPrivilege: Privilege;
     
   constructor (private router: Router, private data: DataService) {
@@ -16,11 +15,10 @@ export class DashboardGuard implements CanActivate {
   }
   
   canActivate(): boolean {
-    if (this.currentPrivilege.priDashboard) {
+    if (this.currentPrivilege.priUser) {
       return true;
     } else {
       return false;
     }
   }
-  
 }

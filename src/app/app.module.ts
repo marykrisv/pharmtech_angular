@@ -1,3 +1,8 @@
+import { DashboardGuard } from './guard/dashboard.guard';
+import { UserService } from './services/user.service';
+import { PrivilegeService } from './services/privilege.service';
+import { DataService } from 'src/app/services/data.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { AuthGuard } from './auth/auth.guard';
 import { InventoryModule } from './inventory/inventory.module';
 import { UsersModule } from './user/user.module';
@@ -15,6 +20,7 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { LoginModule } from './login/login.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserGuard } from './guard/user.guard';
 
 @NgModule({
   declarations: [
@@ -35,7 +41,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginModule,
     ReactiveFormsModule
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard,
+    DashboardGuard,
+    AuthService,
+    DataService,
+    PrivilegeService,
+    UserService,
+    DashboardGuard,
+    UserGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

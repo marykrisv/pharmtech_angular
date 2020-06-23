@@ -1,10 +1,10 @@
-import { DataService } from './services/data.service';
-import { element } from 'protractor';
 import { Session } from './interface/session.interface';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { Router } from '@angular/router';
+import { PrivilegeService } from './services/privilege.service';
 import { Privilege } from './interface/privilege.interface';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +16,12 @@ export class AppComponent {
   user_session: Session;
 
   constructor(private auth: AuthService, 
+              private privilegeService: PrivilegeService,
               private data: DataService,
               private router: Router) {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
     this.auth.currentSession.subscribe(
       usersession => this.user_session = usersession
     );
@@ -40,7 +41,30 @@ export class AppComponent {
       this.data.changePrivilege(privilege);
       
       this.router.navigate(["menu/dashboard"]);
-    } 
+
+      //to be used for checking the privilege for the guard
+      this.setPrivilege();
+    }
+  }
+
+  setPrivilege () {
+    this.privilegeService.getPrivilege({priUserId: this.user_session.userId}).then(
+      response => {
+        console.log(response);
+        const privilege = {
+          priDashboard: response['data'][0]['priDashboard'],
+          priUser: response['data'][0]['priUser'],
+          priInventory: response['data'][0]['priInventory'],
+          priManage: response['data'][0]['priManage'],
+          priPatientManagement: response['data'][0]['priPatientManagement'],
+          priPharmacyCorner: response['data'][0]['priPharmacyCorner'],
+          priNotification: response['data'][0]['priNotification'],
+          priPos: response['data'][0]['priPos']
+        }
+    
+        this.data.changePrivilege(privilege);
+      }
+    );
   }
 }
 
