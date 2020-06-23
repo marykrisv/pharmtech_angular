@@ -1,4 +1,4 @@
-import { ToolConfig } from './../../common/toolconfig';
+import { UserService } from './../../services/user.service';
 import { PasswordValidator } from './../../validators/password.validator';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Session } from 'src/app/interface/session.interface';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { timeStamp } from 'console';
 import { Privilege } from 'src/app/interface/privilege.interface';
 import { DataService } from 'src/app/services/data.service';
 
@@ -41,7 +40,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService, 
     private data: DataService,
-    private router: Router, private http: HttpClient
+    private router: Router, 
+    private http: HttpClient,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -75,48 +76,50 @@ export class LoginComponent implements OnInit {
       'userPassword': this.passwordInput.value
     }
 
-    this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/login', JSON.stringify(user)).
-    subscribe(response => {
-      if (response['data'] != null) {
-        if (response['data'][0]['userIsLocked'] == '0') {
-                 
-          //set user session
-          this.setUsersession(response);
-
-          //set privileges
-          this.setPrivileges(response);
-
-          //update password required for new user
-          if (response['data'][0]['userIsNew'] == '1') {     
-            alert("Welcome new user. Please update your password first.");       
-            this.userId = response['data'][0]['userId'];
-
-            //clear everything
-            this.resetPasswordWarning = null;
-            this.newpasswordInput.setValue('');
-            this.confirmpasswordInput.setValue('');
-
-            this.view = 'resetPassword';
-            this.title = 'Reset Password';
-          } else {       
-            //successful login   
-            this.successfulLogin();       
+    //put here
+    this.userService.login(user).then(
+      response => {
+        if (response['data'] != null) {
+          if (response['data'][0]['userIsLocked'] == '0') {
+                   
+            //set user session
+            this.setUsersession(response);
+  
+            //set privileges
+            this.setPrivileges(response);
+  
+            //update password required for new user
+            if (response['data'][0]['userIsNew'] == '1') {     
+              alert("Welcome new user. Please update your password first.");       
+              this.userId = response['data'][0]['userId'];
+  
+              //clear everything
+              this.resetPasswordWarning = null;
+              this.newpasswordInput.setValue('');
+              this.confirmpasswordInput.setValue('');
+  
+              this.view = 'resetPassword';
+              this.title = 'Reset Password';
+            } else {       
+              //successful login   
+              this.successfulLogin();       
+            }
+          } else {
+            this.warning = 'User is locked. Please contact admin';
           }
         } else {
-          this.warning = 'User is locked. Please contact admin';
+          this.warning = 'Username or password is incorrect!';
+          this.ctr++;
+  
+          if (this.ctr == this.numberOfTries) {
+            alert("lock user");
+          }
         }
-      } else {
-        this.warning = 'Username or password is incorrect!';
-        this.ctr++;
-
-        if (this.ctr == this.numberOfTries) {
-          alert("lock user");
-        }
+        
+        this.usernameInput.setValue('');
+        this.passwordInput.setValue('');
       }
-      
-      this.usernameInput.setValue('');
-      this.passwordInput.setValue('');
-    });
+    );
   }
 
   confirmNewPassword() {  
@@ -134,15 +137,15 @@ export class LoginComponent implements OnInit {
           'userId': this.userId,
           'userPassword': this.newpasswordInput.value
         }
-        this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/confirm-new-password', JSON.stringify(newpass))
-          .subscribe(response => {
-            //successfully changed user password for new user
+
+        this.userService.updatePassword(newpass).then(response => {
+          // successfully changed user password for new user
             if (response['message']=='User Updated') {
               alert('User password successfully updated!');
               this.successfulLogin();
             }
-             
-          });
+        });
+
       } else {
         alert('fix your password first');
       }
@@ -192,7 +195,6 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('session', JSON.stringify(this.user_session));
     localStorage.setItem('privilege', JSON.stringify(this.privilege));
 
-    console.log('test');
     this.router.navigate(["menu/dashboard"]);    
   }
 }

@@ -26,8 +26,14 @@ export class UserService {
     });
   }
   
-  loggedIn () {
-    return !!localStorage.getItem('token');
+  async login(user: any) {
+    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/login', 
+    JSON.stringify(user)).toPromise();
+  }
+
+  async updatePassword (newpass: any) {
+    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/confirm-new-password', 
+    JSON.stringify(newpass)).toPromise();
   }
 }
 

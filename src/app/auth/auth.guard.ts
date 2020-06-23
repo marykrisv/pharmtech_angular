@@ -90,11 +90,12 @@ export class AuthGuard implements CanActivate, OnInit {
   } 
 
   canActivate(): boolean {
-    if (this.user.loggedIn()) {
-      return true;
-    } else {
-      this.router.navigate(['/login']);
-      return false;
-    }
+    // if (this.user.loggedIn()) {
+    //   return true;
+    // } else {
+    //   this.router.navigate(['/login']);
+    //   return false;
+    // }
+    return true;
   }
 }

@@ -9,7 +9,7 @@ if (environment.production) {
 }
 
 document.onload = function(e) {
-  console.log("onload");
+  // console.log("onload");
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
