@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { Session } from 'src/app/interface/session.interface';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { timeStamp } from 'console';
+import { Privilege } from 'src/app/interface/privilege.interface';
+import { DataService } from 'src/app/services/data.service';
 
 
 @Component({
@@ -21,6 +23,7 @@ export class LoginComponent implements OnInit {
   view;
   title;
   user_session: Session;
+  privilege: Privilege;
   warning: string = null;
   resetPasswordWarning: string = null;
   userId: number;
@@ -35,26 +38,19 @@ export class LoginComponent implements OnInit {
     confirmpassword: new FormControl('', Validators.required)
   });
 
-  constructor(private data: AuthService, private router: Router, private http: HttpClient) { }
+  constructor(
+    private auth: AuthService, 
+    private data: DataService,
+    private router: Router, private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
     this.view = 'login';
     this.title = 'Login';
 
-    this.data.currentSession.subscribe(
+    this.auth.currentSession.subscribe(
       usersession => this.user_session = usersession
-    );
-    // this.router.navigate(['login']);
-    //check if in session
-    if (localStorage.getItem('session') == null) {
-      // do nothing
-    } else {
-      //get localStorage sesson and set as currentSession
-      let jsonObj: any = JSON.parse(localStorage.getItem('session')); // string to generic object first
-      let session: Session = <Session>jsonObj;
-      this.data.changeSession(session);
-      this.router.navigate(["menu/dashboard"]);
-    }   
+    ); 
   }
 
   get usernameInput () {
@@ -83,17 +79,12 @@ export class LoginComponent implements OnInit {
     subscribe(response => {
       if (response['data'] != null) {
         if (response['data'][0]['userIsLocked'] == '0') {
-          const usersession = {
-            userId: response['data'][0]['userId'],
-            userName: response['data'][0]['userName'],
-            userFname: response['data'][0]['userFname'],
-            userMname: response['data'][0]['userMname'],
-            userLname: response['data'][0]['userLname'],
-            userLocId: response['data'][0]['userLocId'],
-            userLocName: response['data'][0]['locName']
-          };
+                 
+          //set user session
+          this.setUsersession(response);
 
-          this.data.changeSession(usersession);
+          //set privileges
+          this.setPrivileges(response);
 
           //update password required for new user
           if (response['data'][0]['userIsNew'] == '1') {     
@@ -109,10 +100,7 @@ export class LoginComponent implements OnInit {
             this.title = 'Reset Password';
           } else {       
             //successful login   
-            //set storage
-            localStorage.clear();
-            localStorage.setItem('session', JSON.stringify(usersession));
-            this.router.navigate(["menu/dashboard"]);            
+            this.successfulLogin();       
           }
         } else {
           this.warning = 'User is locked. Please contact admin';
@@ -122,7 +110,7 @@ export class LoginComponent implements OnInit {
         this.ctr++;
 
         if (this.ctr == this.numberOfTries) {
-          console.log("lock user");
+          alert("lock user");
         }
       }
       
@@ -148,12 +136,10 @@ export class LoginComponent implements OnInit {
         }
         this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/confirm-new-password', JSON.stringify(newpass))
           .subscribe(response => {
+            //successfully changed user password for new user
             if (response['message']=='User Updated') {
               alert('User password successfully updated!');
-              localStorage.clear();
-              localStorage.setItem('session', JSON.stringify(this.user_session));  
-              console.log(this.user_session);
-              this.router.navigate(["menu/dashboard"]);   
+              this.successfulLogin();
             }
              
           });
@@ -169,5 +155,44 @@ export class LoginComponent implements OnInit {
 
   resetWarningMessageInReset () {
     this.resetPasswordWarning = null;
+  }
+
+  setUsersession (response: any) {
+    const usersession = {
+      userId: response['data'][0]['userId'],
+      userName: response['data'][0]['userName'],
+      userFname: response['data'][0]['userFname'],
+      userMname: response['data'][0]['userMname'],
+      userLname: response['data'][0]['userLname'],
+      userLocId: response['data'][0]['userLocId'],
+      userLocName: response['data'][0]['locName'],
+      userRole: response['data'][0]['userRole']
+    };
+    this.auth.changeSession(usersession);            
+  }
+
+  setPrivileges (response: any) {
+    this.privilege = {
+      priDashboard: response['data'][0]['priDashboard'],
+      priUser: response['data'][0]['priUser'],
+      priInventory: response['data'][0]['priInventory'],
+      priManage: response['data'][0]['priManage'],
+      priPatientManagement: response['data'][0]['priPatientManagement'],
+      priPharmacyCorner: response['data'][0]['priPharmacyCorner'],
+      priNotification: response['data'][0]['priNotification'],
+      priPos: response['data'][0]['priPos']
+    }
+
+    this.data.changePrivilege(this.privilege);
+  }
+
+  successfulLogin () {
+    //set storage
+    localStorage.clear();
+    localStorage.setItem('session', JSON.stringify(this.user_session));
+    localStorage.setItem('privilege', JSON.stringify(this.privilege));
+
+    console.log('test');
+    this.router.navigate(["menu/dashboard"]);    
   }
 }

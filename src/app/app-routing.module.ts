@@ -1,3 +1,4 @@
+import { DashboardGuard } from './guard/dashboard.guard';
 import { AuthGuard } from './auth/auth.guard';
 import { ViewinventoryComponent } from './inventory/viewinventory/viewinventory.component';
 import { MenuviewComponent } from './menuview/menuview.component';
@@ -18,7 +19,8 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        component: ReportComponent
+        component: ReportComponent,
+        // canActivate: [DashboardGuard]
       },
       {
         path: 'users',
@@ -28,6 +30,10 @@ const routes: Routes = [
         path: 'inventory',
         component: ViewinventoryComponent
         // canActivate: [AuthGuard],
+      },
+      {
+        path: 'patient-management',
+        loadChildren: () => import('./patient-management/patient-management.module').then(m => m.PatientManagementModule)
       }
     ]
   },

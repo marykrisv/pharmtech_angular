@@ -1,7 +1,10 @@
+import { DataService } from './services/data.service';
 import { element } from 'protractor';
 import { Session } from './interface/session.interface';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { AuthService } from './auth/auth.service';
+import { Router } from '@angular/router';
+import { Privilege } from './interface/privilege.interface';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +15,32 @@ export class AppComponent {
   title = 'pharmtech';
   user_session: Session;
 
-  constructor(private data: AuthService) {
+  constructor(private auth: AuthService, 
+              private data: DataService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
-    this.data.currentSession.subscribe(
+    this.auth.currentSession.subscribe(
       usersession => this.user_session = usersession
     );
+
+    //check if in session
+    if (localStorage.getItem('session') == null) {
+      // do nothing
+    } else {
+      //get localStorage sesson and set as currentSession
+      let sessionObj: any = JSON.parse(localStorage.getItem('session')); // string to generic object first
+      let session: Session = <Session>sessionObj;
+
+      let privilegeObj: any = JSON.parse(localStorage.getItem('privilege')); // string to generic object first
+      let privilege: Privilege = <Privilege>privilegeObj;
+
+      this.auth.changeSession(session);
+      this.data.changePrivilege(privilege);
+      
+      this.router.navigate(["menu/dashboard"]);
+    } 
   }
 }
 

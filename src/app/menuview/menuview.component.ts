@@ -10,7 +10,7 @@ import { Session } from '../interface/session.interface';
 })
 export class MenuviewComponent implements OnInit {
 
-  currentSession = null;
+  currentSession: Session = null;
 
   constructor(private data: AuthService, private router: Router) {    
   }
@@ -18,8 +18,13 @@ export class MenuviewComponent implements OnInit {
   ngOnInit(): void {
     this.data.currentSession.subscribe(currentSession => this.currentSession = currentSession);
     
-    if (this.currentSession != null) {      
-      this.router.navigate(["menu/dashboard"]);
+    if (this.currentSession != null) {    
+      if (this.currentSession.userRole.toLowerCase() == 'admin') {
+        //set view to dashboard
+        this.router.navigate(["menu/dashboard"]);
+      } else {
+        this.router.navigate(["menu/patient-management"]);
+      }      
     } else {
       //redirect to login
       this.router.navigate(["/login"]);

@@ -5,5 +5,6 @@ export interface Session {
     userMname: string,
     userLname: string,
     userLocId: number,
-    userLocName: string
+    userLocName: string,
+    userRole: string
   }

@@ -6,23 +6,33 @@
             <div class="menu-list">
     
                 <ul id="menu-content" class="menu-content out">
-                    <li routerLink="dashboard" routerLinkActive="active">
+                    <li [ngClass]="userPrivilege.priDashboard==false?'hidden':''" 
+                        routerLink="dashboard" 
+                        routerLinkActive="active">
                         <a>
                             <i class="fa fa-dashboard fa-lg"></i> Dashboard
                         </a>
                     </li>
-                    <li routerLink="users" routerLinkActive="active">
+                    <li [ngClass]="userPrivilege.priUser==false?'hidden':''"
+                        routerLink="users" 
+                        routerLinkActive="active">
                         <a>
                             <i class="fa fa-users fa-lg"></i> Users
                         </a>
                     </li>
-                    <li routerLink="inventory" routerLinkActive="active">
+                    <li [ngClass]="userPrivilege.priInventory==false?'hidden':''"
+                        routerLink="inventory" 
+                        routerLinkActive="active">
                         <a>
                             <i class="fa fa-database fa-lg"></i> Inventory
                         </a>
                     </li>
-                    <li (click)=openSubmenu($event); data-toggle="collapse" data-target="#others" class="collapsed">
-                        <a href="#"><i class="fa fa-cogs fa-lg"></i> Others <span class="arrow"></span></a>
+                    <li [ngClass]="userPrivilege.priManage==false?'hidden':''"
+                        (click)=openSubmenu($event); 
+                        data-toggle="collapse" 
+                        data-target="#others" 
+                        class="collapsed">
+                        <a href="#"><i class="fa fa-cogs fa-lg"></i> Manage <span class="arrow"></span></a>
                         </li>
                         <!-- <ul class="sub-menu collapse" id="others"> -->
                         <ul class="sub-menu collapse" id="others">
@@ -37,22 +47,23 @@
                             <li><a href="#">Strength</a></li>
                             <li><a href="#">Unit of measure</a></li>
                         </ul>
-                    <li>
+                    <li routerLink="patient-management" 
+                        routerLinkActive="active">
                         <a href="#">
                             <i class="fa fa-desktop fa-lg"></i> Patient Management
                         </a>
                     </li>
-                    <li>
+                    <li [ngClass]="userPrivilege.priPharmacyCorner==false?'hidden':''">
                         <a href="#">
                             <i class="fa fa-medkit fa-lg"></i> Pharmacy Corner
                         </a>
                     </li>                    
-                    <li>
+                    <li [ngClass]="userPrivilege.priNotification==false?'hidden':''">
                         <a href="#">
                             <i class="fa fa-bell fa-lg"></i> Notification
                         </a>
                     </li>
-                    <li>
+                    <li [ngClass]="userPrivilege.priPos==false?'hidden':''">
                         <a href="#">
                             <i class="fa fa-calculator fa-lg"></i> POS
                         </a>
