@@ -1,3 +1,4 @@
+import { InventoryGuard } from './guard/inventory.guard';
 import { DashboardGuard } from './guard/dashboard.guard';
 import { UserService } from './services/user.service';
 import { PrivilegeService } from './services/privilege.service';
@@ -49,7 +50,8 @@ import { UserGuard } from './guard/user.guard';
     PrivilegeService,
     UserService,
     DashboardGuard,
-    UserGuard
+    UserGuard,
+    InventoryGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,4 @@
+import { InventoryGuard } from './guard/inventory.guard';
 import { DashboardGuard } from './guard/dashboard.guard';
 import { AuthGuard } from './auth/auth.guard';
 import { ViewinventoryComponent } from './inventory/viewinventory/viewinventory.component';
@@ -30,8 +31,8 @@ const routes: Routes = [
       },
       {
         path: 'inventory',
-        component: ViewinventoryComponent
-        // canActivate: [AuthGuard],
+        component: ViewinventoryComponent,
+        canActivate: [InventoryGuard]
       },
       {
         path: 'patient-management',
