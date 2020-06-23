@@ -1,5 +1,5 @@
 import { element } from 'protractor';
-import { Session } from './interface/session';
+import { Session } from './interface/session.interface';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 

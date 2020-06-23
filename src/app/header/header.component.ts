@@ -1,4 +1,4 @@
-import { Session } from './../interface/session';
+import { Session } from '../interface/session.interface';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';

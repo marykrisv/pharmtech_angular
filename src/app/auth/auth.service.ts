@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Session } from '../interface/session';
+import { Session } from '../interface/session.interface';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 

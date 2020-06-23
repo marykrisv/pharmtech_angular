@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Session } from 'src/app/interface/session';
+import { Session } from 'src/app/interface/session.interface';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { timeStamp } from 'console';
 

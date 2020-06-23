@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
-import { Session } from '../interface/session';
+import { Session } from '../interface/session.interface';
 
 @Component({
   selector: 'app-menuview',
