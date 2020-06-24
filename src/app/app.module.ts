@@ -22,6 +22,7 @@ import { HttpClientModule }    from '@angular/common/http';
 import { LoginModule } from './login/login.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserGuard } from './guard/user.guard';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UserGuard } from './guard/user.guard';
     HeaderComponent,
     MenuviewComponent,
     EprescriptionComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,

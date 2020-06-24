@@ -14,4 +14,9 @@ export class PrivilegeService {
     return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/privilege/get-privilege', 
     JSON.stringify(user)).toPromise();
   }
+
+  async createPrivilege (privilege: any) {
+    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/privilege/create-privilege', 
+    JSON.stringify(privilege)).toPromise();
+  }
 }

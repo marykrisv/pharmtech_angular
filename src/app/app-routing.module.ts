@@ -1,3 +1,4 @@
+import { NotfoundComponent } from './notfound/notfound.component';
 import { InventoryGuard } from './guard/inventory.guard';
 import { DashboardGuard } from './guard/dashboard.guard';
 import { AuthGuard } from './auth/auth.guard';
@@ -44,6 +45,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '\login',
     pathMatch: 'full'
+  },
+  {
+    path: '**',
+    component: NotfoundComponent
   }
   // {
   //   path: '**',

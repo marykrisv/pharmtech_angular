@@ -54,22 +54,6 @@ export class LoginComponent implements OnInit {
     ); 
   }
 
-  get usernameInput () {
-    return this.form.get('username');
-  }
-
-  get passwordInput () {
-    return this.form.get('password');
-  }
-
-  get newpasswordInput () {
-    return this.resetPassword.get('newpassword');
-  }
-
-  get confirmpasswordInput () {
-    return this.resetPassword.get('confirmpassword');
-  }
-
   login () {
     const user = {
       'userName': this.usernameInput.value,
@@ -140,9 +124,11 @@ export class LoginComponent implements OnInit {
 
         this.userService.updatePassword(newpass).then(response => {
           // successfully changed user password for new user
-            if (response['message']=='User Updated') {
+            if (response['success']== true) {
               alert('User password successfully updated!');
               this.successfulLogin();
+            } else {
+              alert('Connection Problem!');
             }
         });
 
@@ -196,5 +182,21 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('privilege', JSON.stringify(this.privilege));
 
     this.router.navigate(["menu/patient-management"]);    
+  }
+
+  get usernameInput () {
+    return this.form.get('username');
+  }
+
+  get passwordInput () {
+    return this.form.get('password');
+  }
+
+  get newpasswordInput () {
+    return this.resetPassword.get('newpassword');
+  }
+
+  get confirmpasswordInput () {
+    return this.resetPassword.get('confirmpassword');
   }
 }

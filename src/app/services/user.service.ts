@@ -18,6 +18,11 @@ export class UserService {
     this.users.next(users);
   }
 
+  async createNewUser(user: any) {
+    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/create-new-user', 
+    JSON.stringify(user)).toPromise();
+  }
+
   async getAllUsers(locId: number) {
     return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-all-from-this-location.php?locid='+locId)
     .toPromise();
@@ -32,28 +37,4 @@ export class UserService {
     return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/confirm-new-password', 
     JSON.stringify(newpass)).toPromise();
   }
-}
-
-interface User {
-  userId: number,
-  username: string,
-  userPassword: string,
-  userFname: string,
-  userMname: string,
-  userLname: string,
-  // userGender: string,
-  // userBirthdate: Date,
-  // userAddress: string,
-  // userCitizenship: string,
-  // userContactNo: string,
-  userRole: string,
-  // userLicenseNo: string,
-  // userStatus: number,
-  // userIsLocked: boolean,
-  // userIsNew: boolean,
-  // userLocId: number
-  // userCreatedOn: Date,
-  // userCreatedBy: number,
-  // userModifiedOn: Date,
-  // userModifiedBy: number
 }

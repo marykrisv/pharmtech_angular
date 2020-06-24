@@ -1,4 +1,5 @@
 export interface Privilege {
+    priUserId?: number,
     priDashboard: boolean,
     priUser: boolean,
     priInventory: boolean,

@@ -10,13 +10,6 @@
                         routerLink="dashboard" 
                         routerLinkActive="active">
                         <a>
-                            <i class="fa fa-dashboard fa-lg"></i> Dashboard                            
-                        </a>
-                    </li>
-                    <li [ngClass]="userPrivilege.priDashboard==false?'hidden':''" 
-                        routerLink="dashboard" 
-                        routerLinkActive="active">
-                        <a>
                             <i class="fa fa-dashboard fa-lg"></i> Dashboard
                         </a>
                     </li>
@@ -39,7 +32,7 @@
                         data-toggle="collapse" 
                         data-target="#others" 
                         class="collapsed">
-                        <a href="#"><i class="fa fa-cogs fa-lg"></i> Manage <span class="arrow"></span></a>
+                        <a><i class="fa fa-cogs fa-lg"></i> Manage <span class="arrow"></span></a>
                         </li>
                         <!-- <ul class="sub-menu collapse" id="others"> -->
                         <ul class="sub-menu collapse" id="others">
@@ -56,7 +49,7 @@
                         </ul>
                     <li routerLink="patient-management" 
                         routerLinkActive="active">
-                        <a href="#">
+                        <a>
                             <i class="fa fa-desktop fa-lg"></i> Patient Management
                         </a>
                     </li>

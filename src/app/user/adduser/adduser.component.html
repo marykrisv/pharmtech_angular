@@ -1,1 +1,71 @@
+<form [formGroup]="userForm">
+    <br>
+    <label for="">Username</label>
+    <input formControlName="userName" type="text" placeholder="Username">
+    <br>
+    <label for="">Password</label>
+    <input formControlName="userPassword" type="text" placeholder="Password" type="password">
+    <br>
+    <label for="">First Name</label>
+    <input formControlName="userFname" type="text" placeholder="First Name">
+    <br>
+    <label for="">Middle Name</label>
+    <input formControlName="userMname" type="text" placeholder="Middle Name">
+    <br>
+    <label for="">Last Name</label>
+    <input formControlName="userLname" type="text" placeholder="Last Name">
+    <br>
+    <label for="">Gender</label>
+    <input formControlName="userGender" type="text" placeholder="Gender">
+    <br>
+    <label for="">Birthdate</label>
+    <input formControlName="userBirthdate" type="text" placeholder="Birthdate">
+    <br>
+    <label for="">Address</label>
+    <input formControlName="userAddress" type="text" placeholder="Address">
+    <br>
+    <label for="">Citizenship</label>
+    <input formControlName="userCitizenship" type="text" placeholder="Citizenship">
+    <br>
+    <label for="">Contact No.</label>
+    <input formControlName="userContactNo" type="text" placeholder="Contact No.">
+    <br>
+    <label for="">Role</label>
+    <input formControlName="userRole" type="text" placeholder="Role">
+    <br>
+    <label for="">License No.</label>
+    <input formControlName="userLicenseNo" type="text" placeholder="License">
+    <br><br>
+
+    <!--privilege-->
+    <form [formGroup]="privilegeForm">
+        <input type="checkbox" formControlName="priDashboard">
+        <label for="">Dashboard</label>
+        <br>
+        <input type="checkbox" formControlName="priUser">
+        <label for="">User</label>
+        <br>
+        <input type="checkbox" formControlName="priInventory">
+        <label for="">Inventory</label>
+        <br>
+        <input type="checkbox" formControlName="priManage">
+        <label for="">Manage</label>
+        <br>
+        <input type="checkbox" formControlName="priPatientManagement">
+        <label for="">Patient Management</label>
+        <br>
+        <input type="checkbox" formControlName="priPharmacyCorner">
+        <label for="">Pharmacy Corner</label>
+        <br>
+        <input type="checkbox" formControlName="priNotification">
+        <label for="">Notification</label>
+        <br>
+        <input type="checkbox" formControlName="priPos">
+        <label for="">POS</label>
+        <br>
+    </form>
+    
+    <button (click)="addNewUser()">ADD USER</button>
+</form>
+
 <button routerLink="/menu/users/viewall">Back</button>
