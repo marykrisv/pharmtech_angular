@@ -11,10 +11,6 @@ const routes: Routes = [
     component: AdduserComponent
   },
   {
-    path: 'viewall',
-    component: ViewuserComponent
-  },
-  {
     path: 'userdetail/:userId',
     component: UserdetailComponent
   },

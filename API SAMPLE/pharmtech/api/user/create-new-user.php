@@ -2,7 +2,7 @@
 //Headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: PUT');
+header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../../config/Database.php';
@@ -17,30 +17,45 @@ $um = new UserModel($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
-//set ID to update
-$um->userId = $data->userId;
+$um->userName = $data->userName;
 $um->userPassword = $data->userPassword;
+$um->userFname = $data->userFname;
+$um->userMname = $data->userMname;
+$um->userLname = $data->userLname;
+$um->userGender = $data->userGender;
+$um->userBirthdate = $data->userBirthdate;
+$um->userAddress = $data->userAddress;
+$um->userCitizenship = $data->userCitizenship;
+$um->userContactNo = $data->userContactNo;
+$um->userRole = $data->userRole;
+$um->userLicenseNo = $data->userLicenseNo;
+$um->userStatus = $data->userStatus;
+$um->userIsLocked = $data->userIsLocked;
+$um->userIsNew = $data->userIsNew;
+$um->userLocId = $data->userLocId;
+$um->userCreatedBy = $data->userCreatedBy;
 
 //trigger exception in a "try" block
 try {
     //user query
-    $result = $um->confirmNewPassword();
+    $result = $um->createNewUser();
 
     //get row count
     $num = $result->rowCount();
 
-    // update password
+    //create user
     if ($num > 0) {
         echo json_encode(
             array(
-                'message' => 'User Updated',
-                'success' => true
+                'message' => 'User Created',
+                'success' => true,
+                'userId' => $um->userId
             )
         );
     } else {
         echo json_encode(
             array(
-                'message' => 'User not updated',
+                'message' => 'User not created',
                 'success' => false
             )
         );
@@ -49,7 +64,7 @@ try {
  catch(Exception $e) {
     echo json_encode(
         array(
-            'message' => 'User not updated',
+            'message' => 'User not created',
             'success' => false
         )
     );

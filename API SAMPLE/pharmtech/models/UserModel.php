@@ -136,6 +136,86 @@ class UserModel {
         return false;
     }
 
+    // create user
+    public function createNewUser() {
+        //create query
+        $query = 'INSERT INTO '.$this->table.'
+                VALUES
+                    (null, 
+                    :userName, 
+                    sha2(:userPassword, 512), 
+                    :userFname,
+                    :userMname,
+                    :userLname,
+                    :userGender,
+                    :userBirthdate,
+                    :userAddress,
+                    :userCitizenship,
+                    :userContactNo,
+                    :userRole,
+                    :userLicenseNo,
+                    :userStatus,
+                    :userIsLocked,
+                    :userIsNew,
+                    :userLocId,
+                    null,
+                    :userCreatedBy,
+                    null,
+                    0,
+                    0)
+                    ';
+
+        
+
+        //prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //clean data
+        $this->userName = htmlspecialchars(strip_tags($this->userName));
+        $this->userPassword = htmlspecialchars(strip_tags($this->userPassword));
+        $this->userFname = htmlspecialchars(strip_tags($this->userFname));
+        $this->userMname = htmlspecialchars(strip_tags($this->userMname));
+        $this->userLname = htmlspecialchars(strip_tags($this->userLname));
+        $this->userGender = htmlspecialchars(strip_tags($this->userGender));
+        $this->userBirthdate = htmlspecialchars(strip_tags($this->userBirthdate));
+        $this->userAddress = htmlspecialchars(strip_tags($this->userAddress));
+        $this->userCitizenship = htmlspecialchars(strip_tags($this->userCitizenship));
+        $this->userContactNo = htmlspecialchars(strip_tags($this->userContactNo));
+        $this->userRole = htmlspecialchars(strip_tags($this->userRole));
+        $this->userLicenseNo = htmlspecialchars(strip_tags($this->userLicenseNo));
+        $this->userStatus = htmlspecialchars(strip_tags($this->userStatus));
+        $this->userIsLocked = htmlspecialchars(strip_tags($this->userIsLocked));
+        $this->userIsNew = htmlspecialchars(strip_tags($this->userIsNew));
+        $this->userLocId = htmlspecialchars(strip_tags($this->userLocId));
+        $this->userCreatedBy = htmlspecialchars(strip_tags($this->userCreatedBy));
+
+
+        //bind data
+        $stmt->bindParam(':userName', $this->userName);
+        $stmt->bindParam(':userPassword', $this->userPassword);
+        $stmt->bindParam(':userFname', $this->userFname);
+        $stmt->bindParam(':userMname', $this->userMname);
+        $stmt->bindParam(':userLname', $this->userLname);
+        $stmt->bindParam(':userGender', $this->userGender);
+        $stmt->bindParam(':userBirthdate', $this->userBirthdate);
+        $stmt->bindParam(':userAddress', $this->userAddress);
+        $stmt->bindParam(':userCitizenship', $this->userCitizenship);
+        $stmt->bindParam(':userContactNo', $this->userContactNo);
+        $stmt->bindParam(':userRole', $this->userRole);
+        $stmt->bindParam(':userLicenseNo', $this->userLicenseNo);
+        $stmt->bindParam(':userStatus', $this->userStatus);
+        $stmt->bindParam(':userIsLocked', $this->userIsLocked);
+        $stmt->bindParam(':userIsNew', $this->userIsNew);
+        $stmt->bindParam(':userLocId', $this->userLocId);
+        $stmt->bindParam(':userCreatedBy', $this->userCreatedBy);
+
+        //execute
+        $stmt->execute();
+        $this->userId = $this->conn->lastInsertId();
+
+        return $stmt;
+    }
+
     // login
     public function login() {
         //create query
@@ -225,15 +305,6 @@ class UserModel {
         $stmt->execute();
 
         return $stmt;
-
-        // if ($stmt->execute()) {
-        //     return true;
-        // }
-
-        // //print error if something goes wrong
-        // printf("Error: %s. \n", $stmt->error);
-
-        // return false;
     }
 
     // update user

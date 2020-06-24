@@ -1,71 +1,241 @@
-<form [formGroup]="userForm">
-    <br>
-    <label for="">Username</label>
-    <input formControlName="userName" type="text" placeholder="Username">
-    <br>
-    <label for="">Password</label>
-    <input formControlName="userPassword" type="text" placeholder="Password" type="password">
-    <br>
-    <label for="">First Name</label>
-    <input formControlName="userFname" type="text" placeholder="First Name">
-    <br>
-    <label for="">Middle Name</label>
-    <input formControlName="userMname" type="text" placeholder="Middle Name">
-    <br>
-    <label for="">Last Name</label>
-    <input formControlName="userLname" type="text" placeholder="Last Name">
-    <br>
-    <label for="">Gender</label>
-    <input formControlName="userGender" type="text" placeholder="Gender">
-    <br>
-    <label for="">Birthdate</label>
-    <input formControlName="userBirthdate" type="text" placeholder="Birthdate">
-    <br>
-    <label for="">Address</label>
-    <input formControlName="userAddress" type="text" placeholder="Address">
-    <br>
-    <label for="">Citizenship</label>
-    <input formControlName="userCitizenship" type="text" placeholder="Citizenship">
-    <br>
-    <label for="">Contact No.</label>
-    <input formControlName="userContactNo" type="text" placeholder="Contact No.">
-    <br>
-    <label for="">Role</label>
-    <input formControlName="userRole" type="text" placeholder="Role">
-    <br>
-    <label for="">License No.</label>
-    <input formControlName="userLicenseNo" type="text" placeholder="License">
-    <br><br>
-
-    <!--privilege-->
-    <form [formGroup]="privilegeForm">
-        <input type="checkbox" formControlName="priDashboard">
-        <label for="">Dashboard</label>
-        <br>
-        <input type="checkbox" formControlName="priUser">
-        <label for="">User</label>
-        <br>
-        <input type="checkbox" formControlName="priInventory">
-        <label for="">Inventory</label>
-        <br>
-        <input type="checkbox" formControlName="priManage">
-        <label for="">Manage</label>
-        <br>
-        <input type="checkbox" formControlName="priPatientManagement">
-        <label for="">Patient Management</label>
-        <br>
-        <input type="checkbox" formControlName="priPharmacyCorner">
-        <label for="">Pharmacy Corner</label>
-        <br>
-        <input type="checkbox" formControlName="priNotification">
-        <label for="">Notification</label>
-        <br>
-        <input type="checkbox" formControlName="priPos">
-        <label for="">POS</label>
-        <br>
-    </form>
+<div class="container">  
+    <!-- view all -->
+    <h2>List of Users</h2>
     
-    <button (click)="addNewUser()">ADD USER</button>
-</form>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">                
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button routerLink="/menu/users">Back</button>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button (click)="addNewUser()">ADD USER</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body main">
+                    <div class="row">             
+                        <!-- <br><br> -->                        
+                        <div class="col-md-7">
+                            <div id="information" class="panel panel-default">
+                                <div class="panel-heading">User Personal Information</div>
+                                <div class="panel-body">
+                                    <form [formGroup]="userForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="validate-text">First Name</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userFname"
+                                                        placeholder="First Name">
+                                                    <span class="input-group-addon danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Middle Name</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userMname"
+                                                        placeholder="Middle Name">
+                                                    <span class="input-group-addon danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Last Name</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userLname"
+                                                        placeholder="Last Name">
+                                                    <span class="input-group-addon danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <!-- <label for="validate-text">Gender</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userGender"
+                                                        placeholder="Gender">
+                                                    <span class="input-group-addon danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+                                                </div> -->
+                                                <label for="validate-select">Gender</label>
+                                                <div class="input-group">
+                                                    <select 
+                                                        class="form-control" 
+                                                        name="validate-select" 
+                                                        id="validate-select" 
+                                                        placeholder="Validate Select"
+                                                        formControlName="userGender">
+                                                        <option value="">Select Gender</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                    <span class="input-group-addon danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+                                                </div>
+                                                <br>                                                
+                                                <label for="validate-text">Citizenship</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userCitizenship"
+                                                        placeholder="Citizenship">
+                                                    <span class="input-group-addon danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="validate-text">Birthdate</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userBirthdate"
+                                                        placeholder="userBirthdate">
+                                                    <span class="input-group-addon danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Contact No.</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userContactNo"
+                                                        placeholder="Contact No.">
+                                                    <span class="input-group-addon danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Role</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userRole"
+                                                        placeholder="Role">
+                                                    <span class="input-group-addon danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">License No.</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userLicenseNo"
+                                                        placeholder="License No.">
+                                                    <span class="input-group-addon danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="validate-text">Address</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userAddress"
+                                                        placeholder="Address">
+                                                    <span class="input-group-addon danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="credential" class="panel panel-default">
+                                        <div class="panel-heading">User Login Credentials</div>
+                                        <div class="panel-body">
+                                            <form [formGroup]="userForm">
+                                                <label for="">Username</label>
+                                                <input formControlName="userName" type="text" placeholder="Username">
+                                                <br>
+                                                <label for="">Password</label>
+                                                <input formControlName="userPassword" type="text" placeholder="Password" type="password">
+                                                <br>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="privilege" class="panel panel-default">
+                                        <div class="panel-heading">User Privileges</div>
+                                        <div class="panel-body">
+                                            <form [formGroup]="privilegeForm">
+                                                <input type="checkbox" formControlName="priDashboard">
+                                                <label for="">Dashboard</label>
+                                                <br>
+                                                <input type="checkbox" formControlName="priUser">
+                                                <label for="">User</label>
+                                                <br>
+                                                <input type="checkbox" formControlName="priInventory">
+                                                <label for="">Inventory</label>
+                                                <br>
+                                                <input type="checkbox" formControlName="priManage">
+                                                <label for="">Manage</label>
+                                                <br>
+                                                <input type="checkbox" formControlName="priPatientManagement">
+                                                <label for="">Patient Management</label>
+                                                <br>
+                                                <input type="checkbox" formControlName="priPharmacyCorner">
+                                                <label for="">Pharmacy Corner</label>
+                                                <br>
+                                                <input type="checkbox" formControlName="priNotification">
+                                                <label for="">Notification</label>
+                                                <br>
+                                                <input type="checkbox" formControlName="priPos">
+                                                <label for="">POS</label>
+                                                <br>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="panel-footer">
+                    <button (click)="addNewUser()">ADD USER</button>
+                </div> -->
+            </div>
+            
+        </div>
+    </div>  
+    
+</div>
 
-<button routerLink="/menu/users/viewall">Back</button>
+
+

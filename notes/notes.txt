@@ -38,3 +38,6 @@ https://www.youtube.com/watch?v=7L80dKtfHe0
 
 properties reader
 https://www.npmjs.com/package/properties-reader
+
+input with validation
+https://bootsnipp.com/snippets/6aGm
