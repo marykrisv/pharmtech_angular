@@ -39,11 +39,9 @@ export class AppComponent {
 
       this.auth.changeSession(session);
       this.data.changePrivilege(privilege);
-      
-      this.router.navigate(["menu/dashboard"]);
 
       //to be used for checking the privilege for the guard
-      this.setPrivilege();
+      this.setPrivilege();    
     }
   }
 
@@ -62,6 +60,9 @@ export class AppComponent {
         }
     
         this.data.changePrivilege(privilege);
+        localStorage.setItem('privilege', JSON.stringify(privilege));
+      
+        this.router.navigate(["menu/patient-management"]);  
       }
     );
   }

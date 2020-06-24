@@ -20,9 +20,6 @@ export class MenuviewComponent implements OnInit {
     
     if (this.currentSession != null) {    
       if (this.currentSession.userRole.toLowerCase() == 'admin') {
-        //set view to dashboard
-        this.router.navigate(["menu/dashboard"]);
-      } else {
         this.router.navigate(["menu/patient-management"]);
       }      
     } else {

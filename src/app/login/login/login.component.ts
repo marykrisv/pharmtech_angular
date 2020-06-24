@@ -195,6 +195,6 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('session', JSON.stringify(this.user_session));
     localStorage.setItem('privilege', JSON.stringify(this.privilege));
 
-    this.router.navigate(["menu/dashboard"]);    
+    this.router.navigate(["menu/patient-management"]);    
   }
 }
