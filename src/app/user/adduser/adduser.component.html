@@ -7,10 +7,10 @@
             <div class="panel panel-default">                
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-md-6">
-                            <button routerLink="/menu/users">Back</button>
+                        <div class="col-md-6 col-xs-6">
+                            <button routerLink="/menu/users">< Back</button>
                         </div>
-                        <div class="col-md-6 text-right">
+                        <div class="col-md-6 col-xs-6 text-right">
                             <button (click)="addNewUser()">ADD USER</button>
                         </div>
                     </div>
@@ -178,12 +178,29 @@
                                         <div class="panel-heading">User Login Credentials</div>
                                         <div class="panel-body">
                                             <form [formGroup]="userForm">
-                                                <label for="">Username</label>
-                                                <input formControlName="userName" type="text" placeholder="Username">
+                                                <label for="validate-text">Username</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userName"
+                                                        placeholder="Username">
+                                                    <span class="input-group-addon danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+                                                </div>
                                                 <br>
-                                                <label for="">Password</label>
-                                                <input formControlName="userPassword" type="text" placeholder="Password" type="password">
-                                                <br>
+                                                <label for="validate-text">Password</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userPassword"
+                                                        placeholder="Password">
+                                                    <span class="input-group-addon danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
