@@ -10,13 +10,13 @@ import { AuthService } from '../auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
   menuSelected: string;
-  user_session: Session;
+  userSession: Session;
 
   constructor(private data: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.data.currentSession.subscribe(
-      usersession => this.user_session = usersession
+      usersession => this.userSession = usersession
     );
   }
 

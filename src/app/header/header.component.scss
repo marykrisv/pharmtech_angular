@@ -12,48 +12,40 @@
     display: inline-block;
 }
 
-#menu-toggle {
-    text-decoration: none;
-    color: black;
-    position: relative;
-    left: -10px;
+.show-on-hover:hover > ul.dropdown-menu {
+    display: block;    
+}
+
+#profileButton {
+    margin-right:15px;
+    height: 100%;
     font-size: 30px;
-    top: 5px;
 }
 
-#appName {
-    font-size: 25px;
-    color: black;
-    margin: auto;
+#userProfile {
+    margin-right:15px;
+    height: 100%;
 }
 
-.navbar-right {
-    margin-right: -15px;
-    left: -30px;
-    position: relative;
-    top: -5px;
+.btn-default {
+    height: 100%;
 }
 
 .dropdown-menu {
-    display: inline-block;
-    z-index: 1000;
+    left: -125px;
 }
 
-#dropdownMenu.collapse {
-    display: none;
+#menu-toggle {
+    color: black;
+}
+
+#home {
+    margin-left: 7px;
 }
 
 @media (max-width:767px) {
-    #menu-toggle {
-        display: inline-block;
-    }
-
-    .navbar-right {
-        float: right;
-        left: -20px;
-    }
-
-    .navbar-nav > li > .dropdown-menu {
-        left: -70px;
+    .dropdown-menu {
+        left: -110px;
     }
 }
+
