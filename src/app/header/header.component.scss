@@ -23,12 +23,13 @@
 }
 
 #userProfile {
-    margin-right:15px;
+    margin-right:10px;
     height: 100%;
 }
 
 .btn-default {
     height: 100%;
+    background: #38ada9;
 }
 
 .dropdown-menu {
@@ -46,6 +47,10 @@
 @media (max-width:767px) {
     .dropdown-menu {
         left: -110px;
+    }
+
+    #profileButton {
+        margin-right:10px;
     }
 }
 
