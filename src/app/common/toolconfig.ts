@@ -1,3 +1,3 @@
 export class ToolConfig {
-    static url = "localhost";
+    static url = "192.168.254.108";
 }

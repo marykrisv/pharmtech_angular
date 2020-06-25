@@ -75,6 +75,8 @@ export class AdduserComponent implements OnInit {
       userLocId: this.userSession.userLocId,
       userCreatedBy: this.userSession.userId
     }
+
+    console.log(userData);
     
     this.userService.createNewUser(userData).then(
       response => {
