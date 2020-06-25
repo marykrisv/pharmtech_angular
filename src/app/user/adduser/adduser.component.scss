@@ -17,6 +17,10 @@ label {
     padding: 20px;
 }
 
+.backToTop {
+  display: none;
+}
+
 
 .input-group-addon.primary {
     color: rgb(255, 255, 255);
@@ -129,4 +133,15 @@ label {
   
   .slider.round:before {
     border-radius: 50%;
+  }
+
+  @media (max-width:991px) {
+    .backToTop {
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .main {
+      padding-bottom: 0px;
+    }
   }

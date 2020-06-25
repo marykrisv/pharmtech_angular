@@ -140,6 +140,10 @@ export class AdduserComponent implements OnInit {
     );
   }
 
+  backToTop () {
+    document.getElementById('top').scrollIntoView();
+  }
+
   
   get userNameInput () {
     return this.userForm.get('userName');
