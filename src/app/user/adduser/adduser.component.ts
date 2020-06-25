@@ -50,7 +50,7 @@ export class AdduserComponent implements OnInit {
   ngOnInit(): void {
     this.auth.currentSession.subscribe(currentSession => this.userSession = currentSession);
 
-    
+    // document.getElementById('datepicker').datepicker();
   }
 
   addNewUser() {
