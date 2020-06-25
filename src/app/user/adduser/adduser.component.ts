@@ -1,3 +1,4 @@
+import { PhoneValidator } from './../../validators/phone.validator';
 import { Privilege } from './../../interface/privilege.interface';
 import { PrivilegeService } from './../../services/privilege.service';
 import { UserService } from './../../services/user.service';
@@ -28,7 +29,7 @@ export class AdduserComponent implements OnInit {
     userBirthdate: new FormControl('', Validators.required),
     userAddress: new FormControl('', Validators.required),
     userCitizenship: new FormControl('', Validators.required),
-    userContactNo: new FormControl(''),
+    userContactNo: new FormControl('', PhoneValidator.isPhoneNumberValid),
     userRole: new FormControl('', Validators.required),
     userLicenseNo: new FormControl('')
   });

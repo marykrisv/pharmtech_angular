@@ -142,10 +142,10 @@
                                                         formControlName="userContactNo"
                                                         placeholder="Contact No.">
                                                     <span 
-                                                        [ngClass]="this.userContactNoInput.invalid?'danger':'info'"
+                                                        [ngClass]="this.userContactNoInput.errors.isPhoneNumberValid?'info':'danger'"
                                                         class="input-group-addon">
                                                         <span 
-                                                            [ngClass]="this.userMnameInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                            [ngClass]="this.userContactNoInput.errors.isPhoneNumberValid?'glyphicon-asterisk':'glyphicon-remove'"
                                                             class="glyphicon"></span>
                                                     </span>
                                                 </div>
