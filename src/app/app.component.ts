@@ -64,7 +64,9 @@ export class AppComponent {
       
         this.router.navigate(["menu/patient-management"]);  
       }
-    );
+    ).catch(response => {
+      alert("Connection Problem. Please check your internet.");
+    });;
   }
 }
 

@@ -25,7 +25,9 @@ export class ViewuserComponent implements OnInit {
       } else {
         this.us.changeUsers(null);
       } 
-    });
+    }).catch(response => {
+      alert("Connection Problem. Please check your internet.");
+    });;
   }
 
   ngOnInit(): void {

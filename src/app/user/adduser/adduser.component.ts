@@ -83,7 +83,9 @@ export class AdduserComponent implements OnInit {
           alert('Connection Problem!');
         }
       }
-    );
+    ).catch(response => {
+      alert("Connection Problem. Please check your internet.");
+    });;
 
     
   }
@@ -111,7 +113,9 @@ export class AdduserComponent implements OnInit {
           alert('Connection Problem!');
         }
       }
-    );
+    ).catch(response => {
+      alert("Connection Problem. Please check your internet.");
+    });;
   }
 
   

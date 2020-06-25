@@ -103,7 +103,9 @@ export class LoginComponent implements OnInit {
         this.usernameInput.setValue('');
         this.passwordInput.setValue('');
       }
-    );
+    ).catch(response => {
+      alert("Connection Problem. Please check your internet.");
+    });
   }
 
   confirmNewPassword() {  
@@ -130,7 +132,9 @@ export class LoginComponent implements OnInit {
             } else {
               alert('Connection Problem!');
             }
-        });
+        }).catch(response => {
+          alert("Connection Problem. Please check your internet.");
+        });;
 
       } else {
         alert('fix your password first');
