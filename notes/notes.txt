@@ -41,3 +41,6 @@ https://www.npmjs.com/package/properties-reader
 
 input with validation
 https://bootsnipp.com/snippets/6aGm
+
+checkbox
+https://bootsnipp.com/snippets/GaxR2

@@ -1,6 +1,6 @@
 <div class="container">  
     <!-- view all -->
-    <h2>List of Users</h2>
+    <h2>Add New User</h2>
     
     <div class="row">
         <div class="col-md-12">
@@ -44,8 +44,8 @@
                                                         class="form-control" 
                                                         formControlName="userMname"
                                                         placeholder="Middle Name">
-                                                    <span class="input-group-addon danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    <span class="input-group-addon info">
+                                                        <span class="glyphicon glyphicon-asterisk"></span>
                                                     </span>
                                                 </div>
                                                 <br>
@@ -61,17 +61,6 @@
                                                     </span>
                                                 </div>
                                                 <br>
-                                                <!-- <label for="validate-text">Gender</label>
-                                                <div class="input-group">
-                                                    <input 
-                                                        type="text" 
-                                                        class="form-control" 
-                                                        formControlName="userGender"
-                                                        placeholder="Gender">
-                                                    <span class="input-group-addon danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
-                                                    </span>
-                                                </div> -->
                                                 <label for="validate-select">Gender</label>
                                                 <div class="input-group">
                                                     <select 
@@ -102,13 +91,24 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
+                                                <!-- <label for="validate-text">Birthdate</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="date" 
+                                                        class="form-control dateInput" 
+                                                        formControlName="userBirthdate"
+                                                        placeholder="Birthdate">
+                                                    <span class="input-group-addon danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+                                                </div> -->
                                                 <label for="validate-text">Birthdate</label>
                                                 <div class="input-group">
                                                     <input 
-                                                        type="text" 
-                                                        class="form-control" 
+                                                        type="date" 
+                                                        class="form-control dateInput" 
                                                         formControlName="userBirthdate"
-                                                        placeholder="userBirthdate">
+                                                        placeholder="Birthdate">
                                                     <span class="input-group-addon danger">
                                                         <span class="glyphicon glyphicon-remove"></span>
                                                     </span>
@@ -121,12 +121,31 @@
                                                         class="form-control" 
                                                         formControlName="userContactNo"
                                                         placeholder="Contact No.">
+                                                    <span class="input-group-addon info">
+                                                        <span class="glyphicon glyphicon-asterisk"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-select">Role</label>
+                                                <div class="input-group">
+                                                    <select 
+                                                        class="form-control" 
+                                                        name="validate-select" 
+                                                        id="validate-select" 
+                                                        placeholder="Validate Select"
+                                                        formControlName="userRole">
+                                                        <option value="">Select Role</option>
+                                                        <option value="Male">Super Admin</option>
+                                                        <option value="Male">Admin</option>
+                                                        <option value="Male">Pharmacist</option>
+                                                        <option value="Male">Doctor</option>
+                                                        <option value="Male">Staff</option>
+                                                    </select>
                                                     <span class="input-group-addon danger">
                                                         <span class="glyphicon glyphicon-remove"></span>
                                                     </span>
                                                 </div>
-                                                <br>
-                                                <label for="validate-text">Role</label>
+                                                <!-- <label for="validate-text">Role</label>
                                                 <div class="input-group">
                                                     <input 
                                                         type="text" 
@@ -136,7 +155,7 @@
                                                     <span class="input-group-addon danger">
                                                         <span class="glyphicon glyphicon-remove"></span>
                                                     </span>
-                                                </div>
+                                                </div> -->
                                                 <br>
                                                 <label for="validate-text">License No.</label>
                                                 <div class="input-group">
@@ -145,8 +164,8 @@
                                                         class="form-control" 
                                                         formControlName="userLicenseNo"
                                                         placeholder="License No.">
-                                                    <span class="input-group-addon danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    <span class="input-group-addon info">
+                                                        <span class="glyphicon glyphicon-asterisk"></span>
                                                     </span>
                                                 </div>
                                             </div>
@@ -211,31 +230,109 @@
                                     <div id="privilege" class="panel panel-default">
                                         <div class="panel-heading">User Privileges</div>
                                         <div class="panel-body">
-                                            <form [formGroup]="privilegeForm">
-                                                <input type="checkbox" formControlName="priDashboard">
-                                                <label for="">Dashboard</label>
-                                                <br>
-                                                <input type="checkbox" formControlName="priUser">
-                                                <label for="">User</label>
-                                                <br>
-                                                <input type="checkbox" formControlName="priInventory">
-                                                <label for="">Inventory</label>
-                                                <br>
-                                                <input type="checkbox" formControlName="priManage">
-                                                <label for="">Manage</label>
-                                                <br>
-                                                <input type="checkbox" formControlName="priPatientManagement">
-                                                <label for="">Patient Management</label>
-                                                <br>
-                                                <input type="checkbox" formControlName="priPharmacyCorner">
-                                                <label for="">Pharmacy Corner</label>
-                                                <br>
-                                                <input type="checkbox" formControlName="priNotification">
-                                                <label for="">Notification</label>
-                                                <br>
-                                                <input type="checkbox" formControlName="priPos">
-                                                <label for="">POS</label>
-                                                <br>
+                                            <form [formGroup]="privilegeForm">                                                
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>Dashboard</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priDashboard">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>User</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priUser">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>Inventory</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priInventory">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>Manage</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priManage">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>Patient Mgmt</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priPatientManagement">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>Pharmacy Corner</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priPharmacyCorner">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>Notification</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priNotification">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>POS</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priPos">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
