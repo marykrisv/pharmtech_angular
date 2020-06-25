@@ -15,20 +15,22 @@ import { User } from 'src/app/interface/user.interface';
 export class AdduserComponent implements OnInit {
 
   userSession: Session;
+  temporaryPass: string;
+  genUsername: string = null;
 
   userForm = new FormGroup({
     userName: new FormControl('', Validators.required),
-    userPassword: new FormControl('', Validators.required),
-    userFname: new FormControl('', Validators.required),
-    userMname: new FormControl('', Validators.required),
-    userLname: new FormControl('', Validators.required),
+    userPassword: new FormControl({value: '', disabled: true}, Validators.required),
+    userFname: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    userMname: new FormControl('', Validators.minLength(2)),
+    userLname: new FormControl('', [Validators.required, Validators.minLength(2)]),
     userGender: new FormControl('', Validators.required),
     userBirthdate: new FormControl('', Validators.required),
     userAddress: new FormControl('', Validators.required),
     userCitizenship: new FormControl('', Validators.required),
-    userContactNo: new FormControl('', Validators.required),
+    userContactNo: new FormControl(''),
     userRole: new FormControl('', Validators.required),
-    userLicenseNo: new FormControl('', Validators.required)
+    userLicenseNo: new FormControl('')
   });
 
   privilegeForm = new FormGroup({
@@ -49,8 +51,29 @@ export class AdduserComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.currentSession.subscribe(currentSession => this.userSession = currentSession);
+    this.setRandomPassword();
+  }
 
-    // document.getElementById('datepicker').datepicker();
+  //set random password
+  setRandomPassword () {
+    this.temporaryPass = (Math.random().toString(36).slice(2)).substring(0,6);
+    this.userPasswordInput.setValue(this.temporaryPass);
+  }
+
+  //set username
+  generateUserName() {
+    var lname = this.userLnameInput.value.toString().trim().toLowerCase();
+    var fname = this.userFnameInput.value.toString().trim().toLowerCase().substring(0,2);
+    var bday = this.userBirthdateInput.value.toString().trim();
+    var month = bday.substring(5,7);
+    var day = bday.substring(8,10);    
+    var role = this.userRoleInput.value.toString().trim().toLowerCase().substring(0,2);
+    
+    if (lname != '' && fname != '' && month != '' && day != '' && role != '') {
+      this.genUsername = lname+'.'+fname+'_'+role+month+day;
+      this.userNameInput.setValue(this.genUsername);
+    }
+    
   }
 
   addNewUser() {
@@ -75,8 +98,6 @@ export class AdduserComponent implements OnInit {
       userLocId: this.userSession.userLocId,
       userCreatedBy: this.userSession.userId
     }
-
-    console.log(userData);
     
     this.userService.createNewUser(userData).then(
       response => {
@@ -87,9 +108,7 @@ export class AdduserComponent implements OnInit {
           alert('Connection Problem!');
         }
       }
-    ).catch(response => {
-      alert("Connection Problem. Please check your internet.");
-    });;
+    );
 
     
   }
@@ -117,9 +136,7 @@ export class AdduserComponent implements OnInit {
           alert('Connection Problem!');
         }
       }
-    ).catch(response => {
-      alert("Connection Problem. Please check your internet.");
-    });;
+    );
   }
 
   

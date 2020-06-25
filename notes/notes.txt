@@ -44,3 +44,6 @@ https://bootsnipp.com/snippets/6aGm
 
 checkbox
 https://bootsnipp.com/snippets/GaxR2
+
+phone number
+https://stackblitz.com/edit/angular6-phone-mask?file=app%2Fapp.component.ts

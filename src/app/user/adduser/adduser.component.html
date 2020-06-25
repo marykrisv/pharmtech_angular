@@ -11,7 +11,7 @@
                             <button routerLink="/menu/users">< Back</button>
                         </div>
                         <div class="col-md-6 col-xs-6 text-right">
-                            <button (click)="addNewUser()">ADD USER</button>
+                            <button [disabled]="userForm.invalid" (click)="addNewUser()">ADD USER</button>
                         </div>
                     </div>
                 </div>
@@ -28,36 +28,53 @@
                                                 <label for="validate-text">First Name</label>
                                                 <div class="input-group">
                                                     <input 
+                                                        [value] = "this.userFnameInput.value | titlecase"
                                                         type="text" 
                                                         class="form-control" 
                                                         formControlName="userFname"
-                                                        placeholder="First Name">
-                                                    <span class="input-group-addon danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                        placeholder="First Name"
+                                                        (keyup)="generateUserName()">
+                                                    <span 
+                                                        [ngClass]="this.userFnameInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userFnameInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
                                                     </span>
                                                 </div>
                                                 <br>
                                                 <label for="validate-text">Middle Name</label>
                                                 <div class="input-group">
                                                     <input 
+                                                        [value] = "this.userMnameInput.value | titlecase"
                                                         type="text" 
                                                         class="form-control" 
                                                         formControlName="userMname"
                                                         placeholder="Middle Name">
-                                                    <span class="input-group-addon info">
-                                                        <span class="glyphicon glyphicon-asterisk"></span>
+                                                    <span 
+                                                        [ngClass]="this.userMnameInput.invalid?'danger':'info'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userMnameInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                            class="glyphicon"></span>
                                                     </span>
                                                 </div>
                                                 <br>
                                                 <label for="validate-text">Last Name</label>
                                                 <div class="input-group">
                                                     <input 
+                                                        [value] = "this.userLnameInput.value | titlecase"
                                                         type="text" 
                                                         class="form-control" 
                                                         formControlName="userLname"
-                                                        placeholder="Last Name">
-                                                    <span class="input-group-addon danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                        placeholder="Last Name"
+                                                        (keyup)="generateUserName()">
+                                                    <span 
+                                                        [ngClass]="this.userLnameInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userLnameInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
                                                     </span>
                                                 </div>
                                                 <br>
@@ -73,20 +90,29 @@
                                                         <option value="Male">Male</option>
                                                         <option value="Female">Female</option>
                                                     </select>
-                                                    <span class="input-group-addon danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    <span 
+                                                        [ngClass]="this.userGenderInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userGenderInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
                                                     </span>
                                                 </div>
                                                 <br>                                                
                                                 <label for="validate-text">Citizenship</label>
                                                 <div class="input-group">
                                                     <input 
+                                                        [value] = "this.userCitizenshipInput.value | titlecase"
                                                         type="text" 
                                                         class="form-control" 
                                                         formControlName="userCitizenship"
                                                         placeholder="Citizenship">
-                                                    <span class="input-group-addon danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    <span 
+                                                        [ngClass]="this.userCitizenshipInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userCitizenshipInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
                                                     </span>
                                                 </div>
                                             </div>
@@ -97,9 +123,14 @@
                                                         type="date" 
                                                         class="form-control dateInput" 
                                                         formControlName="userBirthdate"
-                                                        placeholder="Birthdate">
-                                                    <span class="input-group-addon danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                        placeholder="Birthdate"
+                                                        (change)="generateUserName()">
+                                                    <span 
+                                                        [ngClass]="this.userBirthdateInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userBirthdateInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
                                                     </span>
                                                 </div>
                                                 <br>
@@ -110,8 +141,12 @@
                                                         class="form-control" 
                                                         formControlName="userContactNo"
                                                         placeholder="Contact No.">
-                                                    <span class="input-group-addon info">
-                                                        <span class="glyphicon glyphicon-asterisk"></span>
+                                                    <span 
+                                                        [ngClass]="this.userContactNoInput.invalid?'danger':'info'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userMnameInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                            class="glyphicon"></span>
                                                     </span>
                                                 </div>
                                                 <br>
@@ -122,7 +157,8 @@
                                                         name="validate-select" 
                                                         id="validate-select" 
                                                         placeholder="Validate Select"
-                                                        formControlName="userRole">
+                                                        formControlName="userRole"
+                                                        (change)="generateUserName()">
                                                         <option value="">Select Role</option>
                                                         <option value="Super Admind">Super Admin</option>
                                                         <option value="Admin">Admin</option>
@@ -130,21 +166,14 @@
                                                         <option value="Doctor">Doctor</option>
                                                         <option value="Staff">Staff</option>
                                                     </select>
-                                                    <span class="input-group-addon danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    <span 
+                                                        [ngClass]="this.userRoleInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userRoleInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
                                                     </span>
                                                 </div>
-                                                <!-- <label for="validate-text">Role</label>
-                                                <div class="input-group">
-                                                    <input 
-                                                        type="text" 
-                                                        class="form-control" 
-                                                        formControlName="userRole"
-                                                        placeholder="Role">
-                                                    <span class="input-group-addon danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
-                                                    </span>
-                                                </div> -->
                                                 <br>
                                                 <label for="validate-text">License No.</label>
                                                 <div class="input-group">
@@ -153,8 +182,12 @@
                                                         class="form-control" 
                                                         formControlName="userLicenseNo"
                                                         placeholder="License No.">
-                                                    <span class="input-group-addon info">
-                                                        <span class="glyphicon glyphicon-asterisk"></span>
+                                                    <span 
+                                                        [ngClass]="this.userLicenseNoInput.invalid?'danger':'info'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userMnameInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                            class="glyphicon"></span>
                                                     </span>
                                                 </div>
                                             </div>
@@ -165,12 +198,17 @@
                                                 <label for="validate-text">Address</label>
                                                 <div class="input-group">
                                                     <input 
+                                                        [value] = "this.userAddressInput.value | titlecase"
                                                         type="text" 
                                                         class="form-control" 
                                                         formControlName="userAddress"
                                                         placeholder="Address">
-                                                    <span class="input-group-addon danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    <span 
+                                                        [ngClass]="this.userAddressInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userAddressInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
                                                     </span>
                                                 </div>
                                             </div>
@@ -193,8 +231,12 @@
                                                         class="form-control" 
                                                         formControlName="userName"
                                                         placeholder="Username">
-                                                    <span class="input-group-addon danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    <span 
+                                                        [ngClass]="this.userNameInput.invalid && genUsername == null?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userNameInput.invalid && genUsername == null?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
                                                     </span>
                                                 </div>
                                                 <br>
@@ -205,8 +247,8 @@
                                                         class="form-control" 
                                                         formControlName="userPassword"
                                                         placeholder="Password">
-                                                    <span class="input-group-addon danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    <span class="input-group-addon success">
+                                                        <span class="glyphicon glyphicon-ok"></span>
                                                     </span>
                                                 </div>
                                             </form>
