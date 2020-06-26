@@ -45,10 +45,10 @@
                         <th class="visible-xs">
                           <input type="checkbox">
                         </th>
-                        <th width="15%" class="hidden-xs"><em class="fa fa-cog"></em></th>
+                        <th width="10%" class="hidden-xs"><em class="fa fa-cog"></em></th>
                         <th class="hidden">ID</th>
                         <th width="20%">Username</th>
-                        <th width="50%">Full Name</th>
+                        <th width="50%">Fullname</th>
                         <th width="30%">Role</th>
                       </tr> 
                     </thead>
@@ -66,7 +66,6 @@
                           </td>
                           <td class="text-center hidden-xs">
                             <a [routerLink]="['/menu/users/userdetail',user.userId]" class="btn btn-primary"><em class="fa fa-eye"></em></a>
-                            <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
                             <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
                           </td>
                           <td><span>{{ user.userName }}</span></td>

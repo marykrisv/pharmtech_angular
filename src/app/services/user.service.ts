@@ -37,4 +37,10 @@ export class UserService {
     return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/confirm-new-password', 
     JSON.stringify(newpass)).toPromise();
   }
+
+  async viewUserDetail (userId, locId) {
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-user-detail.php?id='
+    +userId+'&locid='+locId).toPromise();
+  }
+
 }

@@ -1,2 +1,7 @@
 <p>userdetail works!</p>
+
+
 <button routerLink="/menu/users">Back</button>
+<div *ngIf="userDetail != null">
+    {{ userDetail.userName }}
+</div>
