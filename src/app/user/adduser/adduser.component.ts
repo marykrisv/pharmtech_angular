@@ -1,3 +1,4 @@
+import { RoleConfig } from './../../common/roleconfig';
 import { PhoneValidator } from './../../validators/phone.validator';
 import { Privilege } from './../../interface/privilege.interface';
 import { PrivilegeService } from './../../services/privilege.service';
@@ -53,6 +54,21 @@ export class AdduserComponent implements OnInit {
   ngOnInit(): void {
     this.auth.currentSession.subscribe(currentSession => this.userSession = currentSession);
     this.setRandomPassword();
+  }
+
+  // set privilege based on role
+  setPrivilegeBasedOnRole () {
+    var role = this.userRoleInput.value.toString().trim();
+    var privilege: Privilege = RoleConfig.role[role];
+
+    this.priDashboardInput.setValue(privilege.priDashboard);
+    this.priUserInput.setValue(privilege.priUser);
+    this.priInventoryInput.setValue(privilege.priInventory);
+    this.priManageInput.setValue(privilege.priManage);
+    this.priPatientManagementInput.setValue(privilege.priPatientManagement);
+    this.priPharmacyCornerInput.setValue(privilege.priPharmacyCorner);
+    this.priNotificationInput.setValue(privilege.priNotification);
+    this.priPosInput.setValue(privilege.priPos);
   }
 
   //set random password
