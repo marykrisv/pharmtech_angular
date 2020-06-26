@@ -15,10 +15,25 @@ label {
 
 .main {
     padding: 20px;
+    padding-bottom: 0px;
 }
 
 .backToTop {
   display: none;
+}
+
+#credential {
+  .panel-body {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+#privilege {
+  .panel-body {
+    padding-bottom: 0px;
+    height: 268px;
+  }
 }
 
 

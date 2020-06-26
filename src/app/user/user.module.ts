@@ -1,3 +1,4 @@
+import { PopupComponent } from './../common/popup/popup.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -9,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [ViewuserComponent, AdduserComponent, UserdetailComponent],
+  declarations: [ViewuserComponent, AdduserComponent, UserdetailComponent, PopupComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,

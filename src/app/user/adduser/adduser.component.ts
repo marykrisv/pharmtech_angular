@@ -93,45 +93,77 @@ export class AdduserComponent implements OnInit {
       this.genUsername = lname+'.'+fname+'_'+role+month+day;
       this.userNameInput.setValue(this.genUsername);
     }
-    
   }
 
   addNewUser() {
-    this.stillCreatingUser = true;
+    if (confirm('Are you sure you want to save this user?')) {
+      this.stillCreatingUser = true;
 
-    //add user
-    var userData: User;
-    userData = {
-      userName: this.userNameInput.value,
-      userPassword: this.userPasswordInput.value,
-      userFname: this.userFnameInput.value,
-      userMname: this.userMnameInput.value,
-      userLname: this.userLnameInput.value,
-      userGender: this.userGenderInput.value,
-      userBirthdate: this.userBirthdateInput.value,
-      userAddress: this.userAddressInput.value,
-      userCitizenship: this.userCitizenshipInput.value,
-      userContactNo: this.userContactNoInput.value,
-      userRole: this.userRoleInput.value,
-      userLicenseNo: this.userLicenseNoInput.value,
-      userStatus: 1,
-      userIsLocked: false,
-      userIsNew: true,
-      userLocId: this.userSession.userLocId,
-      userCreatedBy: this.userSession.userId
-    }
-    
-    this.userService.createNewUser(userData).then(
-      response => {
-        if (response['success'] == true) {          
-          this.createPrivilege(response['userId']);
-        } else {
-          alert('Connection Problem!');
-        }
+      //add user
+      var userData: User;
+      userData = {
+        userName: this.userNameInput.value,
+        userPassword: this.userPasswordInput.value,
+        userFname: this.userFnameInput.value,
+        userMname: this.userMnameInput.value,
+        userLname: this.userLnameInput.value,
+        userGender: this.userGenderInput.value,
+        userBirthdate: this.userBirthdateInput.value,
+        userAddress: this.userAddressInput.value,
+        userCitizenship: this.userCitizenshipInput.value,
+        userContactNo: this.userContactNoInput.value,
+        userRole: this.userRoleInput.value,
+        userLicenseNo: this.userLicenseNoInput.value,
+        userStatus: 1,
+        userIsLocked: false,
+        userIsNew: true,
+        userLocId: this.userSession.userLocId,
+        userCreatedBy: this.userSession.userId
       }
-    );
+      
+      this.userService.createNewUser(userData).then(
+        response => {
+          if (response['success'] == true) {          
+            this.createPrivilege(response['userId']);
+          } else {
+            alert('Connection Problem!');
+          }
+          this.stillCreatingUser = false;
+        }
+      );    
+    } 
+  }
 
-    
+  clearAll() {
+    if (confirm('Are you sure you want to clear all?')) {
+      // clear all value in information
+      this.userNameInput.setValue('');
+      this.userFnameInput.setValue('');
+      this.userMnameInput.setValue('');
+      this.userLnameInput.setValue('');
+      this.userGenderInput.setValue('');
+      this.userBirthdateInput.setValue('');
+      this.userAddressInput.setValue('');
+      this.userCitizenshipInput.setValue('');
+      this.userContactNoInput.setValue('');
+      this.userRoleInput.setValue('');
+      this.userLicenseNoInput.setValue('');
+
+      // clear all privilege
+      this.priDashboardInput.setValue('');
+      this.priUserInput.setValue('');
+      this.priInventoryInput.setValue('');
+      this.priManageInput.setValue('');
+      this.priPatientManagementInput.setValue('');
+      this.priPharmacyCornerInput.setValue('');
+      this.priNotificationInput.setValue('');
+      this.priPosInput.setValue('');
+
+      //set generated username to null
+      this.genUsername = null;
+    } else {
+      // Do nothing!
+    }
   }
 
   createPrivilege(userId:number) {
@@ -153,11 +185,10 @@ export class AdduserComponent implements OnInit {
       response => {
         if (response['success'] == true) {
           alert("User Successfully Added!");
-          this.stillCreatingUser = false;
         } else {
           alert('Connection Problem!');
         }
-      }
+      }      
     );
   }
 

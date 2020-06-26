@@ -12,9 +12,12 @@
                         </div>
                         <div class="col-md-6 col-xs-6 text-right">
                             <button 
+                                style="margin-right: 5px;"
+                                class="btn btn-sm btn-default" (click)="clearAll()">Clear All</button>
+                            <button 
                                 [ngClass]="stillCreatingUser?'m-progress':''"
                                 class="btn btn-sm btn-primary"
-                                [disabled]="userForm.invalid" (click)="addNewUser()">ADD USER</button>
+                                [disabled]="userForm.invalid" (click)="addNewUser()">Add User</button>
                         </div>
                     </div>
                 </div>
@@ -387,5 +390,4 @@
     </div>
 </div>
 
-
-
+<!-- <app-popup></app-popup> -->
