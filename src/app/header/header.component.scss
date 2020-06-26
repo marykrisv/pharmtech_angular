@@ -38,6 +38,9 @@
 
 #menu-toggle {
     color: black;
+    &:hover {
+        color: blue;
+    }
 }
 
 #home {

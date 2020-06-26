@@ -31,6 +31,14 @@
     width:100%;
     height:35px;
     margin-bottom:20px;
+
+    input {
+        height: 100%;
+    }
+
+    span.input-group-addon:hover {
+        background-color: lightblue;
+    }
 }
 
 .loginButton {

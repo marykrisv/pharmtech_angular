@@ -30,14 +30,23 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-10 col-sm-offset-1">
-                                        <input class="inputStyle form-control" 
-                                            formControlName="password"
-                                            type="password" 
-                                            name="password" 
-                                            placeholder="password"
-                                            (click)="resetWarningMessage();"
-                                            (keyup.enter)="login()"
-                                        >
+                                        <div class="input-group inputStyle">
+                                            <input 
+                                                id="loginPassword"
+                                                type="password" 
+                                                class="form-control" 
+                                                formControlName="password"
+                                                placeholder="Password"
+                                                (click)="resetWarningMessage();"
+                                                (keyup.enter)="login()">
+                                            <span
+                                                (click)="changeLoginPassword()" 
+                                                class="input-group-addon">
+                                                <span 
+                                                    [ngClass]="showLoginPassword?'glyphicon-eye-open':'glyphicon-eye-close'"
+                                                    class="glyphicon"></span>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -75,7 +84,7 @@
                                             class="alert alert-danger warningMessage">
                                             {{ resetPasswordWarning }}
                                         </div>                                         -->
-                                        <input class="inputStyle form-control" 
+                                        <!-- <input class="inputStyle form-control" 
                                             formControlName="newpassword"
                                             type="password" 
                                             name="newpassword" 
@@ -83,12 +92,29 @@
                                             (click)="resetWarningMessageInReset();"
                                             (keyup.enter)="confirmNewPassword()"
                                             autocomplete="false off new-password"
-                                        >                                  
+                                        > -->
+                                        <div class="input-group inputStyle">
+                                            <input 
+                                                id="newPassword"
+                                                type="password" 
+                                                class="form-control" 
+                                                formControlName="newpassword"
+                                                placeholder="New Password"
+                                                (click)="resetWarningMessageInReset();"
+                                                (keyup.enter)="confirmNewPassword()">
+                                            <span
+                                                (click)="changeNewPassword()" 
+                                                class="input-group-addon">
+                                                <span 
+                                                    [ngClass]="showNewPassword?'glyphicon-eye-open':'glyphicon-eye-close'"
+                                                    class="glyphicon"></span>
+                                            </span>
+                                        </div>                                  
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-10 col-sm-offset-1">
-                                        <input class="inputStyle form-control" 
+                                        <!-- <input class="inputStyle form-control" 
                                             formControlName="confirmpassword"
                                             type="password" 
                                             name="confirmpassword" 
@@ -96,7 +122,24 @@
                                             (click)="resetWarningMessageInReset();"
                                             (keyup.enter)="confirmNewPassword()"
                                             autocomplete="off"
-                                        >
+                                        > -->
+                                        <div class="input-group inputStyle">
+                                            <input 
+                                                id="confirmPassword"
+                                                type="password" 
+                                                class="form-control" 
+                                                formControlName="confirmpassword"
+                                                placeholder="Confirm Password"
+                                                (click)="resetWarningMessageInReset();"
+                                                (keyup.enter)="confirmNewPassword()">
+                                            <span
+                                                (click)="changeConfirmPassword()" 
+                                                class="input-group-addon">
+                                                <span 
+                                                    [ngClass]="showConfirmPassword?'glyphicon-eye-open':'glyphicon-eye-close'"
+                                                    class="glyphicon"></span>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">

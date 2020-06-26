@@ -27,6 +27,11 @@ export class LoginComponent implements OnInit {
   resetPasswordWarning: string = null;
   userId: number;
 
+  // show passwords
+  showLoginPassword: boolean = false;
+  showNewPassword: boolean = false;
+  showConfirmPassword: boolean = false;
+
   form = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
@@ -186,6 +191,24 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('privilege', JSON.stringify(this.privilege));
 
     this.router.navigate(["menu/patient-management"]);    
+  }
+
+  changeLoginPassword () {
+    var type = this.showLoginPassword?'password':'text';
+    document.getElementById('loginPassword').setAttribute("type", type);
+    this.showLoginPassword = !this.showLoginPassword;
+  }
+
+  changeNewPassword () {
+    var type = this.showNewPassword?'password':'text';
+    document.getElementById('newPassword').setAttribute("type", type);
+    this.showNewPassword = !this.showNewPassword;
+  }
+
+  changeConfirmPassword () {
+    var type = this.showConfirmPassword?'password':'text';
+    document.getElementById('confirmPassword').setAttribute("type", type);
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 
   get usernameInput () {
