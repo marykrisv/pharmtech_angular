@@ -11,7 +11,10 @@
                             <button routerLink="/menu/users">< Back</button>
                         </div>
                         <div class="col-md-6 col-xs-6 text-right">
-                            <button [disabled]="userForm.invalid" (click)="addNewUser()">ADD USER</button>
+                            <button 
+                                [ngClass]="stillCreatingUser?'m-progress':''"
+                                class="btn btn-sm btn-primary"
+                                [disabled]="userForm.invalid" (click)="addNewUser()">ADD USER</button>
                         </div>
                     </div>
                 </div>
@@ -142,11 +145,9 @@
                                                         formControlName="userContactNo"
                                                         placeholder="Contact No.">
                                                     <span 
-                                                        [ngClass]="this.userContactNoInput.errors.isPhoneNumberValid?'info':'danger'"
-                                                        class="input-group-addon">
+                                                        class="input-group-addon info">
                                                         <span 
-                                                            [ngClass]="this.userContactNoInput.errors.isPhoneNumberValid?'glyphicon-asterisk':'glyphicon-remove'"
-                                                            class="glyphicon"></span>
+                                                            class="glyphicon glyphicon-asterisk"></span>
                                                     </span>
                                                 </div>
                                                 <br>

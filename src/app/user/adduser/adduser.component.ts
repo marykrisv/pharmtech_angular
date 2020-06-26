@@ -20,6 +20,9 @@ export class AdduserComponent implements OnInit {
   temporaryPass: string;
   genUsername: string = null;
 
+  //adding status
+  stillCreatingUser: boolean = false;
+
   userForm = new FormGroup({
     userName: new FormControl('', Validators.required),
     userPassword: new FormControl({value: '', disabled: true}, Validators.required),
@@ -30,7 +33,7 @@ export class AdduserComponent implements OnInit {
     userBirthdate: new FormControl('', Validators.required),
     userAddress: new FormControl('', Validators.required),
     userCitizenship: new FormControl('', Validators.required),
-    userContactNo: new FormControl('', PhoneValidator.isPhoneNumberValid),
+    userContactNo: new FormControl(''), //fix later
     userRole: new FormControl('', Validators.required),
     userLicenseNo: new FormControl('')
   });
@@ -94,6 +97,8 @@ export class AdduserComponent implements OnInit {
   }
 
   addNewUser() {
+    this.stillCreatingUser = true;
+
     //add user
     var userData: User;
     userData = {
@@ -118,8 +123,7 @@ export class AdduserComponent implements OnInit {
     
     this.userService.createNewUser(userData).then(
       response => {
-        if (response['success'] == true) {
-          alert("User Successfully Added!");
+        if (response['success'] == true) {          
           this.createPrivilege(response['userId']);
         } else {
           alert('Connection Problem!');
@@ -148,7 +152,8 @@ export class AdduserComponent implements OnInit {
     this.privilegeService.createPrivilege(privilege).then(
       response => {
         if (response['success'] == true) {
-          alert('Privilege Successfully Added!');
+          alert("User Successfully Added!");
+          this.stillCreatingUser = false;
         } else {
           alert('Connection Problem!');
         }
