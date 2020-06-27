@@ -269,19 +269,36 @@ label {
   }
 }
 
-@media (max-width: 1298px) {
+@media (max-width: 1546px) {
   .buttons {
     button {
       margin-bottom: 5px;
     }
   }
 
-  @media (min-width: 991px) {
-    
+  @media (min-width: 992px) {
+    #privilege {
+      span {
+        display: block;
+        font-size: 13px;
+      }
+
+      .switch {
+        display: inline-block;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+        float: none;
+      }
+
+      .panel-body {
+        height: auto;
+      }
+    }
   }
 }
 
-@media (min-width: 991px) {
+@media (max-width: 991px) {
   #privilege {
     .panel-body {
       height: auto;
