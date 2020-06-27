@@ -17,6 +17,13 @@ import { RoleConfig } from 'src/app/common/roleconfig';
 })
 export class UserdetailComponent implements OnInit {
 
+  constructor(
+    private auth: AuthService, 
+    private userService: UserService,
+    private privilegeService: PrivilegeService,
+    private route: ActivatedRoute,
+    private router: Router) { }
+
   userId
   userSession: SessionInterface;
   userDetail: UserInterface = null;
@@ -56,12 +63,6 @@ export class UserdetailComponent implements OnInit {
     priNotification: new FormControl(false, Validators.required),
     priPos: new FormControl(false, Validators.required)
   });
-
-  constructor(
-    private auth: AuthService, 
-    private userService: UserService,
-    private privilegeService: PrivilegeService,
-    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.auth.currentSession.subscribe(currentSession => this.userSession = currentSession);
@@ -140,8 +141,23 @@ export class UserdetailComponent implements OnInit {
         this.initializeFormValue();
       }
     }).catch(response => {
-      alert("Connection Problem. Please check your internet. p");
+      alert("Connection Problem. Please check your internet.");
     });
+  }
+
+  deleteUser () {
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.userService.deleteUser({"userId": this.userDetail.userId}).then(response => {
+        if (response['success'] == true) {
+          alert(response['message']);
+          this.router.navigate(["menu/users"]);  
+        } else {
+          alert(response['message']);
+        }
+      }).catch(response => {
+        alert("Connection Problem. Please check your internet.");
+      });
+    }
   }
 
   // set privilege based on role

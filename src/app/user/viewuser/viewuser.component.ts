@@ -16,18 +16,24 @@ export class ViewuserComponent implements OnInit {
 
   loading: boolean = false;
 
-  constructor(private us: UserService, private auth: AuthService) { 
+  constructor(private userSerive: UserService, private auth: AuthService) { 
+  }
+
+  deleteUser () {
+    if (confirm('Are you sure you want to save this user?')) {
+      // this.us.deleteUser({userId: })
+    }
   }
 
   goToViewAll() {
     this.loading = true;
     if (this.userSession.userRole == 'Super Admin') {
       // get all users from all location
-      this.us.getAllUsersFromAllLocation().then(response => {
+      this.userSerive.getAllUsersFromAllLocation().then(response => {
         if (response['data'] != undefined) {
-          this.us.changeUsers(response['data']);
+          this.userSerive.changeUsers(response['data']);
         } else {
-          this.us.changeUsers(null);
+          this.userSerive.changeUsers(null);
         } 
       }).catch(response => {
         alert("Connection Problem. Please check your internet.");
@@ -36,11 +42,11 @@ export class ViewuserComponent implements OnInit {
       });
     } else {
       // get all users from this location
-      this.us.getAllUsersFromThisLocation(this.userSession.userLocId).then(response => {
+      this.userSerive.getAllUsersFromThisLocation(this.userSession.userLocId).then(response => {
         if (response['data'] != undefined) {
-          this.us.changeUsers(response['data']);
+          this.userSerive.changeUsers(response['data']);
         } else {
-          this.us.changeUsers(null);
+          this.userSerive.changeUsers(null);
         } 
       }).catch(response => {
         alert("Connection Problem. Please check your internet.");
@@ -49,7 +55,7 @@ export class ViewuserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.us.currentUsers.subscribe(users => this.users = users);
+    this.userSerive.currentUsers.subscribe(users => this.users = users);
     this.auth.currentSession.subscribe(currentSession => {
       this.userSession = currentSession;
     });

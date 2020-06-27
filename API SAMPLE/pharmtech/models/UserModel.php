@@ -33,6 +33,72 @@ class UserModel {
         $this->conn = $db;
     }
 
+
+    //delete user - set userDeleted = 1
+    public function deleteUser() {
+        //create query
+        $query = 'UPDATE '.$this->table.'
+                SET
+                    userDeleted = 1
+                WHERE
+                    userId = :userId';
+
+        //prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //clean data
+        $this->userId = htmlspecialchars(strip_tags($this->userId));
+        
+        //bind data
+        $stmt->bindParam(':userId', $this->userId);
+
+        //execute
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    //get username
+    public function getUsername () {
+        //create query
+        $query = 'SELECT created.userName as createdBy, modified.userName as modifiedBy FROM user
+                LEFT JOIN user as created on user.userCreatedBy = created.userId
+                LEFT JOIN user as modified on user.userModifiedBy = modified.userId
+                WHERE user.userId = ?';
+
+        //prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //bind ID
+        $stmt->bindParam(1, $this->userId);
+
+        //execute
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    //Get users
+    public function viewAllFromAllLocation  () {
+        //create query
+        $query = 'select * from '.$this->table.' 
+                JOIN
+                    location on userLocId = locId 
+                WHERE
+                    userDeleted=0';
+
+        //prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //bind ID
+        $stmt->bindParam(1, $this->userId);
+
+        //execute
+        $stmt->execute();
+
+        return $stmt;
+    }
+
     //Get users
     public function viewAllFromThisLocation  () {
         //create query
@@ -94,6 +160,27 @@ class UserModel {
         //set properties
         $this->userId = $row['userId'];
         $this->userLocId = $row['userLocId'];
+    }
+
+    //get single user
+    public function viewUserDetail() {
+        $query = 'select * from '.$this->table.' 
+                JOIN
+                    location on userLocId = locId 
+                WHERE
+                    userId=? and userLocId=? and userDeleted=0';
+
+        //prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //bind ID
+        $stmt->bindParam(1, $this->userId);
+        $stmt->bindParam(2, $this->userLocId);
+
+        //execute
+        $stmt->execute();
+
+        return $stmt;
     }
 
     // create user

@@ -53,4 +53,9 @@ export class UserService {
     +userId).toPromise();    
   }
 
+  async deleteUser (user: any) {
+    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/delete-user.php', 
+    JSON.stringify(user)).toPromise();
+  }
+
 }

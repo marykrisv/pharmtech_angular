@@ -14,12 +14,14 @@ $db = $database->connect();
 $um = new UserModel($db);
 
 //get loc id
+$um->userId = isset($_GET['id']) ? $_GET['id'] : die();
+//get loc id
 $um->userLocId = isset($_GET['locid']) ? $_GET['locid'] : die();
 
 //trigger exception in a "try" block
 try {
     //user query
-    $result = $um->viewAllFromThisLocation();
+    $result = $um->viewUserDetail();
 
     //get row count
     $num = $result->rowCount();

@@ -47,7 +47,7 @@ try {
     if ($num > 0) {
         echo json_encode(
             array(
-                'message' => 'User Created',
+                'message' => 'User successfully created!',
                 'success' => true,
                 'userId' => $um->userId
             )
@@ -55,16 +55,25 @@ try {
     } else {
         echo json_encode(
             array(
-                'message' => 'User not created',
+                'message' => 'Error. User not created!',
                 'success' => false
             )
         );
     }
 }  //catch exception
- catch(Exception $e) {
+ catch(PDOException $e) {
+    if ($e->errorInfo[1]==1062) {
+        echo json_encode(
+            array(
+                'message' => 'Username already exists!',
+                'success' => false
+            )
+        );
+    }
+} catch (Exception $e) {
     echo json_encode(
         array(
-            'message' => 'User not created',
+            'message' => 'Error. User not created!',
             'success' => false
         )
     );

@@ -39,14 +39,14 @@ try {
     if ($num > 0) {
         echo json_encode(
             array(
-                'message' => 'Privilege Created',
+                'message' => 'Privilege successfully created!',
                 'success' => true
             )
         );
     } else {
         echo json_encode(
             array(
-                'message' => 'Privilege not created',
+                'message' => 'Error. Privilege not created!',
                 'success' => false
             )
         );
@@ -56,7 +56,7 @@ try {
     print($e);
     echo json_encode(
         array(
-            'message' => 'Privilege not created',
+            'message' => 'Error. Privilege not created!',
             'success' => false
         )
     );

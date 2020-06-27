@@ -19,12 +19,11 @@ $data = json_decode(file_get_contents("php://input"));
 
 //set ID to update
 $um->userId = $data->userId;
-$um->userPassword = $data->userPassword;
 
 //trigger exception in a "try" block
 try {
     //user query
-    $result = $um->confirmNewPassword();
+    $result = $um->deleteUser();
 
     //get row count
     $num = $result->rowCount();
@@ -33,14 +32,14 @@ try {
     if ($num > 0) {
         echo json_encode(
             array(
-                'message' => 'User successfully updated!',
+                'message' => 'User successfully deleted!',
                 'success' => true
             )
         );
     } else {
         echo json_encode(
             array(
-                'message' => 'Error. User not updated!',
+                'message' => 'Error. User not deleted!',
                 'success' => false
             )
         );
@@ -49,7 +48,7 @@ try {
  catch(Exception $e) {
     echo json_encode(
         array(
-            'message' => 'Error. User not updated!',
+            'message' => 'Error. User not deleted!',
             'success' => false
         )
     );

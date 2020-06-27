@@ -56,13 +56,13 @@ try {
         echo json_encode($user_arr);
     } else {
         echo json_encode (
-            array('message' => 'No privilege found')
+            array('message' => 'No privilege found!')
         );
     }
 }  //catch exception
  catch(Exception $e) {
     echo json_encode(
-        array('message' => 'No privilege found')
+        array('message' => 'No privilege found!')
     );
 }
 
