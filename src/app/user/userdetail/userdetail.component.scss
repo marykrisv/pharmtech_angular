@@ -202,58 +202,91 @@ label {
   }
   
   .m-progress:before {
-      content: '';
-      
-      display: inline-block;
-      
-      position: absolute;
-      background: transparent;
-      border: 1px solid #fff;
-      border-top-color: transparent;
-      border-bottom-color: transparent;
-      border-radius: 50%;
-      
-      box-sizing: border-box;
-      
-      top: 50%;
-      left: 50%;
-      margin-top: -12px;
-      margin-left: -12px;
-      
-      width: 24px;
-      height: 24px;
-      
-      -webkit-animation: ld 1s ease-in-out infinite;
-      -moz-animation:    ld 1s ease-in-out infinite;
-      -o-animation:      ld 1s ease-in-out infinite;
-      animation:         ld 1s ease-in-out infinite;
+    content: '';
+    
+    display: inline-block;
+    
+    position: absolute;
+    background: transparent;
+    border: 1px solid #fff;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    
+    box-sizing: border-box;
+    
+    top: 50%;
+    left: 50%;
+    margin-top: -12px;
+    margin-left: -12px;
+    
+    width: 24px;
+    height: 24px;
+    
+    -webkit-animation: ld 1s ease-in-out infinite;
+    -moz-animation:    ld 1s ease-in-out infinite;
+    -o-animation:      ld 1s ease-in-out infinite;
+    animation:         ld 1s ease-in-out infinite;
+}
+
+.btn-default.m-progress:before {
+    border-left-color: #333333;
+    border-right-color: #333333;
+}
+
+.btn-lg.m-progress:before {
+    margin-top: -16px;
+    margin-left: -16px;
+    
+    width: 32px;
+    height: 32px;
+}
+
+.btn-sm.m-progress:before {
+    margin-top: -9px;
+    margin-left: -9px;
+    
+    width: 18px;
+    height: 18px;
+}
+
+.btn-xs.m-progress:before {
+    margin-top: -7px;
+    margin-left: -7px;
+    
+    width: 14px;
+    height: 14px;
+}
+
+#otherDetailsDiv {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.buttons {
+  button {
+    margin-left: 5px;
   }
-  
-  .btn-default.m-progress:before {
-      border-left-color: #333333;
-      border-right-color: #333333;
+}
+
+@media (max-width: 1298px) {
+  .buttons {
+    button {
+      margin-bottom: 5px;
+    }
   }
-  
-  .btn-lg.m-progress:before {
-      margin-top: -16px;
-      margin-left: -16px;
-      
-      width: 32px;
-      height: 32px;
+
+  @media (min-width: 991px) {
+    
   }
-  
-  .btn-sm.m-progress:before {
-      margin-top: -9px;
-      margin-left: -9px;
-      
-      width: 18px;
-      height: 18px;
+}
+
+@media (min-width: 991px) {
+  #privilege {
+    .panel-body {
+      height: auto;
+    }
   }
-  
-  .btn-xs.m-progress:before {
-      margin-top: -7px;
-      margin-left: -7px;
-      
-      width: 14px;
-      height: 14px;
-  }
+}
+
+

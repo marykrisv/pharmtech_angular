@@ -11,15 +11,16 @@ import { SessionInterface } from 'src/app/interface/session.interface';
 })
 export class ViewuserComponent implements OnInit {
 
-  userMenu: string;
   users: UserInterface;
-
   userSession: SessionInterface;
+
+  loading: boolean = false;
 
   constructor(private us: UserService, private auth: AuthService) { 
   }
 
   goToViewAll() {
+    this.loading = true;
     if (this.userSession.userRole == 'Super Admin') {
       // get all users from all location
       this.us.getAllUsersFromAllLocation().then(response => {
@@ -30,7 +31,9 @@ export class ViewuserComponent implements OnInit {
         } 
       }).catch(response => {
         alert("Connection Problem. Please check your internet.");
-      });;
+      }).finally(() => {
+        this.loading = false;
+      });
     } else {
       // get all users from this location
       this.us.getAllUsersFromThisLocation(this.userSession.userLocId).then(response => {
@@ -51,7 +54,6 @@ export class ViewuserComponent implements OnInit {
       this.userSession = currentSession;
     });
     this.goToViewAll();
-    this.userMenu = 'viewAll';
   }
 
   calculateAge (birthday) {
@@ -59,7 +61,6 @@ export class ViewuserComponent implements OnInit {
     var ageDate = new Date(ageDifMs); // miliseconds from epoch
     return Math.abs(ageDate.getUTCFullYear() - 1970);
   }
-
 }
 
 

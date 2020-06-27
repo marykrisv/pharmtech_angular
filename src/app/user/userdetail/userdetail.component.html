@@ -1,4 +1,4 @@
-<div id="top" class="container">  
+<div *ngIf="userDetail != null && otherDetails != null" id="top" class="container">  
     <!-- view all -->
     <h2>Add New User</h2>
     
@@ -7,15 +7,45 @@
             <div class="panel panel-default">                
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-md-6 col-xs-6">
+                        <div class="col-md-8 col-xs-12">
                             <button 
                                 class="btn btn-sm btn-default" 
                                 routerLink="/menu/users">< Back</button>
+                            <div id="otherDetailsDiv">
+                                <span>
+                                    {{ 'Created: '+otherDetails.createdBy+' | '+userDetail.userCreatedOn }}
+                                </span>
+                                <span *ngIf="otherDetails.modifiedOn != null">
+                                    {{ 'Modified: '+otherDetails.modifiedBy+' | '+userDetail.userModifiedOn }}
+                                </span>
+                            </div>
+                            
                         </div>
-                        <div class="col-md-6 col-xs-6 text-right">
+                        <div class="col-md-4 col-sm-12 col-xs-12 text-right buttons">
+                            <div *ngIf="userDetail.userStatus == 1; then thenBlockStat else elseBlockStat"></div>
+                            <ng-template #thenBlockStat>
+                                <button 
+                                class="btn btn-sm btn-info">
+                                <em class="fa fa-unlock-shield"></em> Deactivate</button>
+                            </ng-template>
+                            <ng-template #elseBlockStat>
+                                <button 
+                                class="btn btn-sm btn-info">
+                                <em class="fa fa-shield"></em> Activate</button>
+                            </ng-template>
+                            <div *ngIf="userDetail.userIsLocked == true; then thenBlock else elseBlock"></div>
+                            <ng-template #thenBlock>
+                                <button 
+                                class="btn btn-sm btn-info">
+                                <em class="fa fa-unlock-alt"></em> Unlock</button>
+                            </ng-template>
+                            <ng-template #elseBlock>
+                                <button 
+                                class="btn btn-sm btn-info">
+                                <em class="fa fa-lock"></em> Lock</button>
+                            </ng-template>                            
                             <button 
-                                style="margin-right: 5px;"
-                                class="btn btn-sm btn-warning btnUpdate"
+                                class="btn btn-sm btn-warning"
                                 [disabled]="userForm.touched?false:true">
                                 <em class="fa fa-pencil"></em> Update</button>
                             <button 
@@ -233,7 +263,19 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div id="credential" class="panel panel-default">
-                                        <div class="panel-heading">User Login Credentials</div>
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-lg-7 col-md-12 col-sm-12">
+                                                    User Login Credentials
+                                                </div>
+                                                <div class="col-lg-5 col-md-12 col-sm-12 text-right">
+                                                    <button 
+                                                    class="btn btn-sm btn-danger">
+                                                    <em class="fa fa-trash"></em> Reset Password</button>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
                                         <div class="panel-body">
                                             <form [formGroup]="userForm">
                                                 <label for="validate-text">Username</label>
@@ -255,7 +297,7 @@
                                                 <label for="validate-text">Password</label>
                                                 <div class="input-group">
                                                     <input 
-                                                        type="text" 
+                                                        type="password" 
                                                         class="form-control" 
                                                         formControlName="userPassword"
                                                         placeholder="Password">

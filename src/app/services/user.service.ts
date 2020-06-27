@@ -48,4 +48,9 @@ export class UserService {
     +userId+'&locid='+locId).toPromise();
   }
 
+  async getUsername (userId) {
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/get-username.php?id='
+    +userId).toPromise();    
+  }
+
 }

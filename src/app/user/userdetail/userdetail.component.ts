@@ -21,6 +21,8 @@ export class UserdetailComponent implements OnInit {
   userSession: SessionInterface;
   userDetail: UserInterface = null;
   privilegeDetail: PrivilegeInterface = null;
+
+  otherDetails: any;
   // userDetail: any;
 
   temporaryPass: string;
@@ -87,6 +89,7 @@ export class UserdetailComponent implements OnInit {
       this.userContactNoInput.setValue(this.userDetail.userContactNo);
       this.userRoleInput.setValue(this.userDetail.userRole);
       this.userLicenseNoInput.setValue(this.userDetail.userLicenseNo);
+      this.userPasswordInput.setValue('password');
     }
 
     if (this.privilegeDetail != null) {
@@ -121,12 +124,23 @@ export class UserdetailComponent implements OnInit {
     this.privilegeService.getPrivilege({"priUserId": userId}).then(response=> {
       if(response['data'] != null) {
         this.privilegeDetail = <PrivilegeInterface>response['data'][0];
-        this.initializeFormValue();
+        this.populateOtherDetails(userId);
       } else {
         alert("Connection Problem. Please check your internet.");
       }
     }).catch(response => {
       alert("Connection Problem. Please check your internet.");
+    });
+  }
+
+  populateOtherDetails (userId) {
+    this.userService.getUsername(userId).then(response => {
+      if (response['data'] != null) {
+        this.otherDetails = response['data'][0];
+        this.initializeFormValue();
+      }
+    }).catch(response => {
+      alert("Connection Problem. Please check your internet. p");
     });
   }
 
@@ -211,13 +225,14 @@ export class UserdetailComponent implements OnInit {
             } else {
               alert(response['message']);
             }
-            this.stillCreatingUser = false;
           } else {
             alert('Connection Problem!');
           }
           
         }
-      );    
+      ).finally(() => {        
+        this.stillCreatingUser = false;
+      });    
     } 
   }
 
