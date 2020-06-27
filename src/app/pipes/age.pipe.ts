@@ -8,7 +8,7 @@ export class AgePipe implements PipeTransform {
         if (!value) {
             return null;
         } else {
-            var bday = value as Date;
+            var bday = new Date(value);
             var ageDifMs = Date.now() - bday.getTime();
             var ageDate = new Date(ageDifMs); // miliseconds from epoch
             return Math.abs(ageDate.getUTCFullYear() - 1970);

@@ -38,9 +38,6 @@ export class ViewuserComponent implements OnInit {
     });
     this.goToViewAll();
     this.userMenu = 'viewAll';
-
-    var dateobj = new Date('October 13, 1996 05:35:32'); 
-    console.log(this.calculateAge(dateobj as Date));
   }
 
   calculateAge (birthday) {
