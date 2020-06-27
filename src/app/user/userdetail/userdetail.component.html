@@ -1,7 +1,396 @@
-<p>userdetail works!</p>
-
-
-<button routerLink="/menu/users">Back</button>
-<div *ngIf="userDetail != null">
-    {{ userDetail.userName }}
+<div id="top" class="container">  
+    <!-- view all -->
+    <h2>Add New User</h2>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">                
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6">
+                            <button 
+                                class="btn btn-sm btn-default" 
+                                routerLink="/menu/users">< Back</button>
+                        </div>
+                        <div class="col-md-6 col-xs-6 text-right">
+                            <button 
+                                style="margin-right: 5px;"
+                                class="btn btn-sm btn-warning btnUpdate"
+                                [disabled]="userForm.touched?false:true">
+                                <em class="fa fa-pencil"></em> Update</button>
+                            <button 
+                                class="btn btn-sm btn-danger">
+                                <em class="fa fa-trash"></em> Delete</button>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="panel-body main">
+                    <div class="row">             
+                        <!-- <br><br> -->                        
+                        <div class="col-md-7">
+                            <div id="information" class="panel panel-default">
+                                <div class="panel-heading">User Personal Information</div>
+                                <div class="panel-body">
+                                    <form [formGroup]="userForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="validate-text">First Name</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        [value] = "this.userFnameInput.value | titlecase"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userFname"
+                                                        placeholder="First Name"
+                                                        (keyup)="generateUserName()">
+                                                    <span 
+                                                        [ngClass]="this.userFnameInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userFnameInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Middle Name</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        [value] = "this.userMnameInput.value | titlecase"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userMname"
+                                                        placeholder="Middle Name">
+                                                    <span 
+                                                        [ngClass]="this.userMnameInput.invalid?'danger':'info'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userMnameInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Last Name</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        [value] = "this.userLnameInput.value | titlecase"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userLname"
+                                                        placeholder="Last Name"
+                                                        (keyup)="generateUserName()">
+                                                    <span 
+                                                        [ngClass]="this.userLnameInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userLnameInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-select">Gender</label>
+                                                <div class="input-group">
+                                                    <select 
+                                                        class="form-control" 
+                                                        name="validate-select" 
+                                                        id="validate-select" 
+                                                        placeholder="Validate Select"
+                                                        formControlName="userGender">
+                                                        <option value="">Select Gender</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                    <span 
+                                                        [ngClass]="this.userGenderInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userGenderInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>                                                
+                                                <label for="validate-text">Citizenship</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        [value] = "this.userCitizenshipInput.value | titlecase"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userCitizenship"
+                                                        placeholder="Citizenship">
+                                                    <span 
+                                                        [ngClass]="this.userCitizenshipInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userCitizenshipInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="validate-text">Birthdate</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="date" 
+                                                        class="form-control dateInput" 
+                                                        formControlName="userBirthdate"
+                                                        placeholder="Birthdate"
+                                                        (change)="generateUserName()">
+                                                    <span 
+                                                        [ngClass]="this.userBirthdateInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userBirthdateInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Contact No.</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userContactNo"
+                                                        placeholder="Contact No.">
+                                                    <span 
+                                                        [ngClass]="this.userContactNoInput.errors != null && 
+                                                                this.userContactNoInput.errors.isPhoneInvalid?'danger':'info'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                        [ngClass]="this.userContactNoInput.errors != null &&
+                                                        this.userContactNoInput.errors.isPhoneInvalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                            class="glyphicon glyphicon-asterisk"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-select">Role</label>
+                                                <div class="input-group">
+                                                    <select 
+                                                        class="form-control" 
+                                                        name="validate-select" 
+                                                        id="validate-select" 
+                                                        placeholder="Validate Select"
+                                                        formControlName="userRole"
+                                                        (change)="generateUserName(); setPrivilegeBasedOnRole();">
+                                                        <option value="">Select Role</option>
+                                                        <option value="Super Admin">Super Admin</option>
+                                                        <option value="Admin">Admin</option>
+                                                        <option value="Pharmacist">Pharmacist</option>
+                                                        <option value="Doctor">Doctor</option>
+                                                        <option value="Staff">Staff</option>
+                                                    </select>
+                                                    <span 
+                                                        [ngClass]="this.userRoleInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userRoleInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">License No.</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userLicenseNo"
+                                                        placeholder="License No.">
+                                                    <span 
+                                                        [ngClass]="this.userLicenseNoInput.invalid?'danger':'info'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userMnameInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="validate-text">Address</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        [value] = "this.userAddressInput.value | titlecase"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userAddress"
+                                                        placeholder="Address">
+                                                    <span 
+                                                        [ngClass]="this.userAddressInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userAddressInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="credential" class="panel panel-default">
+                                        <div class="panel-heading">User Login Credentials</div>
+                                        <div class="panel-body">
+                                            <form [formGroup]="userForm">
+                                                <label for="validate-text">Username</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userName"
+                                                        placeholder="Username">
+                                                    <span 
+                                                        [ngClass]="this.userNameInput.invalid && genUsername == null?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.userNameInput.invalid && genUsername == null?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Password</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="userPassword"
+                                                        placeholder="Password">
+                                                    <span class="input-group-addon success">
+                                                        <span class="glyphicon glyphicon-ok"></span>
+                                                    </span>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="privilege" class="panel panel-default">
+                                        <div class="panel-heading">User Privileges</div>
+                                        <div class="panel-body">
+                                            <form [formGroup]="privilegeForm">                                                
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>Dashboard</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priDashboard">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>User</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priUser">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>Inventory</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priInventory">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>Manage</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priManage">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>Patient Mgmt</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priPatientManagement">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>Pharmacy Corner</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priPharmacyCorner">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>Notification</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priNotification">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <span>POS</span>                                                                
+                                                                <label class="switch">
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        class="primary" 
+                                                                        formControlName="priPos">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="panel-footer">
+                    <button (click)="addNewUser()">ADD USER</button>
+                </div> -->
+            </div>
+            
+        </div>
+    </div>
 </div>
+
+<!-- <app-popup></app-popup> -->
