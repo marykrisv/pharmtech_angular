@@ -1,4 +1,4 @@
-export interface Privilege {
+export interface PrivilegeInterface {
     priUserId?: number,
     priDashboard: boolean,
     priUser: boolean,

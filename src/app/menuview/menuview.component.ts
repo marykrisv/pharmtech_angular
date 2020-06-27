@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
-import { Session } from '../interface/session.interface';
+import { SessionInterface } from '../interface/session.interface';
 
 @Component({
   selector: 'app-menuview',
@@ -10,7 +10,7 @@ import { Session } from '../interface/session.interface';
 })
 export class MenuviewComponent implements OnInit {
 
-  currentSession: Session = null;
+  currentSession: SessionInterface = null;
 
   constructor(private data: AuthService, private router: Router) {    
   }

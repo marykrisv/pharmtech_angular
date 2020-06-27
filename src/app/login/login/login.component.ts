@@ -4,9 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Session } from 'src/app/interface/session.interface';
+import { SessionInterface } from 'src/app/interface/session.interface';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Privilege } from 'src/app/interface/privilege.interface';
+import { PrivilegeInterface } from 'src/app/interface/privilege.interface';
 import { DataService } from 'src/app/services/data.service';
 
 
@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
   ctr = 0;
   view;
   title;
-  user_session: Session;
-  privilege: Privilege;
+  user_session: SessionInterface;
+  privilege: PrivilegeInterface;
   warning: string = null;
   resetPasswordWarning: string = null;
   userId: number;

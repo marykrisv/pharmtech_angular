@@ -1,7 +1,8 @@
+import { UserInterface } from './../../interface/user.interface';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { Session } from 'src/app/interface/session.interface';
+import { SessionInterface } from 'src/app/interface/session.interface';
 
 @Component({
   selector: 'app-viewuser',
@@ -11,9 +12,9 @@ import { Session } from 'src/app/interface/session.interface';
 export class ViewuserComponent implements OnInit {
 
   userMenu: string;
-  users: any;
+  users: UserInterface;
 
-  user_session: Session;
+  user_session: SessionInterface;
 
   constructor(private us: UserService, private auth: AuthService) { 
   }
@@ -37,6 +38,15 @@ export class ViewuserComponent implements OnInit {
     });
     this.goToViewAll();
     this.userMenu = 'viewAll';
+
+    var dateobj = new Date('October 13, 1996 05:35:32'); 
+    console.log(this.calculateAge(dateobj as Date));
+  }
+
+  calculateAge (birthday) {
+    var ageDifMs = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
   }
 
 }

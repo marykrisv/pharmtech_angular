@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Privilege } from '../interface/privilege.interface';
+import { PrivilegeInterface } from '../interface/privilege.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  private userPrivilege = new BehaviorSubject<Privilege>(null);
+  private userPrivilege = new BehaviorSubject<PrivilegeInterface>(null);
   currentUserPrivilege = this.userPrivilege.asObservable();
 
 
   constructor() { }
 
-  changePrivilege (privilege: Privilege) {
+  changePrivilege (privilege: PrivilegeInterface) {
     this.userPrivilege.next(privilege);
   }
 }

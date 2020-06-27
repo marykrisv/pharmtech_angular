@@ -1,4 +1,4 @@
-export interface Session {
+export interface SessionInterface {
     userId: number,
     userName: string,
     userFname: string,

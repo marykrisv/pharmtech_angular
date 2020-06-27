@@ -1,13 +1,13 @@
 import { RoleConfig } from './../../common/roleconfig';
 import { PhoneValidator } from './../../validators/phone.validator';
-import { Privilege } from './../../interface/privilege.interface';
+import { PrivilegeInterface } from './../../interface/privilege.interface';
 import { PrivilegeService } from './../../services/privilege.service';
 import { UserService } from './../../services/user.service';
 import { AuthService } from './../../auth/auth.service';
-import { Session } from './../../interface/session.interface';
+import { SessionInterface } from './../../interface/session.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { User } from 'src/app/interface/user.interface';
+import { UserInterface } from 'src/app/interface/user.interface';
 
 @Component({
   selector: 'app-adduser',
@@ -16,7 +16,7 @@ import { User } from 'src/app/interface/user.interface';
 })
 export class AdduserComponent implements OnInit {
 
-  userSession: Session;
+  userSession: SessionInterface;
   temporaryPass: string;
   genUsername: string = null;
 
@@ -62,7 +62,7 @@ export class AdduserComponent implements OnInit {
   // set privilege based on role
   setPrivilegeBasedOnRole () {
     var role = this.userRoleInput.value.toString().trim();
-    var privilege: Privilege = RoleConfig.role[role];
+    var privilege: PrivilegeInterface = RoleConfig.role[role];
 
     this.priDashboardInput.setValue(privilege.priDashboard);
     this.priUserInput.setValue(privilege.priUser);
@@ -100,7 +100,7 @@ export class AdduserComponent implements OnInit {
       this.stillCreatingUser = true;
 
       //add user
-      var userData: User;
+      var userData: UserInterface;
       userData = {
         userName: this.userNameInput.value,
         userPassword: this.userPasswordInput.value,
@@ -168,7 +168,7 @@ export class AdduserComponent implements OnInit {
 
   createPrivilege(userId:number) {
     //create privilege
-    var privilege: Privilege;
+    var privilege: PrivilegeInterface;
     privilege = {
       priUserId: userId,
       priDashboard: this.priDashboardInput.value,
