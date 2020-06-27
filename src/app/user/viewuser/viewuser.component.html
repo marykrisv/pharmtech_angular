@@ -112,6 +112,7 @@
                           </td>
                           <td class="hidden-xs"><span>{{ user.userBirthdate | age }}</span></td>
                           <td><span>{{ user.userRole }}</span></td>
+                          <td *ngIf="userSession.userRole == 'Super Admin'"><span>{{ user.locName }}</span></td>
                         </tr>
                       </ng-template>
                       

@@ -20,15 +20,29 @@ export class ViewuserComponent implements OnInit {
   }
 
   goToViewAll() {
-    this.us.getAllUsers(this.userSession.userLocId).then(response => {
-      if (response['data'] != undefined) {
-        this.us.changeUsers(response['data']);
-      } else {
-        this.us.changeUsers(null);
-      } 
-    }).catch(response => {
-      alert("Connection Problem. Please check your internet.");
-    });;
+    if (this.userSession.userRole == 'Super Admin') {
+      // get all users from all location
+      this.us.getAllUsersFromAllLocation().then(response => {
+        if (response['data'] != undefined) {
+          this.us.changeUsers(response['data']);
+        } else {
+          this.us.changeUsers(null);
+        } 
+      }).catch(response => {
+        alert("Connection Problem. Please check your internet.");
+      });;
+    } else {
+      // get all users from this location
+      this.us.getAllUsersFromThisLocation(this.userSession.userLocId).then(response => {
+        if (response['data'] != undefined) {
+          this.us.changeUsers(response['data']);
+        } else {
+          this.us.changeUsers(null);
+        } 
+      }).catch(response => {
+        alert("Connection Problem. Please check your internet.");
+      });;
+    }
   }
 
   ngOnInit(): void {

@@ -23,8 +23,13 @@ export class UserService {
     JSON.stringify(user)).toPromise();
   }
 
-  async getAllUsers(locId: number) {
+  async getAllUsersFromThisLocation(locId: number) {
     return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-all-from-this-location.php?locid='+locId)
+    .toPromise();
+  }
+
+  async getAllUsersFromAllLocation() {
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-all-from-all-location.php')
     .toPromise();
   }
   

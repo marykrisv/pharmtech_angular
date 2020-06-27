@@ -19,5 +19,6 @@ export interface UserInterface {
     userCreatedOn?: Date,
     userCreatedBy: number,
     userModifiedOn?: Date,
-    userModifiedBy?: number
+    userModifiedBy?: number,
+    locName?: string
 }
