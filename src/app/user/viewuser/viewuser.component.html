@@ -70,7 +70,7 @@
                             <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
                           </td>
                           <td><span>{{ user.userName }}</span></td>
-                          <td><span>{{ user.userLname + ', '+ user.userFname  }}</span></td>
+                          <td><span>{{ user.userLname + ', '+ user.userFname+' '+(user.userMname | middlename) }}</span></td>
                           <td><span>{{ user.userGender }}</span></td>
                           <td><span>{{ user.userBirthdate | age }}</span></td>
                           <td><span>{{ user.userRole }}</span></td>

@@ -148,8 +148,12 @@
                                                         formControlName="userContactNo"
                                                         placeholder="Contact No.">
                                                     <span 
-                                                        class="input-group-addon info">
+                                                        [ngClass]="this.userContactNoInput.errors != null && 
+                                                                this.userContactNoInput.errors.isPhoneInvalid?'danger':'info'"
+                                                        class="input-group-addon">
                                                         <span 
+                                                        [ngClass]="this.userContactNoInput.errors != null &&
+                                                        this.userContactNoInput.errors.isPhoneInvalid?'glyphicon-remove':'glyphicon-asterisk'"
                                                             class="glyphicon glyphicon-asterisk"></span>
                                                     </span>
                                                 </div>

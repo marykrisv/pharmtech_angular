@@ -33,7 +33,7 @@ export class AdduserComponent implements OnInit {
     userBirthdate: new FormControl('', Validators.required),
     userAddress: new FormControl('', Validators.required),
     userCitizenship: new FormControl('', Validators.required),
-    userContactNo: new FormControl(''), //fix later
+    userContactNo: new FormControl('aa', PhoneValidator.isPhoneInvalid), //fix later
     userRole: new FormControl('', Validators.required),
     userLicenseNo: new FormControl('')
   });

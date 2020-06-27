@@ -1,3 +1,4 @@
+import { MiddlenamePipe } from './../pipes/middle-name.pipe';
 import { AgePipe } from './../pipes/age.pipe';
 import { PopupComponent } from './../common/popup/popup.component';
 import { NgModule } from '@angular/core';
@@ -16,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdduserComponent, 
     UserdetailComponent, 
     PopupComponent,
-    AgePipe
+    AgePipe,
+    MiddlenamePipe
   ],
   imports: [
     CommonModule,
