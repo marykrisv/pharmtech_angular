@@ -72,7 +72,7 @@
                           <td><span>{{ user.userName }}</span></td>
                           <td><span>{{ user.userLname + ', '+ user.userFname  }}</span></td>
                           <td><span>{{ user.userGender }}</span></td>
-                          <td><span>{{ user.userBirthdate }}</span></td>
+                          <td><span>{{ user.userBirthdate | age }}</span></td>
                           <td><span>{{ user.userRole }}</span></td>
                         </tr>
                       </ng-template>

@@ -16,7 +16,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MenuviewComponent } from './menuview/menuview.component';
-import { EprescriptionComponent } from './eprescription/eprescription.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { LoginModule } from './login/login.module';
@@ -29,7 +28,6 @@ import { NotfoundComponent } from './notfound/notfound.component';
     AppComponent,
     HeaderComponent,
     MenuviewComponent,
-    EprescriptionComponent,
     SideMenuComponent,
     NotfoundComponent
   ],

@@ -1,3 +1,4 @@
+import { AgePipe } from './../pipes/age.pipe';
 import { PopupComponent } from './../common/popup/popup.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,7 +11,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [ViewuserComponent, AdduserComponent, UserdetailComponent, PopupComponent],
+  declarations: [
+    ViewuserComponent, 
+    AdduserComponent, 
+    UserdetailComponent, 
+    PopupComponent,
+    AgePipe
+  ],
   imports: [
     CommonModule,
     UsersRoutingModule,

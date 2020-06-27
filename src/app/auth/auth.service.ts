@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Session } from '../interface/session.interface';
+import { SessionInterface } from '../interface/session.interface';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private usersession = new BehaviorSubject<Session>(null);
+  private usersession = new BehaviorSubject<SessionInterface>(null);
   currentSession = this.usersession.asObservable();
 
   constructor(private http: HttpClient, private router: Router) { }  
 
-  changeSession (data_session: Session) {
+  changeSession (data_session: SessionInterface) {
     this.usersession.next(data_session);
   }
   

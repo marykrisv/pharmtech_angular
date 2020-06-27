@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
-import { Privilege } from '../interface/privilege.interface';
-import { Session } from '../interface/session.interface';
+import { PrivilegeInterface } from '../interface/privilege.interface';
+import { SessionInterface } from '../interface/session.interface';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -11,8 +11,8 @@ import { AuthService } from '../auth/auth.service';
 })
 export class SideMenuComponent implements OnInit {
   screenWidth = window.innerWidth;
-  userPrivilege: Privilege;
-  userSession: Session;
+  userPrivilege: PrivilegeInterface;
+  userSession: SessionInterface;
 
   constructor(private data: DataService, private auth: AuthService) { }
 

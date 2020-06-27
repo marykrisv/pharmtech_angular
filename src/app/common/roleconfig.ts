@@ -1,4 +1,4 @@
-import { Privilege } from 'src/app/interface/privilege.interface';
+import { PrivilegeInterface } from 'src/app/interface/privilege.interface';
 export class RoleConfig {
     static role = {
         "Super Admin": {

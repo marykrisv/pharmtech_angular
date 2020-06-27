@@ -2,14 +2,14 @@ import { DataService } from './../services/data.service';
 import { UserService } from '../services/user.service';
 import { Injectable, OnInit } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Privilege } from '../interface/privilege.interface';
+import { PrivilegeInterface } from '../interface/privilege.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, OnInit {
 
-  currentPrivilege: Privilege;
+  currentPrivilege: PrivilegeInterface;
   // canActivate(
   //   next: ActivatedRouteSnapshot,
   //   state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

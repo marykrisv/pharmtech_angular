@@ -1,4 +1,4 @@
-import { Session } from '../interface/session.interface';
+import { SessionInterface } from '../interface/session.interface';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
@@ -10,7 +10,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
   menuSelected: string;
-  userSession: Session;
+  userSession: SessionInterface;
 
   constructor(private data: AuthService, private router: Router) { }
 

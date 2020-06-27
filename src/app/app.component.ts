@@ -1,9 +1,9 @@
-import { Session } from './interface/session.interface';
+import { SessionInterface } from './interface/session.interface';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { Router } from '@angular/router';
 import { PrivilegeService } from './services/privilege.service';
-import { Privilege } from './interface/privilege.interface';
+import { PrivilegeInterface } from './interface/privilege.interface';
 import { DataService } from './services/data.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { DataService } from './services/data.service';
 })
 export class AppComponent {
   title = 'pharmtech';
-  user_session: Session;
+  user_session: SessionInterface;
 
   constructor(private auth: AuthService, 
               private privilegeService: PrivilegeService,
@@ -32,10 +32,10 @@ export class AppComponent {
     } else {
       //get localStorage sesson and set as currentSession
       let sessionObj: any = JSON.parse(localStorage.getItem('session')); // string to generic object first
-      let session: Session = <Session>sessionObj;
+      let session: SessionInterface = <SessionInterface>sessionObj;
 
       let privilegeObj: any = JSON.parse(localStorage.getItem('privilege')); // string to generic object first
-      let privilege: Privilege = <Privilege>privilegeObj;
+      let privilege: PrivilegeInterface = <PrivilegeInterface>privilegeObj;
 
       this.auth.changeSession(session);
       this.data.changePrivilege(privilege);
