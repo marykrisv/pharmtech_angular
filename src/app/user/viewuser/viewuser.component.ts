@@ -14,13 +14,13 @@ export class ViewuserComponent implements OnInit {
   userMenu: string;
   users: UserInterface;
 
-  user_session: SessionInterface;
+  userSession: SessionInterface;
 
   constructor(private us: UserService, private auth: AuthService) { 
   }
 
   goToViewAll() {
-    this.us.getAllUsers(this.user_session.userLocId).then(response => {
+    this.us.getAllUsers(this.userSession.userLocId).then(response => {
       if (response['data'] != undefined) {
         this.us.changeUsers(response['data']);
       } else {
@@ -34,7 +34,7 @@ export class ViewuserComponent implements OnInit {
   ngOnInit(): void {
     this.us.currentUsers.subscribe(users => this.users = users);
     this.auth.currentSession.subscribe(currentSession => {
-      this.user_session = currentSession;
+      this.userSession = currentSession;
     });
     this.goToViewAll();
     this.userMenu = 'viewAll';

@@ -66,6 +66,23 @@ td {
     }
 }
 
+// search input
+#search_container{
+    width: 100%;
+}
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+
 @media (max-width:991px) {
     .btn-create {
         margin-top: 10px;
@@ -75,10 +92,9 @@ td {
         font-size: 12px;
     }
 
-    // td {
-    //     overflow: hidden;
-    //     height: 5px;
-    //     white-space: nowrap;
-    // }
+    #options {
+        div {
+            margin-top:5px;
+        }
+    }
 }
-  

@@ -33,7 +33,7 @@ export class AdduserComponent implements OnInit {
     userBirthdate: new FormControl('', Validators.required),
     userAddress: new FormControl('', Validators.required),
     userCitizenship: new FormControl('', Validators.required),
-    userContactNo: new FormControl('aa', PhoneValidator.isPhoneInvalid), //fix later
+    userContactNo: new FormControl('', PhoneValidator.isPhoneInvalid), //fix later
     userRole: new FormControl('', Validators.required),
     userLicenseNo: new FormControl('')
   });
@@ -62,16 +62,27 @@ export class AdduserComponent implements OnInit {
   // set privilege based on role
   setPrivilegeBasedOnRole () {
     var role = this.userRoleInput.value.toString().trim();
-    var privilege: PrivilegeInterface = RoleConfig.role[role];
+    if (role == '') {
+      this.priDashboardInput.setValue(false);
+      this.priUserInput.setValue(false);
+      this.priInventoryInput.setValue(false);
+      this.priManageInput.setValue(false);
+      this.priPatientManagementInput.setValue(false);
+      this.priPharmacyCornerInput.setValue(false);
+      this.priNotificationInput.setValue(false);
+      this.priPosInput.setValue(false);
+    } else {
+      var privilege: PrivilegeInterface = RoleConfig.role[role];
 
-    this.priDashboardInput.setValue(privilege.priDashboard);
-    this.priUserInput.setValue(privilege.priUser);
-    this.priInventoryInput.setValue(privilege.priInventory);
-    this.priManageInput.setValue(privilege.priManage);
-    this.priPatientManagementInput.setValue(privilege.priPatientManagement);
-    this.priPharmacyCornerInput.setValue(privilege.priPharmacyCorner);
-    this.priNotificationInput.setValue(privilege.priNotification);
-    this.priPosInput.setValue(privilege.priPos);
+      this.priDashboardInput.setValue(privilege.priDashboard);
+      this.priUserInput.setValue(privilege.priUser);
+      this.priInventoryInput.setValue(privilege.priInventory);
+      this.priManageInput.setValue(privilege.priManage);
+      this.priPatientManagementInput.setValue(privilege.priPatientManagement);
+      this.priPharmacyCornerInput.setValue(privilege.priPharmacyCorner);
+      this.priNotificationInput.setValue(privilege.priNotification);
+      this.priPosInput.setValue(privilege.priPos);
+    }
   }
 
   //set random password
@@ -123,12 +134,17 @@ export class AdduserComponent implements OnInit {
       
       this.userService.createNewUser(userData).then(
         response => {
-          if (response['success'] == true) {          
-            this.createPrivilege(response['userId']);
+          if (response != null) {
+            if (response['success'] == true) {          
+              this.createPrivilege(response['userId']);
+            } else {
+              alert(response['message']);
+            }
+            this.stillCreatingUser = false;
           } else {
             alert('Connection Problem!');
           }
-          this.stillCreatingUser = false;
+          
         }
       );    
     } 
