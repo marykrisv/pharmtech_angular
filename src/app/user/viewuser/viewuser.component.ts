@@ -1,4 +1,5 @@
-import { UserInterface } from './../../interface/user.interface';
+import { UserStatus } from 'src/app/interface/user.interface';
+import { UserInterface, UserRole } from './../../interface/user.interface';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
@@ -19,6 +20,10 @@ export class ViewuserComponent implements OnInit {
   constructor(private userSerive: UserService, private auth: AuthService) { 
   }
 
+  statusChanged() {
+    console.log('test');
+  }
+
   deleteUser () {
     if (confirm('Are you sure you want to save this user?')) {
       // this.us.deleteUser({userId: })
@@ -27,7 +32,7 @@ export class ViewuserComponent implements OnInit {
 
   goToViewAll() {
     this.loading = true;
-    if (this.userSession.userRole == 'Super Admin') {
+    if (this.userSession.userRole == UserRole.SuperAdmin) {
       // get all users from all location
       this.userSerive.getAllUsersFromAllLocation().then(response => {
         if (response['data'] != undefined) {

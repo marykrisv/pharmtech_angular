@@ -1,3 +1,4 @@
+import { UserRole } from './user.interface';
 export interface SessionInterface {
     userId: number,
     userName: string,
@@ -6,5 +7,5 @@ export interface SessionInterface {
     userLname: string,
     userLocId: number,
     userLocName: string,
-    userRole: string
+    userRole: UserRole
   }

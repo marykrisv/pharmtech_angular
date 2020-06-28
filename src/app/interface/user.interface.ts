@@ -10,7 +10,7 @@ export interface UserInterface {
     userAddress: string,
     userCitizenship: string,
     userContactNo?: string,
-    userRole: string,
+    userRole: UserRole,
     userLicenseNo?: string,
     userStatus?: UserStatus,
     userIsNew: boolean,
@@ -26,4 +26,12 @@ export enum UserStatus {
     Active = 'Active', 
     Locked = 'Locked',
     Deactivated = 'Deactivated'
+}
+
+export enum UserRole {
+    SuperAdmin = 'Super Admin',
+    Admin = 'Admin',
+    Pharmacist = 'Pharmacist',
+    Doctor = 'Doctor',
+    Staff = 'Staff'
 }

@@ -37,14 +37,15 @@
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12">
                           <div id="category-container">
-                            <span>Stat</span>
+                            <span>Status</span>
                             <select 
-                                class="form-control" 
-                                name="validate-select" 
-                                placeholder="Validate Select">
-                                <option value="">Active</option>
-                                <option value="Admin">New User</option>
-                                <option value="Pharmacist">Locked</option>
+                              (change)="statusChanged()"
+                              class="form-control" 
+                              name="validate-select" 
+                              placeholder="Validate Select">
+                              <option value="UserStatus.Active">Active</option>
+                              <option value="UserStatus.Locked">Locked</option>
+                              <option value="UserSTatus.Deactivated">Deactivated</option>
                             </select>
                           </div>
                         </div>
@@ -55,9 +56,11 @@
                                 class="form-control" 
                                 name="validate-select" 
                                 placeholder="Validate Select">
-                                <option value="">Active</option>
-                                <option value="Admin">New User</option>
-                                <option value="Pharmacist">Locked</option>
+                                <option value="UserRole.SuperAdmin">Super Admin</option>
+                                <option value="UserRole.Admin">Admin</option>
+                                <option value="UserRole.Pharmacist">Pharmacist</option>
+                                <option value="UserRole.Doctor">Doctor</option>
+                                <option value="UserRole.Staff">Staff</option>
                             </select>
                           </div>
                           
