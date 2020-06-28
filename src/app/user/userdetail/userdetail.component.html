@@ -289,8 +289,10 @@
                                                 </div>
                                                 <div class="col-lg-5 col-md-12 col-sm-12 text-right">
                                                     <button 
-                                                    class="btn btn-sm btn-primary">
-                                                    <em class="fa fa-trash"></em> Reset Password</button>
+                                                        (click)="resetPassword()"
+                                                        class="btn btn-sm btn-primary">
+                                                        <em class="fa fa-trash"></em> Reset Password
+                                                    </button>
                                                 </div>
                                             </div>
                                             
@@ -316,10 +318,10 @@
                                                 <label for="validate-text">Password</label>
                                                 <div class="input-group">
                                                     <input 
-                                                        type="password" 
+                                                        type="text" 
                                                         class="form-control" 
                                                         formControlName="userPassword"
-                                                        placeholder="Password">
+                                                        placeholder="For reset password">
                                                     <span class="input-group-addon success">
                                                         <span class="glyphicon glyphicon-ok"></span>
                                                     </span>

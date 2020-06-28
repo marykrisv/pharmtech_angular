@@ -95,7 +95,6 @@ export class UserdetailComponent implements OnInit {
       this.userContactNoInput.setValue(this.userDetail.userContactNo);
       this.userRoleInput.setValue(this.userDetail.userRole);
       this.userLicenseNoInput.setValue(this.userDetail.userLicenseNo);
-      this.userPasswordInput.setValue('password');
     }
 
     if (this.privilegeDetail != null) {
@@ -112,6 +111,22 @@ export class UserdetailComponent implements OnInit {
 
     this.currentStat = this.userDetail.userStatus;
     this.userStatusIput.setValue(this.userDetail.userStatus);
+  }
+
+  resetPassword() {
+    if (confirm('Are you sure you want to reset user password?')) {
+      this.setRandomPassword();
+      const user = {
+        userId: this.userDetail.userId,
+        userPassword: this.temporaryPass
+      }
+      this.userService.resetPassword(user).then(response => {
+        if (response['success'] == true) {
+          this.userPasswordInput.setValue(this.temporaryPass);
+        }
+        alert(response['message']);
+      });
+    }
   }
 
   changeStatus () {
@@ -219,7 +234,7 @@ export class UserdetailComponent implements OnInit {
   //set random password
   setRandomPassword () {
     this.temporaryPass = (Math.random().toString(36).slice(2)).substring(0,6);
-    this.userPasswordInput.setValue(this.temporaryPass);
+
   }
 
   //set username

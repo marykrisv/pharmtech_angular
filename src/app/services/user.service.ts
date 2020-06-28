@@ -63,4 +63,9 @@ export class UserService {
     JSON.stringify(user)).toPromise();
   }
 
+  async resetPassword (user: any) {
+    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/reset-user-password.php', 
+    JSON.stringify(user)).toPromise();
+  }
+
 }
