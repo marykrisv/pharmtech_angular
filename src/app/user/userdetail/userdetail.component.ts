@@ -4,7 +4,7 @@ import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SessionInterface } from 'src/app/interface/session.interface';
-import { UserInterface } from 'src/app/interface/user.interface';
+import { UserInterface, UserStatus } from 'src/app/interface/user.interface';
 import { PrivilegeService } from 'src/app/services/privilege.service';
 import { PhoneValidator } from 'src/app/validators/phone.validator';
 import { PrivilegeInterface } from 'src/app/interface/privilege.interface';
@@ -226,8 +226,6 @@ export class UserdetailComponent implements OnInit {
         userContactNo: this.userContactNoInput.value,
         userRole: this.userRoleInput.value,
         userLicenseNo: this.userLicenseNoInput.value,
-        userStatus: 1,
-        userIsLocked: false,
         userIsNew: true,
         userLocId: this.userSession.userLocId,
         userCreatedBy: this.userSession.userId

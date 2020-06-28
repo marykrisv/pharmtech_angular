@@ -7,7 +7,7 @@ import { AuthService } from './../../auth/auth.service';
 import { SessionInterface } from './../../interface/session.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserInterface } from 'src/app/interface/user.interface';
+import { UserInterface, UserStatus } from 'src/app/interface/user.interface';
 
 @Component({
   selector: 'app-adduser',
@@ -125,8 +125,7 @@ export class AdduserComponent implements OnInit {
         userContactNo: this.userContactNoInput.value,
         userRole: this.userRoleInput.value,
         userLicenseNo: this.userLicenseNoInput.value,
-        userStatus: 1,
-        userIsLocked: false,
+        userStatus: UserStatus.Active,
         userIsNew: true,
         userLocId: this.userSession.userLocId,
         userCreatedBy: this.userSession.userId

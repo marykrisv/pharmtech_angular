@@ -47,7 +47,6 @@ try {
                 'userContactNo' => $userContactNo,
                 'userRole' => $userRole,
                 'userLicenseNo' => $userLicenseNo,
-                'userIsLocked' => $userIsLocked,
                 'userIsNew' => $userIsNew,
                 'userLocId' => $userLocId,
                 'userCreatedOn' => $userCreatedOn,

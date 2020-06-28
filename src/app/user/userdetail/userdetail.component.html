@@ -22,7 +22,7 @@
                             
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12 text-right buttons">
-                            <div *ngIf="userDetail.userStatus == 1; then thenBlockStat else elseBlockStat"></div>
+                            <!-- <div *ngIf="userDetail.userStatus == 1; then thenBlockStat else elseBlockStat"></div>
                             <ng-template #thenBlockStat>
                                 <button 
                                 class="btn btn-sm btn-info">
@@ -43,7 +43,7 @@
                                 <button 
                                 class="btn btn-sm btn-info">
                                 <em class="fa fa-lock"></em> Lock</button>
-                            </ng-template>                            
+                            </ng-template>                             -->
                             <button 
                                 class="btn btn-sm btn-warning"
                                 [disabled]="userForm.touched?false:true">

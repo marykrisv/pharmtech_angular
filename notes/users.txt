@@ -12,7 +12,6 @@ userContactNo
 userRole
 userLicenseNo
 userStatus
-userIsLocked
 userIsNew
 userLocId
 userCreatedOn

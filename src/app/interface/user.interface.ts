@@ -12,8 +12,7 @@ export interface UserInterface {
     userContactNo?: string,
     userRole: string,
     userLicenseNo?: string,
-    userStatus: number,
-    userIsLocked: boolean,
+    userStatus?: UserStatus,
     userIsNew: boolean,
     userLocId: number
     userCreatedOn?: Date,
@@ -21,4 +20,8 @@ export interface UserInterface {
     userModifiedOn?: Date,
     userModifiedBy?: number,
     locName?: string
+}
+
+export enum UserStatus {
+    Active, Locked, Deactivated
 }

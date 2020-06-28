@@ -19,7 +19,6 @@ class UserModel {
     public $userRole;
     public $userLicenseNo;
     public $userStatus;
-    public $userIsLocked;
     public $userIsNew;
     public $userLocId;
     public $userCreatedOn;
@@ -242,7 +241,6 @@ class UserModel {
                     :userRole,
                     :userLicenseNo,
                     :userStatus,
-                    :userIsLocked,
                     :userIsNew,
                     :userLocId,
                     null,
@@ -271,7 +269,6 @@ class UserModel {
         $this->userRole = htmlspecialchars(strip_tags($this->userRole));
         $this->userLicenseNo = htmlspecialchars(strip_tags($this->userLicenseNo));
         $this->userStatus = htmlspecialchars(strip_tags($this->userStatus));
-        $this->userIsLocked = htmlspecialchars(strip_tags($this->userIsLocked));
         $this->userIsNew = htmlspecialchars(strip_tags($this->userIsNew));
         $this->userLocId = htmlspecialchars(strip_tags($this->userLocId));
         $this->userCreatedBy = htmlspecialchars(strip_tags($this->userCreatedBy));
@@ -291,7 +288,6 @@ class UserModel {
         $stmt->bindParam(':userRole', $this->userRole);
         $stmt->bindParam(':userLicenseNo', $this->userLicenseNo);
         $stmt->bindParam(':userStatus', $this->userStatus);
-        $stmt->bindParam(':userIsLocked', $this->userIsLocked);
         $stmt->bindParam(':userIsNew', $this->userIsNew);
         $stmt->bindParam(':userLocId', $this->userLocId);
         $stmt->bindParam(':userCreatedBy', $this->userCreatedBy);

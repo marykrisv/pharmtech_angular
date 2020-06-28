@@ -69,7 +69,8 @@ export class LoginComponent implements OnInit {
     this.userService.login(user).then(
       response => {
         if (response['data'] != null) {
-          if (response['data'][0]['userIsLocked'] == '0') {
+          var stat = response['data'][0]['userStatus'];
+          if (stat == 'Active') {
                    
             //set user session
             this.setUsersession(response);
@@ -93,8 +94,10 @@ export class LoginComponent implements OnInit {
               //successful login   
               this.successfulLogin();       
             }
-          } else {
+          } else if (stat == 'Locked') {
             this.warning = 'User is locked. Please contact admin';
+          } else {
+            this.warning = 'User is deactivated. Please contact admin';
           }
         } else {
           this.warning = 'Username or password is incorrect!';

@@ -30,7 +30,6 @@ $um->userContactNo = $data->userContactNo;
 $um->userRole = $data->userRole;
 $um->userLicenseNo = $data->userLicenseNo;
 $um->userStatus = $data->userStatus;
-$um->userIsLocked = $data->userIsLocked;
 $um->userIsNew = $data->userIsNew;
 $um->userLocId = $data->userLocId;
 $um->userCreatedBy = $data->userCreatedBy;
