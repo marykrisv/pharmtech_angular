@@ -28,6 +28,7 @@ export class UserdetailComponent implements OnInit {
   userSession: SessionInterface;
   userDetail: UserInterface = null;
   privilegeDetail: PrivilegeInterface = null;
+  currentStat: string;
 
   otherDetails: any;
   // userDetail: any;
@@ -51,6 +52,10 @@ export class UserdetailComponent implements OnInit {
     userContactNo: new FormControl('', PhoneValidator.isPhoneInvalid), //fix later
     userRole: new FormControl('', Validators.required),
     userLicenseNo: new FormControl('')
+  });
+
+  statusForm = new FormGroup({
+    userStatus: new FormControl('')
   });
 
   privilegeForm = new FormGroup({
@@ -103,6 +108,31 @@ export class UserdetailComponent implements OnInit {
       this.priPharmacyCornerInput.setValue(this.privilegeDetail.priPharmacyCorner);
       this.priNotificationInput.setValue(this.privilegeDetail.priNotification);
       this.priPosInput.setValue(this.privilegeDetail.priPos);
+    }
+
+    this.currentStat = this.userDetail.userStatus;
+    this.userStatusIput.setValue(this.userDetail.userStatus);
+  }
+
+  changeStatus () {
+    var stat = this.userStatusIput.value;
+    if (confirm('Are you sure you want to change user to '+stat+'?')) {
+      //change user status
+      const user = {
+        "userId": this.userDetail.userId,
+        "userStatus": this.userStatusIput.value
+      }
+
+      this.userService.changeUserStatus(user).then(response => {
+        if (response['success'] == false) {
+          this.userStatusIput.setValue(this.currentStat);
+        } 
+        alert(response['message']);
+      }).catch(response => {
+        alert("Connection Problem");
+      });
+    } else {
+      this.userStatusIput.setValue(this.currentStat);
     }
   }
 
@@ -393,4 +423,7 @@ export class UserdetailComponent implements OnInit {
     return this.privilegeForm.get('priPos');
   }  
 
+  get userStatusIput () {
+    return this.statusForm.get('userStatus');
+  }
 }

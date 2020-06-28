@@ -22,6 +22,26 @@
                             
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12 text-right buttons">
+                            <form [formGroup]="statusForm" class="change-status">
+                                <!-- <select 
+                                    name="validate-select" 
+                                    formControlName="userStatus"
+                                    class="form-control">
+                                    <option value="userStatus.Active">Active</option>
+                                    <option value="userStatus.Locked">Locked</option>
+                                    <option value="userStatus.Deactivated">Deactivated</option>
+                                </select> -->
+                                <select 
+                                    class="form-control" 
+                                    name="validate-select" 
+                                    formControlName="userStatus"
+                                    (change)="changeStatus()">
+                                    <option value="Active">Active</option>
+                                    <option value="Locked">Locked</option>
+                                    <option value="Deactivated">Deactivated</option>
+                                </select>
+                            </form>
+                            
                             <!-- <div *ngIf="userDetail.userStatus == 1; then thenBlockStat else elseBlockStat"></div>
                             <ng-template #thenBlockStat>
                                 <button 
@@ -127,7 +147,6 @@
                                                         id="validate-select" 
                                                         placeholder="Validate Select"
                                                         formControlName="userGender">
-                                                        <option value="">Select Gender</option>
                                                         <option value="Male">Male</option>
                                                         <option value="Female">Female</option>
                                                     </select>
@@ -202,7 +221,6 @@
                                                         placeholder="Validate Select"
                                                         formControlName="userRole"
                                                         (change)="generateUserName(); setPrivilegeBasedOnRole();">
-                                                        <option value="">Select Role</option>
                                                         <option value="Super Admin">Super Admin</option>
                                                         <option value="Admin">Admin</option>
                                                         <option value="Pharmacist">Pharmacist</option>
@@ -271,7 +289,7 @@
                                                 </div>
                                                 <div class="col-lg-5 col-md-12 col-sm-12 text-right">
                                                     <button 
-                                                    class="btn btn-sm btn-danger">
+                                                    class="btn btn-sm btn-primary">
                                                     <em class="fa fa-trash"></em> Reset Password</button>
                                                 </div>
                                             </div>

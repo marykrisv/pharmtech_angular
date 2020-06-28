@@ -58,4 +58,9 @@ export class UserService {
     JSON.stringify(user)).toPromise();
   }
 
+  async changeUserStatus (user: any) {
+    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/change-user-status.php', 
+    JSON.stringify(user)).toPromise();
+  }
+
 }

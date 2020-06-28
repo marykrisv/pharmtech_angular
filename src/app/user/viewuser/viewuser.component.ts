@@ -21,7 +21,6 @@ export class ViewuserComponent implements OnInit {
   }
 
   statusChanged() {
-    console.log('test');
   }
 
   deleteUser () {
@@ -55,7 +54,9 @@ export class ViewuserComponent implements OnInit {
         } 
       }).catch(response => {
         alert("Connection Problem. Please check your internet.");
-      });;
+      }).finally(() => {
+        this.loading = false;
+      });
     }
   }
 
