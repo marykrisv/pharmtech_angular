@@ -25,12 +25,7 @@ export class PasswordValidator {
                 errorMessage: 'Password should have atleast 1 number.'
             }
         } else {
-            return { 
-                isPasswordInvalid: false, 
-                errorMessage: 'Password should have atleast 1 number.'
-            }
-        }
-
-        return null;
+            return null;
+        }        
     }
 }

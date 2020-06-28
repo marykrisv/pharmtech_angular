@@ -23,5 +23,7 @@ export interface UserInterface {
 }
 
 export enum UserStatus {
-    Active, Locked, Deactivated
+    Active = 'Active', 
+    Locked = 'Locked',
+    Deactivated = 'Deactivated'
 }

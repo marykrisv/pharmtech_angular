@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
 
   login () {
     const user = {
-      'userName': this.usernameInput.value,
+      'userName': this.usernameInput.value.toString().trim(),
       'userPassword': this.passwordInput.value
     }
 
@@ -116,38 +116,38 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  confirmNewPassword() {  
-    if (this.newpasswordInput.errors.isPasswordInvalid) {
-      this.resetPasswordWarning = this.newpasswordInput.errors.errorMessage;
-    } else if (this.newpasswordInput.value != this.confirmpasswordInput.value) {
-      this.resetPasswordWarning = 'Password does not match.';
-    } else {
-      this.resetPasswordWarning = null;
-      
-      if (this.newpasswordInput.errors.isPasswordInvalid == false 
-        && this.resetPasswordWarning == null) {
-        // update your new user here
-        const newpass = {
-          'userId': this.userId,
-          'userPassword': this.newpasswordInput.value
-        }
-
-        this.userService.updatePassword(newpass).then(response => {
-          // successfully changed user password for new user
-            if (response['success']== true) {
-              alert('User password successfully updated!');
-              this.successfulLogin();
-            } else {
-              alert('Connection Problem!');
-            }
-        }).catch(response => {
-          alert("Connection Problem. Please check your internet.");
-        });;
-
+  confirmNewPassword() {
+    if (this.resetPassword.invalid) {
+      if (this.newpasswordInput.invalid) {
+        this.resetPasswordWarning = this.newpasswordInput.errors.errorMessage; 
       } else {
-        alert('fix your password first');
+        this.resetPasswordWarning = null;
       }
-    }    
+      // alert('fix your password first');
+    } else {
+      if (this.newpasswordInput.value != this.confirmpasswordInput.value) {
+        this.resetPasswordWarning = 'Password does not match.';
+      } else {
+          // update your new user here
+          const newpass = {
+            'userId': this.userId,
+            'userPassword': this.newpasswordInput.value
+          }
+  
+          this.userService.updatePassword(newpass).then(response => {
+            // successfully changed user password for new user
+              if (response['success']== true) {
+                alert('User password successfully updated!');
+                this.successfulLogin();
+              } else {
+                alert('Connection Problem!');
+              }
+          }).catch(response => {
+            alert("Connection Problem. Please check your internet.");
+          });
+      }
+      
+    }
   }
 
   resetWarningMessage () {
