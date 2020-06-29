@@ -118,7 +118,9 @@ export class UserdetailComponent implements OnInit {
       this.setRandomPassword();
       const user = {
         userId: this.userDetail.userId,
-        userPassword: this.temporaryPass
+        userPassword: this.temporaryPass,
+        userModifiedOn: new Date(),
+        userModifiedBy: this.userSession.userId
       }
       this.userService.resetPassword(user).then(response => {
         if (response['success'] == true) {
@@ -134,8 +136,10 @@ export class UserdetailComponent implements OnInit {
     if (confirm('Are you sure you want to change user to '+stat+'?')) {
       //change user status
       const user = {
-        "userId": this.userDetail.userId,
-        "userStatus": this.userStatusIput.value
+        userId: this.userDetail.userId,
+        userStatus: this.userStatusIput.value,
+        userModifiedOn: new Date(),
+        userModifiedBy: this.userSession.userId
       }
 
       this.userService.changeUserStatus(user).then(response => {
@@ -192,6 +196,11 @@ export class UserdetailComponent implements OnInit {
 
   deleteUser () {
     if (confirm('Are you sure you want to delete this user?')) {
+      const user = {
+        userId: this.userDetail.userId,
+        userModifiedOn: new Date(),
+        userModifiedBy: this.userSession.userId
+      }
       this.userService.deleteUser({"userId": this.userDetail.userId}).then(response => {
         if (response['success'] == true) {
           alert(response['message']);

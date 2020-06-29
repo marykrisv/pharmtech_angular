@@ -15,7 +15,7 @@
                                 <span>
                                     {{ 'Created: '+otherDetails.createdBy+' | '+userDetail.userCreatedOn }}
                                 </span>
-                                <span *ngIf="otherDetails.modifiedOn != null">
+                                <span *ngIf="userDetail.userModifiedOn != null">
                                     {{ 'Modified: '+otherDetails.modifiedBy+' | '+userDetail.userModifiedOn }}
                                 </span>
                             </div>
