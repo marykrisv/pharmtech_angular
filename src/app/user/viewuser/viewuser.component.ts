@@ -1,8 +1,9 @@
+import { FormGroup, FormControl } from '@angular/forms';
+import { UserService } from './../../services/user.service';
 import { UserStatus } from 'src/app/interface/user.interface';
 import { UserInterface, UserRole } from './../../interface/user.interface';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
 import { SessionInterface } from 'src/app/interface/session.interface';
 
 @Component({
@@ -12,20 +13,52 @@ import { SessionInterface } from 'src/app/interface/session.interface';
 })
 export class ViewuserComponent implements OnInit {
 
-  users: UserInterface;
+  users: UserInterface[];
   userSession: SessionInterface;
 
   loading: boolean = false;
 
-  constructor(private userSerive: UserService, private auth: AuthService) { 
+  options = new FormGroup({
+    search: new FormControl(),
+    location: new FormControl(),
+    status: new FormControl('Active'),
+    role: new FormControl('All')
+  });
+
+  constructor(private UserService: UserService, private auth: AuthService) { 
   }
 
   statusChanged() {
   }
 
-  deleteUser () {
-    if (confirm('Are you sure you want to save this user?')) {
-      // this.us.deleteUser({userId: })
+  deleteUser (userId) {
+    if (confirm('Are you sure you want to delete this user?')) {
+      const user = {
+        userId: userId,
+        userModifiedOn: new Date(),
+        userModifiedBy: this.userSession.userId
+      }
+      this.UserService.deleteUser(user).then(response => {
+        if (response['success'] == true) {
+          alert(response['message']);
+          
+          //delete row
+          this.deleteRow(userId);
+
+        } else {
+          alert(response['message']);
+        }
+      }).catch(response => {
+        alert("Connection Problem. Please check your internet.");
+      });
+    }
+  }
+
+  deleteRow (userId) {
+    for(let i = 0; i < this.users.length; ++i){
+      if (this.users[i].userId === userId) {
+          this.users.splice(i,1);
+      }
     }
   }
 
@@ -33,11 +66,11 @@ export class ViewuserComponent implements OnInit {
     this.loading = true;
     if (this.userSession.userRole == UserRole.SuperAdmin) {
       // get all users from all location
-      this.userSerive.getAllUsersFromAllLocation().then(response => {
+      this.UserService.getAllUsersFromAllLocation().then(response => {
         if (response['data'] != undefined) {
-          this.userSerive.changeUsers(response['data']);
+          this.UserService.changeUsers(response['data']);
         } else {
-          this.userSerive.changeUsers(null);
+          this.UserService.changeUsers(null);
         } 
       }).catch(response => {
         alert("Connection Problem. Please check your internet.");
@@ -46,11 +79,11 @@ export class ViewuserComponent implements OnInit {
       });
     } else {
       // get all users from this location
-      this.userSerive.getAllUsersFromThisLocation(this.userSession.userLocId).then(response => {
+      this.UserService.getAllUsersFromThisLocation(this.userSession.userLocId).then(response => {
         if (response['data'] != undefined) {
-          this.userSerive.changeUsers(response['data']);
+          this.UserService.changeUsers(response['data']);
         } else {
-          this.userSerive.changeUsers(null);
+          this.UserService.changeUsers(null);
         } 
       }).catch(response => {
         alert("Connection Problem. Please check your internet.");
@@ -61,7 +94,7 @@ export class ViewuserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userSerive.currentUsers.subscribe(users => this.users = users);
+    this.UserService.currentUsers.subscribe(users => this.users = users);
     this.auth.currentSession.subscribe(currentSession => {
       this.userSession = currentSession;
     });
@@ -72,6 +105,18 @@ export class ViewuserComponent implements OnInit {
     var ageDifMs = Date.now() - birthday.getTime();
     var ageDate = new Date(ageDifMs); // miliseconds from epoch
     return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+
+  get searchInput () {
+    return this.options.get('search');
+  }
+
+  get statusInput () {
+    return this.options.get('status');
+  }
+
+  get roleInput () {
+    return this.options.get('role');
   }
 }
 

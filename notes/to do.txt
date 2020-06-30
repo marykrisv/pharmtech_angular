@@ -1,0 +1,11 @@
+To do:
+1. back button disabled after login.
+2. Update user
+3. Modified On date should be fixed
+
+View user
+Search Button
+Status - (Search for Status) -> or DB?
+Role - (Search for Role) -> or DB?
+Delete - OK
+

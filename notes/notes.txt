@@ -47,3 +47,7 @@ https://bootsnipp.com/snippets/GaxR2
 
 phone number
 https://stackblitz.com/edit/angular6-phone-mask?file=app%2Fapp.component.ts
+
+calendar
+https://bootsnipp.com/snippets/PEZZ7
+https://bootsnipp.com/snippets/M3jmA
