@@ -5,6 +5,7 @@ import { UserInterface, UserRole } from './../../interface/user.interface';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { SessionInterface } from 'src/app/interface/session.interface';
+import { SearchUserValidator } from 'src/app/validators/search-user.validator';
 
 @Component({
   selector: 'app-viewuser',
@@ -18,17 +19,77 @@ export class ViewuserComponent implements OnInit {
 
   loading: boolean = false;
 
+  filterBy: string = "";
+  userSearchInput: string = null;
+
+  filterByList = [
+    {
+      filterString: 'Username: ',
+      sqlSearch: 'userName'
+    },
+    {
+      filterString: 'First Name: ',
+      sqlSearch: 'userFname'
+    },
+    {
+      filterString: 'Middle Name: ',
+      sqlSearch: 'userMname'
+    },
+    {
+      filterString: 'Last Name: ',
+      sqlSearch: 'userLname'
+    }
+  ]
+
   options = new FormGroup({
-    search: new FormControl(),
+    search: new FormControl(this.filterBy, SearchUserValidator.isSearchUserInvalid),
     location: new FormControl(),
-    status: new FormControl('Active'),
+    status: new FormControl('All'),
     role: new FormControl('All')
   });
 
   constructor(private UserService: UserService, private auth: AuthService) { 
   }
 
-  statusChanged() {
+  changeFilterBy (filterBy: string) {
+    this.filterBy = filterBy+": ";
+
+    this.searchInput.setValue(this.filterBy);
+  }
+
+  removeFilter() {
+    this.userSearchInput = null;
+    this.filterBy = "";
+    this.searchInput.setValue(this.filterBy);
+    this.goToViewAll();
+  }
+
+  search() {
+    if (this.searchInput.invalid) {
+      alert("Fix search text first");
+    } else {
+      this.userSearchInput = this.searchInput.value.toString().trim();
+      this.userSearchInput = this.userSearchInput.substr(this.filterBy.length, this.userSearchInput.length);
+
+      if (this.userSearchInput.trim() != '' && this.userSearchInput != null && this.userSearchInput != '') {
+        //search here
+        var searchBy: string;
+        for (var i = 0; i < this.filterByList.length; i++) {
+          if (this.filterByList[i].filterString == this.filterBy) {
+            searchBy = this.filterByList[i].sqlSearch;
+          }
+        }
+        this.UserService.searchUser(this.userSession.userLocId, searchBy, this.userSearchInput).then(response=> {
+          if (response['data'] != undefined) {
+            this.users = <UserInterface[]>response['data'];
+          } else {
+            this.users = null;
+          } 
+        }).catch(response=> {
+          alert("Error. Connection Problem!");
+        })
+      }
+    }
   }
 
   deleteUser (userId) {
@@ -68,9 +129,9 @@ export class ViewuserComponent implements OnInit {
       // get all users from all location
       this.UserService.getAllUsersFromAllLocation().then(response => {
         if (response['data'] != undefined) {
-          this.UserService.changeUsers(response['data']);
+          this.users = <UserInterface[]>response['data'];
         } else {
-          this.UserService.changeUsers(null);
+          this.users = null;
         } 
       }).catch(response => {
         alert("Connection Problem. Please check your internet.");
@@ -81,9 +142,9 @@ export class ViewuserComponent implements OnInit {
       // get all users from this location
       this.UserService.getAllUsersFromThisLocation(this.userSession.userLocId).then(response => {
         if (response['data'] != undefined) {
-          this.UserService.changeUsers(response['data']);
+          this.users = <UserInterface[]>response['data'];
         } else {
-          this.UserService.changeUsers(null);
+          this.users = null;
         } 
       }).catch(response => {
         alert("Connection Problem. Please check your internet.");
@@ -94,7 +155,7 @@ export class ViewuserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.UserService.currentUsers.subscribe(users => this.users = users);
+    // this.UserService.currentUsers.subscribe(users => this.users = users);
     this.auth.currentSession.subscribe(currentSession => {
       this.userSession = currentSession;
     });

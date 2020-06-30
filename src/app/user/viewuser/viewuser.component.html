@@ -17,18 +17,23 @@
                                   <span id="search_concept">Filter by</span> <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
-                                  <li><a>Username</a></li>
-                                  <li><a>First Name</a></li>
-                                  <li><a>Middle Name</a></li>
-                                  <li><a>Last Name</a></li>
+                                  <li><a (click)="changeFilterBy('Username')">Username</a></li>
+                                  <li><a (click)="changeFilterBy('First Name')">First Name</a></li>
+                                  <li><a (click)="changeFilterBy('Middle Name')">Middle Name</a></li>
+                                  <li><a (click)="changeFilterBy('Last Name')">Last Name</a></li>
+                                  <li class="divider"></li>
+                                  <li><a (click)="removeFilter()">Remove filter</a></li>
                                 </ul>
                             </div>
                             <input type="hidden" name="search_param" value="all" id="search_param">         
                             <input 
                               formControlName="search"
+                              [ngClass]="this.searchInput.invalid?'error':''"
                               type="text" class="form-control" name="x" placeholder="Search term...">
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                <button 
+                                  (click)="search()"
+                                  class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
                             </span>
                           </div>
                         </div>
@@ -54,10 +59,10 @@
                               <span>Status</span>
                               <select 
                                 formControlName="status"
-                                (change)="statusChanged()"
                                 class="form-control" 
                                 name="validate-select" 
                                 placeholder="Validate Select">
+                                <option value="All">All</option>
                                 <option value="Active">Active</option>
                                 <option value="Locked">Locked</option>
                                 <option value="Deactivated">Deactivated</option>
@@ -103,10 +108,11 @@
                         <th width="10%"><em class="fa fa-cog"></em></th>
                         <th width="15%">Username</th>
                         <th width="30%">Fullname</th>
-                        <th class="hidden-xs" width="15%">Gender</th>
-                        <th class="hidden-xs" width="10%">Age</th>
+                        <th class="hidden-xs" width="10%">Gender</th>
+                        <th class="hidden-xs">Age</th>
                         <th width="20%">Role</th>
-                        <th *ngIf="userSession.userRole == 'Super Admin'" width="20%">Location</th>
+                        <th width="20%">Status</th>
+                        <th width="20%" *ngIf="userSession.userRole == 'Super Admin'">Location</th>
                       </tr> 
                     </thead>
                     <tbody>
@@ -133,6 +139,7 @@
                           </td>
                           <td class="hidden-xs"><span>{{ user.userBirthdate | age }}</span></td>
                           <td><span>{{ user.userRole }}</span></td>
+                          <td><span>{{ user.userStatus }}</span></td>
                           <td *ngIf="userSession.userRole == 'Super Admin'"><span>{{ user.locName }}</span></td>
                         </tr>
                       </ng-template>

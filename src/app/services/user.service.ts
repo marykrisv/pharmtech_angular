@@ -8,15 +8,22 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 })
 export class UserService {
 
-  private users = new BehaviorSubject<any>(null);
-  currentUsers = this.users.asObservable();
+  // private users = new BehaviorSubject<any>(null);
+  // currentUsers = this.users.asObservable();
 
   constructor(private http: HttpClient) {
   }
 
-  changeUsers (users: any) {
-    this.users.next(users);
+  async searchUser(locId: number, searchBy: string, search: string) {
+    console.log('http://'+ToolConfig.url+'/pharmtech/api/user/search-user.php?locid='
+    +locId+'&searchBy='+searchBy+'&search='+search);
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/search-user.php?locid='
+    +locId+'&searchBy='+searchBy+'&search='+search).toPromise();
   }
+
+  // changeUsers (users: any) {
+  //   this.users.next(users);
+  // }
 
   async createNewUser(user: any) {
     return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/create-new-user', 

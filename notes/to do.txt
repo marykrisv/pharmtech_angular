@@ -4,8 +4,9 @@ To do:
 3. Modified On date should be fixed
 
 View user
-Search Button
+Search Button - in db
 Status - (Search for Status) -> or DB?
 Role - (Search for Role) -> or DB?
 Delete - OK
 
+Add error codes
