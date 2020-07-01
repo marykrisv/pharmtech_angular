@@ -51,6 +51,7 @@ try {
                 'userContactNo' => $userContactNo,
                 'userRole' => $userRole,
                 'userLicenseNo' => $userLicenseNo,
+                'userStatus' => $userStatus,
                 'userIsNew' => $userIsNew,
                 'userLocId' => $userLocId,
                 'userCreatedOn' => $userCreatedOn,

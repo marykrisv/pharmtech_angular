@@ -15,8 +15,6 @@ $um = new UserModel($db);
 
 //get loc id
 $um->userId = isset($_GET['id']) ? $_GET['id'] : die();
-//get loc id
-$um->userLocId = isset($_GET['locid']) ? $_GET['locid'] : die();
 
 //trigger exception in a "try" block
 try {
@@ -49,6 +47,7 @@ try {
                 'userContactNo' => $userContactNo,
                 'userRole' => $userRole,
                 'userLicenseNo' => $userLicenseNo,
+                'userStatus' => $userStatus,
                 'userIsNew' => $userIsNew,
                 'userLocId' => $userLocId,
                 'userCreatedOn' => $userCreatedOn,
@@ -56,8 +55,18 @@ try {
                 'userModifiedOn' => $userModifiedOn,
                 'userModifiedBy' => $userModifiedBy,
                 'userDeleted' => $userDeleted,
-                'locId' => $locId,
-                'locName' => $locName
+                'locName' => $locName,
+                'userCreatedBy' => $ucUsername,
+                'userModifiedBy' => $umUsername,
+                'priUserId' => $priUserId,
+                'priDashboard' => $priDashboard,
+                'priUser' => $priUser,
+                'priInventory' => $priInventory,
+                'priManage' => $priManage,
+                'priPatientManagement' => $priPatientManagement,
+                'priPharmacyCorner' => $priPharmacyCorner,
+                'priNotification' => $priNotification,
+                'priPos' => $priPos 
             );
 
             //push to "data"

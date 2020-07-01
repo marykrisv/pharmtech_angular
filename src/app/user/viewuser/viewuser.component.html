@@ -76,13 +76,14 @@
                                 formControlName="role"
                                 class="form-control" 
                                 name="validate-select" 
-                                placeholder="Validate Select">
+                                placeholder="Validate Select"
+                                (change)="filterByRole()">
                                 <option value="All">All</option>
-                                <option value="UserRole.SuperAdmin">Super Admin</option>
-                                <option value="UserRole.Admin">Admin</option>
-                                <option value="UserRole.Pharmacist">Pharmacist</option>
-                                <option value="UserRole.Doctor">Doctor</option>
-                                <option value="UserRole.Staff">Staff</option>
+                                <option value="Super Admin">Super Admin</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Pharmacist">Pharmacist</option>
+                                <option value="Doctor">Doctor</option>
+                                <option value="Staff">Staff</option>
                               </select>
                             </div>
                             

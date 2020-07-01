@@ -3,6 +3,7 @@ class UserModel {
     //DB stuff
     private $conn;
     private $table = 'user';
+    private $viewtable = 'currentusers';
 
     //Post Properties
     public $userId;
@@ -27,18 +28,77 @@ class UserModel {
     public $userModifiedBy;
     public $userDeleted;
 
+    public $searchBy;
+    public $search;
+
     // Constructor with DB
     public function __construct($db) {
         $this->conn = $db;
     }
 
+    //view by role
+    public function viewByRoleAllLocation () {
+        //create query
+        $query = 'SELECT * FROM '.$this->viewtable.'
+                WHERE userRole=?';
 
-    //delete user - set userDeleted = 1
-    public function deleteUser() {
+        $params = array($this->userRole);
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute($params);
+
+        return $stmt;
+    }
+
+    //view by role
+    public function viewByRoleOneLocation () {
+        //create query
+        $query = 'SELECT * FROM '.$this->viewtable.'
+                WHERE userRole=?
+                and userLocId=?';
+
+        $params = array($this->userRole, $this->userLocId);
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute($params);
+
+        return $stmt;
+    }
+
+    //search user
+    public function viewSearchOneLocation () {
+        //create query
+        $query = 'SELECT * FROM '.$this->viewtable.'
+                WHERE '.$this->searchBy.' LIKE ?
+                and userLocId=?';
+
+        $params = array("$this->search%", $this->userLocId);
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute($params);
+
+        return $stmt;
+    }
+
+    //search user
+    public function viewSearchAllLocation () {
+        //create query
+        $query = 'SELECT * FROM '.$this->viewtable.'
+                WHERE '.$this->searchBy.' LIKE ?';
+
+        $params = array("$this->search%");
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute($params);
+
+        return $stmt;
+    }
+
+    //chnage user status
+    public function resetPassword() {
         //create query
         $query = 'UPDATE '.$this->table.'
                 SET
-                    userDeleted = 1
+                    userPassword = sha2(:userPassword,512),
+                    userIsNew = 1,
+                    userModifiedOn = :userModifiedOn,
+                    userModifiedBy = :userModifiedBy
                 WHERE
                     userId = :userId';
 
@@ -47,9 +107,78 @@ class UserModel {
 
         //clean data
         $this->userId = htmlspecialchars(strip_tags($this->userId));
+        $this->userPassword = htmlspecialchars(strip_tags($this->userPassword));
+        $this->userModifiedOn = htmlspecialchars(strip_tags($this->userModifiedOn));
+        $this->userModifiedBy = htmlspecialchars(strip_tags($this->userModifiedBy));
         
         //bind data
         $stmt->bindParam(':userId', $this->userId);
+        $stmt->bindParam(':userPassword', $this->userPassword);
+        $stmt->bindParam(':userModifiedOn', $this->userModifiedOn);
+        $stmt->bindParam(':userModifiedBy', $this->userModifiedBy);
+
+        //execute
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    //chnage user status
+    public function updateStatus() {
+        //create query
+        $query = 'UPDATE '.$this->table.'
+                SET
+                    userStatus = :userStatus,
+                    userModifiedOn = :userModifiedOn,
+                    userModifiedBy = :userModifiedBy
+                WHERE
+                    userId = :userId';
+
+        //prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //clean data
+        $this->userId = htmlspecialchars(strip_tags($this->userId));
+        $this->userStatus = htmlspecialchars(strip_tags($this->userStatus));
+        $this->userModifiedOn = htmlspecialchars(strip_tags($this->userModifiedOn));
+        $this->userModifiedBy = htmlspecialchars(strip_tags($this->userModifiedBy));
+        
+        //bind data
+        $stmt->bindParam(':userId', $this->userId);
+        $stmt->bindParam(':userStatus', $this->userStatus);
+        $stmt->bindParam(':userModifiedOn', $this->userModifiedOn);
+        $stmt->bindParam(':userModifiedBy', $this->userModifiedBy);
+
+        //execute
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+
+    //delete user - set userDeleted = 1
+    public function deleteUser() {
+        //create query
+        $query = 'UPDATE '.$this->table.'
+                SET
+                    userDeleted = 1,
+                    userModifiedOn = :userModifiedOn,
+                    userModifiedBy = :userModifiedBy
+                WHERE
+                    userId = :userId';
+
+        //prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //clean data
+        $this->userId = htmlspecialchars(strip_tags($this->userId));
+        $this->userModifiedOn = htmlspecialchars(strip_tags($this->userModifiedOn));
+        $this->userModifiedBy = htmlspecialchars(strip_tags($this->userModifiedBy));
+        
+        //bind data
+        $stmt->bindParam(':userId', $this->userId);
+        $stmt->bindParam(':userModifiedOn', $this->userModifiedOn);
+        $stmt->bindParam(':userModifiedBy', $this->userModifiedBy);
 
         //execute
         $stmt->execute();
@@ -60,7 +189,7 @@ class UserModel {
     //get username
     public function getUsername () {
         //create query
-        $query = 'SELECT created.userName as createdBy, modified.userName as modifiedBy FROM user
+        $query = 'SELECT created.userName as createdBy, modified.userName as modifiedBy FROM '.$this->table.'
                 LEFT JOIN user as created on user.userCreatedBy = created.userId
                 LEFT JOIN user as modified on user.userModifiedBy = modified.userId
                 WHERE user.userId = ?';
@@ -80,11 +209,7 @@ class UserModel {
     //Get users
     public function viewAllFromAllLocation  () {
         //create query
-        $query = 'select * from '.$this->table.' 
-                JOIN
-                    location on userLocId = locId 
-                WHERE
-                    userDeleted=0';
+        $query = 'select * from '.$this->viewtable;
 
         //prepare statement
         $stmt = $this->conn->prepare($query);
@@ -99,13 +224,11 @@ class UserModel {
     }
 
     //Get users
-    public function viewAllFromThisLocation  () {
+    public function viewAllFromOneLocation  () {
         //create query
-        $query = 'select * from '.$this->table.' 
-                JOIN
-                    location on userLocId = locId 
+        $query = 'select * from '.$this->viewtable.' 
                 WHERE
-                    userLocId=? and userDeleted=0';
+                    userLocId=?';
 
         //prepare statement
         $stmt = $this->conn->prepare($query);
@@ -119,62 +242,17 @@ class UserModel {
         return $stmt;
     }
 
-    //Get users
-    public function read  () {
-        //create query
-        $query = 'select * from user_sample';
-
-        //prepare statement
-        $stmt = $this->conn->prepare($query);
-
-        //bind ID
-        // $stmt->bindParam(1, $this->userLocId);
-
-        //execute
-        $stmt->execute();
-
-        return $stmt;
-    }
-
-    //get single user
-    public function read_single() {
-        $query = 'select * from '.$this->table.' 
-                JOIN
-                    location on userLocId = locId 
-                WHERE
-                    userId=? and userLocId=? and userDeleted=0';
-
-        //prepare statement
-        $stmt = $this->conn->prepare($query);
-
-        //bind ID
-        $stmt->bindParam(1, $this->userId);
-        $stmt->bindParam(2, $this->userLocId);
-
-        //execute
-        $stmt->execute();
-
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        //set properties
-        $this->userId = $row['userId'];
-        $this->userLocId = $row['userLocId'];
-    }
-
     //get single user
     public function viewUserDetail() {
-        $query = 'select * from '.$this->table.' 
-                JOIN
-                    location on userLocId = locId 
+        $query = 'select * from '.$this->viewtable.' 
                 WHERE
-                    userId=? and userLocId=? and userDeleted=0';
+                    userId=?';
 
         //prepare statement
         $stmt = $this->conn->prepare($query);
 
         //bind ID
         $stmt->bindParam(1, $this->userId);
-        $stmt->bindParam(2, $this->userLocId);
 
         //execute
         $stmt->execute();

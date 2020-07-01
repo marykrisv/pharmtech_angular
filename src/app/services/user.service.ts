@@ -18,6 +18,8 @@ export class UserService {
   }
 
   async viewByRoleOneLocation (locId: number, role: string) {
+    console.log('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-role-one-location.php?locid='
+    +locId+'&role='+role);
     return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-role-one-location.php?locid='
     +locId+'&role='+role).toPromise();
   }

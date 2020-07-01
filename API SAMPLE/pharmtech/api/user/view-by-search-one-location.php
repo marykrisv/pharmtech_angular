@@ -13,10 +13,17 @@ $db = $database->connect();
 // Instantiate user object
 $um = new UserModel($db);
 
+//get loc id
+$um->userLocId = isset($_GET['locid']) ? $_GET['locid'] : die();
+//get search by
+$um->searchBy = isset($_GET['searchBy']) ? $_GET['searchBy'] : die();
+//get search
+$um->search = isset($_GET['search']) ? $_GET['search'] : die();
+
 //trigger exception in a "try" block
 try {
     //user query
-    $result = $um->viewAllFromAllLocation();
+    $result = $um->viewSearchOneLocation();
 
     //get row count
     $num = $result->rowCount();
@@ -44,7 +51,6 @@ try {
                 'userContactNo' => $userContactNo,
                 'userRole' => $userRole,
                 'userLicenseNo' => $userLicenseNo,
-                'userStatus' => $userStatus,
                 'userIsNew' => $userIsNew,
                 'userLocId' => $userLocId,
                 'userCreatedOn' => $userCreatedOn,
@@ -68,6 +74,7 @@ try {
     }
 }  //catch exception
  catch(Exception $e) {
+    echo $e;
     echo json_encode(
         array('message' => 'No user found!')
     );

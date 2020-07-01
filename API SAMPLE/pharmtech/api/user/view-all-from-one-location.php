@@ -13,10 +13,13 @@ $db = $database->connect();
 // Instantiate user object
 $um = new UserModel($db);
 
+//get loc id
+$um->userLocId = isset($_GET['locid']) ? $_GET['locid'] : die();
+
 //trigger exception in a "try" block
 try {
     //user query
-    $result = $um->viewAllFromAllLocation();
+    $result = $um->viewAllFromOneLocation();
 
     //get row count
     $num = $result->rowCount();

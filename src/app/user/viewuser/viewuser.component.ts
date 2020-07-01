@@ -51,6 +51,24 @@ export class ViewuserComponent implements OnInit {
   constructor(private UserService: UserService, private auth: AuthService) { 
   }
 
+  filterByRole() {
+    var role = this.roleInput.value;
+    if (role == 'All') {
+      //do nothing for now
+    } else {
+      this.UserService.viewByRoleOneLocation(this.userSession.userLocId, role).then(response => {
+        console.log(response);
+        if (response['data'] != undefined) {
+          this.users = <UserInterface[]>response['data'];
+        } else {
+          this.users = null;
+        } 
+      }).catch(response=> {
+        alert("Error. Connection Problem!");
+      });
+    }
+  }
+
   changeFilterBy (filterBy: string) {
     var prevFilterBy = this.filterBy;
     this.filterBy = filterBy+": ";
