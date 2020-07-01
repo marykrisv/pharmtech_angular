@@ -52,9 +52,18 @@ export class ViewuserComponent implements OnInit {
   }
 
   changeFilterBy (filterBy: string) {
+    var prevFilterBy = this.filterBy;
     this.filterBy = filterBy+": ";
+    if (this.searchInput.invalid) {
+      this.searchInput.setValue(this.filterBy);
+    } else {
+      this.userSearchInput = this.searchInput.value.toString().trim();
+      this.userSearchInput = this.userSearchInput.substr(prevFilterBy.length, this.userSearchInput.length);
 
-    this.searchInput.setValue(this.filterBy);
+      if (this.userSearchInput != null) {
+        this.searchInput.setValue(this.filterBy+this.userSearchInput);
+      }
+    }   
   }
 
   removeFilter() {
@@ -79,15 +88,28 @@ export class ViewuserComponent implements OnInit {
             searchBy = this.filterByList[i].sqlSearch;
           }
         }
-        this.UserService.searchUser(this.userSession.userLocId, searchBy, this.userSearchInput).then(response=> {
-          if (response['data'] != undefined) {
-            this.users = <UserInterface[]>response['data'];
-          } else {
-            this.users = null;
-          } 
-        }).catch(response=> {
-          alert("Error. Connection Problem!");
-        })
+
+        if (this.userSession.userRole == UserRole.SuperAdmin) {
+          this.UserService.searchUserAllLocation(this.userSession.userLocId, searchBy, this.userSearchInput).then(response=> {
+            if (response['data'] != undefined) {
+              this.users = <UserInterface[]>response['data'];
+            } else {
+              this.users = null;
+            } 
+          }).catch(response=> {
+            alert("Error. Connection Problem!");
+          });
+        } else {
+          this.UserService.searchUserOneLocation(this.userSession.userLocId, searchBy, this.userSearchInput).then(response=> {
+            if (response['data'] != undefined) {
+              this.users = <UserInterface[]>response['data'];
+            } else {
+              this.users = null;
+            } 
+          }).catch(response=> {
+            alert("Error. Connection Problem!");
+          });
+        }
       }
     }
   }

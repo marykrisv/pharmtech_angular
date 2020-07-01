@@ -1,4 +1,4 @@
-<div *ngIf="userDetail != null && otherDetails != null" id="top" class="container">  
+<div *ngIf="userDetail != null" id="top" class="container">  
     <!-- view all -->
     <h2>User Detail</h2>
     
@@ -13,10 +13,10 @@
                                 routerLink="/menu/users">< Back</button>
                             <div id="otherDetailsDiv">
                                 <span>
-                                    {{ 'Created: '+otherDetails.createdBy+' | '+userDetail.userCreatedOn }}
+                                    {{ 'Created: '+userDetail.userCreatedBy+' | '+userDetail.userCreatedOn }}
                                 </span>
                                 <span *ngIf="userDetail.userModifiedOn != null">
-                                    {{ 'Modified: '+otherDetails.modifiedBy+' | '+userDetail.userModifiedOn }}
+                                    {{ 'Modified: '+userDetail.userModifiedBy+' | '+userDetail.userModifiedOn }}
                                 </span>
                             </div>
                             

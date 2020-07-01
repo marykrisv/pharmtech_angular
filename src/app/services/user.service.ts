@@ -10,20 +10,27 @@ export class UserService {
 
   // private users = new BehaviorSubject<any>(null);
   // currentUsers = this.users.asObservable();
+   // changeUsers (users: any) {
+  //   this.users.next(users);
+  // }
 
   constructor(private http: HttpClient) {
   }
 
-  async searchUser(locId: number, searchBy: string, search: string) {
-    console.log('http://'+ToolConfig.url+'/pharmtech/api/user/search-user.php?locid='
-    +locId+'&searchBy='+searchBy+'&search='+search);
-    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/search-user.php?locid='
+  async viewByRoleOneLocation (locId: number, role: string) {
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-role-one-location.php?locid='
+    +locId+'&role='+role).toPromise();
+  }
+
+  async searchUserOneLocation (locId: number, searchBy: string, search: string) {
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-search-one-location?locid='
     +locId+'&searchBy='+searchBy+'&search='+search).toPromise();
   }
 
-  // changeUsers (users: any) {
-  //   this.users.next(users);
-  // }
+  async searchUserAllLocation (locId: number, searchBy: string, search: string) {
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-search-all-location?locid='
+    +locId+'&searchBy='+searchBy+'&search='+search).toPromise();
+  }
 
   async createNewUser(user: any) {
     return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/create-new-user', 
@@ -31,7 +38,7 @@ export class UserService {
   }
 
   async getAllUsersFromThisLocation(locId: number) {
-    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-all-from-this-location.php?locid='+locId)
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-all-from-one-location.php?locid='+locId)
     .toPromise();
   }
 
@@ -55,18 +62,13 @@ export class UserService {
     +userId+'&locid='+locId).toPromise();
   }
 
-  async getUsername (userId) {
-    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/get-username.php?id='
-    +userId).toPromise();    
-  }
-
   async deleteUser (user: any) {
     return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/delete-user.php', 
     JSON.stringify(user)).toPromise();
   }
 
   async changeUserStatus (user: any) {
-    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/change-user-status.php', 
+    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/update-status.php', 
     JSON.stringify(user)).toPromise();
   }
 

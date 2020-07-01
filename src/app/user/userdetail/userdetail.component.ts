@@ -27,11 +27,7 @@ export class UserdetailComponent implements OnInit {
   userId
   userSession: SessionInterface;
   userDetail: UserInterface = null;
-  privilegeDetail: PrivilegeInterface = null;
   currentStat: string;
-
-  otherDetails: any;
-  // userDetail: any;
 
   temporaryPass: string;
   genUsername: string = null;
@@ -95,18 +91,16 @@ export class UserdetailComponent implements OnInit {
       this.userContactNoInput.setValue(this.userDetail.userContactNo);
       this.userRoleInput.setValue(this.userDetail.userRole);
       this.userLicenseNoInput.setValue(this.userDetail.userLicenseNo);
-    }
 
-    if (this.privilegeDetail != null) {
       // populate user privilege
-      this.priDashboardInput.setValue(this.privilegeDetail.priDashboard);
-      this.priUserInput.setValue(this.privilegeDetail.priUser);
-      this.priInventoryInput.setValue(this.privilegeDetail.priInventory);
-      this.priManageInput.setValue(this.privilegeDetail.priManage);
-      this.priPatientManagementInput.setValue(this.privilegeDetail.priPatientManagement);
-      this.priPharmacyCornerInput.setValue(this.privilegeDetail.priPharmacyCorner);
-      this.priNotificationInput.setValue(this.privilegeDetail.priNotification);
-      this.priPosInput.setValue(this.privilegeDetail.priPos);
+      this.priDashboardInput.setValue(this.userDetail.priDashboard);
+      this.priUserInput.setValue(this.userDetail.priUser);
+      this.priInventoryInput.setValue(this.userDetail.priInventory);
+      this.priManageInput.setValue(this.userDetail.priManage);
+      this.priPatientManagementInput.setValue(this.userDetail.priPatientManagement);
+      this.priPharmacyCornerInput.setValue(this.userDetail.priPharmacyCorner);
+      this.priNotificationInput.setValue(this.userDetail.priNotification);
+      this.priPosInput.setValue(this.userDetail.priPos);
     }
 
     this.currentStat = this.userDetail.userStatus;
@@ -159,35 +153,11 @@ export class UserdetailComponent implements OnInit {
     this.userService.viewUserDetail(this.userId, this.userSession.userLocId).then(response => {
       if(response['data'] != null) {
         this.userDetail = <UserInterface>response['data'][0];
-        
-        this.populatePrivilege(response['data'][0]['userId']);
 
-      } else {
-        alert("Connection Problem. Please check your internet.");
-      }
-    }).catch(response => {
-      alert("Connection Problem. Please check your internet.");
-    });
-  }
-
-  populatePrivilege (userId) {
-    this.privilegeService.getPrivilege({"priUserId": userId}).then(response=> {
-      if(response['data'] != null) {
-        this.privilegeDetail = <PrivilegeInterface>response['data'][0];
-        this.populateOtherDetails(userId);
-      } else {
-        alert("Connection Problem. Please check your internet.");
-      }
-    }).catch(response => {
-      alert("Connection Problem. Please check your internet.");
-    });
-  }
-
-  populateOtherDetails (userId) {
-    this.userService.getUsername(userId).then(response => {
-      if (response['data'] != null) {
-        this.otherDetails = response['data'][0];
         this.initializeFormValue();
+
+      } else {
+        alert("Connection Problem. Please check your internet.");
       }
     }).catch(response => {
       alert("Connection Problem. Please check your internet.");

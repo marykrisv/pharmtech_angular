@@ -19,7 +19,18 @@ export interface UserInterface {
     userCreatedBy: number,
     userModifiedOn?: Date,
     userModifiedBy?: number,
-    locName?: string
+    locName?: string,
+
+    //added privilege since this is now a view table
+    priUserId?: number,
+    priDashboard?: boolean,
+    priUser?: boolean,
+    priInventory?: boolean,
+    priManage?: boolean,
+    priPatientManagement?: boolean,
+    priPharmacyCorner?: boolean,
+    priNotification?: boolean,
+    priPos?: boolean
 }
 
 export enum UserStatus {

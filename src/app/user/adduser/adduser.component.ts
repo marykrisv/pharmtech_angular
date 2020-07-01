@@ -164,6 +164,9 @@ export class AdduserComponent implements OnInit {
       this.userRoleInput.setValue('');
       this.userLicenseNoInput.setValue('');
 
+      //clear password
+      this.setRandomPassword();
+
       // clear all privilege
       this.priDashboardInput.setValue('');
       this.priUserInput.setValue('');
