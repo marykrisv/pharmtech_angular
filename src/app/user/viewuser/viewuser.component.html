@@ -21,6 +21,7 @@
                                   <li><a (click)="changeFilterBy('First Name')">First Name</a></li>
                                   <li><a (click)="changeFilterBy('Middle Name')">Middle Name</a></li>
                                   <li><a (click)="changeFilterBy('Last Name')">Last Name</a></li>
+                                  <li><a (click)="changeFilterBy('Role')">Role</a></li>
                                   <li class="divider"></li>
                                   <li><a (click)="removeFilter()">Remove filter</a></li>
                                 </ul>
@@ -47,10 +48,12 @@
                                 formControlName="location"
                                 class="form-control" 
                                 name="validate-select" 
-                                placeholder="Validate Select">
-                                <option value="">Active</option>
-                                <option value="Admin">New User</option>
-                                <option value="Pharmacist">Locked</option>
+                                placeholder="Validate Select"                                
+                                (change)="filterByLocation()">
+                                <option value="All" (click)="filterByLocation()">All</option>
+                                <option 
+                                  *ngFor="let loc of locations" 
+                                  [value]="loc.locId">{{ loc.locName }}</option>
                               </select>
                             </div>
                           </div>
@@ -61,7 +64,8 @@
                                 formControlName="status"
                                 class="form-control" 
                                 name="validate-select" 
-                                placeholder="Validate Select">
+                                placeholder="Validate Select"
+                                (change)="filterByStatus()">
                                 <option value="All">All</option>
                                 <option value="Active">Active</option>
                                 <option value="Locked">Locked</option>
@@ -69,7 +73,7 @@
                               </select>
                             </div>
                           </div>
-                          <div class="col-md-4 col-sm-12 col-xs-12">
+                          <!-- <div class="col-md-4 col-sm-12 col-xs-12">
                             <div id="role-container">
                               <span>Role</span>
                               <select 
@@ -85,9 +89,9 @@
                                 <option value="Doctor">Doctor</option>
                                 <option value="Staff">Staff</option>
                               </select>
-                            </div>
-                            
-                          </div>
+                            </div>                            
+                          </div> -->
+
                         </div>                        
                       </div>                         
                     </form>
@@ -111,9 +115,9 @@
                         <th width="30%">Fullname</th>
                         <th class="hidden-xs" width="10%">Gender</th>
                         <th class="hidden-xs">Age</th>
-                        <th width="20%">Role</th>
-                        <th width="20%">Status</th>
-                        <th width="20%" *ngIf="userSession.userRole == 'Super Admin'">Location</th>
+                        <th width="15%">Role</th>
+                        <th width="15%" *ngIf="userSession.userRole == 'Super Admin'">Location</th>
+                        <th width="15%">Status</th>                        
                       </tr> 
                     </thead>
                     <tbody>
@@ -140,8 +144,8 @@
                           </td>
                           <td class="hidden-xs"><span>{{ user.userBirthdate | age }}</span></td>
                           <td><span>{{ user.userRole }}</span></td>
-                          <td><span>{{ user.userStatus }}</span></td>
                           <td *ngIf="userSession.userRole == 'Super Admin'"><span>{{ user.locName }}</span></td>
+                          <td><span>{{ user.userStatus }}</span></td>
                         </tr>
                       </ng-template>
                       

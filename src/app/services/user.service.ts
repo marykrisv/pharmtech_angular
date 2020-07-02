@@ -17,11 +17,13 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  async viewByRoleOneLocation (locId: number, role: string) {
-    console.log('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-role-one-location.php?locid='
-    +locId+'&role='+role);
-    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-role-one-location.php?locid='
-    +locId+'&role='+role).toPromise();
+  async viewByStatusAllLocation (locId: number, role: string) {
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-status-all-location.php?status='+role).toPromise();
+  }
+
+  async viewByStatusOneLocation (locId: number, role: string) {
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-status-one-location.php?locid='
+    +locId+'&status='+role).toPromise();
   }
 
   async searchUserOneLocation (locId: number, searchBy: string, search: string) {

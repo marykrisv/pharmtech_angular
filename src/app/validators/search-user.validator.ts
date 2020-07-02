@@ -17,7 +17,8 @@ export class SearchUserValidator {
             "Username: ",
             "First Name: ",
             "Middle Name: ",
-            "Last Name: "
+            "Last Name: ",
+            "Role: "
         ];
 
         var search = control.value as string;

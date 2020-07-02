@@ -53,3 +53,12 @@ https://bootsnipp.com/snippets/PEZZ7
 https://bootsnipp.com/snippets/M3jmA
 
 $sth->debugDumpParams();
+
+create view
+https://www.w3schools.com/sql/sql_view.asp
+CREATE VIEW currentlocations AS
+SELECT l.*, uc.userName as ucUsername, um.userName as umUsername
+FROM location l
+LEFT JOIN user uc on l.locCreatedBy=uc.userId
+LEFT JOIN user um on l.locModifiedBy=um.userId
+WHERE l.locDeleted = 0; 

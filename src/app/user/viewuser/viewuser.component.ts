@@ -1,3 +1,5 @@
+import { LocationService } from './../../services/location.service';
+import { LocationInterface } from './../../interface/location.interface';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UserService } from './../../services/user.service';
 import { UserStatus } from 'src/app/interface/user.interface';
@@ -15,6 +17,7 @@ import { SearchUserValidator } from 'src/app/validators/search-user.validator';
 export class ViewuserComponent implements OnInit {
 
   users: UserInterface[];
+  locations: LocationInterface[];
   userSession: SessionInterface;
 
   loading: boolean = false;
@@ -38,34 +41,89 @@ export class ViewuserComponent implements OnInit {
     {
       filterString: 'Last Name: ',
       sqlSearch: 'userLname'
+    },
+    {
+      filterString: 'Role: ',
+      sqlSearch: 'userRole'
     }
   ]
 
   options = new FormGroup({
     search: new FormControl(this.filterBy, SearchUserValidator.isSearchUserInvalid),
-    location: new FormControl(),
-    status: new FormControl('All'),
-    role: new FormControl('All')
+    location: new FormControl('All'),
+    status: new FormControl('All')
   });
 
-  constructor(private UserService: UserService, private auth: AuthService) { 
+  constructor(
+    private UserService: UserService, 
+    private auth: AuthService,
+    private locService: LocationService
+  ) { }
+
+  ngOnInit(): void {
+    // this.UserService.currentUsers.subscribe(users => this.users = users);
+    this.auth.currentSession.subscribe(currentSession => {
+      this.userSession = currentSession;
+    });
+    this.goToViewAll();
+    this.populateLocation();
   }
 
-  filterByRole() {
-    var role = this.roleInput.value;
-    if (role == 'All') {
-      //do nothing for now
+  populateLocation() {
+    this.locService.viewAllLocation().then(response => {
+      if (response['data']) {
+        this.locations = <LocationInterface[]>response['data'];
+      } else {
+        this.locations = null;
+      }
+    }).catch();
+  }
+
+  filterByLocation () {
+    var loc = this.locationInput.value;
+    if (loc == 'All') {
+
     } else {
-      this.UserService.viewByRoleOneLocation(this.userSession.userLocId, role).then(response => {
-        console.log(response);
+      this.UserService.getAllUsersFromThisLocation(loc).then(response => {
         if (response['data'] != undefined) {
           this.users = <UserInterface[]>response['data'];
         } else {
           this.users = null;
-        } 
-      }).catch(response=> {
-        alert("Error. Connection Problem!");
-      });
+        }
+      }).catch();
+    }
+  }
+
+  filterByStatus() {
+    var status = this.statusInput.value;
+    if (this.userSession.userRole == 'Super Admin') {
+      if (status == 'All') {
+        //do nothing for now
+      } else {
+        this.UserService.viewByStatusAllLocation(this.userSession.userLocId, status).then(response => {
+          if (response['data'] != undefined) {
+            this.users = <UserInterface[]>response['data'];
+          } else {
+            this.users = null;
+          } 
+        }).catch(response=> {
+          alert("Error. Connection Problem!");
+        });
+      }
+    } else {
+      if (status == 'All') {
+        //do nothing for now
+      } else {
+        this.UserService.viewByStatusOneLocation(this.userSession.userLocId, status).then(response => {
+          if (response['data'] != undefined) {
+            this.users = <UserInterface[]>response['data'];
+          } else {
+            this.users = null;
+          } 
+        }).catch(response=> {
+          alert("Error. Connection Problem!");
+        });
+      }
     }
   }
 
@@ -194,14 +252,6 @@ export class ViewuserComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    // this.UserService.currentUsers.subscribe(users => this.users = users);
-    this.auth.currentSession.subscribe(currentSession => {
-      this.userSession = currentSession;
-    });
-    this.goToViewAll();
-  }
-
   calculateAge (birthday) {
     var ageDifMs = Date.now() - birthday.getTime();
     var ageDate = new Date(ageDifMs); // miliseconds from epoch
@@ -216,8 +266,8 @@ export class ViewuserComponent implements OnInit {
     return this.options.get('status');
   }
 
-  get roleInput () {
-    return this.options.get('role');
+  get locationInput () {
+    return this.options.get('location');
   }
 }
 
