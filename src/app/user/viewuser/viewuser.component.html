@@ -162,19 +162,18 @@
                         class="btn btn-default" (click)="goToViewAll()">
                         <em class="fa fa-refresh"></em></button>
                       </span>
-                      <span> Page 1 of 5</span>                      
+                      <span *ngIf="numberOfPages != null">{{ 'Page 1 of '+numberOfPages.length }}</span>                      
                     </div>
                     <div class="col col-xs-6">
                       <ul class="pagination hidden-xs pull-right">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
+                        <li 
+                          *ngFor="let num of numberOfPages" 
+                          [ngClass]="num==this.currentPage?'active':''"
+                          (click)="changePage(num)"><a>{{ num+1 }}</a></li>
                       </ul>
                       <ul class="pagination visible-xs pull-right">
-                          <li><a href="#">«</a></li>
-                          <li><a href="#">»</a></li>
+                          <li><a>«</a></li>
+                          <li><a>»</a></li>
                       </ul>
                     </div>
                   </div>

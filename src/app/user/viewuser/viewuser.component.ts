@@ -1,3 +1,4 @@
+import { ToolConfig } from './../../common/toolconfig';
 import { LocationService } from './../../services/location.service';
 import { LocationInterface } from './../../interface/location.interface';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -20,10 +21,15 @@ export class ViewuserComponent implements OnInit {
   locations: LocationInterface[];
   userSession: SessionInterface;
 
+  totalUserCount: number;
+
   loading: boolean = false;
 
   filterBy: string = "";
   userSearchInput: string = null;
+
+  numberOfPages: number[] = null;
+  currentPage: number;
 
   filterByList = [
     {
@@ -55,7 +61,7 @@ export class ViewuserComponent implements OnInit {
   });
 
   constructor(
-    private UserService: UserService, 
+    private userService: UserService, 
     private auth: AuthService,
     private locService: LocationService
   ) { }
@@ -66,10 +72,10 @@ export class ViewuserComponent implements OnInit {
       this.userSession = currentSession;
     });
     this.goToViewAll();
-    this.populateLocation();
+    this.populateLocations();
   }
 
-  populateLocation() {
+  populateLocations() {
     this.locService.viewAllLocation().then(response => {
       if (response['data']) {
         this.locations = <LocationInterface[]>response['data'];
@@ -79,17 +85,35 @@ export class ViewuserComponent implements OnInit {
     }).catch();
   }
 
+  populateUsers(response) {
+    if (response['data'] != undefined) {
+      this.users = <UserInterface[]>response['data'];
+      this.totalUserCount = response['data'][0]['total'];
+
+      var numpages = Math.ceil(this.totalUserCount/ToolConfig.limitUsers);
+
+      this.numberOfPages = Array(numpages).fill(0).map((x,i)=>i);
+
+      console.log(this.numberOfPages);
+    } else {
+      this.users = null;
+      this.totalUserCount = 0;
+      this.numberOfPages = [1];
+    }
+    this.currentPage = 0; //indexing
+  }
+
+  changePage(num) {
+    this.currentPage = num;
+  }
+
   filterByLocation () {
     var loc = this.locationInput.value;
     if (loc == 'All') {
-
+      this.goToViewAll();
     } else {
-      this.UserService.getAllUsersFromThisLocation(loc).then(response => {
-        if (response['data'] != undefined) {
-          this.users = <UserInterface[]>response['data'];
-        } else {
-          this.users = null;
-        }
+      this.userService.getAllUsersFromThisLocation(loc).then(response => {
+        this.populateUsers(response);
       }).catch();
     }
   }
@@ -99,13 +123,10 @@ export class ViewuserComponent implements OnInit {
     if (this.userSession.userRole == 'Super Admin') {
       if (status == 'All') {
         //do nothing for now
+        this.goToViewAll();
       } else {
-        this.UserService.viewByStatusAllLocation(this.userSession.userLocId, status).then(response => {
-          if (response['data'] != undefined) {
-            this.users = <UserInterface[]>response['data'];
-          } else {
-            this.users = null;
-          } 
+        this.userService.viewByStatusAllLocation(this.userSession.userLocId, status).then(response => {
+          this.populateUsers(response);
         }).catch(response=> {
           alert("Error. Connection Problem!");
         });
@@ -114,12 +135,8 @@ export class ViewuserComponent implements OnInit {
       if (status == 'All') {
         //do nothing for now
       } else {
-        this.UserService.viewByStatusOneLocation(this.userSession.userLocId, status).then(response => {
-          if (response['data'] != undefined) {
-            this.users = <UserInterface[]>response['data'];
-          } else {
-            this.users = null;
-          } 
+        this.userService.viewByStatusOneLocation(this.userSession.userLocId, status).then(response => {
+          this.populateUsers(response);
         }).catch(response=> {
           alert("Error. Connection Problem!");
         });
@@ -166,22 +183,14 @@ export class ViewuserComponent implements OnInit {
         }
 
         if (this.userSession.userRole == UserRole.SuperAdmin) {
-          this.UserService.searchUserAllLocation(this.userSession.userLocId, searchBy, this.userSearchInput).then(response=> {
-            if (response['data'] != undefined) {
-              this.users = <UserInterface[]>response['data'];
-            } else {
-              this.users = null;
-            } 
+          this.userService.searchUserAllLocation(this.userSession.userLocId, searchBy, this.userSearchInput).then(response=> {
+            this.populateUsers(response);
           }).catch(response=> {
             alert("Error. Connection Problem!");
           });
         } else {
-          this.UserService.searchUserOneLocation(this.userSession.userLocId, searchBy, this.userSearchInput).then(response=> {
-            if (response['data'] != undefined) {
-              this.users = <UserInterface[]>response['data'];
-            } else {
-              this.users = null;
-            } 
+          this.userService.searchUserOneLocation(this.userSession.userLocId, searchBy, this.userSearchInput).then(response=> {
+            this.populateUsers(response);
           }).catch(response=> {
             alert("Error. Connection Problem!");
           });
@@ -197,7 +206,7 @@ export class ViewuserComponent implements OnInit {
         userModifiedOn: new Date(),
         userModifiedBy: this.userSession.userId
       }
-      this.UserService.deleteUser(user).then(response => {
+      this.userService.deleteUser(user).then(response => {
         if (response['success'] == true) {
           alert(response['message']);
           
@@ -225,12 +234,8 @@ export class ViewuserComponent implements OnInit {
     this.loading = true;
     if (this.userSession.userRole == UserRole.SuperAdmin) {
       // get all users from all location
-      this.UserService.getAllUsersFromAllLocation().then(response => {
-        if (response['data'] != undefined) {
-          this.users = <UserInterface[]>response['data'];
-        } else {
-          this.users = null;
-        } 
+      this.userService.getAllUsersFromAllLocation().then(response => {
+        this.populateUsers(response); 
       }).catch(response => {
         alert("Connection Problem. Please check your internet.");
       }).finally(() => {
@@ -238,12 +243,8 @@ export class ViewuserComponent implements OnInit {
       });
     } else {
       // get all users from this location
-      this.UserService.getAllUsersFromThisLocation(this.userSession.userLocId).then(response => {
-        if (response['data'] != undefined) {
-          this.users = <UserInterface[]>response['data'];
-        } else {
-          this.users = null;
-        } 
+      this.userService.getAllUsersFromThisLocation(this.userSession.userLocId).then(response => {
+        this.populateUsers(response); 
       }).catch(response => {
         alert("Connection Problem. Please check your internet.");
       }).finally(() => {

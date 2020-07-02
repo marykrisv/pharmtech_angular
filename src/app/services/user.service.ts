@@ -18,22 +18,23 @@ export class UserService {
   }
 
   async viewByStatusAllLocation (locId: number, role: string) {
-    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-status-all-location.php?status='+role).toPromise();
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-status-all-location.php?status='
+    +role+'&limit='+ToolConfig.limitUsers).toPromise();
   }
 
   async viewByStatusOneLocation (locId: number, role: string) {
     return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-status-one-location.php?locid='
-    +locId+'&status='+role).toPromise();
+    +locId+'&status='+role+'&limit='+ToolConfig.limitUsers).toPromise();
   }
 
   async searchUserOneLocation (locId: number, searchBy: string, search: string) {
     return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-search-one-location?locid='
-    +locId+'&searchBy='+searchBy+'&search='+search).toPromise();
+    +locId+'&searchBy='+searchBy+'&search='+search+'&limit='+ToolConfig.limitUsers).toPromise();
   }
 
   async searchUserAllLocation (locId: number, searchBy: string, search: string) {
     return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-search-all-location?locid='
-    +locId+'&searchBy='+searchBy+'&search='+search).toPromise();
+    +locId+'&searchBy='+searchBy+'&search='+search+'&limit='+ToolConfig.limitUsers).toPromise();
   }
 
   async createNewUser(user: any) {
@@ -42,12 +43,14 @@ export class UserService {
   }
 
   async getAllUsersFromThisLocation(locId: number) {
-    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-all-from-one-location.php?locid='+locId)
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-all-from-one-location.php?locid='
+    +locId+'&limit='+ToolConfig.limitUsers)
     .toPromise();
   }
 
   async getAllUsersFromAllLocation() {
-    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-all-from-all-location.php')
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-all-from-all-location.php?limit='
+    +ToolConfig.limitUsers)
     .toPromise();
   }
   
@@ -63,7 +66,7 @@ export class UserService {
 
   async viewUserDetail (userId, locId) {
     return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-user-detail.php?id='
-    +userId+'&locid='+locId).toPromise();
+    +userId).toPromise();
   }
 
   async deleteUser (user: any) {

@@ -62,3 +62,5 @@ FROM location l
 LEFT JOIN user uc on l.locCreatedBy=uc.userId
 LEFT JOIN user um on l.locModifiedBy=um.userId
 WHERE l.locDeleted = 0; 
+
+https://stackoverflow.com/questions/17187124/how-to-select-all-columns-and-a-count-in-the-same-query
