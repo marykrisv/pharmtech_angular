@@ -17,6 +17,11 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
+  async updateUserInformation (user: any) {
+    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/user/update-user-info.php',
+    JSON.stringify(user)).toPromise();
+  }
+
   async viewByStatusAllLocation (locId: number, role: string) {
     return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/user/view-by-status-all-location.php?status='
     +role+'&limit='+ToolConfig.limitUsers).toPromise();
@@ -60,7 +65,7 @@ export class UserService {
   }
 
   async updatePassword (newpass: any) {
-    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/confirm-new-password', 
+    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/user/confirm-new-password', 
     JSON.stringify(newpass)).toPromise();
   }
 
@@ -70,17 +75,17 @@ export class UserService {
   }
 
   async deleteUser (user: any) {
-    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/delete-user.php', 
+    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/user/delete-user.php', 
     JSON.stringify(user)).toPromise();
   }
 
   async changeUserStatus (user: any) {
-    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/update-status.php', 
+    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/user/update-status.php', 
     JSON.stringify(user)).toPromise();
   }
 
-  async resetPassword (user: any) {
-    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/reset-user-password.php', 
+  async resetPassword (user: any) {    
+    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/user/reset-user-password.php', 
     JSON.stringify(user)).toPromise();
   }
 

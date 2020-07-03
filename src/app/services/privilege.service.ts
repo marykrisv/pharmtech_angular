@@ -10,6 +10,11 @@ export class PrivilegeService {
 
   constructor(private http: HttpClient) { }
 
+  async updatePrivilege (user: any) {
+    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/privilege/update-privilege', 
+    JSON.stringify(user)).toPromise();
+  }
+
   async getPrivilege (user: any) {
     return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/privilege/get-privilege', 
     JSON.stringify(user)).toPromise();

@@ -33,7 +33,7 @@ export class UserdetailComponent implements OnInit {
   genUsername: string = null;
 
   //adding status
-  stillCreatingUser: boolean = false;
+  stillUpdatingUser: boolean = false;
 
   userForm = new FormGroup({
     userName: new FormControl('', Validators.required),
@@ -213,7 +213,6 @@ export class UserdetailComponent implements OnInit {
   //set random password
   setRandomPassword () {
     this.temporaryPass = (Math.random().toString(36).slice(2)).substring(0,6);
-
   }
 
   //set username
@@ -231,15 +230,15 @@ export class UserdetailComponent implements OnInit {
     }
   }
 
-  addNewUser() {
-    if (confirm('Are you sure you want to save this user?')) {
-      this.stillCreatingUser = true;
+  updatedUser() {
+    if (confirm('Are you sure you want to update this user?')) {
+      this.stillUpdatingUser = true;
 
       //add user
-      var userData: UserInterface;
+      var userData: any;
       userData = {
+        userId: this.userDetail.userId,
         userName: this.userNameInput.value,
-        userPassword: this.userPasswordInput.value,
         userFname: this.userFnameInput.value,
         userMname: this.userMnameInput.value,
         userLname: this.userLnameInput.value,
@@ -249,17 +248,17 @@ export class UserdetailComponent implements OnInit {
         userCitizenship: this.userCitizenshipInput.value,
         userContactNo: this.userContactNoInput.value,
         userRole: this.userRoleInput.value,
-        userLicenseNo: this.userLicenseNoInput.value,
-        userIsNew: true,
-        userLocId: this.userSession.userLocId,
-        userCreatedBy: this.userSession.userId
+        userLicenseNo: this.userLicenseNoInput.value,        
+        userLocId: 1,
+        userModifiedBy: this.userSession.userId,
+        userModifiedOn: new Date()
       }
       
-      this.userService.createNewUser(userData).then(
+      this.userService.updateUserInformation(userData).then(
         response => {
           if (response != null) {
             if (response['success'] == true) {          
-              this.createPrivilege(response['userId']);
+              this.updatePrivilege(this.userDetail.userId);
             } else {
               alert(response['message']);
             }
@@ -268,8 +267,9 @@ export class UserdetailComponent implements OnInit {
           }
           
         }
-      ).finally(() => {        
-        this.stillCreatingUser = false;
+      ).catch(response => {
+      }).finally(() => {        
+        this.stillUpdatingUser = false;
       });    
     } 
   }
@@ -306,7 +306,7 @@ export class UserdetailComponent implements OnInit {
     }
   }
 
-  createPrivilege(userId:number) {
+  updatePrivilege(userId:number) {
     //create privilege
     var privilege: PrivilegeInterface;
     privilege = {
@@ -321,12 +321,13 @@ export class UserdetailComponent implements OnInit {
       priPos: this.priPosInput.value
     }
 
-    this.privilegeService.createPrivilege(privilege).then(
+    this.privilegeService.updatePrivilege(privilege).then(
       response => {
+        console.log(response);
         if (response['success'] == true) {
           alert("User Successfully Added!");
         } else {
-          alert('Connection Problem!');
+          // alert('Connection Problem!');
         }
       }      
     );

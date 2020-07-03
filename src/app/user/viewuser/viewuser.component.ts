@@ -93,8 +93,6 @@ export class ViewuserComponent implements OnInit {
       var numpages = Math.ceil(this.totalUserCount/ToolConfig.limitUsers);
 
       this.numberOfPages = Array(numpages).fill(0).map((x,i)=>i);
-
-      console.log(this.numberOfPages);
     } else {
       this.users = null;
       this.totalUserCount = 0;
