@@ -1,0 +1,27 @@
+01 - No item found.
+02 - Catched in Exception.
+03 - No item created/affected.
+04 - Catched in PDOException
+05 - Item already exists.
+
+array(
+                'errorCode' => 01,
+                'message' => 'ERROR. No user found!'
+            )
+catch(PDOException $e) {
+    echo json_encode(
+        array(
+            'errorCode' => 04,
+            'message' => $e->errorInfo[1],
+            'success' => false
+        )
+    );
+} catch(Exception $e) {
+    echo json_encode(
+        array(
+            'errorCode' => 02,
+            'message' => $e->getMessage(),
+            'success' => false
+        )
+    );
+}
