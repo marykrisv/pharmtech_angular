@@ -1,3 +1,4 @@
+import { ErrorHandling } from './../../common/error-handling';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from './../../auth/auth.service';
 import { UserService } from './../../services/user.service';
@@ -260,14 +261,19 @@ export class UserdetailComponent implements OnInit {
             if (response['success'] == true) {          
               this.updatePrivilege(this.userDetail.userId);
             } else {
-              alert(response['message']);
+              var errorcode = response['errorCode'];
+              if (errorcode != '03') {
+                alert(ErrorHandling.showError(response));
+              } else {
+                this.updatePrivilege(this.userDetail.userId);
+              }
             }
           } else {
             alert('Connection Problem!');
           }
-          
         }
       ).catch(response => {
+        alert(ErrorHandling.showError(response));
       }).finally(() => {        
         this.stillUpdatingUser = false;
       });    
@@ -323,14 +329,22 @@ export class UserdetailComponent implements OnInit {
 
     this.privilegeService.updatePrivilege(privilege).then(
       response => {
-        console.log(response);
         if (response['success'] == true) {
           alert("User Successfully Added!");
         } else {
-          // alert('Connection Problem!');
+          var errorcode = response['errorCode'];
+          if (errorcode != '03') {
+            alert(ErrorHandling.showError(response));
+          } else {
+            this.updatePrivilege(this.userDetail.userId);
+          }
         }
       }      
-    );
+    ).catch(response => {
+      alert(ErrorHandling.showError(response));
+    }).finally(() => {        
+      this.stillUpdatingUser = false;
+    });
   }
 
   backToTop () {

@@ -24,4 +24,4 @@ catch(PDOException $e) {
             'success' => false
         )
     );
-}
+}\
