@@ -8,7 +8,7 @@ import { UserInterface, UserRole } from './../../interface/user.interface';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { SessionInterface } from 'src/app/interface/session.interface';
-import { SearchUserValidator } from 'src/app/validators/search-user.validator';
+import { SearchValidator } from 'src/app/validators/search.validator';
 
 @Component({
   selector: 'app-viewuser',
@@ -55,7 +55,7 @@ export class ViewuserComponent implements OnInit {
   ]
 
   options = new FormGroup({
-    search: new FormControl(this.filterBy, SearchUserValidator.isSearchUserInvalid),
+    search: new FormControl(this.filterBy, SearchValidator.isSearchUserInvalid),
     location: new FormControl('All'),
     status: new FormControl('All')
   });
