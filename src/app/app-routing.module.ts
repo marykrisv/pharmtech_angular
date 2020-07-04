@@ -1,3 +1,4 @@
+import { LocationModule } from './location/location.module';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { InventoryGuard } from './guard/inventory.guard';
 import { DashboardGuard } from './guard/dashboard.guard';
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'patient-management',
         loadChildren: () => import('./patient-management/patient-management.module').then(m => m.PatientManagementModule)
+      },
+      {
+        path: 'locations',
+        loadChildren: () => import('./location/location.module').then(m => m.LocationModule)
       }
     ]
   },

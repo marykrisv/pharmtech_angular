@@ -1,3 +1,4 @@
+import { LocationModule } from './location/location.module';
 import { InventoryGuard } from './guard/inventory.guard';
 import { DashboardGuard } from './guard/dashboard.guard';
 import { UserService } from './services/user.service';
@@ -40,7 +41,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
     UsersModule,
     InventoryModule,
     LoginModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LocationModule
   ],
   providers: [
     AuthGuard,

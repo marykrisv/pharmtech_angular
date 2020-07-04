@@ -21,7 +21,7 @@ export class MenuviewComponent implements OnInit {
     
     if (this.currentSession != null) {    
       if (this.currentSession.userRole == UserRole.Admin) {
-        this.router.navigate(["menu/patient-management"]);
+        // this.router.navigate(["menu/patient-management"]);
       }      
     } else {
       //redirect to login
