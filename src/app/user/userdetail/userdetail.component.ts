@@ -35,6 +35,7 @@ export class UserdetailComponent implements OnInit {
 
   //adding status
   stillUpdatingUser: boolean = false;
+  stillDeletingUser: boolean = false;
 
   userForm = new FormGroup({
     userName: new FormControl('', Validators.required),

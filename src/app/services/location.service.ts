@@ -26,4 +26,9 @@ export class LocationService {
     return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/location/update-location', 
     JSON.stringify(location)).toPromise();
   }
+
+  async deleteLocation(location: any) {
+    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/location/delete-location', 
+    JSON.stringify(location)).toPromise();
+  }
 }

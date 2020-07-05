@@ -34,11 +34,13 @@
                                 </select>
                             </form>
                             <button 
+                                [ngClass]="stillUpdatingUser?'m-progress':''"
                                 class="btn btn-sm btn-warning"
                                 [disabled]="(userForm.touched && userForm.valid)?false:true"
                                 (click)="updatedUser()">
                                 <em class="fa fa-pencil"></em> Update</button>
                             <button 
+                                [ngClass]="stillDeletingUser?'m-progress':''"
                                 class="btn btn-sm btn-danger"
                                 (click)="deleteUser()">
                                 <em class="fa fa-trash"></em> Delete</button>

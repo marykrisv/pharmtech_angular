@@ -95,58 +95,45 @@ export class ViewlocationComponent implements OnInit {
     }   
   }
 
-  removeFilter() {
-    // this.locationSearchInput = null;
-    // this.filterBy = "";
-    // this.searchInput.setValue(this.filterBy);
-    // this.viewAllLocation();
+  search() {
+
   }
 
-  search() {
-    // if (this.searchInput.invalid) {
-    //   alert("Fix search text first");
-    // } else {
-    //   this.locationSearchInput = this.searchInput.value.toString().trim();
-    //   this.locationSearchInput = this.locationSearchInput.substr(this.filterBy.length, this.locationSearchInput.length);
-
-    //   if (this.locationSearchInput.trim() != '' && this.locationSearchInput != null && this.locationSearchInput != '') {
-    //     //search here
-    //     var searchBy: string;
-    //     for (var i = 0; i < this.filterByList.length; i++) {
-    //       if (this.filterByList[i].filterString == this.filterBy) {
-    //         searchBy = this.filterByList[i].sqlSearch;
-    //       }
-    //     }
-
-    //     // this.locService.searchUserAllLocation(this.userSession.userLocId, searchBy, this.userSearchInput).then(response=> {
-    //     //   this.populateUsers(response);
-    //     // }).catch(response=> {
-    //     //   alert("Error. Connection Problem!");
-    //     // });
-    //   }
-    // }
+  removeFilter() {
+    this.locationSearchInput = null;
+    this.filterBy = "";
+    this.searchInput.setValue(this.filterBy);
+    this.viewAllLocation();
   }
 
   deleteLocation (locId) {
     if (confirm('Are you sure you want to delete this location?')) {
-      const user = {
+      const location = {
         locId: locId,
         locModifiedOn: new Date(),
         locModifiedBy: this.userSession.userId
       }
-      // this.userService.deleteUser(user).then(response => {
-      //   if (response['success'] == true) {
-      //     alert(response['message']);
+      this.locService.deleteLocation(location).then(response => {
+        if (response['success'] == true) {
+          alert(response['message']);
           
-      //     //delete row
-      //     this.deleteRow(userId);
+          //delete row
+          this.deleteRow(locId);
 
-      //   } else {
-      //     alert(response['message']);
-      //   }
-      // }).catch(response => {
-      //   alert("Connection Problem. Please check your internet.");
-      // });
+        } else {
+          alert(ErrorHandling.showError(response));
+        }
+      }).catch(response => {
+        alert("Connection Problem. Please check your internet.");
+      });
+    }
+  }
+
+  deleteRow (locId) {
+    for(let i = 0; i < this.locations.length; ++i){
+      if (this.locations[i].locId === locId) {
+          this.locations.splice(i,1);
+      }
     }
   }
 

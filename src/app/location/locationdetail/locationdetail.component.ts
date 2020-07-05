@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import { LocationService } from 'src/app/services/location.service';
 import { ErrorHandling } from 'src/app/common/error-handling';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-locationdetail',
@@ -20,6 +20,7 @@ export class LocationdetailComponent implements OnInit {
 
   //adding status
   stillUpdatingLocation: boolean = false;
+  stillDeletingLocation: boolean = false;
 
   locForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -31,6 +32,7 @@ export class LocationdetailComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private route: ActivatedRoute,
+    private router: Router,
     private locService: LocationService
   ) { }
 
@@ -91,6 +93,29 @@ export class LocationdetailComponent implements OnInit {
         alert("Connection Problem. Please check your internet.");
       }).finally(() => {
         this.stillUpdatingLocation = false;
+      });
+    }
+  }
+
+  deleteLocation() {
+    if (confirm('Are you sure you want to delete this location?')) {
+      this.stillDeletingLocation = true;
+      const location = {
+        locModifiedBy: this.userSession.userId,
+        locModifiedOn: new Date(),
+        locId: this.locDetails.locId
+      }
+      this.locService.deleteLocation(location).then(response => {
+        if (response['success'] == true) {
+          alert(response['message']);
+          this.router.navigate(["/menu/locations"]);
+        } else {
+          alert(ErrorHandling.showError(response));
+        }        
+      }).catch(response => {
+        alert("Connection Problem. Please check your internet.");
+      }).finally(() => {
+        this.stillDeletingLocation = false;
       });
     }
   }
