@@ -2,7 +2,7 @@
 //Headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Methods: PUT');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../../config/Database.php';
@@ -12,53 +12,39 @@ include_once '../../models/LocationModel.php';
 $database = new Database();
 $db = $database->connect();
 
-// Instantiate location object
+// Instantiate user object
 $lm = new LocationModel ($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
-$lm->locName = $data->locName;
-$lm->locDescription = $data->locDescription;
-$lm->locLatitude = $data->locLatitude;
-$lm->locLongitude = $data->locLongitude;
-$lm->locCreatedBy = $data->locCreatedBy;
+$lm->locId = $data->locId;
+$lm->locModifiedOn = $data->locModifiedOn;
+$lm->locModifiedBy = $data->locModifiedBy;
 
 //trigger exception in a "try" block
 try {
-    $result = $lm->checkNameAdd();
+    //user query
+    $result = $lm->deleteLocation();
+
+    //get row count
     $num = $result->rowCount();
+
+    //create user
     if ($num > 0) {
         echo json_encode(
             array(
-                'errorCode' => 05,
-                'message' => 'ERROR. Location name already exists!',
-                'success' => false
+                'message' => 'Location successfully deleted!',
+                'success' => true
             )
         );
     } else {
-        //location query
-        $result = $lm->createLocation();
-
-        //get row count
-        $num = $result->rowCount();
-
-        //create location
-        if ($num > 0) {
-            echo json_encode(
-                array(
-                    'message' => 'Location successfully created!',
-                    'success' => true
-                )
-            );
-        } else {
-            echo json_encode(
-                array(
-                    'errorCode' => '03',
-                    'message' => 'ERROR. Location not created!',
-                    'success' => false
-                )
-            );
-        }
+        echo json_encode(
+            array(
+                'errorCode' => '03',
+                'message' => 'ERROR. Location not deleted!',
+                'success' => false
+            )
+        );
     }
 } catch(PDOException $e) {
     echo json_encode(

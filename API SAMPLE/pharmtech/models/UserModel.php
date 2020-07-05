@@ -38,7 +38,29 @@ class UserModel {
         $this->conn = $db;
     }
 
-    public function checkUsername() {
+    public function checkUsernameAdd() {
+        //create query
+        $query = 'SELECT userName from '.$this->table.'
+                    WHERE
+                        userName=:userName
+                    LIMIT 1';
+
+        //prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //clean data
+        $this->userName = htmlspecialchars(strip_tags($this->userName));
+
+        //bind data
+        $stmt->bindParam(':userName', $this->userName);
+
+        //execute
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    public function checkUsernameUpdate() {
         //create query
         $query = 'SELECT userName from '.$this->table.'
                     WHERE

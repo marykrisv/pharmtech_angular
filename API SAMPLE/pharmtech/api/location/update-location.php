@@ -6,51 +6,40 @@ header('Access-Control-Allow-Methods: PUT');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../../config/Database.php';
-include_once '../../models/UserModel.php';
+include_once '../../models/LocationModel.php';
 
 //instantiate db and connect
 $database = new Database();
 $db = $database->connect();
 
 // Instantiate user object
-$um = new UserModel($db);
+$lm = new LocationModel ($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
-$um->userId = $data->userId;
-$um->userName = $data->userName;
-$um->userFname = $data->userFname;
-$um->userMname = $data->userMname;
-$um->userLname = $data->userLname;
-$um->userGender = $data->userGender;
-$um->userBirthdate = $data->userBirthdate;
-$um->userAddress = $data->userAddress;
-$um->userCitizenship = $data->userCitizenship;
-$um->userContactNo = $data->userContactNo;
-$um->userRole = $data->userRole;
-$um->userLicenseNo = $data->userLicenseNo;
-$um->userLocId = $data->userLocId;
-$um->userModifiedBy = $data->userModifiedBy;
-$um->userModifiedOn = $data->userModifiedOn;
+$lm->locName = $data->locName;
+$lm->locDescription = $data->locDescription;
+$lm->locLatitude = $data->locLatitude;
+$lm->locLongitude = $data->locLongitude;
+$lm->locModifiedBy = $data->locModifiedBy;
+$lm->locModifiedOn = $data->locModifiedOn;
+$lm->locId = $data->locId;
 
 //trigger exception in a "try" block
 try {
-
-    //check for username duplicate
-    //user query
-    $result = $um->checkUsernameUpdate();
+    $result = $lm->checkNameUpdate();
     $num = $result->rowCount();
     if ($num > 0) {
         echo json_encode(
             array(
-                'errorCode' => '05',
-                'message' => 'Error. Username already exists!',
+                'errorCode' => 05,
+                'message' => 'ERROR. Location name already exists!',
                 'success' => false
             )
         );
     } else {
         //user query
-        $result = $um->updateUserInformation();
+        $result = $lm->updateLocation();
 
         //get row count
         $num = $result->rowCount();
@@ -59,7 +48,7 @@ try {
         if ($num > 0) {
             echo json_encode(
                 array(
-                    'message' => 'User successfully updated!',
+                    'message' => 'Location successfully udpated!',
                     'success' => true
                 )
             );
@@ -67,7 +56,7 @@ try {
             echo json_encode(
                 array(
                     'errorCode' => '03',
-                    'message' => 'ERROR. User not updated!',
+                    'message' => 'ERROR. Location not updated!',
                     'success' => false
                 )
             );
@@ -82,6 +71,7 @@ try {
         )
     );
 } catch(Exception $e) {
+    print($e);
     echo json_encode(
         array(
             'errorCode' => '02',

@@ -38,7 +38,7 @@ $um->userCreatedBy = $data->userCreatedBy;
 try {
     //check for username duplicate
     //user query
-    $result = $um->checkUsername();
+    $result = $um->checkUsernameAdd();
     $num = $result->rowCount();
     if ($num > 0) {
         echo json_encode(
