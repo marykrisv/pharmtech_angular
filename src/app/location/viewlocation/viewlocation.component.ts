@@ -133,6 +133,8 @@ export class ViewlocationComponent implements OnInit {
     for(let i = 0; i < this.locations.length; ++i){
       if (this.locations[i].locId === locId) {
           this.locations.splice(i,1);
+          this.totalLocationCount--;
+          break;
       }
     }
   }

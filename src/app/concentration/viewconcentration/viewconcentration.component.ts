@@ -123,6 +123,8 @@ export class ViewconcentrationComponent implements OnInit {
     for(let i = 0; i < this.concentrations.length; ++i){
       if (this.concentrations[i].conId === conId) {
           this.concentrations.splice(i,1);
+          this.totalConCount--;
+          break;
       }
     }
   }
