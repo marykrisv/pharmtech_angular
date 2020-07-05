@@ -1,3 +1,4 @@
+import { ConcentrationModule } from './concentration/concentration.module';
 import { LocationModule } from './location/location.module';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { InventoryGuard } from './guard/inventory.guard';
@@ -43,6 +44,10 @@ const routes: Routes = [
       {
         path: 'locations',
         loadChildren: () => import('./location/location.module').then(m => m.LocationModule)
+      },
+      {
+        path: 'concentrations',
+        loadChildren: () => import('./concentration/concentration.module').then(m => m.ConcentrationModule)
       }
     ]
   },

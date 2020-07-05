@@ -11,7 +11,7 @@ const routes: Routes = [
     component: AddconcentrationComponent
   },
   {
-    path: 'detail/:locId',
+    path: 'detail/:conId',
     component: ConcentrationdetailComponent
   },
   {

@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -11,7 +12,8 @@ import { ConcentrationdetailComponent } from './concentrationdetail/concentratio
   declarations: [ViewconcentrationComponent, AddconcentrationComponent, ConcentrationdetailComponent],
   imports: [
     CommonModule,
-    ConcentrationRoutingModule
+    ConcentrationRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class ConcentrationModule { }
