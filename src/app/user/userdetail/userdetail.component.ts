@@ -74,7 +74,7 @@ export class UserdetailComponent implements OnInit {
     });
 
     this.populateDetails();
-    this.auth.currentSession.subscribe(currentSession => this.userSession = currentSession);
+    // this.auth.currentSession.subscribe(currentSession => this.userSession = currentSession);
     // this.setRandomPassword();
   }
 

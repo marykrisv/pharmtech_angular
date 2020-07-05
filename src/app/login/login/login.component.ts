@@ -113,7 +113,7 @@ export class LoginComponent implements OnInit {
         this.passwordInput.setValue('');
       }
     ).catch(response => {
-      alert(ErrorHandling.showError(response));
+      alert("Connection Problem. Please check your internet.");
     });
   }
 

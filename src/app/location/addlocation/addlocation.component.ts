@@ -43,7 +43,7 @@ export class AddlocationComponent implements OnInit {
         locDescription: this.descriptionInput.value,
         locLatitude: this.latitudeInput.value,
         locLongitude: this.longitudeInput.value,
-        loCreatedBy: this.userSession.userId
+        locCreatedBy: this.userSession.userId
       }
       this.locService.createNewLocation(location).then(response => {
         if (response['success'] == true) {
@@ -52,7 +52,7 @@ export class AddlocationComponent implements OnInit {
           alert(ErrorHandling.showError(response));
         }        
       }).catch(response => {
-        alert(ErrorHandling.showError(response));
+        alert("Connection Problem. Please check your internet.");
       }).finally(() => {
         this.stillCreatingLocation = false;
       });

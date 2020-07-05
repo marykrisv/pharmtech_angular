@@ -23,14 +23,6 @@
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12 text-right buttons">
                             <form [formGroup]="statusForm" class="change-status">
-                                <!-- <select 
-                                    name="validate-select" 
-                                    formControlName="userStatus"
-                                    class="form-control">
-                                    <option value="userStatus.Active">Active</option>
-                                    <option value="userStatus.Locked">Locked</option>
-                                    <option value="userStatus.Deactivated">Deactivated</option>
-                                </select> -->
                                 <select 
                                     class="form-control" 
                                     name="validate-select" 
@@ -41,29 +33,6 @@
                                     <option value="Deactivated">Deactivated</option>
                                 </select>
                             </form>
-                            
-                            <!-- <div *ngIf="userDetail.userStatus == 1; then thenBlockStat else elseBlockStat"></div>
-                            <ng-template #thenBlockStat>
-                                <button 
-                                class="btn btn-sm btn-info">
-                                <em class="fa fa-unlock-shield"></em> Deactivate</button>
-                            </ng-template>
-                            <ng-template #elseBlockStat>
-                                <button 
-                                class="btn btn-sm btn-info">
-                                <em class="fa fa-shield"></em> Activate</button>
-                            </ng-template>
-                            <div *ngIf="userDetail.userIsLocked == true; then thenBlock else elseBlock"></div>
-                            <ng-template #thenBlock>
-                                <button 
-                                class="btn btn-sm btn-info">
-                                <em class="fa fa-unlock-alt"></em> Unlock</button>
-                            </ng-template>
-                            <ng-template #elseBlock>
-                                <button 
-                                class="btn btn-sm btn-info">
-                                <em class="fa fa-lock"></em> Lock</button>
-                            </ng-template>                             -->
                             <button 
                                 class="btn btn-sm btn-warning"
                                 [disabled]="(userForm.touched && userForm.valid)?false:true"
@@ -75,7 +44,6 @@
                                 <em class="fa fa-trash"></em> Delete</button>
                         </div>
                     </div>
-                    
                 </div>
                 <div class="panel-body main">
                     <div class="row">             

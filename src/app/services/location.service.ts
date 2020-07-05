@@ -13,6 +13,10 @@ export class LocationService {
     return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/location/view-all-location.php').toPromise();
   }
 
+  async viewLocationDetail (locId: number) {
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/location/view-location-detail.php?id='+locId).toPromise();
+  }
+
   async createNewLocation(location: any) {
     return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/location/create-location', 
     JSON.stringify(location)).toPromise();

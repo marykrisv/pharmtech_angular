@@ -141,7 +141,7 @@ export class AdduserComponent implements OnInit {
           }
         }
       ).catch(response => {
-        alert(ErrorHandling.showError(response));
+        alert("Connection Problem. Please check your internet.");
       }).finally(() => {
         this.stillCreatingUser = false;
       });    

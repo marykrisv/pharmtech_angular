@@ -65,7 +65,7 @@ export class ViewlocationComponent implements OnInit {
     this.locService.viewAllLocation().then(response => {
       this.populateLocation(response);
     }).catch(response => {
-      alert(ErrorHandling.showError(response));
+      alert("Connection Problem. Please check your internet.");
     });
   }
 
