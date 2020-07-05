@@ -58,6 +58,7 @@ export class ViewconcentrationComponent implements OnInit {
   }
 
   populateConcentration(response) {
+    this.loading = true;
     if (response['data'] != undefined) {
       this.concentrations = <ConcentrationInterface[]>response['data'];
       this.totalConCount = response['data'][0]['total'];
@@ -66,6 +67,7 @@ export class ViewconcentrationComponent implements OnInit {
       this.totalConCount = 0;
       // alert(ErrorHandling.showError(response));
     }
+    this.loading = false;
   }
 
   changeFilterBy (filterBy: string) {

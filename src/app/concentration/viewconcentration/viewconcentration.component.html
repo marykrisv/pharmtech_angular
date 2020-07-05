@@ -69,7 +69,7 @@
                       <td><span>{{ i+1 }}</span></td>
                       <td class="text-center">
                         <a [routerLink]="['/menu/concentrations/detail',con.conId]" class="btn btn-primary"><em class="fa fa-eye"></em></a>
-                        <a class="btn btn-danger" (click)="deleteLocation(loc.locId)"><em class="fa fa-trash"></em></a>
+                        <a class="btn btn-danger" (click)="deleteLocation(con.conId)"><em class="fa fa-trash"></em></a>
                       </td>                          
                       <td><span>{{ con.conValue }}</span></td>
                       <td><span>{{ con.conCreatedBy }}</span></td>
