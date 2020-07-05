@@ -19,7 +19,7 @@ export class LocationdetailComponent implements OnInit {
   locId;
 
   //adding status
-  stillCreatingLocation: boolean = false;
+  stillUpdatingLocation: boolean = false;
 
   locForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -51,8 +51,6 @@ export class LocationdetailComponent implements OnInit {
       if (response['data'] != null) {
         this.locDetails = <LocationInterface>response['data'][0];
 
-        console.log(this.locDetails);
-
         this.intializeForm();
       } else {
         alert(ErrorHandling.showError(response));
@@ -71,17 +69,19 @@ export class LocationdetailComponent implements OnInit {
     }
   }
 
-  addNewLocation() {
-    if (confirm('Are you sure you want to save this location?')) {
-      this.stillCreatingLocation = true;
+  updateLocation() {
+    if (confirm('Are you sure you want to update this location?')) {
+      this.stillUpdatingLocation = true;
       const location = {
         locName: this.nameInput.value,
         locDescription: this.descriptionInput.value,
         locLatitude: this.latitudeInput.value,
         locLongitude: this.longitudeInput.value,
-        loCreatedBy: this.userSession.userId
+        locModifiedBy: this.userSession.userId,
+        locModifiedOn: new Date(),
+        locId: this.locDetails.locId
       }
-      this.locService.createNewLocation(location).then(response => {
+      this.locService.updateLocation(location).then(response => {
         if (response['success'] == true) {
           alert(response['message']);
         } else {
@@ -90,7 +90,7 @@ export class LocationdetailComponent implements OnInit {
       }).catch(response => {
         alert("Connection Problem. Please check your internet.");
       }).finally(() => {
-        this.stillCreatingLocation = false;
+        this.stillUpdatingLocation = false;
       });
     }
   }

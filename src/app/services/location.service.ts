@@ -21,4 +21,9 @@ export class LocationService {
     return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/location/create-location', 
     JSON.stringify(location)).toPromise();
   }
+
+  async updateLocation(location: any) {
+    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/location/update-location', 
+    JSON.stringify(location)).toPromise();
+  }
 }

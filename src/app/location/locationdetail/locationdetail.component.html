@@ -24,7 +24,8 @@
                         <div class="col-md-4 col-sm-12 col-xs-12 text-right buttons">                            
                             <button 
                                 class="btn btn-sm btn-warning"
-                                [disabled]="(locForm.touched && locForm.valid)?false:true">
+                                [disabled]="(locForm.touched && locForm.valid)?false:true"
+                                (click)="updateLocation()">
                                 <em class="fa fa-pencil"></em> Update</button>
                             <button 
                                 class="btn btn-sm btn-danger">
