@@ -7,11 +7,11 @@ import { LocationdetailComponent } from './locationdetail/locationdetail.compone
 
 const routes: Routes = [
   {
-    path: 'addlocation',
+    path: 'add',
     component: AddlocationComponent
   },
   {
-    path: 'locationdetail/:locId',
+    path: 'detail/:locId',
     component: LocationdetailComponent
   },
   {

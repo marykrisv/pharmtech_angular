@@ -97,7 +97,7 @@
                     </form>
                     <div class="col-md-2 col-xs-12 col-sm-12 text-right">
                       <button type="button" class="btn btn-sm btn-primary btn-create" 
-                      routerLink="/menu/users/adduser">
+                      routerLink="/menu/users/add">
                       <em class="fa fa-plus"></em> Create</button>
                     </div>
                   </div>
@@ -134,7 +134,7 @@
                           </td> -->
                           <td><span>{{ i+1 }}</span></td>
                           <td class="text-center">
-                            <a [routerLink]="['/menu/users/userdetail',user.userId]" class="btn btn-primary"><em class="fa fa-eye"></em></a>
+                            <a [routerLink]="['/menu/users/detail',user.userId]" class="btn btn-primary"><em class="fa fa-eye"></em></a>
                             <a class="btn btn-danger" (click)="deleteUser(user.userId)"><em class="fa fa-trash"></em></a>
                           </td>                          
                           <td><span>{{ user.userName }}</span></td>

@@ -1,3 +1,4 @@
+import { ConcentrationModule } from './concentration/concentration.module';
 import { LocationModule } from './location/location.module';
 import { InventoryGuard } from './guard/inventory.guard';
 import { DashboardGuard } from './guard/dashboard.guard';
@@ -42,7 +43,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
     InventoryModule,
     LoginModule,
     ReactiveFormsModule,
-    LocationModule
+    LocationModule,
+    ConcentrationModule
   ],
   providers: [
     AuthGuard,

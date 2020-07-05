@@ -42,7 +42,7 @@
 
                 <div class="col-md-6 col-xs-12 col-sm-12 text-right">
                   <button type="button" class="btn btn-sm btn-primary btn-create" 
-                  routerLink="/menu/locations/addlocation">
+                  routerLink="/menu/locations/add">
                   <em class="fa fa-plus"></em> Create</button>
                 </div>
               </div>
@@ -71,7 +71,7 @@
                     <tr *ngFor="let loc of locations; let i = index" [attr.id]="loc.locId">
                       <td><span>{{ i+1 }}</span></td>
                       <td class="text-center">
-                        <a [routerLink]="['/menu/locations/locationdetail',loc.locId]" class="btn btn-primary"><em class="fa fa-eye"></em></a>
+                        <a [routerLink]="['/menu/locations/detail',loc.locId]" class="btn btn-primary"><em class="fa fa-eye"></em></a>
                         <a class="btn btn-danger" (click)="deleteLocation(loc.locId)"><em class="fa fa-trash"></em></a>
                       </td>                          
                       <td><span>{{ loc.locName }}</span></td>
