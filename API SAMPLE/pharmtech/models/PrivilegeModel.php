@@ -20,6 +20,52 @@ class PrivilegeModel {
         $this->conn = $db;
     }
 
+    //create privilege
+    public function updatePrivilege () {
+        $query = 'UPDATE '.$this->table.'
+                SET
+                    priDashboard = :priDashboard,
+                    priUser = :priUser,
+                    priInventory = :priInventory,
+                    priManage = :priManage,
+                    priPatientManagement = :priPatientManagement,
+                    priPharmacyCorner = :priPharmacyCorner,
+                    priNotification = :priNotification,
+                    priPos = :priPos
+                WHERE
+                    priUserId = :priUserId';
+
+        //prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //clean data
+        $this->priUserId = htmlspecialchars(strip_tags($this->priUserId));
+        $this->priDashboard = htmlspecialchars(strip_tags($this->priDashboard));
+        $this->priUser = htmlspecialchars(strip_tags($this->priUser));
+        $this->priInventory = htmlspecialchars(strip_tags($this->priInventory));
+        $this->priManage = htmlspecialchars(strip_tags($this->priManage));
+        $this->priPatientManagement = htmlspecialchars(strip_tags($this->priPatientManagement));
+        $this->priPharmacyCorner = htmlspecialchars(strip_tags($this->priPharmacyCorner));
+        $this->priNotification = htmlspecialchars(strip_tags($this->priNotification));
+        $this->priPos = htmlspecialchars(strip_tags($this->priPos));
+
+        //bind params
+        $stmt->bindParam(':priDashboard', $this->priDashboard);
+        $stmt->bindParam(':priUser', $this->priUser);
+        $stmt->bindParam(':priInventory', $this->priInventory);
+        $stmt->bindParam(':priManage', $this->priManage);
+        $stmt->bindParam(':priPatientManagement', $this->priPatientManagement);
+        $stmt->bindParam(':priPharmacyCorner', $this->priPharmacyCorner);
+        $stmt->bindParam(':priNotification', $this->priNotification);
+        $stmt->bindParam(':priPos', $this->priPos);
+        $stmt->bindParam(':priUserId', $this->priUserId);
+
+        //execute
+        $stmt->execute();
+
+        return $stmt;
+    }
+
     // get privilege 
     public function getPrivilege () {
         $query = 'SELECT * FROM '.$this->table.' 

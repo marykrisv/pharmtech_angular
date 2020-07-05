@@ -3,5 +3,5 @@ export class ToolConfig {
 
     // view rows
     static noOfRows = 20;
-    static limitUsers = 5;
+    static limitUsers = 50;
 }

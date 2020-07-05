@@ -31,18 +31,110 @@ class UserModel {
     public $searchBy;
     public $search;
 
+    public $limit;
+
     // Constructor with DB
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    //view by role
-    public function viewByRoleAllLocation () {
+    public function checkUsername() {
         //create query
-        $query = 'SELECT * FROM '.$this->viewtable.'
-                WHERE userRole=?';
+        $query = 'SELECT userName from '.$this->table.'
+                    WHERE
+                        userName=:userName and userId!=:userId
+                    LIMIT 1';
 
-        $params = array($this->userRole);
+        //prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //clean data
+        $this->userName = htmlspecialchars(strip_tags($this->userName));
+
+        //bind data
+        $stmt->bindParam(':userName', $this->userName);
+        $stmt->bindParam(':userId', $this->userId);
+
+        //execute
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    public function updateUserInformation() {
+        //create query
+        $query = 'UPDATE '.$this->table.'
+                SET
+                    userName = :userName,
+                    userFname = :userFname,
+                    userMname = :userMname,
+                    userLname = :userLname,
+                    userGender = :userGender,
+                    userBirthdate = :userBirthdate,
+                    userAddress = :userAddress,
+                    userCitizenship = :userCitizenship,
+                    userContactNo = :userContactNo,
+                    userRole = :userRole,
+                    userLicenseNo = :userLicenseNo,
+                    userLocId = :userLocId,
+                    userModifiedBy = :userModifiedBy,
+                    userModifiedOn = :userModifiedOn
+                WHERE
+                    userId = :userId';
+
+        //prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //clean data
+        $this->userName = htmlspecialchars(strip_tags($this->userName));
+        $this->userFname = htmlspecialchars(strip_tags($this->userFname));
+        $this->userMname = htmlspecialchars(strip_tags($this->userMname));
+        $this->userLname = htmlspecialchars(strip_tags($this->userLname));
+        $this->userGender = htmlspecialchars(strip_tags($this->userGender));
+        $this->userBirthdate = htmlspecialchars(strip_tags($this->userBirthdate));
+        $this->userAddress = htmlspecialchars(strip_tags($this->userAddress));
+        $this->userCitizenship = htmlspecialchars(strip_tags($this->userCitizenship));
+        $this->userContactNo = htmlspecialchars(strip_tags($this->userContactNo));
+        $this->userRole = htmlspecialchars(strip_tags($this->userRole));
+        $this->userLicenseNo = htmlspecialchars(strip_tags($this->userLicenseNo));
+        $this->userLocId = htmlspecialchars(strip_tags($this->userLocId));
+        $this->userModifiedBy = htmlspecialchars(strip_tags($this->userModifiedBy));
+        $this->userModifiedOn = htmlspecialchars(strip_tags($this->userModifiedOn));
+        $this->userId = htmlspecialchars(strip_tags($this->userId));
+
+
+        //bind data
+        $stmt->bindParam(':userName', $this->userName);
+        $stmt->bindParam(':userFname', $this->userFname);
+        $stmt->bindParam(':userMname', $this->userMname);
+        $stmt->bindParam(':userLname', $this->userLname);
+        $stmt->bindParam(':userGender', $this->userGender);
+        $stmt->bindParam(':userBirthdate', $this->userBirthdate);
+        $stmt->bindParam(':userAddress', $this->userAddress);
+        $stmt->bindParam(':userCitizenship', $this->userCitizenship);
+        $stmt->bindParam(':userContactNo', $this->userContactNo);
+        $stmt->bindParam(':userRole', $this->userRole);
+        $stmt->bindParam(':userLicenseNo', $this->userLicenseNo);
+        $stmt->bindParam(':userLocId', $this->userLocId);
+        $stmt->bindParam(':userModifiedBy', $this->userModifiedBy);
+        $stmt->bindParam(':userModifiedOn', $this->userModifiedOn);
+        $stmt->bindParam(':userId', $this->userId);
+
+        //execute
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    //view by role
+    public function viewByStatusAllLocation () {
+        //create query
+        $query = 'SELECT COUNT(*) OVER () as total, c.*
+                FROM '.$this->viewtable.' c
+                WHERE userStatus=?
+                LIMIT 0, '.$this->limit;
+
+        $params = array($this->userStatus);
         $stmt = $this->conn->prepare($query);
         $stmt->execute($params);
 
@@ -50,13 +142,15 @@ class UserModel {
     }
 
     //view by role
-    public function viewByRoleOneLocation () {
+    public function viewByStatusOneLocation () {
         //create query
-        $query = 'SELECT * FROM '.$this->viewtable.'
-                WHERE userRole=?
-                and userLocId=?';
+        $query = 'SELECT COUNT(*) OVER () as total, c.*
+                FROM '.$this->viewtable.' c
+                WHERE userStatus=?
+                and userLocId=?
+                LIMIT 0, '.$this->limit;
 
-        $params = array($this->userRole, $this->userLocId);
+        $params = array($this->userStatus, $this->userLocId);
         $stmt = $this->conn->prepare($query);
         $stmt->execute($params);
 
@@ -66,9 +160,11 @@ class UserModel {
     //search user
     public function viewSearchOneLocation () {
         //create query
-        $query = 'SELECT * FROM '.$this->viewtable.'
+        $query = 'SELECT COUNT(*) OVER () as total, c.*
+                FROM '.$this->viewtable.' c
                 WHERE '.$this->searchBy.' LIKE ?
-                and userLocId=?';
+                and userLocId=?
+                LIMIT 0, '.$this->limit;
 
         $params = array("$this->search%", $this->userLocId);
         $stmt = $this->conn->prepare($query);
@@ -80,8 +176,10 @@ class UserModel {
     //search user
     public function viewSearchAllLocation () {
         //create query
-        $query = 'SELECT * FROM '.$this->viewtable.'
-                WHERE '.$this->searchBy.' LIKE ?';
+        $query = 'SELECT COUNT(*) OVER () as total, c.*
+                FROM '.$this->viewtable.' c
+                WHERE '.$this->searchBy.' LIKE ?
+                LIMIT 0, '.$this->limit;
 
         $params = array("$this->search%");
         $stmt = $this->conn->prepare($query);
@@ -186,30 +284,12 @@ class UserModel {
         return $stmt;
     }
 
-    //get username
-    public function getUsername () {
-        //create query
-        $query = 'SELECT created.userName as createdBy, modified.userName as modifiedBy FROM '.$this->table.'
-                LEFT JOIN user as created on user.userCreatedBy = created.userId
-                LEFT JOIN user as modified on user.userModifiedBy = modified.userId
-                WHERE user.userId = ?';
-
-        //prepare statement
-        $stmt = $this->conn->prepare($query);
-
-        //bind ID
-        $stmt->bindParam(1, $this->userId);
-
-        //execute
-        $stmt->execute();
-
-        return $stmt;
-    }
-
     //Get users
     public function viewAllFromAllLocation  () {
         //create query
-        $query = 'select * from '.$this->viewtable;
+        $query = 'SELECT COUNT(*) OVER () as total, c.*
+                    FROM '.$this->viewtable.' c
+                    LIMIT 0, '.$this->limit;
 
         //prepare statement
         $stmt = $this->conn->prepare($query);
@@ -226,9 +306,11 @@ class UserModel {
     //Get users
     public function viewAllFromOneLocation  () {
         //create query
-        $query = 'select * from '.$this->viewtable.' 
-                WHERE
-                    userLocId=?';
+        $query = 'SELECT COUNT(*) OVER () as total, c.*
+                    FROM '.$this->viewtable.' c
+                    WHERE
+                        userLocId=?
+                    LIMIT 0, '.$this->limit;
 
         //prepare statement
         $stmt = $this->conn->prepare($query);
@@ -442,7 +524,7 @@ class UserModel {
         return false;
     }
 
-    // update user
+    // update user new password
     public function confirmNewPassword() {
         //create query
         $query = 'UPDATE '.$this->table.'

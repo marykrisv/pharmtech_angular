@@ -77,13 +77,25 @@ try {
         echo json_encode($user_arr);
     } else {
         echo json_encode (
-            array('message' => 'No user found!')
+            array(
+                'errorCode' => '01',
+                'message' => 'ERROR. No user found!'
+            )
         );
     }
-}  //catch exception
- catch(Exception $e) {
+} catch(PDOException $e) {
     echo json_encode(
-        array('message' => 'No user found!')
+        array(
+            'errorCode' => '04',
+            'message' => $e->errorInfo[1]
+        )
+    );
+} catch(Exception $e) {
+    echo json_encode(
+        array(
+            'errorCode' => '02',
+            'message' => $e->getMessage()
+        )
     );
 }
 ?>

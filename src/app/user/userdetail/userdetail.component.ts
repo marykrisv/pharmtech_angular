@@ -120,8 +120,12 @@ export class UserdetailComponent implements OnInit {
       this.userService.resetPassword(user).then(response => {
         if (response['success'] == true) {
           this.userPasswordInput.setValue(this.temporaryPass);
+          alert(response['message']);
+        } else {
+          alert(ErrorHandling.showError(response));
         }
-        alert(response['message']);
+      }).catch(response => {
+        alert(ErrorHandling.showError(response));
       });
     }
   }
@@ -140,10 +144,12 @@ export class UserdetailComponent implements OnInit {
       this.userService.changeUserStatus(user).then(response => {
         if (response['success'] == false) {
           this.userStatusIput.setValue(this.currentStat);
-        } 
-        alert(response['message']);
+          alert(ErrorHandling.showError(response));
+        } else {
+          alert(response['message']);
+        }
       }).catch(response => {
-        alert("Connection Problem");
+        alert("Connection Problem. Please check your internet.");
       });
     } else {
       this.userStatusIput.setValue(this.currentStat);
@@ -156,9 +162,8 @@ export class UserdetailComponent implements OnInit {
         this.userDetail = <UserInterface>response['data'][0];
 
         this.initializeFormValue();
-
       } else {
-        alert("Connection Problem. Please check your internet.");
+        alert(ErrorHandling.showError(response));
       }
     }).catch(response => {
       alert("Connection Problem. Please check your internet.");
@@ -172,12 +177,12 @@ export class UserdetailComponent implements OnInit {
         userModifiedOn: new Date(),
         userModifiedBy: this.userSession.userId
       }
-      this.userService.deleteUser({"userId": this.userDetail.userId}).then(response => {
+      this.userService.deleteUser(user).then(response => {
         if (response['success'] == true) {
           alert(response['message']);
           this.router.navigate(["menu/users"]);  
         } else {
-          alert(response['message']);
+          alert(ErrorHandling.showError(response));
         }
       }).catch(response => {
         alert("Connection Problem. Please check your internet.");
@@ -269,11 +274,11 @@ export class UserdetailComponent implements OnInit {
               }
             }
           } else {
-            alert('Connection Problem!');
+            alert(ErrorHandling.showError(response));
           }
         }
       ).catch(response => {
-        alert(ErrorHandling.showError(response));
+        alert("Connection Problem. Please check your internet.");
       }).finally(() => {        
         this.stillUpdatingUser = false;
       });    
@@ -330,18 +335,18 @@ export class UserdetailComponent implements OnInit {
     this.privilegeService.updatePrivilege(privilege).then(
       response => {
         if (response['success'] == true) {
-          alert("User Successfully Added!");
+          alert('User successfully updated!');
         } else {
           var errorcode = response['errorCode'];
           if (errorcode != '03') {
             alert(ErrorHandling.showError(response));
           } else {
-            this.updatePrivilege(this.userDetail.userId);
+            alert('User successfully updated!');
           }
         }
       }      
     ).catch(response => {
-      alert(ErrorHandling.showError(response));
+      alert("Connection Problem. Please check your internet.");
     }).finally(() => {        
       this.stillUpdatingUser = false;
     });

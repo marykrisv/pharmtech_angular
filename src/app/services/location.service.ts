@@ -12,4 +12,9 @@ export class LocationService {
   async viewAllLocation () {
     return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/location/view-all-location.php').toPromise();
   }
+
+  async createNewLocation(location: any) {
+    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/location/create-location', 
+    JSON.stringify(location)).toPromise();
+  }
 }

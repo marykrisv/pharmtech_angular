@@ -1,1 +1,115 @@
-<p>addlocation works!</p>
+<div id="top" class="container">  
+    <!-- view all -->
+    <h2>Add New Location</h2>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">                
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6">
+                            <button class="btn btn-sm btn-default" routerLink="/menu/locations">< Back</button>
+                        </div>
+                        <div class="col-md-6 col-xs-6 text-right">
+                            <button 
+                                style="margin-right: 5px;"
+                                class="btn btn-sm btn-default" (click)="clearAll()">Clear All</button>
+                            <button 
+                                [ngClass]="stillCreatingLocation?'m-progress':''"
+                                class="btn btn-sm btn-primary"
+                                [disabled]="locForm.invalid" (click)="addNewLocation()">Add Location</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">             
+                        <!-- <br><br> -->                        
+                        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                            <div id="information" class="panel panel-default">
+                                <div class="panel-heading">Location Information</div>
+                                <div class="panel-body">
+                                    <form [formGroup]="locForm">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="validate-text">Name</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        [value] = "this.nameInput.value | titlecase"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="name"
+                                                        placeholder="Name">
+                                                    <span 
+                                                        [ngClass]="this.nameInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.nameInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Description</label>
+                                                <div class="input-group" data-validate="length" data-length="5">
+                                                    <textarea 
+                                                        [value] = "this.descriptionInput.value | titlecase"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        name="validate-length" 
+                                                        id="description" 
+                                                        placeholder="Description"
+                                                        formControlName="description"></textarea>
+                                                    <span 
+                                                        [ngClass]="this.descriptionInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.descriptionInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Latitude</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="latitude"
+                                                        placeholder="Latitude">
+                                                    <span 
+                                                        [ngClass]="this.latitudeInput.invalid?'danger':'info'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.latitudeInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Longitude</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="longitude"
+                                                        placeholder="Longitude">
+                                                    <span 
+                                                        [ngClass]="this.longitudeInput.invalid?'danger':'info'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.longitudeInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-popup></app-popup> -->

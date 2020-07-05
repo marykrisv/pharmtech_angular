@@ -1,3 +1,4 @@
+import { ErrorHandling } from './../../common/error-handling';
 import { RoleConfig } from './../../common/roleconfig';
 import { PhoneValidator } from './../../validators/phone.validator';
 import { PrivilegeInterface } from './../../interface/privilege.interface';
@@ -133,19 +134,17 @@ export class AdduserComponent implements OnInit {
       
       this.userService.createNewUser(userData).then(
         response => {
-          if (response != null) {
-            if (response['success'] == true) {          
-              this.createPrivilege(response['userId']);
-            } else {
-              alert(response['message']);
-            }
-            this.stillCreatingUser = false;
+          if (response['success'] == true) {          
+            this.createPrivilege(response['userId']);
           } else {
-            alert('Connection Problem!');
+            alert(ErrorHandling.showError(response));
           }
-          
         }
-      );    
+      ).catch(response => {
+        alert(ErrorHandling.showError(response));
+      }).finally(() => {
+        this.stillCreatingUser = false;
+      });    
     } 
   }
 
@@ -202,12 +201,16 @@ export class AdduserComponent implements OnInit {
     this.privilegeService.createPrivilege(privilege).then(
       response => {
         if (response['success'] == true) {
-          alert("User Successfully Added!");
+          alert('User successfully added!');
         } else {
-          alert('Connection Problem!');
+          alert(ErrorHandling.showError(response));
         }
       }      
-    );
+    ).catch(response => {
+      alert(ErrorHandling.showError(response));
+    }).finally(() => {
+      this.stillCreatingUser = false;
+    });
   }
 
   backToTop () {

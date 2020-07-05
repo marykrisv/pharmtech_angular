@@ -2,8 +2,6 @@
 //Headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../../config/Database.php';
 include_once '../../models/UserModel.php';
@@ -15,15 +13,14 @@ $db = $database->connect();
 // Instantiate user object
 $um = new UserModel($db);
 
-$data = json_decode(file_get_contents("php://input"));
-
-$um->userName = $data->userName;
-$um->userPassword = $data->userPassword;
+//get search by
+$um->userStatus = isset($_GET['status']) ? $_GET['status'] : die();
+$um->limit = isset($_GET['limit']) ? $_GET['limit']: 50;
 
 //trigger exception in a "try" block
 try {
     //user query
-    $result = $um->login();
+    $result = $um->viewByStatusAllLocation();
 
     //get row count
     $num = $result->rowCount();
@@ -59,16 +56,8 @@ try {
                 'userModifiedOn' => $userModifiedOn,
                 'userModifiedBy' => $userModifiedBy,
                 'userDeleted' => $userDeleted,
-                'locId' => $locId,
                 'locName' => $locName,
-                'priDashboard' => $priDashboard,
-                'priUser' => $priUser,
-                'priInventory' => $priInventory,
-                'priManage' => $priManage,
-                'priPatientManagement' => $priPatientManagement,
-                'priPharmacyCorner' => $priPharmacyCorner,
-                'priNotification' => $priNotification,
-                'priPos' => $priPos
+                'total' => $total
             );
 
             //push to "data"
@@ -89,16 +78,14 @@ try {
     echo json_encode(
         array(
             'errorCode' => '04',
-            'message' => $e->errorInfo[1],
-            'success' => false
+            'message' => $e->errorInfo[1]
         )
     );
 } catch(Exception $e) {
     echo json_encode(
         array(
             'errorCode' => '02',
-            'message' => $e->getMessage(),
-            'success' => false
+            'message' => $e->getMessage()
         )
     );
 }

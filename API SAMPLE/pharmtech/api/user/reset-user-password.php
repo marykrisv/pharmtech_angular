@@ -42,16 +42,25 @@ try {
     } else {
         echo json_encode(
             array(
-                'message' => 'Error. User password not updated!',
+                'errorCode' => '03',
+                'message' => 'ERROR. User password not updated!',
                 'success' => false
             )
         );
     }
-}  //catch exception
- catch(Exception $e) {
+} catch(PDOException $e) {
     echo json_encode(
         array(
-            'message' => 'Error. User password not updated!',
+            'errorCode' => '04',
+            'message' => $e->errorInfo[1],
+            'success' => false
+        )
+    );
+} catch(Exception $e) {
+    echo json_encode(
+        array(
+            'errorCode' => '02',
+            'message' => $e->getMessage(),
             'success' => false
         )
     );

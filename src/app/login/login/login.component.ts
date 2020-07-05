@@ -8,6 +8,7 @@ import { SessionInterface } from 'src/app/interface/session.interface';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PrivilegeInterface } from 'src/app/interface/privilege.interface';
 import { DataService } from 'src/app/services/data.service';
+import { ErrorHandling } from 'src/app/common/error-handling';
 
 
 @Component({
@@ -112,7 +113,7 @@ export class LoginComponent implements OnInit {
         this.passwordInput.setValue('');
       }
     ).catch(response => {
-      alert("Connection Problem. Please check your internet.");
+      alert(ErrorHandling.showError(response));
     });
   }
 
@@ -137,10 +138,10 @@ export class LoginComponent implements OnInit {
           this.userService.updatePassword(newpass).then(response => {
             // successfully changed user password for new user
               if (response['success']== true) {
-                alert('User password successfully updated!');
+                alert(response['message']);
                 this.successfulLogin();
               } else {
-                alert('Connection Problem!');
+                alert(ErrorHandling.showError(response));
               }
           }).catch(response => {
             alert("Connection Problem. Please check your internet.");

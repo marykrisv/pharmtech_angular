@@ -43,7 +43,7 @@ export class UserService {
   }
 
   async createNewUser(user: any) {
-    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/create-new-user', 
+    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/user/create-user', 
     JSON.stringify(user)).toPromise();
   }
 

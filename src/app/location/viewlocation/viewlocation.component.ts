@@ -76,6 +76,7 @@ export class ViewlocationComponent implements OnInit {
     } else {
       this.locations = null;
       this.totalLocationCount = 0;
+      alert(ErrorHandling.showError(response));
     }
   }
 

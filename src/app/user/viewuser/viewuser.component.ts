@@ -1,3 +1,4 @@
+import { ErrorHandling } from 'src/app/common/error-handling';
 import { ToolConfig } from './../../common/toolconfig';
 import { LocationService } from './../../services/location.service';
 import { LocationInterface } from './../../interface/location.interface';
@@ -82,7 +83,9 @@ export class ViewuserComponent implements OnInit {
       } else {
         this.locations = null;
       }
-    }).catch();
+    }).catch(response => {
+      alert("Connection Problem. Please check your internet.");
+    });
   }
 
   populateUsers(response) {
@@ -112,7 +115,9 @@ export class ViewuserComponent implements OnInit {
     } else {
       this.userService.getAllUsersFromThisLocation(loc).then(response => {
         this.populateUsers(response);
-      }).catch();
+      }).catch(response => {
+        alert("Connection Problem. Please check your internet.");
+      });
     }
   }
 
@@ -126,17 +131,18 @@ export class ViewuserComponent implements OnInit {
         this.userService.viewByStatusAllLocation(this.userSession.userLocId, status).then(response => {
           this.populateUsers(response);
         }).catch(response=> {
-          alert("Error. Connection Problem!");
+          alert("Connection Problem. Please check your internet.");
         });
       }
     } else {
       if (status == 'All') {
         //do nothing for now
+        this.goToViewAll();
       } else {
         this.userService.viewByStatusOneLocation(this.userSession.userLocId, status).then(response => {
           this.populateUsers(response);
         }).catch(response=> {
-          alert("Error. Connection Problem!");
+          alert("Connection Problem. Please check your internet.");
         });
       }
     }
@@ -184,13 +190,13 @@ export class ViewuserComponent implements OnInit {
           this.userService.searchUserAllLocation(this.userSession.userLocId, searchBy, this.userSearchInput).then(response=> {
             this.populateUsers(response);
           }).catch(response=> {
-            alert("Error. Connection Problem!");
+            alert("Connection Problem. Please check your internet.");
           });
         } else {
           this.userService.searchUserOneLocation(this.userSession.userLocId, searchBy, this.userSearchInput).then(response=> {
             this.populateUsers(response);
           }).catch(response=> {
-            alert("Error. Connection Problem!");
+            alert("Connection Problem. Please check your internet.");
           });
         }
       }
@@ -212,7 +218,7 @@ export class ViewuserComponent implements OnInit {
           this.deleteRow(userId);
 
         } else {
-          alert(response['message']);
+          alert(ErrorHandling.showError(response));
         }
       }).catch(response => {
         alert("Connection Problem. Please check your internet.");

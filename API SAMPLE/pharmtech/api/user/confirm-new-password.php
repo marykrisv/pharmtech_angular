@@ -33,23 +33,32 @@ try {
     if ($num > 0) {
         echo json_encode(
             array(
-                'message' => 'User successfully updated!',
+                'message' => 'User password successfully updated!',
                 'success' => true
             )
         );
     } else {
         echo json_encode(
             array(
-                'message' => 'Error. User not updated!',
+                'errorCode' => '03',
+                'message' => 'ERROR. User password not updated!',
                 'success' => false
             )
         );
     }
-}  //catch exception
- catch(Exception $e) {
+} catch(PDOException $e) {
     echo json_encode(
         array(
-            'message' => 'Error. User not updated!',
+            'errorCode' => '04',
+            'message' => $e->errorInfo[1],
+            'success' => false
+        )
+    );
+} catch(Exception $e) {
+    echo json_encode(
+        array(
+            'errorCode' => '02',
+            'message' => $e->getMessage(),
             'success' => false
         )
     );

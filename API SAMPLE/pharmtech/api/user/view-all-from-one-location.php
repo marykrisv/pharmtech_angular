@@ -15,6 +15,7 @@ $um = new UserModel($db);
 
 //get loc id
 $um->userLocId = isset($_GET['locid']) ? $_GET['locid'] : die();
+$um->limit = isset($_GET['limit']) ? $_GET['limit']: 50;
 
 //trigger exception in a "try" block
 try {
@@ -55,7 +56,8 @@ try {
                 'userModifiedOn' => $userModifiedOn,
                 'userModifiedBy' => $userModifiedBy,
                 'userDeleted' => $userDeleted,
-                'locName' => $locName
+                'locName' => $locName,
+                'total' => $total
             );
 
             //push to "data"
@@ -66,13 +68,25 @@ try {
         echo json_encode($user_arr);
     } else {
         echo json_encode (
-            array('message' => 'No user found!')
+            array(
+                'errorCode' => '01',
+                'message' => 'ERROR. No user found!'
+            )
         );
     }
-}  //catch exception
- catch(Exception $e) {
+} catch(PDOException $e) {
     echo json_encode(
-        array('message' => 'No user found!')
+        array(
+            'errorCode' => '04',
+            'message' => $e->errorInfo[1]
+        )
+    );
+} catch(Exception $e) {
+    echo json_encode(
+        array(
+            'errorCode' => '02',
+            'message' => $e->getMessage()
+        )
     );
 }
 ?>
