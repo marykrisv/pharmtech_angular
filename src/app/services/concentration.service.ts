@@ -12,4 +12,9 @@ export class ConcentrationService {
   async viewAllConcentration () {
     return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/concentration/view-all-concentration.php').toPromise();
   }
+
+  async createNewConcentration(concentration: any) {
+    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/concentration/create-concentration', 
+    JSON.stringify(concentration)).toPromise();
+  }
 }

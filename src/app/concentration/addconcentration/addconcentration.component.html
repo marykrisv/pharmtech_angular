@@ -1,1 +1,65 @@
-<p>addconcentration works!</p>
+<div class="container">  
+    <!-- view all -->
+    <h2>Add New Concentration</h2>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">                
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-12">
+                            <button class="btn btn-sm btn-default" routerLink="/menu/concentrations">< Back</button>
+                        </div>
+                        <div class="col-md-9 col-xs-12 text-right">
+                            <button 
+                                style="margin-right: 5px;"
+                                class="btn btn-sm btn-default" (click)="clearAll()">Clear All</button>
+                            <button 
+                                [ngClass]="stillCreatingConcentration?'m-progress':''"
+                                class="btn btn-sm btn-primary"
+                                [disabled]="conForm.invalid" (click)="addNewConcentration()">Add Concentration</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">             
+                        <!-- <br><br> -->                        
+                        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                            <div id="information" class="panel panel-default">
+                                <div class="panel-heading">Concentration Information</div>
+                                <div class="panel-body">
+                                    <form [formGroup]="conForm">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="validate-text">Value</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        [value] = "this.valueInput.value | titlecase"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="value"
+                                                        placeholder="Value">
+                                                    <span 
+                                                        [ngClass]="this.valueInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.valueInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                
+                                            </div>                                            
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-popup></app-popup> -->
