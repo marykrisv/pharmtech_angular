@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { PrivilegeInterface } from '../interface/privilege.interface';
@@ -14,7 +15,11 @@ export class SideMenuComponent implements OnInit {
   userPrivilege: PrivilegeInterface;
   userSession: SessionInterface;
 
-  constructor(private data: DataService, private auth: AuthService) { }
+  constructor(
+    private data: DataService, 
+    private auth: AuthService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
     this.data.currentUserPrivilege.subscribe(currentUserPrivilege => 
@@ -32,11 +37,13 @@ export class SideMenuComponent implements OnInit {
     //   var element = document.getElementById('menu-content').getElementsByTagName("li");
     //   element[0].classList.add("hidden");
     // } 
+
+    console.log(this.router.url);
   }
 
-  openSubmenu ($event) {
-    $event.stopPropagation();
-    var element = document.getElementById("others");
-    element.classList.toggle("collapse");
-  }
+  // openSubmenu ($event) {
+  //   $event.stopPropagation();
+  //   var element = document.getElementById("others");
+  //   element.classList.toggle("collapse");
+  // }
 }
