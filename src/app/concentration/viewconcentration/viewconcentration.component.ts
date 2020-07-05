@@ -96,35 +96,35 @@ export class ViewconcentrationComponent implements OnInit {
     // this.viewAllLocation();
   }
 
-  deleteLocation (locId) {
-    // if (confirm('Are you sure you want to delete this location?')) {
-    //   const location = {
-    //     locId: locId,
-    //     locModifiedOn: new Date(),
-    //     locModifiedBy: this.userSession.userId
-    //   }
-    //   this.locService.deleteLocation(location).then(response => {
-    //     if (response['success'] == true) {
-    //       alert(response['message']);
+  deleteConcentration (conId) {
+    if (confirm('Are you sure you want to delete this concentration?')) {
+      const concentration = {
+        conId: conId,
+        conModifiedOn: new Date(),
+        conModifiedBy: this.userSession.userId
+      }
+      this.conService.deleteConcentration(concentration).then(response => {
+        if (response['success'] == true) {
+          alert(response['message']);
           
-    //       //delete row
-    //       this.deleteRow(locId);
+          //delete row
+          this.deleteRow(conId);
 
-    //     } else {
-    //       alert(ErrorHandling.showError(response));
-    //     }
-    //   }).catch(response => {
-    //     alert("Connection Problem. Please check your internet.");
-    //   });
-    // }
+        } else {
+          alert(ErrorHandling.showError(response));
+        }
+      }).catch(response => {
+        alert("Connection Problem. Please check your internet.");
+      });
+    }
   }
 
-  deleteRow (locId) {
-    // for(let i = 0; i < this.locations.length; ++i){
-    //   if (this.locations[i].locId === locId) {
-    //       this.locations.splice(i,1);
-    //   }
-    // }
+  deleteRow (conId) {
+    for(let i = 0; i < this.concentrations.length; ++i){
+      if (this.concentrations[i].conId === conId) {
+          this.concentrations.splice(i,1);
+      }
+    }
   }
 
   get searchInput () {

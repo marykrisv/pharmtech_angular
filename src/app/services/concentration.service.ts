@@ -17,4 +17,18 @@ export class ConcentrationService {
     return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/concentration/create-concentration', 
     JSON.stringify(concentration)).toPromise();
   }
+
+  async viewConcentrationDetail (conId: number) {
+    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/concentration/view-concentration-detail.php?id='+conId).toPromise();
+  }
+
+  async updateConcentration(concentration: any) {
+    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/concentration/update-concentration', 
+    JSON.stringify(concentration)).toPromise();
+  }
+
+  async deleteConcentration(concentration: any) {
+    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/concentration/delete-concentration', 
+    JSON.stringify(concentration)).toPromise();
+  }
 }
