@@ -22,6 +22,8 @@ export class LocationdetailComponent implements OnInit {
   stillUpdatingLocation: boolean = false;
   stillDeletingLocation: boolean = false;
 
+  updated: boolean = false;
+
   locForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(2)]),
     description: new FormControl('', Validators.required),
@@ -63,7 +65,7 @@ export class LocationdetailComponent implements OnInit {
   }
 
   back() {
-    if (this.locForm.touched) {
+    if (this.locForm.touched && !this.updated) {
       if (confirm('Are you sure you want to leave?')) {
         this.router.navigate(['/menu/locations']);
       }
@@ -96,6 +98,8 @@ export class LocationdetailComponent implements OnInit {
       this.locService.updateLocation(location).then(response => {
         if (response['success'] == true) {
           alert(response['message']);
+
+          this.updated = true;
         } else {
           alert(ErrorHandling.showError(response));
         }        

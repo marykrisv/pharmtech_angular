@@ -18,6 +18,8 @@ export class AddlocationComponent implements OnInit {
   //adding status
   stillCreatingLocation: boolean = false;
 
+  added: boolean = false;
+
   locForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(2)]),
     description: new FormControl('', Validators.required),
@@ -38,7 +40,7 @@ export class AddlocationComponent implements OnInit {
   }
 
   back() {
-    if (this.locForm.touched) {
+    if (this.locForm.touched && !this.added) {
       if (confirm('Are you sure you want to leave?')) {
         this.router.navigate(['/menu/locations']);
       }
@@ -60,6 +62,8 @@ export class AddlocationComponent implements OnInit {
       this.locService.createNewLocation(location).then(response => {
         if (response['success'] == true) {
           alert(response['message']);
+
+          this.added = true;
         } else {
           alert(ErrorHandling.showError(response));
         }        

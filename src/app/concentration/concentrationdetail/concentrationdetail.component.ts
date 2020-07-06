@@ -22,6 +22,8 @@ export class ConcentrationdetailComponent implements OnInit {
   stillUpdatingConcentration: boolean = false;
   stillDeletingConcentration: boolean = false;
 
+  updated: boolean = false;
+
   conForm = new FormGroup({
     value: new FormControl('', [Validators.required, Validators.minLength(2)]),
   });
@@ -46,7 +48,7 @@ export class ConcentrationdetailComponent implements OnInit {
   }
 
   back() {
-    if (this.conForm.touched) {
+    if (this.conForm.touched && !this.updated) {
       if (confirm('Are you sure you want to leave?')) {
         this.router.navigate(['/menu/concentrations']);
       }
@@ -87,6 +89,8 @@ export class ConcentrationdetailComponent implements OnInit {
       this.conService.updateConcentration(concentration).then(response => {
         if (response['success'] == true) {
           alert(response['message']);
+
+          this.updated = true;
         } else {
           alert(ErrorHandling.showError(response));
         }        

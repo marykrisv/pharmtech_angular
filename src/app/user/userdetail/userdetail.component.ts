@@ -37,6 +37,8 @@ export class UserdetailComponent implements OnInit {
   stillUpdatingUser: boolean = false;
   stillDeletingUser: boolean = false;
 
+  updated: boolean = false;
+
   userForm = new FormGroup({
     userName: new FormControl('', Validators.required),
     userPassword: new FormControl({value: '', disabled: true}, Validators.required),
@@ -110,7 +112,7 @@ export class UserdetailComponent implements OnInit {
   }
 
   back() {
-    if (this.userForm.touched || this.privilegeForm.dirty) {
+    if ((this.userForm.touched || this.privilegeForm.dirty) && !this.updated) {
       if (confirm('Are you sure you want to leave?')) {
         this.router.navigate(['/menu/users']);
       }
@@ -347,12 +349,16 @@ export class UserdetailComponent implements OnInit {
       response => {
         if (response['success'] == true) {
           alert('User successfully updated!');
+
+          this.updated = true;
         } else {
           var errorcode = response['errorCode'];
           if (errorcode != '03') {
             alert(ErrorHandling.showError(response));
           } else {
             alert('User successfully updated!');
+
+            this.updated = true;
           }
         }
       }      

@@ -18,6 +18,8 @@ export class AddconcentrationComponent implements OnInit {
   //adding status
   stillCreatingConcentration: boolean = false;
 
+  added: boolean = false;
+
   conForm = new FormGroup({
     value: new FormControl('', [Validators.required, Validators.minLength(2)])
   });
@@ -35,7 +37,7 @@ export class AddconcentrationComponent implements OnInit {
   }
 
   back() {
-    if (this.conForm.touched) {
+    if (this.conForm.touched && !this.added) {
       if (confirm('Are you sure you want to leave?')) {
         this.router.navigate(['/menu/concentrations']);
       }
@@ -54,6 +56,8 @@ export class AddconcentrationComponent implements OnInit {
       this.conService.createNewConcentration(concentration).then(response => {
         if (response['success'] == true) {
           alert(response['message']);
+
+          this.added = true;
         } else {
           alert(ErrorHandling.showError(response));
         }        

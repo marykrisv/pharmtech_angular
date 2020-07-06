@@ -25,6 +25,8 @@ export class AdduserComponent implements OnInit {
   //adding status
   stillCreatingUser: boolean = false;
 
+  added: boolean = false;
+
   userForm = new FormGroup({
     userName: new FormControl('', Validators.required),
     userPassword: new FormControl({value: '', disabled: true}, Validators.required),
@@ -63,7 +65,7 @@ export class AdduserComponent implements OnInit {
   }
 
   back() {
-    if (this.userForm.touched || this.privilegeForm.dirty) {
+    if ((this.userForm.touched || this.privilegeForm.dirty) && !this.added) {
       if (confirm('Are you sure you want to leave?')) {
         this.router.navigate(['/menu/users']);
       }
@@ -214,6 +216,8 @@ export class AdduserComponent implements OnInit {
       response => {
         if (response['success'] == true) {
           alert('User successfully added!');
+
+          this.added = true;
         } else {
           alert(ErrorHandling.showError(response));
         }
