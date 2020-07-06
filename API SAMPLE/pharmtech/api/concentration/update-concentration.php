@@ -2,51 +2,50 @@
 //Headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Methods: PUT');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../../config/Database.php';
-include_once '../../models/LocationModel.php';
+include_once '../../models/ConcentrationModel.php';
 
 //instantiate db and connect
 $database = new Database();
 $db = $database->connect();
 
-// Instantiate location object
-$lm = new LocationModel ($db);
+// Instantiate concentration object
+$cm = new ConcentrationModel ($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
-$lm->locName = $data->locName;
-$lm->locDescription = $data->locDescription;
-$lm->locLatitude = $data->locLatitude;
-$lm->locLongitude = $data->locLongitude;
-$lm->locCreatedBy = $data->locCreatedBy;
+$cm->conValue = $data->conValue;
+$cm->conModifiedBy = $data->conModifiedBy;
+$cm->conModifiedOn = $data->conModifiedOn;
+$cm->conId = $data->conId;
 
 //trigger exception in a "try" block
 try {
-    $result = $lm->checkNameAdd();
+    $result = $cm->checkValueUpdate();
     $num = $result->rowCount();
     if ($num > 0) {
         echo json_encode(
             array(
                 'errorCode' => 05,
-                'message' => 'ERROR. Location name already exists!',
+                'message' => 'ERROR. Concentration value already exists!',
                 'success' => false
             )
         );
     } else {
-        //location query
-        $result = $lm->createLocation();
+        //concentration query
+        $result = $cm->updateConcentration();
 
         //get row count
         $num = $result->rowCount();
 
-        //create location
+        //create concentration
         if ($num > 0) {
             echo json_encode(
                 array(
-                    'message' => 'Location successfully created!',
+                    'message' => 'Concentration successfully udpated!',
                     'success' => true
                 )
             );
@@ -54,7 +53,7 @@ try {
             echo json_encode(
                 array(
                     'errorCode' => '03',
-                    'message' => 'ERROR. Location not created!',
+                    'message' => 'ERROR. Concentration not updated!',
                     'success' => false
                 )
             );

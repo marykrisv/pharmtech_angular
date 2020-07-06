@@ -6,36 +6,34 @@ header('Access-Control-Allow-Methods: PUT');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../../config/Database.php';
-include_once '../../models/UserModel.php';
+include_once '../../models/ConcentrationModel.php';
 
 //instantiate db and connect
 $database = new Database();
 $db = $database->connect();
 
-// Instantiate user object
-$um = new UserModel($db);
+// Instantiate concentration object
+$cm = new ConcentrationModel ($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
-//set ID to update
-$um->userId = $data->userId;
-$um->userPassword = $data->userPassword;
-$um->userModifiedOn = $data->userModifiedOn;
-$um->userModifiedBy = $data->userModifiedBy;
+$cm->conId = $data->conId;
+$cm->conModifiedOn = $data->conModifiedOn;
+$cm->conModifiedBy = $data->conModifiedBy;
 
 //trigger exception in a "try" block
 try {
-    //user query
-    $result = $um->resetPassword();
+    //concentration query
+    $result = $cm->deleteConcentration();
 
     //get row count
     $num = $result->rowCount();
 
-    // update password
+    //create concentration
     if ($num > 0) {
         echo json_encode(
             array(
-                'message' => 'User password reset successful!',
+                'message' => 'Concentration successfully deleted!',
                 'success' => true
             )
         );
@@ -43,7 +41,7 @@ try {
         echo json_encode(
             array(
                 'errorCode' => '03',
-                'message' => 'ERROR. User password not updated!',
+                'message' => 'ERROR. Concentration not deleted!',
                 'success' => false
             )
         );
@@ -57,6 +55,7 @@ try {
         )
     );
 } catch(Exception $e) {
+    print($e);
     echo json_encode(
         array(
             'errorCode' => '02',

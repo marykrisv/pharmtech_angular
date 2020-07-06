@@ -39,9 +39,7 @@ try {
                 'locLatitude' => $locLatitude,
                 'locLongitude' => $locLongitude,
                 'locCreatedOn' => $locCreatedOn,
-                'locCreatedBy' => $locCreatedBy,
                 'locModifiedOn' => $locModifiedOn,
-                'locModifiedBy' => $locModifiedBy,
                 'locDeleted' => $locDeleted,
                 'locCreatedBy' => $ucUsername,
                 'locModifiedBy' => $umUsername
@@ -65,7 +63,7 @@ try {
     echo json_encode(
         array(
             'errorCode' => '04',
-            'message' => $e->errorInfo[1]
+            'message' => $e->getMessage()
         )
     );
 } catch(Exception $e) {

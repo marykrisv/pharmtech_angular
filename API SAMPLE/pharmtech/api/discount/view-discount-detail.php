@@ -4,56 +4,55 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 include_once '../../config/Database.php';
-include_once '../../models/LocationModel.php';
+include_once '../../models/DiscountModel.php';
 
 //instantiate db and connect
 $database = new Database();
 $db = $database->connect();
 
-// Instantiate location object
-$lm = new LocationModel($db);
+// Instantiate discount object
+$dm = new DiscountModel($db);
+
+//get discount id
+$dm->disId = isset($_GET['id']) ? $_GET['id'] : die();
 
 //trigger exception in a "try" block
 try {
-    //location query
-    $result = $lm->viewAllLocation();
+    //discount query
+    $result = $dm->viewDiscountDetail();
 
     //get row count
     $num = $result->rowCount();
 
-    //Check if any location
+    //Check if any discount
     if ($num > 0) {
-        // location array
-        $loc_arr['data'] = array();
+        // discount array
+        $dis_arr['data'] = array();
 
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             extract($row);
 
-            $loc_item = array(
-                'locId' => $locId,
-                'locName' => $locName,
-                'locDescription' => $locDescription,
-                'locLatitude' => $locLatitude,
-                'locLongitude' => $locLongitude,
-                'locCreatedOn' => $locCreatedOn,
-                'locModifiedOn' => $locModifiedOn,
-                'locDeleted' => $locDeleted,
-                'locCreatedBy' => $ucUsername,
-                'locModifiedBy' => $umUsername,
-                'total' => $total
+            $dis_item = array(
+                'disId' => $disId,
+                'disValue' => $disValue,
+                'disCreatedOn' => $disCreatedOn,
+                'disModifiedOn' => $disModifiedOn,
+                'disDeleted' => $disDeleted,
+                'disCreatedBy' => $ucUsername,
+                'disModifiedBy' => $umUsername
             );
 
             //push to "data"
-            array_push($loc_arr['data'], $loc_item);
+            array_push($dis_arr['data'], $dis_item);
         }
 
         //turn into JSON output
-        echo json_encode($loc_arr);
+        echo json_encode($dis_arr);
     } else {
         echo json_encode (
             array(
                 'errorCode' => '01',
-                'message' => 'ERROR. No location found!'
+                'message' => 'ERROR. No discount found!'
             )
         );
     }

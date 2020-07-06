@@ -6,36 +6,34 @@ header('Access-Control-Allow-Methods: PUT');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../../config/Database.php';
-include_once '../../models/UserModel.php';
+include_once '../../models/DiscountModel.php';
 
 //instantiate db and connect
 $database = new Database();
 $db = $database->connect();
 
-// Instantiate user object
-$um = new UserModel($db);
+// Instantiate discount object
+$dm = new DiscountModel ($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
-//set ID to update
-$um->userId = $data->userId;
-$um->userPassword = $data->userPassword;
-$um->userModifiedOn = $data->userModifiedOn;
-$um->userModifiedBy = $data->userModifiedBy;
+$dm->disId = $data->disId;
+$dm->disModifiedOn = $data->disModifiedOn;
+$dm->disModifiedBy = $data->disModifiedBy;
 
 //trigger exception in a "try" block
 try {
-    //user query
-    $result = $um->resetPassword();
+    //discount query
+    $result = $dm->deleteDiscount();
 
     //get row count
     $num = $result->rowCount();
 
-    // update password
+    //create discount
     if ($num > 0) {
         echo json_encode(
             array(
-                'message' => 'User password reset successful!',
+                'message' => 'Discount successfully deleted!',
                 'success' => true
             )
         );
@@ -43,7 +41,7 @@ try {
         echo json_encode(
             array(
                 'errorCode' => '03',
-                'message' => 'ERROR. User password not updated!',
+                'message' => 'ERROR. Discount not deleted!',
                 'success' => false
             )
         );
@@ -57,6 +55,7 @@ try {
         )
     );
 } catch(Exception $e) {
+    print($e);
     echo json_encode(
         array(
             'errorCode' => '02',

@@ -4,7 +4,7 @@ class PrivilegeModel {
     private $conn;
     private $table = 'privilege';
 
-    //Post Properties
+    //Privilege Properties
     public $priUserId;
     public $priDashboard;
     public $priUser;

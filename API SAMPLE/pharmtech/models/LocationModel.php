@@ -5,7 +5,7 @@ class LocationModel {
     private $table = 'location';
     private $viewtable = 'currentlocations';
 
-    //Post Properties
+    //location Properties
     public $locId;
     public $locName;
     public $locDescription;
@@ -37,6 +37,8 @@ class LocationModel {
 
         //clean data
         $this->locId = htmlspecialchars(strip_tags($this->locId));
+        $this->locModifiedOn = htmlspecialchars(strip_tags($this->locModifiedOn));
+        $this->locModifiedBy = htmlspecialchars(strip_tags($this->locModifiedBy));
 
         //bind params
         $stmt->bindParam(':locModifiedOn', $this->locModifiedOn);
@@ -79,9 +81,6 @@ class LocationModel {
 
         //prepare statement
         $stmt = $this->conn->prepare($query);
-
-        //bind ID
-        $stmt->bindParam(1, $this->priUserId);
 
         //execute
         $stmt->execute();
@@ -170,7 +169,7 @@ class LocationModel {
     //check name
     public function checkNameAdd() {
         //create query
-        $query = 'SELECT locName from '.$this->table.'
+        $query = 'SELECT locName from '.$this->viewtable.'
                     WHERE
                         locName=:locName
                     LIMIT 1';
@@ -193,7 +192,7 @@ class LocationModel {
     //check name
     public function checkNameUpdate() {
         //create query
-        $query = 'SELECT locName from '.$this->table.'
+        $query = 'SELECT locName from '.$this->viewtable.'
                     WHERE
                         locName=:locName and locId!=:locId
                     LIMIT 1';

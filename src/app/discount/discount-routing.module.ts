@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdddiscountComponent } from './adddiscount/adddiscount.component';
 import { DiscountdetailComponent } from './discountdetail/discountdetail.component';
+import { ViewdiscountComponent } from './viewdiscount/viewdiscount.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: AdddiscountComponent
+    component: ViewdiscountComponent
   }
 ];
 

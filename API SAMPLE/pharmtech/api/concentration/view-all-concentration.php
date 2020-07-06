@@ -4,56 +4,53 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 include_once '../../config/Database.php';
-include_once '../../models/LocationModel.php';
+include_once '../../models/ConcentrationModel.php';
 
 //instantiate db and connect
 $database = new Database();
 $db = $database->connect();
 
-// Instantiate location object
-$lm = new LocationModel($db);
+// Instantiate Concentration object
+$cm = new ConcentrationModel($db);
 
 //trigger exception in a "try" block
 try {
-    //location query
-    $result = $lm->viewAllLocation();
+    //concentration query
+    $result = $cm->viewAllConcentration();
 
     //get row count
     $num = $result->rowCount();
 
-    //Check if any location
+    //Check if any concentration
     if ($num > 0) {
-        // location array
-        $loc_arr['data'] = array();
+        // concentration array
+        $con_arr['data'] = array();
 
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             extract($row);
 
-            $loc_item = array(
-                'locId' => $locId,
-                'locName' => $locName,
-                'locDescription' => $locDescription,
-                'locLatitude' => $locLatitude,
-                'locLongitude' => $locLongitude,
-                'locCreatedOn' => $locCreatedOn,
-                'locModifiedOn' => $locModifiedOn,
-                'locDeleted' => $locDeleted,
-                'locCreatedBy' => $ucUsername,
-                'locModifiedBy' => $umUsername,
+            $con_item = array(
+                'conId' => $conId,
+                'conValue' => $conValue,
+                'conCreatedOn' => $conCreatedOn,
+                'conModifiedOn' => $conModifiedOn,
+                'conDeleted' => $conDeleted,
+                'conCreatedBy' => $ucUsername,
+                'conModifiedBy' => $umUsername,
                 'total' => $total
             );
 
             //push to "data"
-            array_push($loc_arr['data'], $loc_item);
+            array_push($con_arr['data'], $con_item);
         }
 
         //turn into JSON output
-        echo json_encode($loc_arr);
+        echo json_encode($con_arr);
     } else {
         echo json_encode (
             array(
                 'errorCode' => '01',
-                'message' => 'ERROR. No location found!'
+                'message' => 'ERROR. No concentration found!'
             )
         );
     }

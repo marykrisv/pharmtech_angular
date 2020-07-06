@@ -5,7 +5,7 @@ class UserModel {
     private $table = 'user';
     private $viewtable = 'currentusers';
 
-    //Post Properties
+    //User Properties
     public $userId;
     public $userName;
     public $userPassword;
@@ -40,7 +40,7 @@ class UserModel {
 
     public function checkUsernameAdd() {
         //create query
-        $query = 'SELECT userName from '.$this->table.'
+        $query = 'SELECT userName from '.$this->viewtable.'
                     WHERE
                         userName=:userName
                     LIMIT 1';
@@ -62,7 +62,7 @@ class UserModel {
 
     public function checkUsernameUpdate() {
         //create query
-        $query = 'SELECT userName from '.$this->table.'
+        $query = 'SELECT userName from '.$this->viewtable.'
                     WHERE
                         userName=:userName and userId!=:userId
                     LIMIT 1';
@@ -72,6 +72,7 @@ class UserModel {
 
         //clean data
         $this->userName = htmlspecialchars(strip_tags($this->userName));
+        $this->userId = htmlspecialchars(strip_tags($this->userId));
 
         //bind data
         $stmt->bindParam(':userName', $this->userName);
@@ -155,6 +156,8 @@ class UserModel {
                 FROM '.$this->viewtable.' c
                 WHERE userStatus=?
                 LIMIT 0, '.$this->limit;
+        
+        $this->userStatus = htmlspecialchars(strip_tags($this->userStatus));
 
         $params = array($this->userStatus);
         $stmt = $this->conn->prepare($query);
@@ -171,6 +174,9 @@ class UserModel {
                 WHERE userStatus=?
                 and userLocId=?
                 LIMIT 0, '.$this->limit;
+
+        $this->userStatus = htmlspecialchars(strip_tags($this->userStatus));
+        $this->userLocId = htmlspecialchars(strip_tags($this->userLocId));
 
         $params = array($this->userStatus, $this->userLocId);
         $stmt = $this->conn->prepare($query);

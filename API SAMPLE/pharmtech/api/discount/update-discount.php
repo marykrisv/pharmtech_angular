@@ -2,51 +2,51 @@
 //Headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Methods: PUT');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../../config/Database.php';
-include_once '../../models/LocationModel.php';
+include_once '../../models/DiscountModel.php';
 
 //instantiate db and connect
 $database = new Database();
 $db = $database->connect();
 
-// Instantiate location object
-$lm = new LocationModel ($db);
+// Instantiate discount object
+$dm = new DiscountModel ($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
-$lm->locName = $data->locName;
-$lm->locDescription = $data->locDescription;
-$lm->locLatitude = $data->locLatitude;
-$lm->locLongitude = $data->locLongitude;
-$lm->locCreatedBy = $data->locCreatedBy;
+$dm->disName = $data->disName;
+$dm->disPercent = $data->disPercent;
+$dm->disModifiedBy = $data->disModifiedBy;
+$dm->disModifiedOn = $data->disModifiedOn;
+$dm->disId = $data->disId;
 
 //trigger exception in a "try" block
 try {
-    $result = $lm->checkNameAdd();
+    $result = $dm->checkNameUpdate();
     $num = $result->rowCount();
     if ($num > 0) {
         echo json_encode(
             array(
                 'errorCode' => 05,
-                'message' => 'ERROR. Location name already exists!',
+                'message' => 'ERROR. Discount value already exists!',
                 'success' => false
             )
         );
     } else {
-        //location query
-        $result = $lm->createLocation();
+        //discount query
+        $result = $dm->updateDiscount();
 
         //get row count
         $num = $result->rowCount();
 
-        //create location
+        //create discount
         if ($num > 0) {
             echo json_encode(
                 array(
-                    'message' => 'Location successfully created!',
+                    'message' => 'Discount successfully udpated!',
                     'success' => true
                 )
             );
@@ -54,7 +54,7 @@ try {
             echo json_encode(
                 array(
                     'errorCode' => '03',
-                    'message' => 'ERROR. Location not created!',
+                    'message' => 'ERROR. Discount not updated!',
                     'success' => false
                 )
             );
