@@ -1,1 +1,95 @@
-<p>discountdetail works!</p>
+<div class="container">  
+    <!-- view all -->
+    <h2>Discount Detail</h2>
+    
+    <div *ngIf="this.disDetails != null" class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">                
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-8 col-xs-12">
+                            <button 
+                                class="btn btn-sm btn-default" 
+                                (click)="back()">< Back</button>
+                            <div id="otherDetailsDiv">
+                                <span>
+                                    {{ 'Created: '+disDetails.disCreatedBy+' | '+disDetails.disCreatedOn }}
+                                </span>
+                                <span *ngIf="disDetails.disModifiedOn != null">
+                                    {{ 'Modified: '+disDetails.disModifiedBy+' | '+disDetails.disModifiedOn }}
+                                </span>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-xs-12 text-right buttons">                            
+                            <button 
+                                [ngClass]="stillUpdatingDiscount?'m-progress':''"
+                                class="btn btn-sm btn-warning"
+                                [disabled]="(disForm.touched && disForm.valid)?false:true"
+                                (click)="updateDiscount()">
+                                <em class="fa fa-pencil"></em> Update</button>
+                            <button 
+                                [ngClass]="stillDeletingDiscount?'m-progress':''"
+                                class="btn btn-sm btn-danger"
+                                (click)="deleteDiscount()">
+                                <em class="fa fa-trash"></em> Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">             
+                        <!-- <br><br> -->                        
+                        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                            <div id="information" class="panel panel-default">
+                                <div class="panel-heading">Discount Information</div>
+                                <div class="panel-body">
+                                    <form [formGroup]="disForm">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="validate-text">Name</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        [value]="this.nameInput.value | titlecase"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="name"
+                                                        placeholder="Name">
+                                                    <span 
+                                                        [ngClass]="this.nameInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.nameInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Percent %</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="percent"
+                                                        placeholder="Percent">
+                                                    <span 
+                                                        [ngClass]="this.percentInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.percentInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-popup></app-popup> -->

@@ -11,7 +11,7 @@ const routes: Routes = [
     component: AdddiscountComponent
   },
   {
-    path: 'detail/:conId',
+    path: 'detail/:disId',
     component: DiscountdetailComponent
   },
   {
