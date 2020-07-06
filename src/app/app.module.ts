@@ -1,3 +1,4 @@
+import { DiscountModule } from './discount/discount.module';
 import { ConcentrationModule } from './concentration/concentration.module';
 import { LocationModule } from './location/location.module';
 import { InventoryGuard } from './guard/inventory.guard';
@@ -44,7 +45,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
     LoginModule,
     ReactiveFormsModule,
     LocationModule,
-    ConcentrationModule
+    ConcentrationModule,
+    DiscountModule
   ],
   providers: [
     AuthGuard,

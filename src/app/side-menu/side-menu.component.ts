@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { PrivilegeInterface } from '../interface/privilege.interface';
 import { SessionInterface } from '../interface/session.interface';
@@ -14,6 +14,8 @@ export class SideMenuComponent implements OnInit {
   screenWidth = window.innerWidth;
   userPrivilege: PrivilegeInterface;
   userSession: SessionInterface;
+
+  isManage: boolean = false;
 
   constructor(
     private data: DataService, 

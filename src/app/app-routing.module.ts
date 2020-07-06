@@ -48,6 +48,10 @@ const routes: Routes = [
       {
         path: 'concentrations',
         loadChildren: () => import('./concentration/concentration.module').then(m => m.ConcentrationModule)
+      },
+      {
+        path: 'discounts',
+        loadChildren: () => import('./discount/discount.module').then(m => m.DiscountModule)
       }
     ]
   },

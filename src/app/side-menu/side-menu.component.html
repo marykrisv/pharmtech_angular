@@ -27,7 +27,9 @@
                             <i class="fa fa-database fa-lg"></i> Inventory
                         </a>
                     </li>
-                    <li [ngClass]="userPrivilege.priManage==false?'hidden':''"
+                    <li 
+                        [ngClass]="userPrivilege.priManage==false?'hidden':''"
+                        [ngClass]="isManage?'active':''"
                         data-toggle="collapse" 
                         data-target="#others" 
                         class="collapsed">
@@ -38,7 +40,8 @@
                             <!-- <li class="active"><a href="#">Concentration</a></li> -->
                             <li routerLink="concentrations"
                                 routerLinkActive="active"><a>Concentration</a></li>
-                            <li><a href="#">Discount</a></li>
+                            <li routerLink="discounts"
+                                routerLinkActive="active"><a>Discount</a></li>
                             <li><a href="#">Dosage Form</a></li>
                             <li><a href="#">Drug Class</a></li>
                             <li routerLink="locations"
