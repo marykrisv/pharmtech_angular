@@ -191,8 +191,8 @@ class DiscountModel {
         $this->disId = htmlspecialchars(strip_tags($this->disId));
 
         //bind data
-        $stmt->bindParam(':conValue', $this->disName);
-        $stmt->bindParam(':conId', $this->disId);
+        $stmt->bindParam(':disName', $this->disName);
+        $stmt->bindParam(':disId', $this->disId);
 
         //execute
         $stmt->execute();

@@ -34,7 +34,8 @@ try {
 
             $dis_item = array(
                 'disId' => $disId,
-                'disValue' => $disValue,
+                'disName' => $disName,
+                'disPercent' => $disPercent,
                 'disCreatedOn' => $disCreatedOn,
                 'disModifiedOn' => $disModifiedOn,
                 'disDeleted' => $disDeleted,
