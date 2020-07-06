@@ -58,7 +58,6 @@ export class AddconcentrationComponent implements OnInit {
           alert(ErrorHandling.showError(response));
         }        
       }).catch(response => {
-        console.log(response);
         alert("Connection Problem. Please check your internet.");
       }).finally(() => {
         this.stillCreatingConcentration = false;

@@ -40,7 +40,7 @@ export class SideMenuComponent implements OnInit {
     //   element[0].classList.add("hidden");
     // } 
 
-    console.log(this.router.url);
+    // console.log(this.router.url);
   }
 
   // openSubmenu ($event) {

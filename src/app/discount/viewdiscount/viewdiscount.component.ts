@@ -56,7 +56,6 @@ export class ViewdiscountComponent implements OnInit {
     this.disService.viewAllDiscount().then(response => {
       this.populateDiscount(response);
     }).catch(response => {
-      console.log(response);
       alert("Connection Problem. Please check your internet.");
     });
   }

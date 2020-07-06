@@ -9,7 +9,11 @@ import { DiscountdetailComponent } from './discountdetail/discountdetail.compone
 
 
 @NgModule({
-  declarations: [AdddiscountComponent, ViewdiscountComponent, DiscountdetailComponent],
+  declarations: [
+    AdddiscountComponent, 
+    ViewdiscountComponent, 
+    DiscountdetailComponent
+  ],
   imports: [
     CommonModule,
     DiscountRoutingModule,

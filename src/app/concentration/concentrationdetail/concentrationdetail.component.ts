@@ -98,7 +98,7 @@ export class ConcentrationdetailComponent implements OnInit {
     }
   }
 
-  deleteLocation() {
+  deleteConcentration() {
     if (confirm('Are you sure you want to delete this concentration?')) {
       this.stillDeletingConcentration = true;
       const concentration = {
@@ -106,9 +106,7 @@ export class ConcentrationdetailComponent implements OnInit {
         conModifiedOn: new Date(),
         conId: this.conDetails.conId
       }
-      console.log(concentration);
       this.conService.deleteConcentration(concentration).then(response => {
-        console.log(response);
         if (response['success'] == true) {
           alert(response['message']);
           this.router.navigate(["/menu/concentrations"]);
