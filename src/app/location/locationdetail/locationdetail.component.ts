@@ -62,6 +62,16 @@ export class LocationdetailComponent implements OnInit {
     });
   }
 
+  back() {
+    if (this.locForm.touched) {
+      if (confirm('Are you sure you want to leave?')) {
+        this.router.navigate(['/menu/locations']);
+      }
+    } else {
+      this.router.navigate(['/menu/locations']);
+    }
+  }
+
   intializeForm() {
     if (this.locDetails != null) {
       this.nameInput.setValue(this.locDetails.locName);

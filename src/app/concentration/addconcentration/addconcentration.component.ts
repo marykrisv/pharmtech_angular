@@ -4,6 +4,7 @@ import { SessionInterface } from 'src/app/interface/session.interface';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ErrorHandling } from 'src/app/common/error-handling';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addconcentration',
@@ -23,13 +24,24 @@ export class AddconcentrationComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private conService: ConcentrationService
+    private conService: ConcentrationService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.auth.currentSession.subscribe(
       currentSession => this.userSession = currentSession
     );
+  }
+
+  back() {
+    if (this.conForm.touched) {
+      if (confirm('Are you sure you want to leave?')) {
+        this.router.navigate(['/menu/concentrations']);
+      }
+    } else {
+      this.router.navigate(['/menu/concentrations']);
+    }
   }
 
   addNewConcentration() {

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ErrorHandling } from './../../common/error-handling';
 import { RoleConfig } from './../../common/roleconfig';
 import { PhoneValidator } from './../../validators/phone.validator';
@@ -53,11 +54,22 @@ export class AdduserComponent implements OnInit {
   constructor(
     private auth: AuthService, 
     private userService: UserService,
-    private privilegeService: PrivilegeService) { }
+    private privilegeService: PrivilegeService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.auth.currentSession.subscribe(currentSession => this.userSession = currentSession);
     this.setRandomPassword();
+  }
+
+  back() {
+    if (this.userForm.touched || this.privilegeForm.dirty) {
+      if (confirm('Are you sure you want to leave?')) {
+        this.router.navigate(['/menu/users']);
+      }
+    } else {
+      this.router.navigate(['/menu/users']);
+    }
   }
 
   // set privilege based on role

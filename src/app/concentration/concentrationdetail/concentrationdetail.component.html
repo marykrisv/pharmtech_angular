@@ -10,7 +10,7 @@
                         <div class="col-md-8 col-xs-12">
                             <button 
                                 class="btn btn-sm btn-default" 
-                                routerLink="/menu/concentrations">< Back</button>
+                                (click)="back()">< Back</button>
                             <div id="otherDetailsDiv">
                                 <span>
                                     {{ 'Created: '+conDetails.conCreatedBy+' | '+conDetails.conCreatedOn }}
@@ -49,7 +49,6 @@
                                                 <label for="validate-text">Value</label>
                                                 <div class="input-group">
                                                     <input 
-                                                        [value] = "this.valueInput.value | titlecase"
                                                         type="text" 
                                                         class="form-control" 
                                                         formControlName="value"

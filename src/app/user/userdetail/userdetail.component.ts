@@ -109,6 +109,16 @@ export class UserdetailComponent implements OnInit {
     this.userStatusIput.setValue(this.userDetail.userStatus);
   }
 
+  back() {
+    if (this.userForm.touched || this.privilegeForm.dirty) {
+      if (confirm('Are you sure you want to leave?')) {
+        this.router.navigate(['/menu/users']);
+      }
+    } else {
+      this.router.navigate(['/menu/users']);
+    }
+  }
+
   resetPassword() {
     if (confirm('Are you sure you want to reset user password?')) {
       this.setRandomPassword();

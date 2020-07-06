@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../../auth/auth.service';
 import { LocationService } from './../../services/location.service';
 import { Component, OnInit } from '@angular/core';
@@ -26,13 +27,24 @@ export class AddlocationComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private locService: LocationService
+    private locService: LocationService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.auth.currentSession.subscribe(
       currentSession => this.userSession = currentSession
     );
+  }
+
+  back() {
+    if (this.locForm.touched) {
+      if (confirm('Are you sure you want to leave?')) {
+        this.router.navigate(['/menu/locations']);
+      }
+    } else {
+      this.router.navigate(['/menu/locations']);
+    }
   }
 
   addNewLocation() {

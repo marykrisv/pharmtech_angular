@@ -45,6 +45,16 @@ export class ConcentrationdetailComponent implements OnInit {
     this.populateDetails();
   }
 
+  back() {
+    if (this.conForm.touched) {
+      if (confirm('Are you sure you want to leave?')) {
+        this.router.navigate(['/menu/concentrations']);
+      }
+    } else {
+      this.router.navigate(['/menu/concentrations']);
+    }
+  }
+
   populateDetails () {    
     this.conService.viewConcentrationDetail(this.conId).then(response => {
       if (response['data'] != null) {
