@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -11,7 +12,8 @@ import { StrengthdetailComponent } from './strengthdetail/strengthdetail.compone
   declarations: [AddstrengthComponent, ViewstrengthComponent, StrengthdetailComponent],
   imports: [
     CommonModule,
-    StrengthRoutingModule
+    StrengthRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class StrengthModule { }

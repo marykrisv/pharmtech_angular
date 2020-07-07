@@ -54,7 +54,7 @@
                     <th style="width: 5%">#</th>
                     <th width="10%"><em class="fa fa-cog"></em></th>
                     <th width="40%">Value</th>
-                    <th width="45%">Created By</th>                    
+                    <th class="hidden-xs" width="45%">Created By</th>                    
                   </tr> 
                 </thead>
                 <tbody>
@@ -72,7 +72,7 @@
                         <a class="btn btn-danger" (click)="deleteConcentration(con.conId)"><em class="fa fa-trash"></em></a>
                       </td>                          
                       <td><span>{{ con.conValue }}</span></td>
-                      <td><span>{{ con.conCreatedBy }}</span></td>
+                      <td class="hidden-xs"><span>{{ con.conCreatedBy }}</span></td>
                     </tr>
                   </ng-template>
                   
