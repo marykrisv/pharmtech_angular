@@ -1,3 +1,5 @@
+import { YesNoPipe } from './../pipes/yesno.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -8,10 +10,16 @@ import { DosagedetailComponent } from './dosagedetail/dosagedetail.component';
 
 
 @NgModule({
-  declarations: [AdddosageComponent, ViewdosageComponent, DosagedetailComponent],
+  declarations: [
+    AdddosageComponent, 
+    ViewdosageComponent, 
+    DosagedetailComponent,
+    YesNoPipe
+  ],
   imports: [
     CommonModule,
-    DosageRoutingModule
+    DosageRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class DosageModule { }
