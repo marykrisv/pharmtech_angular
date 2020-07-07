@@ -52,6 +52,10 @@ const routes: Routes = [
       {
         path: 'discounts',
         loadChildren: () => import('./discount/discount.module').then(m => m.DiscountModule)
+      },
+      {
+        path: 'dosages',
+        loadChildren: () => import('./dosage/dosage.module').then(m => m.DosageModule)
       }
     ]
   },

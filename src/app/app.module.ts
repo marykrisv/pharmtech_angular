@@ -1,3 +1,4 @@
+import { DosageModule } from './dosage/dosage.module';
 import { DiscountModule } from './discount/discount.module';
 import { ConcentrationModule } from './concentration/concentration.module';
 import { LocationModule } from './location/location.module';
@@ -46,7 +47,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
     ReactiveFormsModule,
     LocationModule,
     ConcentrationModule,
-    DiscountModule
+    DiscountModule,
+    DosageModule
   ],
   providers: [
     AuthGuard,
