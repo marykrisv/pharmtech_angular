@@ -1,3 +1,9 @@
+import { InstructionModule } from './instruction/instruction.module';
+import { UomModule } from './uom/uom.module';
+import { StrengthModule } from './strength/strength.module';
+import { RestrictionModule } from './restriction/restriction.module';
+import { DrugclassModule } from './drugclass/drugclass.module';
+import { ManufacturerModule } from './manufacturer/manufacturer.module';
 import { DosageModule } from './dosage/dosage.module';
 import { DiscountModule } from './discount/discount.module';
 import { ConcentrationModule } from './concentration/concentration.module';
@@ -43,12 +49,18 @@ import { NotfoundComponent } from './notfound/notfound.component';
     DashboardModule,
     UsersModule,
     InventoryModule,
+    InstructionModule,
     LoginModule,
     ReactiveFormsModule,
     LocationModule,
     ConcentrationModule,
     DiscountModule,
-    DosageModule
+    DosageModule,
+    DrugclassModule,
+    ManufacturerModule,
+    RestrictionModule,
+    StrengthModule,
+    UomModule
   ],
   providers: [
     AuthGuard,

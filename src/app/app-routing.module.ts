@@ -56,6 +56,30 @@ const routes: Routes = [
       {
         path: 'dosages',
         loadChildren: () => import('./dosage/dosage.module').then(m => m.DosageModule)
+      },
+      {
+        path: 'drugclasses',
+        loadChildren: () => import('./drugclass/drugclass.module').then(m => m.DrugclassModule)
+      },
+      {
+        path: 'manufacturers',
+        loadChildren: () => import('./manufacturer/manufacturer.module').then(m => m.ManufacturerModule)
+      },
+      {
+        path: 'instructions',
+        loadChildren: () => import('./instruction/instruction.module').then(m => m.InstructionModule)
+      },
+      {
+        path: 'restrictions',
+        loadChildren: () => import('./restriction/restriction.module').then(m => m.RestrictionModule)
+      },
+      {
+        path: 'strengths',
+        loadChildren: () => import('./strength/strength.module').then(m => m.StrengthModule)
+      },
+      {
+        path: 'uoms',
+        loadChildren: () => import('./uom/uom.module').then(m => m.UomModule)
       }
     ]
   },
