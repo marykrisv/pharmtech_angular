@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -11,7 +12,8 @@ import { ManufacturerdetailComponent } from './manufacturerdetail/manufacturerde
   declarations: [AddmanufacturerComponent, ViewmanufacturerComponent, ManufacturerdetailComponent],
   imports: [
     CommonModule,
-    ManufacturerRoutingModule
+    ManufacturerRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class ManufacturerModule { }
