@@ -43,9 +43,9 @@ export class SideMenuComponent implements OnInit {
     // console.log(this.router.url);
   }
 
-  // openSubmenu ($event) {
-  //   $event.stopPropagation();
-  //   var element = document.getElementById("others");
-  //   element.classList.toggle("collapse");
-  // }
+  openSubmenu ($event) {
+    $event.stopPropagation();
+    var element = document.getElementById("others");
+    element.classList.toggle("collapse");
+  }
 }

@@ -1,5 +1,5 @@
 export class ToolConfig {
-    static url = "192.168.254.108";
+    static url = "localhost";
 
     // view rows
     static noOfRows = 20;

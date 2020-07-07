@@ -97,14 +97,14 @@ export class UserdetailComponent implements OnInit {
       this.userLicenseNoInput.setValue(this.userDetail.userLicenseNo);
 
       // populate user privilege
-      this.priDashboardInput.setValue(this.userDetail.priDashboard);
-      this.priUserInput.setValue(this.userDetail.priUser);
-      this.priInventoryInput.setValue(this.userDetail.priInventory);
-      this.priManageInput.setValue(this.userDetail.priManage);
-      this.priPatientManagementInput.setValue(this.userDetail.priPatientManagement);
-      this.priPharmacyCornerInput.setValue(this.userDetail.priPharmacyCorner);
-      this.priNotificationInput.setValue(this.userDetail.priNotification);
-      this.priPosInput.setValue(this.userDetail.priPos);
+      this.priDashboardInput.setValue(+this.userDetail.priDashboard);
+      this.priUserInput.setValue(+this.userDetail.priUser);
+      this.priInventoryInput.setValue(+this.userDetail.priInventory);
+      this.priManageInput.setValue(+this.userDetail.priManage);
+      this.priPatientManagementInput.setValue(+this.userDetail.priPatientManagement);
+      this.priPharmacyCornerInput.setValue(+this.userDetail.priPharmacyCorner);
+      this.priNotificationInput.setValue(+this.userDetail.priNotification);
+      this.priPosInput.setValue(+this.userDetail.priPos);
     }
 
     this.currentStat = this.userDetail.userStatus;

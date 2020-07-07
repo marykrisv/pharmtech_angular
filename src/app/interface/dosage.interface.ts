@@ -5,9 +5,9 @@ export interface DosageInterface {
     dosAbr: string,
     dosName: string,
     dosWithConcentration: boolean,
-    conCreatedOn: string,
-    conCreatedBy: string,
-    conModifiedOn: string,
-    conModifiedBy: string,
-    conDeleted: number
+    dosCreatedOn: string,
+    dosCreatedBy: string,
+    dosModifiedOn: string,
+    dosModifiedBy: string,
+    dosDeleted: number
 } 

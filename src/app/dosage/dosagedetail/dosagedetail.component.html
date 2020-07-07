@@ -1,1 +1,108 @@
-<p>dosagedetail works!</p>
+<div class="container">  
+    <!-- view all -->
+    <h2>Dosage Detail</h2>
+    
+    <div *ngIf="this.dosDetails != null" class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">                
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-8 col-xs-12">
+                            <button 
+                                class="btn btn-sm btn-default" 
+                                (click)="back()">< Back</button>
+                            <div id="otherDetailsDiv">
+                                <span>
+                                    {{ 'Created: '+dosDetails.dosCreatedBy+' | '+dosDetails.dosCreatedOn }}
+                                </span>
+                                <span *ngIf="dosDetails.dosModifiedOn != null">
+                                    {{ 'Modified: '+dosDetails.dosModifiedBy+' | '+dosDetails.dosModifiedOn }}
+                                </span>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-xs-12 text-right buttons">                            
+                            <button 
+                                [ngClass]="stillUpdatingDosage?'m-progress':''"
+                                class="btn btn-sm btn-warning"
+                                [disabled]="((dosForm.touched || dosForm.dirty) && dosForm.valid)?false:true"
+                                (click)="updateDosage()">
+                                <em class="fa fa-pencil"></em> Update</button>
+                            <button 
+                                [ngClass]="stillDeletingDosage?'m-progress':''"
+                                class="btn btn-sm btn-danger"
+                                (click)="deleteDosage()">
+                                <em class="fa fa-trash"></em> Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">             
+                        <!-- <br><br> -->                        
+                        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                            <div id="information" class="panel panel-default">
+                                <div class="panel-heading">Dosage Information</div>
+                                <div class="panel-body">
+                                    <form [formGroup]="dosForm">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="validate-text">Abr</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="abr"
+                                                        placeholder="Abreviation">
+                                                    <span 
+                                                        [ngClass]="this.abrInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.abrInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Name</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        [value]="this.nameInput.value | titlecase"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="name"
+                                                        placeholder="Name">
+                                                    <span 
+                                                        [ngClass]="this.nameInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.nameInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br><br>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        <span>With Concentration</span>                                                                
+                                                        <label class="switch">
+                                                            <input 
+                                                                type="checkbox" 
+                                                                class="primary" 
+                                                                formControlName="withConcentration">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>                                            
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-popup></app-popup> -->
