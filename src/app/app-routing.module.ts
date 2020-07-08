@@ -66,10 +66,6 @@ const routes: Routes = [
         loadChildren: () => import('./manufacturer/manufacturer.module').then(m => m.ManufacturerModule)
       },
       {
-        path: 'instructions',
-        loadChildren: () => import('./instruction/instruction.module').then(m => m.InstructionModule)
-      },
-      {
         path: 'restrictions',
         loadChildren: () => import('./restriction/restriction.module').then(m => m.RestrictionModule)
       },

@@ -1,1 +1,92 @@
-<p>uomdetail works!</p>
+<div class="container">  
+    <!-- view all -->
+    <h2>Uom Detail</h2>
+    
+    <div *ngIf="this.uomDetails != null" class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">                
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-8 col-xs-12">
+                            <button 
+                                class="btn btn-sm btn-default" 
+                                (click)="back()">< Back</button>
+                            <div id="otherDetailsDiv">
+                                <span>
+                                    {{ 'Created: '+uomDetails.uomCreatedBy+' | '+uomDetails.uomCreatedOn }}
+                                </span>
+                                <span *ngIf="uomDetails.uomModifiedOn != null">
+                                    {{ 'Modified: '+uomDetails.uomModifiedBy+' | '+uomDetails.uomModifiedOn }}
+                                </span>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-xs-12 text-right buttons">                            
+                            <button 
+                                [ngClass]="stillUpdatingUom?'m-progress':''"
+                                class="btn btn-sm btn-warning"
+                                [disabled]="((uomForm.touched || uomForm.dirty) && uomForm.valid)?false:true"
+                                (click)="updateUom()">
+                                <em class="fa fa-pencil"></em> Update</button>
+                            <button 
+                                [ngClass]="stillDeletingUom?'m-progress':''"
+                                class="btn btn-sm btn-danger"
+                                (click)="deleteUom()">
+                                <em class="fa fa-trash"></em> Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">             
+                        <!-- <br><br> -->                        
+                        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                            <div id="information" class="panel panel-default">
+                                <div class="panel-heading">Uom Information</div>
+                                <div class="panel-body">
+                                    <form [formGroup]="uomForm">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="validate-text">Name</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        [value]="this.nameInput.value | titlecase"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="name"
+                                                        placeholder="Name">
+                                                    <span 
+                                                        [ngClass]="this.nameInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.nameInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br><br>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        <span>Can be computed</span>                                                                
+                                                        <label class="switch">
+                                                            <input 
+                                                                type="checkbox" 
+                                                                class="primary" 
+                                                                formControlName="canBeComputed">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>                                            
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-popup></app-popup> -->

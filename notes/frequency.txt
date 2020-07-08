@@ -1,0 +1,21 @@
+od = Once a day
+bd = Two times a day
+tds = Three times a day
+qds = Four times a day
+5td = Five times a day
+pw = Once a week
+2tw = Two times a week
+3tw = Three times a week
+1h = "One hourly
+1m = Once a month
+2tm = Twice in a month
+3tm = Thrice in a month
+default: ""
+
+add ons
+prn = when necessary
+hs = before sleep
+ac = before meals
+pc = after food
+stat = need NOW, no delay
+once = one-time dose

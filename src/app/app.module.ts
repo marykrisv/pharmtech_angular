@@ -1,4 +1,3 @@
-import { InstructionModule } from './instruction/instruction.module';
 import { UomModule } from './uom/uom.module';
 import { StrengthModule } from './strength/strength.module';
 import { RestrictionModule } from './restriction/restriction.module';
@@ -49,7 +48,6 @@ import { NotfoundComponent } from './notfound/notfound.component';
     DashboardModule,
     UsersModule,
     InventoryModule,
-    InstructionModule,
     LoginModule,
     ReactiveFormsModule,
     LocationModule,
