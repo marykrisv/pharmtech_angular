@@ -1,3 +1,5 @@
+import { SharedModule } from './../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -8,10 +10,16 @@ import { UomdetailComponent } from './uomdetail/uomdetail.component';
 
 
 @NgModule({
-  declarations: [AdduomComponent, ViewuomComponent, UomdetailComponent],
+  declarations: [
+    AdduomComponent, 
+    ViewuomComponent, 
+    UomdetailComponent
+  ],
   imports: [
     CommonModule,
-    UomRoutingModule
+    UomRoutingModule,
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class UomModule { }
