@@ -7,28 +7,30 @@ import { ToolConfig } from '../common/toolconfig';
 })
 export class LocationService {
 
+  apiUrl = "/pharmtech/api/location/";
+
   constructor(private http: HttpClient) { }
   
   async viewAllLocation () {
-    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/location/view-all-location.php').toPromise();
+    return await this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-all-location.php').toPromise();
   }
 
   async viewLocationDetail (locId: number) {
-    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/location/view-location-detail.php?id='+locId).toPromise();
+    return await this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-location-detail.php?id='+locId).toPromise();
   }
 
   async createNewLocation(location: any) {
-    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/location/create-location', 
+    return await this.http.post('http://'+ToolConfig.url+this.apiUrl+'create-location', 
     JSON.stringify(location)).toPromise();
   }
 
   async updateLocation(location: any) {
-    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/location/update-location', 
+    return await this.http.put('http://'+ToolConfig.url+this.apiUrl+'update-location', 
     JSON.stringify(location)).toPromise();
   }
 
   async deleteLocation(location: any) {
-    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/location/delete-location', 
+    return await this.http.put('http://'+ToolConfig.url+this.apiUrl+'delete-location', 
     JSON.stringify(location)).toPromise();
   }
 }

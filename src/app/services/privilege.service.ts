@@ -8,20 +8,22 @@ import { ToolConfig } from '../common/toolconfig';
 })
 export class PrivilegeService {
 
+  apiUrl = "/pharmtech/api/privilege/";
+
   constructor(private http: HttpClient) { }
 
   async updatePrivilege (user: any) {
-    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/privilege/update-privilege', 
+    return await this.http.post('http://'+ToolConfig.url+this.apiUrl+'update-privilege', 
     JSON.stringify(user)).toPromise();
   }
 
   async getPrivilege (user: any) {
-    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/privilege/get-privilege', 
+    return await this.http.post('http://'+ToolConfig.url+this.apiUrl+'get-privilege', 
     JSON.stringify(user)).toPromise();
   }
 
   async createPrivilege (privilege: any) {
-    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/privilege/create-privilege', 
+    return await this.http.post('http://'+ToolConfig.url+this.apiUrl+'create-privilege', 
     JSON.stringify(privilege)).toPromise();
   }
 }

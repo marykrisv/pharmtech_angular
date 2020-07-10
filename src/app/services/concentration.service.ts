@@ -7,28 +7,35 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ConcentrationService {
 
+  apiUrl = "/pharmtech/api/concentration/";
+
   constructor(private http: HttpClient) { }
 
   async viewAllConcentration () {
-    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/concentration/view-all-concentration.php').toPromise();
+    return await this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-all-concentration.php')
+    .toPromise();
   }
 
   async createNewConcentration(concentration: any) {
-    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/concentration/create-concentration', 
-    JSON.stringify(concentration)).toPromise();
+    return await this.http.post('http://'+ToolConfig.url+this.apiUrl+'create-concentration', 
+    JSON.stringify(concentration))
+    .toPromise();
   }
 
   async viewConcentrationDetail (conId: number) {
-    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/concentration/view-concentration-detail.php?id='+conId).toPromise();
+    return await this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-concentration-detail.php?id='+conId)
+    .toPromise();
   }
 
   async updateConcentration(concentration: any) {
-    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/concentration/update-concentration', 
-    JSON.stringify(concentration)).toPromise();
+    return await this.http.put('http://'+ToolConfig.url+this.apiUrl+'update-concentration', 
+    JSON.stringify(concentration))
+    .toPromise();
   }
 
   async deleteConcentration(concentration: any) {
-    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/concentration/delete-concentration', 
-    JSON.stringify(concentration)).toPromise();
+    return await this.http.put('http://'+ToolConfig.url+this.apiUrl+'delete-concentration', 
+    JSON.stringify(concentration))
+    .toPromise();
   }
 }

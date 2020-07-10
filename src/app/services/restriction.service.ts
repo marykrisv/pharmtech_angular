@@ -7,28 +7,32 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RestrictionService {
 
+  apiUrl = "/pharmtech/api/restriction/";
+
   constructor(private http: HttpClient) { }
 
   async viewAllRestriction () {
-    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/restriction/view-all-restriction.php').toPromise();
+    return await this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-all-restriction.php')
+    .toPromise();
   }
 
   async createNewRestriction(restriction: any) {
-    return await this.http.post('http://'+ToolConfig.url+'/pharmtech/api/restriction/create-restriction', 
+    return await this.http.post('http://'+ToolConfig.url+this.apiUrl+'create-restriction', 
     JSON.stringify(restriction)).toPromise();
   }
 
   async viewRestrictionDetail (resId: number) {
-    return await this.http.get('http://'+ToolConfig.url+'/pharmtech/api/restriction/view-restriction-detail.php?id='+resId).toPromise();
+    return await this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-restriction-detail.php?id='+resId)
+    .toPromise();
   }
 
   async updateRestriction(restriction: any) {
-    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/restriction/update-restriction', 
+    return await this.http.put('http://'+ToolConfig.url+this.apiUrl+'update-restriction', 
     JSON.stringify(restriction)).toPromise();
   }
 
   async deleteRestriction(restriction: any) {
-    return await this.http.put('http://'+ToolConfig.url+'/pharmtech/api/restriction/delete-restriction', 
+    return await this.http.put('http://'+ToolConfig.url+this.apiUrl+'delete-restriction', 
     JSON.stringify(restriction)).toPromise();
   }
 }
