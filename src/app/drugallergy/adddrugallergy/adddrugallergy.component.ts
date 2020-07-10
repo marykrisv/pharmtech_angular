@@ -79,7 +79,6 @@ export class AdddrugallergyComponent implements OnInit {
         drugaValue: allergy
       }
       this.drugService.createNewDrugallergy(drugallergy).then(response => {
-        console.log(response);
         if (response['success'] == true) {
           this.added = true;
         }    
@@ -89,7 +88,6 @@ export class AdddrugallergyComponent implements OnInit {
       });
     });
 
-    console.log("should be last");
     this.stillCreatingDrugallergy = false;
 
     

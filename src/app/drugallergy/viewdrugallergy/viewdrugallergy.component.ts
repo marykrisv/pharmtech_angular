@@ -62,7 +62,6 @@ export class ViewdrugallergyComponent implements OnInit {
   }
 
   populateDrugallergy(response) {
-    console.log(response);
     this.drugallergys = [];
     this.drugcIds = [];
     this.loading = true;

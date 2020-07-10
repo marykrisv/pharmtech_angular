@@ -20,7 +20,7 @@ export class MenuviewComponent implements OnInit {
     this.data.currentSession.subscribe(currentSession => this.currentSession = currentSession);
     
     if (this.currentSession != null) {    
-      if (this.currentSession.userRole == UserRole.Admin) {
+      if (this.currentSession.userRole == UserRole.Admin || this.currentSession.userRole == UserRole.SuperAdmin) {
         // this.router.navigate(["menu/patient-management"]);
       }      
     } else {

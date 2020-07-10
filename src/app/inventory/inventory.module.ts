@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -9,7 +10,8 @@ import { ViewinventoryComponent } from './viewinventory/viewinventory.component'
   declarations: [ViewinventoryComponent],
   imports: [
     CommonModule,
-    InventoryRoutingModule
+    InventoryRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class InventoryModule { }

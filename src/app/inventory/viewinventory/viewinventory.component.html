@@ -1,1 +1,71 @@
-<p>viewinventory works!</p>
+<div class="container">  
+    <!-- view all -->
+    <h2>Add New Product</h2>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">                
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <button class="btn btn-sm btn-default">< Back</button>
+                        </div>
+                        <div class="col-md-9 col-sm-9 col-xs-12 text-right">
+                            <button 
+                                style="margin-right: 5px;"
+                                class="btn btn-sm btn-default">Clear All</button>
+                            <button 
+                                class="btn btn-sm btn-primary">Add Product</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">             
+                        <div class="col-md-6 col-sm-9">
+                            <ul class="list-group list-group-flush">
+                                <li id="isMedicine" class="list-group-item">
+                                    <span>Is Medicine</span>                                                                
+                                    <label class="switch">
+                                        <input 
+                                            type="checkbox" 
+                                            class="primary">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Product Information</div>
+                                <div class="panel-body">
+                                    <form [formGroup]="prodForm">
+                                        <div>
+                                            <label class=filePrev (click)="openFileBrowser()">
+                                                <img [src]="prodImage" id="prodImg" >
+                                                <input id="pic" (change)="browsePreview($event.target);" type="file" >
+                                            </label>
+                                        </div>
+
+
+                                        <!-- <img id="blah" [src]="prodImage" alt="your image" />
+                                        <div class="row">
+                                            <input 
+                                                formControlName="prodImage"
+                                                (change)="browsePreview($event.target)"
+                                                type='file'/>
+                                        </div> -->
+                                    </form>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-popup></app-popup> -->
