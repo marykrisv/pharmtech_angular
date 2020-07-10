@@ -1,7 +1,7 @@
+import { DrugallergyModule } from './drugallergy/drugallergy.module';
 import { UomModule } from './uom/uom.module';
 import { StrengthModule } from './strength/strength.module';
 import { RestrictionModule } from './restriction/restriction.module';
-import { DrugclassModule } from './drugclass/drugclass.module';
 import { ManufacturerModule } from './manufacturer/manufacturer.module';
 import { DosageModule } from './dosage/dosage.module';
 import { DiscountModule } from './discount/discount.module';
@@ -54,11 +54,11 @@ import { NotfoundComponent } from './notfound/notfound.component';
     ConcentrationModule,
     DiscountModule,
     DosageModule,
-    DrugclassModule,
     ManufacturerModule,
     RestrictionModule,
     StrengthModule,
-    UomModule
+    UomModule,
+    DrugallergyModule
   ],
   providers: [
     AuthGuard,

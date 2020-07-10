@@ -1,0 +1,4 @@
+delete -> delete-drugclass.php
+detailed -> view-drugclass-detail.php
+view all -> view-all-drugallergy.php
+create -> create-drugclass.php. > all are created class and allergy

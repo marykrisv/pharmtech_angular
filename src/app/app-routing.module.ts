@@ -58,10 +58,6 @@ const routes: Routes = [
         loadChildren: () => import('./dosage/dosage.module').then(m => m.DosageModule)
       },
       {
-        path: 'drugclasses',
-        loadChildren: () => import('./drugclass/drugclass.module').then(m => m.DrugclassModule)
-      },
-      {
         path: 'manufacturers',
         loadChildren: () => import('./manufacturer/manufacturer.module').then(m => m.ManufacturerModule)
       },
@@ -76,6 +72,10 @@ const routes: Routes = [
       {
         path: 'uoms',
         loadChildren: () => import('./uom/uom.module').then(m => m.UomModule)
+      },
+      {
+        path: 'drugallergy',
+        loadChildren: () => import('./drugallergy/drugallergy.module').then(m => m.DrugallergyModule)
       }
     ]
   },

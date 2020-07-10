@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DrugclassdetailComponent } from './drugclassdetail.component';
+import { ViewdrugallergyComponent } from './viewdrugallergy.component';
 
-describe('DrugclassdetailComponent', () => {
-  let component: DrugclassdetailComponent;
-  let fixture: ComponentFixture<DrugclassdetailComponent>;
+describe('ViewdrugallergyComponent', () => {
+  let component: ViewdrugallergyComponent;
+  let fixture: ComponentFixture<ViewdrugallergyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DrugclassdetailComponent ]
+      declarations: [ ViewdrugallergyComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DrugclassdetailComponent);
+    fixture = TestBed.createComponent(ViewdrugallergyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

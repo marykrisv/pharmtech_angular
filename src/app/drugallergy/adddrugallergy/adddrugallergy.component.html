@@ -1,0 +1,114 @@
+<div class="container">  
+    <!-- view all -->
+    <h2>Add New Drug Class</h2>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">                
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-12">
+                            <button class="btn btn-sm btn-default" (click)="back()">< Back</button>
+                        </div>
+                        <div class="col-md-9 col-xs-12 text-right">
+                            <button 
+                                style="margin-right: 5px;"
+                                class="btn btn-sm btn-default" (click)="clearAll()">Clear All</button>
+                            <button 
+                                [ngClass]="stillCreatingDrugallergy?'m-progress':''"
+                                class="btn btn-sm btn-primary"
+                                [disabled]="drugForm.invalid || this.drugallergies.length == 0" 
+                                (click)="addNewDrugallergy()">Add Drugallergy</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">             
+                        <!-- <br><br> -->                        
+                        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                            <div id="information" class="panel panel-default">
+                                <div class="panel-heading">Drug class and allergy Information</div>
+                                <div class="panel-body">
+                                    <form [formGroup]="drugForm">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="validate-text">Drug Class</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        [value]="this.drugclassInput.value | titlecase"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="drugclass"
+                                                        placeholder="Drug Class">
+                                                    <span 
+                                                        [ngClass]="this.drugclassInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.drugclassInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <table class="table table-striped table-bordered table-list">
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="5%">
+                                                                #
+                                                            </th>
+                                                            <th>
+                                                                Drug Allergies
+                                                            </th>
+                                                            <th>
+                                                                
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let drug of drugallergies; let i=index;">
+                                                            <td>{{ i+1 }} </td>
+                                                            <td>{{ drug }} </td>
+                                                            <td>
+                                                                <a (click)="removeAllergy(drug)" class="btn btn-warning"><em class="fa fa-minus-square"></em></a>
+                                                            </td>
+                                                        </tr>                                                        
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <div class="input-group">
+                                                                    <input 
+                                                                        ng-keypress = "addAllergy()"
+                                                                        [value]="this.drugallergyInput.value | titlecase"
+                                                                        type="text" 
+                                                                        class="form-control" 
+                                                                        formControlName="drugallergy"
+                                                                        placeholder="Drug Allergy">
+                                                                    <span 
+                                                                        [ngClass]="this.drugallergyInput.invalid?'danger':'info'"
+                                                                        class="input-group-addon">
+                                                                        <span 
+                                                                            [ngClass]="this.drugallergyInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                                            class="glyphicon"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-primary" (click)="addAllergy()">Add</button>
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>                                            
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-popup></app-popup> -->
