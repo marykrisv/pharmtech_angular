@@ -3,10 +3,6 @@
     height: 100%;
 }
 
-label {
-    width: 100px;
-}
-
 .panel-body {
     padding-left: 20px;
     padding-right: 20px;
@@ -267,6 +263,16 @@ label {
     width: 200px;
 }
 
-#basicInfo {
-  margin-bottom: 10px;
+#str, #con {
+  padding-right: 0px;
+}
+
+.longInfo {
+  resize: none;
+  height: 101px;
+}
+
+.longInfoMed {
+  resize: none;
+  height: 155px;
 }

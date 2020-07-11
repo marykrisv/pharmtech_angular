@@ -34,7 +34,7 @@ const routes: Routes = [
       },
       {
         path: 'inventory',
-        component: ViewinventoryComponent,
+        loadChildren: () => import('./inventory/inventory.module').then(m => m.InventoryModule),
         canActivate: [InventoryGuard]
       },
       {

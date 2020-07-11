@@ -41,21 +41,66 @@
                                 <div class="panel-heading">Product Information</div>
                                 <div class="panel-body">
                                     <form [formGroup]="prodForm">
-                                        <div>
-                                            <label class=filePrev (click)="openFileBrowser()">
-                                                <img [src]="prodImage" id="prodImg" >
-                                                <input id="pic" (change)="browsePreview($event.target);" type="file" >
-                                            </label>
+                                        <div class="row" id="basicInfo">
+                                            <div class="col-md-4">
+                                                <label class=filePrev (click)="openFileBrowser()">
+                                                    <img [src]="prodImage" id="prodImg" >
+                                                    <input id="pic" (change)="browsePreview($event.target);" type="file" >
+                                                </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label for="validate-text">Itemcode</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="itemcode"
+                                                        placeholder="Itemcode">
+                                                    <span 
+                                                        [ngClass]="this.itemcodeInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.itemcodeInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Bin location</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="binLocation"
+                                                        placeholder="Bin Location">
+                                                    <span 
+                                                        [ngClass]="this.binLocationInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.binLocationInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
-
-
-                                        <!-- <img id="blah" [src]="prodImage" alt="your image" />
                                         <div class="row">
-                                            <input 
-                                                formControlName="prodImage"
-                                                (change)="browsePreview($event.target)"
-                                                type='file'/>
-                                        </div> -->
+                                            <div class="col-md-12">
+                                                <label for="validate-text">Generic Name</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="genericName"
+                                                        placeholder="Generic Name">
+                                                    <span 
+                                                        [ngClass]="this.genericNameInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.genericNameInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </form>
                                 </div>
                                 
