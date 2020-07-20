@@ -28,7 +28,8 @@
                                     <label class="switch">
                                         <input 
                                             type="checkbox" 
-                                            class="primary">
+                                            class="primary"
+                                            (change)="updateIsMedicine()">
                                         <span class="slider round"></span>
                                     </label>
                                 </li>
@@ -115,10 +116,10 @@
                                                         <option value="Consignment">Consignment</option>
                                                     </select>
                                                     <span 
-                                                        [ngClass]="this.consignmentInput.invalid?'danger':'success'"
+                                                        [ngClass]="this.consignmentInput.invalid?'danger':'info'"
                                                         class="input-group-addon">
                                                         <span 
-                                                            [ngClass]="this.consignmentInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            [ngClass]="this.consignmentInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
                                                             class="glyphicon"></span>
                                                     </span>
                                                 </div>
@@ -135,10 +136,10 @@
                                                         formControlName="genericName"
                                                         placeholder="Generic Name">
                                                     <span 
-                                                        [ngClass]="this.genericNameInput.invalid?'danger':'success'"
+                                                        [ngClass]="this.genericNameInput.invalid?'danger':'info'"
                                                         class="input-group-addon">
                                                         <span 
-                                                            [ngClass]="this.genericNameInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            [ngClass]="this.genericNameInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
                                                             class="glyphicon"></span>
                                                     </span>
                                                 </div>
@@ -173,10 +174,10 @@
                                                                 [value]="man.manId">{{ man.manName }}</option>
                                                     </select>
                                                     <span 
-                                                        [ngClass]="this.manufacturerInput.invalid?'danger':'success'"
+                                                        [ngClass]="this.manufacturerInput.invalid?'danger':'info'"
                                                         class="input-group-addon">
                                                         <span 
-                                                            [ngClass]="this.manufacturerInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            [ngClass]="this.manufacturerInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
                                                             class="glyphicon"></span>
                                                     </span>
                                                 </div>
@@ -195,10 +196,10 @@
                                                                 [value]="uom.uomId">{{ uom.uomName }}</option>
                                                     </select>
                                                     <span 
-                                                        [ngClass]="this.uomInput.invalid?'danger':'success'"
+                                                        [ngClass]="this.uomInput.invalid?'danger':'info'"
                                                         class="input-group-addon">
                                                         <span 
-                                                            [ngClass]="this.uomInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            [ngClass]="this.uomInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
                                                             class="glyphicon"></span>
                                                     </span>
                                                 </div>
@@ -213,10 +214,10 @@
                                                         placeholder="Description"
                                                         formControlName="description"></textarea>
                                                     <span 
-                                                        [ngClass]="this.descriptionInput.invalid?'danger':'success'"
+                                                        [ngClass]="this.descriptionInput.invalid?'danger':'info'"
                                                         class="input-group-addon">
                                                         <span 
-                                                            [ngClass]="this.descriptionInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            [ngClass]="this.descriptionInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
                                                             class="glyphicon"></span>
                                                     </span>
                                                 </div>
@@ -248,10 +249,10 @@
                                                                 [value]="dos.dosId">{{ dos.dosAbr+' ('+dos.dosName+')' }}</option>
                                                     </select>
                                                     <span 
-                                                        [ngClass]="this.dosageFormInput.invalid?'danger':'success'"
+                                                        [ngClass]="this.dosageFormInput.invalid?'danger':'info'"
                                                         class="input-group-addon">
                                                         <span 
-                                                            [ngClass]="this.dosageFormInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            [ngClass]="this.dosageFormInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
                                                             class="glyphicon"></span>
                                                     </span>
                                                 </div>
@@ -270,10 +271,10 @@
                                                                 [value]="res.resId">{{ res.resIcon+' ('+res.resName+')' }}</option>
                                                     </select>
                                                     <span 
-                                                        [ngClass]="this.restrictionInput.invalid?'danger':'success'"
+                                                        [ngClass]="this.restrictionInput.invalid?'danger':'info'"
                                                         class="input-group-addon">
                                                         <span 
-                                                            [ngClass]="this.restrictionInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            [ngClass]="this.restrictionInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
                                                             class="glyphicon"></span>
                                                     </span>
                                                 </div>
@@ -301,10 +302,10 @@
                                                                         [value]="str.strId">{{ str.strValue }}</option>
                                                             </select>
                                                             <span 
-                                                                [ngClass]="this.strInput.invalid || this.strengthInput.invalid?'danger':'success'"
+                                                                [ngClass]="this.strInput.invalid || this.strengthInput.invalid?'danger':'info'"
                                                                 class="input-group-addon">
                                                                 <span 
-                                                                    [ngClass]="this.strInput.invalid || this.strengthInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                                    [ngClass]="this.strInput.invalid || this.strengthInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
                                                                     class="glyphicon"></span>
                                                             </span>
                                                         </div>
@@ -334,10 +335,10 @@
                                                                         [value]="con.conId">{{ con.conValue }}</option>
                                                             </select>
                                                             <span 
-                                                                [ngClass]="this.conInput.invalid || this.concentrationInput.invalid?'danger':'success'"
+                                                                [ngClass]="this.conInput.invalid || this.concentrationInput.invalid?'danger':'info'"
                                                                 class="input-group-addon">
                                                                 <span 
-                                                                    [ngClass]="this.conInput.invalid || this.concentrationInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                                    [ngClass]="this.conInput.invalid || this.concentrationInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
                                                                     class="glyphicon"></span>
                                                             </span>
                                                         </div>
@@ -354,10 +355,10 @@
                                                         placeholder="Counselling"
                                                         formControlName="counselling"></textarea>
                                                     <span 
-                                                        [ngClass]="this.counsellingInput.invalid?'danger':'success'"
+                                                        [ngClass]="this.counsellingInput.invalid?'danger':'info'"
                                                         class="input-group-addon">
                                                         <span 
-                                                            [ngClass]="this.counsellingInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            [ngClass]="this.counsellingInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
                                                             class="glyphicon"></span>
                                                     </span>
                                                 </div>
@@ -370,12 +371,12 @@
                                                         name="validate-length" 
                                                         id="description" 
                                                         placeholder="Auxilliary"
-                                                        formControlName="auxilliary"></textarea>
+                                                        formControlName="auxiliary"></textarea>
                                                     <span 
-                                                        [ngClass]="this.auxilliaryInput.invalid?'danger':'success'"
+                                                        [ngClass]="this.auxiliaryInput.invalid?'danger':'info'"
                                                         class="input-group-addon">
                                                         <span 
-                                                            [ngClass]="this.auxilliaryInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            [ngClass]="this.auxiliaryInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
                                                             class="glyphicon"></span>
                                                     </span>
                                                 </div>

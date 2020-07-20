@@ -10,7 +10,7 @@ import { UomService } from './../../services/uom.service';
 import { ManufacturerService } from './../../services/manufacturer.service';
 import { ManufacturerInterface } from './../../interface/manufacturer.interface';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UomInterface } from 'src/app/interface/uom.interface';
 
 @Component({
@@ -22,6 +22,8 @@ export class AddinventoryComponent implements OnInit {
 
   prodImage: any = "http://placehold.it/180";
 
+  isMedicine = false;
+
   manufacturers: ManufacturerInterface[];
   uoms: UomInterface[];
   dosageForms: DosageInterface[];
@@ -31,23 +33,23 @@ export class AddinventoryComponent implements OnInit {
 
   prodForm = new FormGroup({
     prodImage: new FormControl(''),
-    itemcode: new FormControl(''),
-    binLocation: new FormControl(''),
+    itemcode: new FormControl('', Validators.required),
+    binLocation: new FormControl('', Validators.required),
     genericName: new FormControl(''),
-    brandName: new FormControl(''),
+    brandName: new FormControl('', Validators.required),
     manufacturer: new FormControl(''),
     uom: new FormControl(''),
-    parlevel: new FormControl(''),
-    consignment: new FormControl(''),
-    dosageForm: new FormControl(''),
-    restriction: new FormControl(''),
-    str: new FormControl(''),
-    strength: new FormControl(''),
-    con: new FormControl(''),
-    concentration: new FormControl(''),
+    parlevel: new FormControl('', Validators.required),
+    consignment: new FormControl('', Validators.required),
+    dosageForm: new FormControl({value: '', disabled: !this.isMedicine}),
+    restriction: new FormControl({value: '', disabled: !this.isMedicine}),
+    str: new FormControl({value: '', disabled: !this.isMedicine}),
+    strength: new FormControl({value: '', disabled: !this.isMedicine}),
+    con: new FormControl({value: '', disabled: !this.isMedicine}),
+    concentration: new FormControl({value: '', disabled: !this.isMedicine}),
     description: new FormControl(''),
-    counselling: new FormControl(''),
-    auxilliary: new FormControl(''),
+    counselling: new FormControl({value: '', disabled: !this.isMedicine}),
+    auxiliary: new FormControl({value: '', disabled: !this.isMedicine}),
   });
 
   constructor(
@@ -70,6 +72,29 @@ export class AddinventoryComponent implements OnInit {
 
   openFileBrowser() {
     document.getElementById("pic").click();
+  }
+
+  updateIsMedicine() {
+    this.isMedicine = !this.isMedicine;
+    if (this.isMedicine) {
+      this.dosageFormInput.enable();
+      this.restrictionInput.enable();
+      this.strInput.enable();
+      this.strengthInput.enable();
+      this.conInput.enable();
+      this.concentrationInput.enable();
+      this.counsellingInput.enable();
+      this.auxiliaryInput.enable();
+    } else {
+      this.dosageFormInput.disable();
+      this.restrictionInput.disable();
+      this.strInput.disable();
+      this.strengthInput.disable();
+      this.conInput.disable();
+      this.concentrationInput.disable();
+      this.counsellingInput.disable();
+      this.auxiliaryInput.disable();
+    }
   }
 
   browsePreview(input) {
@@ -187,7 +212,7 @@ export class AddinventoryComponent implements OnInit {
   }
 
   get strInput() {
-    return this.prodForm.get("strength");
+    return this.prodForm.get("str");
   }
 
   get strengthInput() {
@@ -210,8 +235,8 @@ export class AddinventoryComponent implements OnInit {
     return this.prodForm.get("counselling");
   }
 
-  get auxilliaryInput() {
-    return this.prodForm.get("auxilliary");
+  get auxiliaryInput() {
+    return this.prodForm.get("auxiliary");
   }
 
 }

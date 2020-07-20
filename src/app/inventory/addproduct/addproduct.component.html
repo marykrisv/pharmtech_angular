@@ -1,0 +1,461 @@
+<div class="container">  
+    <!-- view all -->
+    <h2>Add New Product</h2>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">                
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <button class="btn btn-sm btn-default">< Back</button>
+                        </div>
+                        <div class="col-md-9 col-sm-9 col-xs-12 text-right">
+                            <button 
+                                style="margin-right: 5px;"
+                                class="btn btn-sm btn-default"
+                                (click)="clearAll()">Clear All</button>
+                            <button 
+                                [ngClass]="stillCreatingProduct?'m-progress':''"
+                                class="btn btn-sm btn-primary"
+                                [disabled]="prodForm.invalid" (click)="addNewProduct()">Add Product</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form [formGroup]="prodForm">
+                        <div class="row">             
+                            <div class="col-md-6 col-sm-9">
+                                <ul class="list-group list-group-flush">
+                                    <li id="isMedicine" class="list-group-item">
+                                        <span>Is Medicine</span>                                                                
+                                        <label class="switch">
+                                            <input 
+                                                type="checkbox" 
+                                                class="primary"
+                                                (change)="updateIsMedicine()"
+                                                formControlName="isMedicine">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Product Basic Information</div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label class=filePrev (click)="openFileBrowser()">
+                                                    <img [src]="prodImage" id="prodImg" >
+                                                    <input id="pic" (change)="browsePreview1($event.target);" type="file" >
+                                                </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <label for="validate-text">Itemcode</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="itemcode"
+                                                        placeholder="Itemcode">
+                                                    <span 
+                                                        [ngClass]="this.itemcodeInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.itemcodeInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Bin location</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="binLocation"
+                                                        placeholder="Bin Location">
+                                                    <span 
+                                                        [ngClass]="this.binLocationInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.binLocationInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="validate-text">Par Level</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="parlevel"
+                                                        placeholder="Par Level">
+                                                    <span 
+                                                        [ngClass]="this.parlevelInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.parlevelInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="validate-text">Price</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="price"
+                                                        placeholder="00.00">
+                                                    <span 
+                                                        [ngClass]="this.priceInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.priceInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="validate-select">Type</label>
+                                                <div class="input-group">
+                                                    <select 
+                                                        class="form-control" 
+                                                        name="validate-select" 
+                                                        id="validate-select" 
+                                                        placeholder="Validate Select"
+                                                        formControlName="consignment">
+                                                        <option value="">Select Type</option>
+                                                        <option value="Stock">Stock</option>
+                                                        <option value="Consignment">Consignment</option>
+                                                    </select>
+                                                    <span 
+                                                        [ngClass]="this.consignmentInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.consignmentInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="validate-text">Generic Name</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="genericName"
+                                                        placeholder="Generic Name">
+                                                    <span 
+                                                        [ngClass]="this.genericNameInput.invalid?'danger':'info'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.genericNameInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Brand Name</label>
+                                                <div class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        formControlName="brandName"
+                                                        placeholder="Brand Name">
+                                                    <span 
+                                                        [ngClass]="this.brandNameInput.invalid?'danger':'success'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.brandNameInput.invalid?'glyphicon-remove':'glyphicon-ok'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-select">Vendor/Manufacturer</label>
+                                                <div class="input-group">
+                                                    <select 
+                                                        class="form-control" 
+                                                        name="validate-select" 
+                                                        id="validate-select" 
+                                                        placeholder="Validate Select"
+                                                        formControlName="manufacturer">
+                                                        <option value="">Select Manufacturer</option>
+                                                        <option 
+                                                                *ngFor="let man of manufacturers" 
+                                                                [value]="man.manId">{{ man.manName }}</option>
+                                                    </select>
+                                                    <span 
+                                                        [ngClass]="this.manufacturerInput.invalid?'danger':'info'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.manufacturerInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-select">Unit of Measure</label>
+                                                <div class="input-group">
+                                                    <select 
+                                                        class="form-control" 
+                                                        name="validate-select" 
+                                                        id="validate-select" 
+                                                        placeholder="Validate Select"
+                                                        formControlName="uom">
+                                                        <option value="">Select Uom</option>
+                                                        <option 
+                                                                *ngFor="let uom of uoms" 
+                                                                [value]="uom.uomId">{{ uom.uomName }}</option>
+                                                    </select>
+                                                    <span 
+                                                        [ngClass]="this.uomInput.invalid?'danger':'info'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.uomInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                                <label for="validate-text">Description</label>
+                                                <div class="input-group" data-validate="length" data-length="5">
+                                                    <textarea 
+                                                        type="text" 
+                                                        class="form-control longInfo" 
+                                                        name="validate-length" 
+                                                        id="description" 
+                                                        placeholder="Description"
+                                                        formControlName="description"></textarea>
+                                                    <span 
+                                                        [ngClass]="this.descriptionInput.invalid?'danger':'info'"
+                                                        class="input-group-addon">
+                                                        <span 
+                                                            [ngClass]="this.descriptionInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                            class="glyphicon"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Med Information</div>
+                                    <div class="panel-body">
+                                        <form [formGroup]="prodForm">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label for="validate-select">Dosage Form</label>
+                                                    <div class="input-group">
+                                                        <select 
+                                                            class="form-control" 
+                                                            name="validate-select" 
+                                                            id="validate-select" 
+                                                            placeholder="Validate Select"
+                                                            formControlName="dosageForm">
+                                                            <option value="">Select Dosage Form</option>
+                                                            <option 
+                                                                    *ngFor="let dos of dosageForms" 
+                                                                    [value]="dos.dosId">{{ dos.dosAbr+' ('+dos.dosName+')' }}</option>
+                                                        </select>
+                                                        <span 
+                                                            [ngClass]="this.dosageFormInput.invalid?'danger':'info'"
+                                                            class="input-group-addon">
+                                                            <span 
+                                                                [ngClass]="this.dosageFormInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                                class="glyphicon"></span>
+                                                        </span>
+                                                    </div>
+                                                    <br>
+                                                    <label for="validate-select">Restriction</label>
+                                                    <div class="input-group">
+                                                        <select 
+                                                            class="form-control" 
+                                                            name="validate-select" 
+                                                            id="validate-select" 
+                                                            placeholder="Validate Select"
+                                                            formControlName="restriction">
+                                                            <option value="">Select Restriction</option>
+                                                            <option 
+                                                                    *ngFor="let res of restrictions" 
+                                                                    [value]="res.resId">{{ res.resIcon+' ('+res.resName+')' }}</option>
+                                                        </select>
+                                                        <span 
+                                                            [ngClass]="this.restrictionInput.invalid?'danger':'info'"
+                                                            class="input-group-addon">
+                                                            <span 
+                                                                [ngClass]="this.restrictionInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                                class="glyphicon"></span>
+                                                        </span>
+                                                    </div>
+                                                    <br>
+                                                    <label for="validate-select">Strength</label>
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-xs-3" id="str">
+                                                            <input 
+                                                                type="text" 
+                                                                class="form-control" 
+                                                                formControlName="str"
+                                                                placeholder="Value">
+                                                        </div>
+                                                        <div class="col-md-9 col-xs-9">
+                                                            <div class="input-group">                                                    
+                                                                <select 
+                                                                    class="form-control" 
+                                                                    name="validate-select" 
+                                                                    id="validate-select" 
+                                                                    placeholder="Validate Select"
+                                                                    formControlName="strength">
+                                                                    <option value="">Select Strength</option>
+                                                                    <option 
+                                                                            *ngFor="let str of strengths" 
+                                                                            [value]="str.strId">{{ str.strValue }}</option>
+                                                                </select>
+                                                                <span 
+                                                                    [ngClass]="this.strInput.invalid || this.strengthInput.invalid?'danger':'info'"
+                                                                    class="input-group-addon">
+                                                                    <span 
+                                                                        [ngClass]="this.strInput.invalid || this.strengthInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                                        class="glyphicon"></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <label for="validate-select">Concentration</label>
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-xs-3" id="con">
+                                                            <input 
+                                                                type="text" 
+                                                                class="form-control" 
+                                                                formControlName="con"
+                                                                placeholder="Value">
+                                                        </div>
+                                                        <div class="col-md-9 col-xs-9">
+                                                            <div class="input-group">                                                    
+                                                                <select 
+                                                                    class="form-control" 
+                                                                    name="validate-select" 
+                                                                    id="validate-select" 
+                                                                    placeholder="Validate Select"
+                                                                    formControlName="concentration">
+                                                                    <option value="">Select Concentration</option>
+                                                                    <option 
+                                                                            *ngFor="let con of concentrations" 
+                                                                            [value]="con.conId">{{ con.conValue }}</option>
+                                                                </select>
+                                                                <span 
+                                                                    [ngClass]="this.conInput.invalid || this.concentrationInput.invalid?'danger':'info'"
+                                                                    class="input-group-addon">
+                                                                    <span 
+                                                                        [ngClass]="this.conInput.invalid || this.concentrationInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                                        class="glyphicon"></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <label for="validate-text">Counselling</label>
+                                                    <div class="input-group" data-validate="length" data-length="5">
+                                                        <textarea 
+                                                            type="text" 
+                                                            class="form-control longInfoMed" 
+                                                            name="validate-length" 
+                                                            id="description" 
+                                                            placeholder="Counselling"
+                                                            formControlName="counselling"></textarea>
+                                                        <span 
+                                                            [ngClass]="this.counsellingInput.invalid?'danger':'info'"
+                                                            class="input-group-addon">
+                                                            <span 
+                                                                [ngClass]="this.counsellingInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                                class="glyphicon"></span>
+                                                        </span>
+                                                    </div>
+                                                    <br>
+                                                    <label for="validate-text">Auxilliary</label>
+                                                    <div class="input-group" data-validate="length" data-length="5">
+                                                        <textarea 
+                                                            type="text" 
+                                                            class="form-control longInfoMed" 
+                                                            name="validate-length" 
+                                                            id="description" 
+                                                            placeholder="Auxilliary"
+                                                            formControlName="auxiliary"></textarea>
+                                                        <span 
+                                                            [ngClass]="this.auxiliaryInput.invalid?'danger':'info'"
+                                                            class="input-group-addon">
+                                                            <span 
+                                                                [ngClass]="this.auxiliaryInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                                class="glyphicon"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Other Medicine Info</div>
+                                    <div class="panel-body">
+                                        <label for="validate-text">Drug Info</label>
+                                        <div class="input-group" data-validate="length" data-length="5">
+                                            <textarea 
+                                                type="text" 
+                                                class="form-control otherDrugDetails" 
+                                                name="validate-length" 
+                                                id="description" 
+                                                placeholder="Drug Info"
+                                                formControlName="drugInfo"></textarea>
+                                            <span 
+                                                [ngClass]="this.drugInfoInput.invalid?'danger':'info'"
+                                                class="input-group-addon">
+                                                <span 
+                                                    [ngClass]="this.drugInfoInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                    class="glyphicon"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                        <label for="validate-text">Drug Interaction</label>
+                                        <div class="input-group" data-validate="length" data-length="5">
+                                            <textarea 
+                                                type="text" 
+                                                class="form-control otherDrugDetails" 
+                                                name="validate-length" 
+                                                id="description" 
+                                                placeholder="Drug Interaction"
+                                                formControlName="drugInteraction"></textarea>
+                                            <span 
+                                                [ngClass]="this.drugInteractionInput.invalid?'danger':'info'"
+                                                class="input-group-addon">
+                                                <span 
+                                                    [ngClass]="this.drugInteractionInput.invalid?'glyphicon-remove':'glyphicon-asterisk'"
+                                                    class="glyphicon"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>              
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-popup></app-popup> -->

@@ -1,5 +1,4 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms';  
-import { DecimalPipe } from '@angular/common';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export class PercentValidator {
 
