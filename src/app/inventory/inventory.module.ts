@@ -1,4 +1,4 @@
-import { ManufacturerService } from './../services/manufacturer.service';
+import { SharedModule } from './../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,8 @@ import { AddproductComponent } from './addproduct/addproduct.component';
   imports: [
     CommonModule,
     InventoryRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class InventoryModule { }

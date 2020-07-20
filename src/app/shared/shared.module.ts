@@ -1,3 +1,4 @@
+import { TotalPipe } from './../pipes/total.pipe';
 import { YesNoPipe } from './../pipes/yesno.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -6,13 +7,15 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-    YesNoPipe
+    YesNoPipe,
+    TotalPipe
   ],
   imports: [
     CommonModule
   ],
   exports: [
     YesNoPipe,
+    TotalPipe,
     CommonModule
   ]
 })

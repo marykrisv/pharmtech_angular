@@ -244,10 +244,10 @@ export class AddproductComponent implements OnInit {
   back() {
     if (this.prodForm.touched && !this.added) {
       if (confirm('Are you sure you want to leave?')) {
-        this.router.navigate(['/menu/products']);
+        this.router.navigate(['/menu/inventory']);
       }
     } else {
-      this.router.navigate(['/menu/products']);
+      this.router.navigate(['/menu/inventory']);
     }
   }
 
@@ -278,7 +278,7 @@ export class AddproductComponent implements OnInit {
         prodStatus: 1,
         prodIsMedicine: this.isMedicine,
         prodCreatedBy: this.userSession.userId,
-        prodPrice: 0
+        prodPrice: this.priceInput.value
       }
       console.log(this.prodImage);
       this.prodService.createNewProduct(product).then(response => {

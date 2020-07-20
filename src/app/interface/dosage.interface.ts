@@ -1,5 +1,3 @@
-import { Identifiers } from '@angular/compiler';
-
 export interface DosageInterface {
     dosId?: number,
     dosAbr: string,

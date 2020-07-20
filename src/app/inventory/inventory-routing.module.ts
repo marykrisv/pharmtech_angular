@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddproductComponent } from './addproduct/addproduct.component';
+import { ViewinventoryComponent } from './viewinventory/viewinventory.component';
 
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'addproduct',
     component: AddproductComponent
+  },
+  {
+    path: '',
+    component: ViewinventoryComponent
   }
 ];
 
