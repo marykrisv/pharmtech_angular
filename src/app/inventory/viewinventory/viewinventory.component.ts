@@ -1,6 +1,6 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { ProductInterface } from 'src/app/interface/ProductInterface';
+import { ProductInterface } from 'src/app/interface/product.interface';
 import { SessionInterface } from 'src/app/interface/session.interface';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ProductService } from 'src/app/services/product.service';
