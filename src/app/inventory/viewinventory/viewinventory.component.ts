@@ -5,6 +5,9 @@ import { SessionInterface } from 'src/app/interface/session.interface';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 import { ErrorHandling } from 'src/app/common/error-handling';
+import { LocationInterface } from 'src/app/interface/location.interface';
+import { LocationService } from 'src/app/services/location.service';
+import { templateJitUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-viewinventory',
@@ -14,7 +17,10 @@ import { ErrorHandling } from 'src/app/common/error-handling';
 export class ViewinventoryComponent implements OnInit {
 
   products: ProductInterface[] = null;
+  locations: LocationInterface[];
   userSession: SessionInterface;
+
+  totalInventory: TotalInventoryPerLocation[];
 
   totalProdCount: number;
 
@@ -36,25 +42,44 @@ export class ViewinventoryComponent implements OnInit {
   ]
 
   options = new FormGroup({
-    search: new FormControl(this.filterBy)
+    search: new FormControl(),
+    // search: new FormControl(this.filterBy, SearchValidator.isSearchUserInvalid),
+    location: new FormControl('All'),
+    status: new FormControl('All')
   });
 
   constructor(
     private auth: AuthService,
-    private prodService: ProductService
+    private prodService: ProductService,    
+    private locService: LocationService
   ) { }
 
   ngOnInit(): void {
     this.auth.currentSession.subscribe(currentSession => {
       this.userSession = currentSession;
     });
-
+    
+    // this.viewAllProduct();
+    this.populateLocations();
+    this.locationInput.setValue(this.userSession.userLocId);
     this.viewAllProduct();
   }
 
   viewAllProduct () {
     this.prodService.viewAllProduct().then(response => {
       this.populateProduct(response);
+    }).catch(response => {
+      alert("Connection Problem. Please check your internet.");
+    });
+  }
+
+  populateLocations() {
+    this.locService.viewAllLocation().then(response => {
+      if (response['data']) {
+        this.locations = <LocationInterface[]>response['data'];
+      } else {
+        this.locations = null;
+      }
     }).catch(response => {
       alert("Connection Problem. Please check your internet.");
     });
@@ -71,6 +96,42 @@ export class ViewinventoryComponent implements OnInit {
       // alert(ErrorHandling.showError(response));
     }
     this.loading = false;
+  }
+
+  populateInventory() {    
+    this.locations.forEach(location => {
+      this.prodService.viewInventoryPerLocation(location.locId).then(response => {
+        
+      });
+    });
+  }
+
+  initializeAllLocationInventory() {    
+    var totalInventoryPerLocation = this.initTotalInventoryPerLocation();
+    this.products.forEach(prod => {
+      prod.totalInv = totalInventoryPerLocation;
+    });
+  }
+
+  initTotalInventoryPerLocation() {
+    var loc = this.locationInput.value;
+    var numOfLocations = this.locations.length;
+    var totalInv: number[] = [];
+
+    if (loc !='All') {
+      numOfLocations = 1;
+    }    
+    
+    for (var i = 0; i < numOfLocations; i++) {
+      totalInv.push(0);
+    }
+
+    return totalInv;
+  }
+
+  filterByLocation () {
+    this.initializeAllLocationInventory();
+    console.log(this.products);
   }
 
   changeFilterBy (filterBy: string) {
@@ -136,4 +197,17 @@ export class ViewinventoryComponent implements OnInit {
     return this.options.get('search');
   }
 
+  get statusInput () {
+    return this.options.get('status');
+  }
+
+  get locationInput () {
+    return this.options.get('location');
+  }
+
+}
+
+interface TotalInventoryPerLocation {
+  locId: number,
+  totalInvs: number[]
 }

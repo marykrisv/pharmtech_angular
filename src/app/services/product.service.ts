@@ -15,6 +15,10 @@ export class ProductService {
     return await this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-all-product.php').toPromise();
   }
 
+  async viewInventoryPerLocation (locId:number) {
+    return await this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-all-inventory-one-location.php?locid='+locId).toPromise();
+  }
+
   async createNewProduct(product: any) {
     return await this.http.post('http://'+ToolConfig.url+this.apiUrl+'create-product', 
     JSON.stringify(product)).toPromise();

@@ -27,5 +27,6 @@ export interface ProductInterface {
     prodModifiedOn: string,
     prodModifiedBy: string,
     prodDeleted: number,
-    prodPrice: number
-} 
+    prodPrice: number,
+    totalInv: number[]
+}

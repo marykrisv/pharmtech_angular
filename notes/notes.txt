@@ -66,7 +66,7 @@ LEFT JOIN user uc on l.locCreatedBy=uc.userId
 LEFT JOIN user um on l.locModifiedBy=um.userId
 WHERE l.locDeleted = 0; 
 
-CREATE VIEW currentproducts AS
+CREATE VIEW productinventory2 AS
 SELECT p.*, dos.*, str.*, con.*, man.*, res.*, uom.*, uc.userName as ucUsername, um.userName as umUsername
 FROM product p
 LEFT JOIN dosage dos on p.prodDosId=dos.dosId
@@ -77,7 +77,9 @@ LEFT JOIN restriction res on p.prodResId=res.resId
 LEFT JOIN uom uom on p.prodUomId=uom.uomId
 LEFT JOIN user uc on p.prodCreatedBy=uc.userId
 LEFT JOIN user um on p.prodModifiedBy=um.userId
-WHERE p.prodDeleted = 0; 
+LEFT JOIN inventory i on p.prodId = i.invProdId
+WHERE p.prodDeleted = 0
+GROUP BY i.invProdId, i.invLocId
 
 https://stackoverflow.com/questions/17187124/how-to-select-all-columns-and-a-count-in-the-same-query
 
