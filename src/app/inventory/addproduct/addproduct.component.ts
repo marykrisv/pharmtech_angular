@@ -291,7 +291,6 @@ export class AddproductComponent implements OnInit {
         }        
       }).catch(response => {
         alert("Connection Problem. Please check your internet.");
-        console.log(response);
       }).finally(() => {
         this.stillCreatingProduct = false;
       });

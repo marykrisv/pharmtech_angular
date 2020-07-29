@@ -95,3 +95,6 @@ https://www.youtube.com/watch?v=kS8Gde2Db2o
 
 upload file to server
 https://www.youtube.com/watch?v=JTlSOpkfy7g
+
+multiple request
+https://coryrylan.com/blog/angular-multiple-http-requests-with-rxjs

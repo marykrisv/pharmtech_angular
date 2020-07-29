@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToolConfig } from '../common/toolconfig';
+import { LocationInterface } from '../interface/location.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,15 @@ export class ProductService {
   apiUrl = "/pharmtech/api/product/";
 
   constructor(private http: HttpClient) { }
+
+  viewInventoryPerLocations (locations: LocationInterface[]) {
+    let httpInventory = new Array();
+    locations.forEach(loc => {
+      httpInventory.push(this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-all-inventory-one-location.php?locid='+loc.locId));
+    });
+
+    return httpInventory;
+  }
 
   async viewAllProduct () {
     return await this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-all-product.php').toPromise();

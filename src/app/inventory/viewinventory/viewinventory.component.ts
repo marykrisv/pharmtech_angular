@@ -8,6 +8,7 @@ import { ErrorHandling } from 'src/app/common/error-handling';
 import { LocationInterface } from 'src/app/interface/location.interface';
 import { LocationService } from 'src/app/services/location.service';
 import { templateJitUrl } from '@angular/compiler';
+import { Observable, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-viewinventory',
@@ -19,8 +20,6 @@ export class ViewinventoryComponent implements OnInit {
   products: ProductInterface[] = null;
   locations: LocationInterface[];
   userSession: SessionInterface;
-
-  totalInventory: TotalInventoryPerLocation[];
 
   totalProdCount: number;
 
@@ -68,6 +67,8 @@ export class ViewinventoryComponent implements OnInit {
   viewAllProduct () {
     this.prodService.viewAllProduct().then(response => {
       this.populateProduct(response);
+      this.initializeAllLocationInventory();
+      this.populateInventory();
     }).catch(response => {
       alert("Connection Problem. Please check your internet.");
     });
@@ -99,11 +100,43 @@ export class ViewinventoryComponent implements OnInit {
   }
 
   populateInventory() {    
-    this.locations.forEach(location => {
-      this.prodService.viewInventoryPerLocation(location.locId).then(response => {
-        
+    var loc = this.locationInput.value;
+    if (loc == 'All') {
+
+      let httpInventory = this.prodService.viewInventoryPerLocations(this.locations);
+
+      forkJoin(httpInventory).subscribe(results => {
+        for (let i = 0; i < results.length; i++) {
+          this.addToTotalInv(results[i], i);
+        }
       });
-    });
+    } else {
+      this.prodService.viewInventoryPerLocation(loc).then(response => {
+          this.addToTotalInv(response, 0);
+      });
+    }    
+  }
+
+  private addToTotalInv(response, indexOfLoc) {
+    if (response['data'] != undefined) {
+      var inventory = <TotalInventoryPerLocation[]>response['data'];
+      for (var i = 0; i < inventory.length; i++) {
+        for (var j = 0; j < this.products.length; j++) {
+          if (this.products[j].prodId == inventory[i].prodId) {
+            var totalInv = new Array();
+            for (var k = 0; k < this.products[j].totalInv.length; k++) {
+              if (k == indexOfLoc) {
+                totalInv.push(inventory[i].totalInv);
+              } else {
+                totalInv.push(this.products[j].totalInv[k]);
+              }
+            }            
+            this.products[j].totalInv = <number[]>totalInv;
+            break;
+          }
+        }
+      }
+    }
   }
 
   initializeAllLocationInventory() {    
@@ -131,7 +164,7 @@ export class ViewinventoryComponent implements OnInit {
 
   filterByLocation () {
     this.initializeAllLocationInventory();
-    console.log(this.products);
+    this.populateInventory();
   }
 
   changeFilterBy (filterBy: string) {
@@ -208,6 +241,6 @@ export class ViewinventoryComponent implements OnInit {
 }
 
 interface TotalInventoryPerLocation {
-  locId: number,
-  totalInvs: number[]
+  prodId: number,
+  totalInv: number
 }
