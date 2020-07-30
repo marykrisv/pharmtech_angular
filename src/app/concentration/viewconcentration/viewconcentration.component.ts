@@ -50,10 +50,10 @@ export class ViewconcentrationComponent implements OnInit {
   }
 
   viewAllConcentration () {
-    this.conService.viewAllConcentration().then(response => {
+    this.conService.viewAllConcentration().subscribe(response => {
       this.populateConcentration(response);
-    }).catch(response => {
-      alert("Connection Problem. Please check your internet.");
+    }, (error) => {
+      alert(error);
     });
   }
 

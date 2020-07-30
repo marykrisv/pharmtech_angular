@@ -232,13 +232,20 @@ export class AddproductComponent implements OnInit {
   }
 
   populateConcentration() {
-    this.conService.viewAllConcentration().then(response => {
+    this.conService.viewAllConcentration().subscribe(response => {
       if (response['data'] != undefined) {
         this.concentrations = <ConcentrationInterface[]> response['data'];
       } else {
         this.concentrations = null;
       }
-    });
+    })
+    // this.conService.viewAllConcentration().then(response => {
+    //   if (response['data'] != undefined) {
+    //     this.concentrations = <ConcentrationInterface[]> response['data'];
+    //   } else {
+    //     this.concentrations = null;
+    //   }
+    // });
   }
 
   back() {

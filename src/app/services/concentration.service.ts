@@ -1,3 +1,5 @@
+import { catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ToolConfig } from '../common/toolconfig';
 import { HttpClient } from '@angular/common/http';
@@ -11,9 +13,18 @@ export class ConcentrationService {
 
   constructor(private http: HttpClient) { }
 
-  async viewAllConcentration () {
-    return await this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-all-concentration.php')
-    .toPromise();
+  // async viewAllConcentration () {
+  //   return await this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-all-concentration.php')
+  //   .toPromise();
+  // }
+
+  viewAllConcentration (): Observable<any> {
+    return this.http.get<any>('http://'+ToolConfig.url+this.apiUrl+'view-all-concentration.php')
+    .pipe(catchError(this.handleError));
+  }
+
+  handleError(error) {
+    return throwError("Connection Problem. Please check your internet."); 
   }
 
   async createNewConcentration(concentration: any) {

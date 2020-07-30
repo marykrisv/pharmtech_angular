@@ -15,6 +15,8 @@ export class SideMenuComponent implements OnInit {
   userPrivilege: PrivilegeInterface;
   userSession: SessionInterface;
 
+  isCollapse = true;
+
   isManage: boolean = false;
 
   constructor(
@@ -43,9 +45,7 @@ export class SideMenuComponent implements OnInit {
     // console.log(this.router.url);
   }
 
-  openSubmenu ($event) {
-    $event.stopPropagation();
-    var element = document.getElementById("others");
-    element.classList.toggle("collapse");
+  changeSubMenu () {
+    this.isCollapse = !this.isCollapse;
   }
 }

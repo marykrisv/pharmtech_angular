@@ -32,12 +32,14 @@
                         [ngClass]="isManage?'active':''"
                         data-toggle="collapse" 
                         data-target="#others" 
-                        class="collapsed">
+                        class="collapsed"
+                        (click)="changeSubMenu()">
                         <a><i class="fa fa-cogs fa-lg"></i> Manage <span class="arrow"></span></a>
                         </li>
-                        <!-- <ul class="sub-menu collapse" id="others"> -->
-                        <ul class="sub-menu" id="others">
-                            <!-- <li class="active"><a href="#">Concentration</a></li> -->
+                        <ul 
+                            [ngClass]="isCollapse? 'collapse': ''"
+                            class="sub-menu"
+                            id="others">
                             <li routerLink="concentrations"
                                 routerLinkActive="active"><a>Concentration</a></li>
                             <li routerLink="discounts"
