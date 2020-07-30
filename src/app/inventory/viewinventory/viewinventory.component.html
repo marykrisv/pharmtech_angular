@@ -131,7 +131,7 @@
                       <td class="hidden-xs"><span>{{ prod.prodPrice }}</span></td>
                       <td *ngFor="let inv of prod.totalInv"><span>{{ inv }}</span></td>
                       <td><span>{{ prod.prodParLevel }}</span></td>
-                      <td><span>{{ prod.prodIsMedicine | yesNo }}</span></td>
+                      <td><span>{{ prod.prodIsMedicine | yesno }}</span></td>
                       <td class="hidden-xs"><span>{{ prod.prodStockStatus }}</span></td>
                     </tr>
                   </ng-template>

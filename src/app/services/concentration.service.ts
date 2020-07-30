@@ -11,12 +11,13 @@ export class ConcentrationService {
 
   apiUrl = "/pharmtech/api/concentration/";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  // async viewAllConcentration () {
-  //   return await this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-all-concentration.php')
-  //   .toPromise();
-  // }
+  getAll(): Observable<any> {
+    return this.http.get<any>('http://'+ToolConfig.url+this.apiUrl+'view-all-concentration.php')
+    .pipe(catchError(this.handleError));
+  }
 
   viewAllConcentration (): Observable<any> {
     return this.http.get<any>('http://'+ToolConfig.url+this.apiUrl+'view-all-concentration.php')

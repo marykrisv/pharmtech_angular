@@ -73,7 +73,7 @@
                         <a class="btn btn-danger" (click)="deleteUom(uom.uomId)"><em class="fa fa-trash"></em></a>
                       </td>                          
                       <td><span>{{ uom.uomName }}</span></td>
-                      <td><span>{{ uom.uomCanBeComputed | yesNo }}</span></td>
+                      <td><span>{{ uom.uomCanBeComputed | yesno }}</span></td>
                       <td class="hidden-xs"><span>{{ uom.uomCreatedBy }}</span></td>
                     </tr>
                   </ng-template>
