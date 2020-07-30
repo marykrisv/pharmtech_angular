@@ -53,19 +53,18 @@ export class AddconcentrationComponent implements OnInit {
         conValue: this.valueInput.value,
         conCreatedBy: this.userSession.userId
       }
-      this.conService.createNewConcentration(concentration).then(response => {
+      this.conService.create(concentration).subscribe(response => {
         if (response['success'] == true) {
           alert(response['message']);
 
           this.added = true;
         } else {
           alert(ErrorHandling.showError(response));
-        }        
-      }).catch(response => {
-        alert("Connection Problem. Please check your internet.");
-      }).finally(() => {
+        }
         this.stillCreatingConcentration = false;
-      });
+      }, (error) => {
+        alert(error);
+      })
     }
   }
 

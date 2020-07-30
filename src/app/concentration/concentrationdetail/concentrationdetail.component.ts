@@ -58,7 +58,7 @@ export class ConcentrationdetailComponent implements OnInit {
   }
 
   populateDetails () {    
-    this.conService.viewConcentrationDetail(this.conId).then(response => {
+    this.conService.viewDetail(this.conId).subscribe(response => {
       if (response['data'] != null) {
         this.conDetails = <ConcentrationInterface>response['data'][0];
 
@@ -66,9 +66,9 @@ export class ConcentrationdetailComponent implements OnInit {
       } else {
         alert(ErrorHandling.showError(response));
       }
-    }).catch(response => {
-      alert("Connection Problem. Please check your internet.");
-    });
+    }, (error) => {
+      alert(error);
+    })
   }
 
   intializeForm() {
@@ -86,19 +86,19 @@ export class ConcentrationdetailComponent implements OnInit {
         conModifiedOn: new Date(),
         conId: this.conDetails.conId
       }
-      this.conService.updateConcentration(concentration).then(response => {
+      this.conService.update(concentration).subscribe(response => {
         if (response['success'] == true) {
           alert(response['message']);
 
           this.updated = true;
         } else {
           alert(ErrorHandling.showError(response));
-        }        
-      }).catch(response => {
-        alert("Connection Problem. Please check your internet.");
-      }).finally(() => {
+        }    
+        
         this.stillUpdatingConcentration = false;
-      });
+      }, (error) => {
+        alert(error);
+      })
     }
   }
 
@@ -110,18 +110,16 @@ export class ConcentrationdetailComponent implements OnInit {
         conModifiedOn: new Date(),
         conId: this.conDetails.conId
       }
-      this.conService.deleteConcentration(concentration).then(response => {
+      this.conService.delete(concentration).subscribe(response => {
         if (response['success'] == true) {
           alert(response['message']);
           this.router.navigate(["/menu/concentrations"]);
         } else {
           alert(ErrorHandling.showError(response));
-        }        
-      }).catch(response => {
-        alert("Connection Problem. Please check your internet.");
-      }).finally(() => {
+        }     
+        
         this.stillDeletingConcentration = false;
-      });
+      })
     }
   }
 

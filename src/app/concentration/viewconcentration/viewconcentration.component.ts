@@ -50,7 +50,7 @@ export class ViewconcentrationComponent implements OnInit {
   }
 
   viewAllConcentration () {
-    this.conService.viewAllConcentration().subscribe(response => {
+    this.conService.viewAll().subscribe(response => {
       this.populateConcentration(response);
     }, (error) => {
       alert(error);
@@ -103,7 +103,7 @@ export class ViewconcentrationComponent implements OnInit {
         conModifiedOn: new Date(),
         conModifiedBy: this.userSession.userId
       }
-      this.conService.deleteConcentration(concentration).then(response => {
+      this.conService.delete(concentration).subscribe(response => {
         if (response['success'] == true) {
           alert(response['message']);
           
@@ -113,9 +113,10 @@ export class ViewconcentrationComponent implements OnInit {
         } else {
           alert(ErrorHandling.showError(response));
         }
-      }).catch(response => {
-        alert("Connection Problem. Please check your internet.");
-      });
+      }, (error) => {
+        alert(error);
+      })
+      
     }
   }
 

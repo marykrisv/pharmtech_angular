@@ -232,7 +232,7 @@ export class AddproductComponent implements OnInit {
   }
 
   populateConcentration() {
-    this.conService.viewAllConcentration().subscribe(response => {
+    this.conService.viewAll().subscribe(response => {
       if (response['data'] != undefined) {
         this.concentrations = <ConcentrationInterface[]> response['data'];
       } else {
