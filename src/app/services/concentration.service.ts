@@ -1,8 +1,4 @@
-import { catchError } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { ToolConfig } from '../common/toolconfig';
-import { HttpClient } from '@angular/common/http';
 import { DbService } from './db.service';
 
 @Injectable({
@@ -15,5 +11,5 @@ export class ConcentrationService extends DbService {
   ngOnInit () {
     super.setApiUrl(this.apiUrl);
   }
-  
+
 }
