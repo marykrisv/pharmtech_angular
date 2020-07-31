@@ -53,10 +53,10 @@ export class ViewdosageComponent implements OnInit {
   }
 
   viewAllDosage () {
-    this.dosService.viewAllDosage().then(response => {
+    this.dosService.viewAll().subscribe(response => {
       this.populateDosage(response);
-    }).catch(response => {
-      alert("Connection Problem. Please check your internet.");
+    }, (error) => {
+      alert(error);
     });
   }
 
@@ -106,7 +106,7 @@ export class ViewdosageComponent implements OnInit {
         dosModifiedOn: new Date(),
         dosModifiedBy: this.userSession.userId
       }
-      this.dosService.deleteDosage(dosage).then(response => {
+      this.dosService.delete(dosage).subscribe(response => {
         if (response['success'] == true) {
           alert(response['message']);
           
@@ -116,8 +116,8 @@ export class ViewdosageComponent implements OnInit {
         } else {
           alert(ErrorHandling.showError(response));
         }
-      }).catch(response => {
-        alert("Connection Problem. Please check your internet.");
+      }, (error) => {
+        alert(error);
       });
     }
   }

@@ -60,7 +60,7 @@ export class DosagedetailComponent implements OnInit {
   }
 
   populateDetails () {    
-    this.dosService.viewDosageDetail(this.dosId).then(response => {
+    this.dosService.viewDetail(this.dosId).subscribe(response => {
       if (response['data'] != null) {
         this.dosDetails = <DosageInterface>response['data'][0];
 
@@ -68,8 +68,8 @@ export class DosagedetailComponent implements OnInit {
       } else {
         alert(ErrorHandling.showError(response));
       }
-    }).catch(response => {
-      alert("Connection Problem. Please check your internet.");
+    }, (error) => {
+      alert(error);
     });
   }
 
@@ -92,18 +92,17 @@ export class DosagedetailComponent implements OnInit {
         dosModifiedOn: new Date(),
         dosId: this.dosDetails.dosId
       }
-      this.dosService.updateDosage(dosage).then(response => {
+      this.dosService.update(dosage).subscribe(response => {
         if (response['success'] == true) {
           alert(response['message']);
 
           this.updated = true;
         } else {
           alert(ErrorHandling.showError(response));
-        }        
-      }).catch(response => {
-        alert("Connection Problem. Please check your internet.");
-      }).finally(() => {
-        this.stillUpdatingDosage = false;
+        }      
+        this.stillUpdatingDosage = false;  
+      }, (error) => {
+        alert(error);
       });
     }
   }
@@ -116,17 +115,17 @@ export class DosagedetailComponent implements OnInit {
         dosModifiedOn: new Date(),
         dosId: this.dosDetails.dosId
       }
-      this.dosService.deleteDosage(dosage).then(response => {
+      this.dosService.delete(dosage).subscribe(response => {
         if (response['success'] == true) {
           alert(response['message']);
           this.router.navigate(["/menu/dosages"]);
         } else {
           alert(ErrorHandling.showError(response));
-        }        
-      }).catch(response => {
-        alert("Connection Problem. Please check your internet.");
-      }).finally(() => {
+        }      
+        
         this.stillDeletingDosage = false;
+      }, (error) => {
+        alert(error);
       });
     }
   }

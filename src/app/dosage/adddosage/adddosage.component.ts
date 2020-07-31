@@ -57,7 +57,7 @@ export class AdddosageComponent implements OnInit {
         dosWithConcentration: this.withConcentrationInput.value,
         dosCreatedBy: this.userSession.userId
       }
-      this.dosService.createNewDosage(dosage).then(response => {
+      this.dosService.create(dosage).subscribe(response => {
         if (response['success'] == true) {
           alert(response['message']);
 
@@ -65,10 +65,10 @@ export class AdddosageComponent implements OnInit {
         } else {
           alert(ErrorHandling.showError(response));
         }        
-      }).catch(response => {
-        alert("Connection Problem. Please check your internet.");
-      }).finally(() => {
+
         this.stillCreatingDosage = false;
+      }, (error) => {
+        alert(error);
       });
     }
   }

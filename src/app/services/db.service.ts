@@ -18,26 +18,26 @@ export class DbService {
     .pipe(catchError(this.handleError));
   }
 
-  create(concentration: any): Observable<any> {
+  create(data: any): Observable<any> {
     return this.http.post('http://'+ToolConfig.url+this.apiUrl+'create', 
-    JSON.stringify(concentration))
+    JSON.stringify(data))
     .pipe(catchError(this.handleError));
   }
 
-  viewDetail(conId: number): Observable<any> {
-    return this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-detail.php?id='+conId)
+  viewDetail(id: number): Observable<any> {
+    return this.http.get('http://'+ToolConfig.url+this.apiUrl+'view-detail.php?id='+id)
     .pipe(catchError(this.handleError));
   }
 
-  update(concentration: any): Observable<any> {
+  update(data: any): Observable<any> {
     return this.http.put('http://'+ToolConfig.url+this.apiUrl+'update', 
-    JSON.stringify(concentration))
+    JSON.stringify(data))
     .pipe(catchError(this.handleError));
   }
 
-  delete(concentration: any): Observable<any> {
+  delete(data: any): Observable<any> {
     return this.http.put('http://'+ToolConfig.url+this.apiUrl+'delete', 
-    JSON.stringify(concentration))
+    JSON.stringify(data))
     .pipe(catchError(this.handleError));
   }
 

@@ -202,7 +202,7 @@ export class AddproductComponent implements OnInit {
   }
 
   populateDosageForm() {
-    this.dosService.viewAllDosage().then(response => {
+    this.dosService.viewAll().subscribe(response => {
       if (response['data'] != undefined) {
         this.dosageForms = <DosageInterface[]> response['data'];
       } else {
