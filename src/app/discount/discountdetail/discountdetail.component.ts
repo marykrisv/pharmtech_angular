@@ -60,7 +60,7 @@ export class DiscountdetailComponent implements OnInit {
   }
 
   populateDetails () {    
-    this.disService.viewDiscountDetail(this.disId).then(response => {
+    this.disService.viewDetail(this.disId).subscribe(response => {
       if (response['data'] != null) {
         this.disDetails = <DiscountInterface>response['data'][0];
 
@@ -68,9 +68,9 @@ export class DiscountdetailComponent implements OnInit {
       } else {
         alert(ErrorHandling.showError(response));
       }
-    }).catch(response => {
-      alert("Connection Problem. Please check your internet.");
-    });
+    }, (error)=> {
+      alert(error);
+    })
   }
 
   intializeForm() {
@@ -90,7 +90,7 @@ export class DiscountdetailComponent implements OnInit {
         disModifiedOn: new Date(),
         disId: this.disDetails.disId
       }
-      this.disService.updateDiscount(discount).then(response => {
+      this.disService.update(discount).subscribe(response => {
         if (response['success'] == true) {
           alert(response['message']);
 
@@ -98,11 +98,10 @@ export class DiscountdetailComponent implements OnInit {
         } else {
           alert(ErrorHandling.showError(response));
         }        
-      }).catch(response => {
-        alert("Connection Problem. Please check your internet.");
-      }).finally(() => {
         this.stillUpdatingDiscount = false;
-      });
+      }, (error) => {
+        alert(error);
+      })
     }
   }
 
@@ -114,18 +113,18 @@ export class DiscountdetailComponent implements OnInit {
         disModifiedOn: new Date(),
         disId: this.disDetails.disId
       }
-      this.disService.deleteDiscount(discount).then(response => {
+      this.disService.delete(discount).subscribe(response => {
         if (response['success'] == true) {
           alert(response['message']);
           this.router.navigate(["/menu/discounts"]);
         } else {
           alert(ErrorHandling.showError(response));
-        }        
-      }).catch(response => {
-        alert("Connection Problem. Please check your internet.");
-      }).finally(() => {
+        }  
+        
         this.stillDeletingDiscount = false;
-      });
+      }, (error) => {
+        alert(error);
+      })
     }
   }
 

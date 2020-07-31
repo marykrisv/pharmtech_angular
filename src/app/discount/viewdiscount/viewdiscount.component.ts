@@ -53,11 +53,11 @@ export class ViewdiscountComponent implements OnInit {
   }
 
   viewAllDiscount () {
-    this.disService.viewAllDiscount().then(response => {
+    this.disService.viewAll().subscribe(response => {
       this.populateDiscount(response);
-    }).catch(response => {
-      alert("Connection Problem. Please check your internet.");
-    });
+    }, (error) => {
+      alert(error);
+    })
   }
 
   populateDiscount(response) {
@@ -106,7 +106,7 @@ export class ViewdiscountComponent implements OnInit {
         disModifiedOn: new Date(),
         disModifiedBy: this.userSession.userId
       }
-      this.disService.deleteDiscount(discount).then(response => {
+      this.disService.delete(discount).subscribe(response => {
         if (response['success'] == true) {
           alert(response['message']);
           
@@ -116,9 +116,9 @@ export class ViewdiscountComponent implements OnInit {
         } else {
           alert(ErrorHandling.showError(response));
         }
-      }).catch(response => {
-        alert("Connection Problem. Please check your internet.");
-      });
+      }, (error) => {
+        alert(error);
+      })
     }
   }
 

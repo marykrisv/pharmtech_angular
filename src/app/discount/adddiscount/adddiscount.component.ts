@@ -56,19 +56,19 @@ export class AdddiscountComponent implements OnInit {
         disPercent: this.percentInput.value,
         disCreatedBy: this.userSession.userId
       }
-      this.disService.createNewDiscount(discount).then(response => {
+      this.disService.create(discount).subscribe(response => {
         if (response['success'] == true) {
           alert(response['message']);
 
           this.added = true;
         } else {
           alert(ErrorHandling.showError(response));
-        }        
-      }).catch(response => {
-        alert("Connection Problem. Please check your internet.");
-      }).finally(() => {
+        }      
+        
         this.stillCreatingDiscount = false;
-      });
+      }, (error) => {
+        alert(error);
+      })
     }
   }
 
